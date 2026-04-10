@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" width="240" height="80">
+  <rect width="240" height="80" rx="8" fill="#1a1a1a"/>
+  <circle cx="40" cy="40" r="22" fill="none" stroke="#ffffff" stroke-width="3"/>
+  <text x="40" y="47" font-family="Arial,sans-serif" font-size="18" font-weight="900" fill="#ffffff" text-anchor="middle">SD</text>
+  <text x="75" y="38" font-family="Arial,sans-serif" font-size="18" font-weight="900" fill="#ffffff" letter-spacing="1">CORP</text>
+</svg>

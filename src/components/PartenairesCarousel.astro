@@ -1,46 +1,45 @@
 ---
 const partenaires = [
-  { nom: 'Groupe RDT', couleur: '#e55a00', initiales: 'RDT' },
-  { nom: 'Hachette Livre', couleur: '#003087', initiales: 'HL' },
-  { nom: 'JAS', couleur: '#0057b8', initiales: 'JAS' },
-  { nom: 'SEKO', couleur: '#e30613', initiales: 'SEKO' },
-  { nom: 'KN Logistics', couleur: '#e30613', initiales: 'KN' },
-  { nom: 'InterCargo', couleur: '#e30613', initiales: 'iC' },
-  { nom: 'Pont Emballage', couleur: '#1b2a4a', initiales: 'PE' },
-  { nom: 'Lagrange', couleur: '#2c5f2e', initiales: 'LG' },
-  { nom: 'Kuehne+Nagel', couleur: '#003082', initiales: 'K+N' },
-  { nom: 'Ziegler', couleur: '#f5d800', textColor: '#222', initiales: 'ZGL' },
-  { nom: 'Transcausse', couleur: '#1b2a4a', initiales: 'TC' },
-  { nom: 'BBL Cargo', couleur: '#003087', initiales: 'BBL' },
-  { nom: 'CEVA Logistics', couleur: '#e30613', initiales: 'CVA' },
-  { nom: 'SDCorp', couleur: '#2c2c2c', initiales: 'SD' },
-  { nom: 'Derudder', couleur: '#005baa', initiales: 'DRD' },
-  { nom: 'Erport', couleur: '#1b3a6b', initiales: 'ERP' },
+  { nom: 'Groupe RDT',       logo: '/assets/partenaires/rdt.png',          bg: '#fff' },
+  { nom: 'Hachette Livre',   logo: '/assets/partenaires/hachette.png',      bg: '#fff' },
+  { nom: 'JAS',              logo: '/assets/partenaires/jas.svg',           bg: '#fff' },
+  { nom: 'SEKO Logistics',   logo: '/assets/partenaires/seko.png',          bg: '#fff' },
+  { nom: 'KN Logistics',     logo: '/assets/partenaires/kn-logistics.svg',  bg: 'transparent' },
+  { nom: 'InterCargo',       logo: '/assets/partenaires/intercargo.svg',    bg: '#fff' },
+  { nom: 'Pont Emballage',   logo: '/assets/partenaires/ponteurope.svg',    bg: '#fff' },
+  { nom: 'Lagrange',         logo: '/assets/partenaires/lagrange.svg',      bg: '#fff' },
+  { nom: 'Kuehne+Nagel',     logo: '/assets/partenaires/kuehne-nagel.png',  bg: '#fff' },
+  { nom: 'Ziegler',          logo: '/assets/partenaires/ziegler.png',       bg: '#fff' },
+  { nom: 'Transcausse',      logo: '/assets/partenaires/transcausse.svg',   bg: '#fff' },
+  { nom: 'BBL Cargo',        logo: '/assets/partenaires/bbl.svg',           bg: 'transparent' },
+  { nom: 'CEVA Logistics',   logo: '/assets/partenaires/ceva.svg',          bg: '#fff' },
+  { nom: 'SDCorp',           logo: '/assets/partenaires/sdcorp.svg',        bg: 'transparent' },
+  { nom: 'Derudder',         logo: '/assets/partenaires/derudder.svg',      bg: '#fff' },
+  { nom: 'Erport',           logo: '/assets/partenaires/erport.svg',        bg: '#fff' },
 ];
 
-// Dupliquer pour boucle infinie
-const doublon = [...partenaires, ...partenaires];
+// Dupliquer 3× pour une boucle parfaitement infinie
+const items = [...partenaires, ...partenaires, ...partenaires];
 ---
 
-<section class="section section--gris partenaires">
-  <div class="container reveal">
-    <h2 class="titre-section" style="text-align:center;">Ils nous font <span>confiance</span></h2>
-    <p class="sous-titre" style="text-align:center; margin: 1rem auto 0;">
-      Des leaders mondiaux de la logistique et du transport nous font confiance au quotidien.
-    </p>
+<section class="carousel-section" aria-label="Nos clients partenaires">
+  <div class="carousel-header">
+    <p class="carousel-label">Ils nous ont fait confiance</p>
   </div>
 
-  <div class="carousel-wrapper" aria-label="Logos des partenaires">
+  <div class="carousel-wrapper">
     <div class="carousel-track" id="carouselTrack">
-      {doublon.map((p) => (
+      {items.map((p) => (
         <div class="carousel-item" title={p.nom}>
-          <div
-            class="logo-badge"
-            style={`background-color: ${p.couleur}; color: ${p.textColor || '#fff'};`}
-          >
-            {p.initiales}
+          <div class="logo-wrapper" style={`background: ${p.bg};`}>
+            <img
+              src={p.logo}
+              alt={`Logo ${p.nom}`}
+              loading="lazy"
+              width="160"
+              height="60"
+            />
           </div>
-          <span class="logo-nom">{p.nom}</span>
         </div>
       ))}
     </div>
@@ -48,25 +47,39 @@ const doublon = [...partenaires, ...partenaires];
 </section>
 
 <style>
-  .partenaires {
+  .carousel-section {
+    background: #f9f9f9;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding: 1.2rem 0;
     overflow: hidden;
-    padding-bottom: 5rem;
+  }
+
+  .carousel-header {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .carousel-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #86868b;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
   }
 
   .carousel-wrapper {
-    margin-top: 3.5rem;
     overflow: hidden;
     position: relative;
-    /* Dégradé sur les bords */
-    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
   }
 
   .carousel-track {
     display: flex;
-    gap: 2rem;
+    align-items: center;
+    gap: 1.5rem;
     width: max-content;
-    animation: defiler 40s linear infinite;
+    animation: defiler 50s linear infinite;
   }
 
   .carousel-track:hover {
@@ -75,44 +88,42 @@ const doublon = [...partenaires, ...partenaires];
 
   @keyframes defiler {
     from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    to   { transform: translateX(calc(-100% / 3)); }
   }
 
   .carousel-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.6rem;
     flex-shrink: 0;
     cursor: default;
   }
 
-  .logo-badge {
-    width: 100px;
+  .logo-wrapper {
+    width: 160px;
     height: 60px;
-    border-radius: 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(0,0,0,0.06);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
-    font-weight: 800;
-    letter-spacing: 0.04em;
+    padding: 0.6rem 1rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .carousel-item:hover .logo-badge {
-    transform: scale(1.08) translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-  }
-
-  .logo-nom {
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--gris-moyen);
-    text-align: center;
-    max-width: 100px;
-    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+  }
+
+  .carousel-item:hover .logo-wrapper {
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  }
+
+  .logo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 0;
+    filter: grayscale(20%);
+    transition: filter 0.3s ease;
+  }
+
+  .carousel-item:hover .logo-wrapper img {
+    filter: grayscale(0%);
   }
 </style>
