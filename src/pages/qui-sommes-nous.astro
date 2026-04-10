@@ -1,0 +1,570 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout
+  title="Qui sommes-nous"
+  description="Découvrez l'histoire de PR Logistics, fondée en 2017 par Patrick Richer au cœur du port du Havre. 15 collaborateurs, une croissance constante, des valeurs solides."
+>
+
+  <!-- EN-TÊTE -->
+  <section class="page-hero">
+    <div class="container page-hero__inner">
+      <p class="eyebrow-rouge animate-in">Notre entreprise</p>
+      <h1 class="titre-section animate-in" style="animation-delay:0.1s;">
+        Qui sommes-<span>nous</span> ?
+      </h1>
+      <p class="sous-titre animate-in" style="animation-delay:0.2s; margin: 1rem auto 0;">
+        Prestataire logistique indépendant au cœur du port du Havre, nous mettons notre expertise au service de vos flux depuis 2017.
+      </p>
+    </div>
+  </section>
+
+  <!-- NOTRE HISTOIRE -->
+  <section class="section histoire">
+    <div class="container">
+      <div class="histoire__grid">
+        <div class="reveal">
+          <p class="eyebrow-rouge">Notre histoire</p>
+          <h2 class="titre-section">L'aventure <span>PR Logistics</span></h2>
+          <p class="histoire__texte">
+            C'est en <strong>2017</strong> que débute l'aventure PR Logistics. Après plus de
+            <strong>25 années</strong> passées au poste de responsable logistique au sein de
+            différentes structures, <strong>Patrick Richer</strong> décide de créer la société
+            PR Logistics.
+          </p>
+          <p class="histoire__texte">
+            Aujourd'hui, PR Logistics c'est <strong>15 collaborateurs</strong> à votre service
+            pour vous apporter des solutions concrètes à toutes vos problématiques de logistique
+            en entrepôt. Vos flux sont organisés et gérés avec des moyens techniques adaptés
+            pour répondre au mieux à vos besoins.
+          </p>
+          <p class="histoire__texte">
+            PR Logistics est une société <strong>indépendante</strong> située au cœur du port
+            du Havre, disposant d'un entrepôt de <strong>8 000 m²</strong> sur un terrain de
+            <strong>18 500 m²</strong> entièrement clos et télésurveillé 24h/7j par la sécurité
+            portuaire.
+          </p>
+        </div>
+
+        <div class="histoire__timeline reveal" style="transition-delay:0.15s;">
+          <div class="timeline__item">
+            <div class="timeline__annee">2017</div>
+            <div class="timeline__contenu">
+              <h3>Fondation</h3>
+              <p>Patrick Richer crée PR Logistics au cœur du port du Havre.</p>
+            </div>
+          </div>
+          <div class="timeline__item">
+            <div class="timeline__annee">2021</div>
+            <div class="timeline__contenu">
+              <h3>Consolidation</h3>
+              <p>1 322 000 € de CA — 1 500 conteneurs traités.</p>
+            </div>
+          </div>
+          <div class="timeline__item">
+            <div class="timeline__annee">2022</div>
+            <div class="timeline__contenu">
+              <h3>Développement</h3>
+              <p>1 698 000 € de CA — 1 700 conteneurs traités.</p>
+            </div>
+          </div>
+          <div class="timeline__item timeline__item--actif">
+            <div class="timeline__annee">2023</div>
+            <div class="timeline__contenu">
+              <h3>Accélération</h3>
+              <p>2 177 000 € de CA — 2 100 conteneurs traités.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHIFFRES CLÉS -->
+  <section class="section section--gris chiffres-cles">
+    <div class="container">
+      <div class="reveal" style="text-align:center; margin-bottom:3rem;">
+        <p class="eyebrow-rouge">En chiffres</p>
+        <h2 class="titre-section">PR Logistics <span>aujourd'hui</span></h2>
+      </div>
+      <div class="kpi-grid">
+        {[
+          { val: '2017', label: 'Année de fondation', ico: '🏭' },
+          { val: '15', label: 'Collaborateurs', ico: '👥' },
+          { val: '8 000 m²', label: 'Entrepôt sous douane', ico: '📦' },
+          { val: '18 500 m²', label: 'Terrain clos sécurisé', ico: '🔒' },
+          { val: '8 000', label: 'Palettes stockables', ico: '🏗️' },
+          { val: '24/7', label: 'Surveillance portuaire', ico: '📹' },
+        ].map((k, i) => (
+          <div class="kpi-item reveal" style={`transition-delay:${i*0.07}s`}>
+            <span class="kpi-ico" aria-hidden="true">{k.ico}</span>
+            <span class="kpi-val">{k.val}</span>
+            <span class="kpi-label">{k.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- GRAPHIQUES DE CROISSANCE -->
+  <section class="section croissance">
+    <div class="container">
+      <div class="reveal" style="text-align:center; margin-bottom:3.5rem;">
+        <p class="eyebrow-rouge">Performances</p>
+        <h2 class="titre-section">Notre <span>croissance</span></h2>
+        <p class="sous-titre" style="margin:1rem auto 0;">
+          Une croissance continue depuis la création, portée par la confiance de nos partenaires.
+        </p>
+      </div>
+
+      <div class="graphiques-grid">
+        <!-- Graphique CA -->
+        <div class="graphique-carte reveal">
+          <div class="graphique-carte__header">
+            <h3>Chiffre d'affaires</h3>
+            <span class="badge-hausse">+65% en 2 ans</span>
+          </div>
+          <div class="graphique-carte__canvas-wrapper">
+            <canvas id="chartCA" aria-label="Évolution du chiffre d'affaires 2021-2023"></canvas>
+          </div>
+          <div class="graphique-carte__legende">
+            {[
+              { annee: '2021', val: '1 322 000 €' },
+              { annee: '2022', val: '1 698 000 €' },
+              { annee: '2023', val: '2 177 000 €' },
+            ].map(r => (
+              <div class="legende-row">
+                <span class="legende-annee">{r.annee}</span>
+                <div class="legende-barre-bg">
+                  <div
+                    class="legende-barre"
+                    style={`width: ${Math.round((parseInt(r.val.replace(/\s/g,'').replace('€','')) / 2177000) * 100)}%`}
+                  ></div>
+                </div>
+                <span class="legende-val">{r.val}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Graphique Conteneurs -->
+        <div class="graphique-carte reveal" style="transition-delay:0.15s;">
+          <div class="graphique-carte__header">
+            <h3>Volume de conteneurs traités</h3>
+            <span class="badge-hausse">+40% en 2 ans</span>
+          </div>
+          <div class="graphique-carte__canvas-wrapper">
+            <canvas id="chartConteneurs" aria-label="Évolution du volume de conteneurs 2021-2023"></canvas>
+          </div>
+          <div class="graphique-carte__legende">
+            {[
+              { annee: '2021', val: '1 500', raw: 1500 },
+              { annee: '2022', val: '1 700', raw: 1700 },
+              { annee: '2023', val: '2 100', raw: 2100 },
+            ].map(r => (
+              <div class="legende-row">
+                <span class="legende-annee">{r.annee}</span>
+                <div class="legende-barre-bg">
+                  <div
+                    class="legende-barre legende-barre--bleu"
+                    style={`width: ${Math.round((r.raw / 2100) * 100)}%`}
+                  ></div>
+                </div>
+                <span class="legende-val">{r.val} EVP</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>
+
+<!-- Chart.js via CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const rouge = '#e30613';
+    const bleu  = '#1b2a4a';
+    const gris  = '#f5f5f7';
+
+    // Dégradé rouge
+    function gradientRouge(ctx) {
+      const g = ctx.createLinearGradient(0, 0, 0, 260);
+      g.addColorStop(0,   'rgba(227,6,19,0.35)');
+      g.addColorStop(0.6, 'rgba(227,6,19,0.08)');
+      g.addColorStop(1,   'rgba(227,6,19,0)');
+      return g;
+    }
+
+    // Dégradé bleu
+    function gradientBleu(ctx) {
+      const g = ctx.createLinearGradient(0, 0, 0, 260);
+      g.addColorStop(0,   'rgba(27,42,74,0.35)');
+      g.addColorStop(0.6, 'rgba(27,42,74,0.08)');
+      g.addColorStop(1,   'rgba(27,42,74,0)');
+      return g;
+    }
+
+    const optionsCommun = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(10,10,10,0.85)',
+          padding: 12,
+          cornerRadius: 10,
+          titleFont: { size: 13, weight: '700' },
+          bodyFont: { size: 13 },
+          callbacks: {},
+        },
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          border: { display: false },
+          ticks: {
+            font: { size: 14, weight: '600' },
+            color: '#1d1d1f',
+          },
+        },
+        y: {
+          display: false,
+          grid: { display: false },
+          border: { display: false },
+          beginAtZero: false,
+        },
+      },
+      elements: {
+        line: {
+          tension: 0.45,
+          borderWidth: 3,
+        },
+        point: {
+          radius: 6,
+          hoverRadius: 9,
+          borderWidth: 3,
+          backgroundColor: '#ffffff',
+        },
+      },
+    };
+
+    // --- Graphique CA ---
+    const ctxCA = (document.getElementById('chartCA') as HTMLCanvasElement)?.getContext('2d');
+    if (ctxCA) {
+      new (window as any).Chart(ctxCA, {
+        type: 'line',
+        data: {
+          labels: ['2021', '2022', '2023'],
+          datasets: [{
+            data: [1322000, 1698000, 2177000],
+            borderColor: rouge,
+            backgroundColor: gradientRouge(ctxCA),
+            fill: true,
+            pointBorderColor: rouge,
+          }],
+        },
+        options: {
+          ...optionsCommun,
+          plugins: {
+            ...optionsCommun.plugins,
+            tooltip: {
+              ...optionsCommun.plugins.tooltip,
+              callbacks: {
+                label: (ctx: any) => ` ${ctx.parsed.y.toLocaleString('fr-FR')} €`,
+              },
+            },
+          },
+          scales: {
+            ...optionsCommun.scales,
+            y: {
+              ...optionsCommun.scales.y,
+              min: 1000000,
+              max: 2400000,
+            },
+          },
+        },
+      });
+    }
+
+    // --- Graphique Conteneurs ---
+    const ctxC = (document.getElementById('chartConteneurs') as HTMLCanvasElement)?.getContext('2d');
+    if (ctxC) {
+      new (window as any).Chart(ctxC, {
+        type: 'line',
+        data: {
+          labels: ['2021', '2022', '2023'],
+          datasets: [{
+            data: [1500, 1700, 2100],
+            borderColor: bleu,
+            backgroundColor: gradientBleu(ctxC),
+            fill: true,
+            pointBorderColor: bleu,
+          }],
+        },
+        options: {
+          ...optionsCommun,
+          plugins: {
+            ...optionsCommun.plugins,
+            tooltip: {
+              ...optionsCommun.plugins.tooltip,
+              callbacks: {
+                label: (ctx: any) => ` ${ctx.parsed.y.toLocaleString('fr-FR')} EVP`,
+              },
+            },
+          },
+          scales: {
+            ...optionsCommun.scales,
+            y: {
+              ...optionsCommun.scales.y,
+              min: 1200,
+              max: 2400,
+            },
+          },
+        },
+      });
+    }
+  });
+</script>
+
+<style>
+  /* PAGE HERO */
+  .page-hero {
+    background: linear-gradient(135deg, var(--gris-clair), white);
+    padding: 5rem 0 4rem;
+    text-align: center;
+  }
+
+  /* HISTOIRE */
+  .histoire__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .histoire__texte {
+    font-size: 1rem;
+    color: var(--gris-moyen);
+    line-height: 1.8;
+    margin-top: 1rem;
+  }
+
+  .histoire__texte strong {
+    color: var(--gris-fonce);
+    font-weight: 600;
+  }
+
+  /* TIMELINE */
+  .histoire__timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .histoire__timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    bottom: 12px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--rouge), rgba(227,6,19,0.1));
+    border-radius: 2px;
+  }
+
+  .timeline__item {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .timeline__item::before {
+    content: '';
+    position: absolute;
+    left: -2.4rem;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid rgba(227,6,19,0.3);
+    transition: all 0.3s;
+  }
+
+  .timeline__item--actif::before {
+    background: var(--rouge);
+    border-color: var(--rouge);
+    box-shadow: 0 0 0 4px rgba(227,6,19,0.15);
+  }
+
+  .timeline__annee {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--rouge);
+    min-width: 44px;
+    padding-top: 2px;
+  }
+
+  .timeline__contenu h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--gris-fonce);
+    margin-bottom: 0.2rem;
+  }
+
+  .timeline__contenu p {
+    font-size: 0.85rem;
+    color: var(--gris-moyen);
+    line-height: 1.5;
+  }
+
+  /* KPI */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .kpi-item {
+    background: white;
+    border-radius: var(--rayon-lg);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .kpi-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+  }
+
+  .kpi-ico { font-size: 2rem; }
+
+  .kpi-val {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--gris-fonce);
+    line-height: 1;
+  }
+
+  .kpi-label {
+    font-size: 0.82rem;
+    color: var(--gris-moyen);
+  }
+
+  /* GRAPHIQUES */
+  .graphiques-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .graphique-carte {
+    background: white;
+    border-radius: var(--rayon-lg);
+    padding: 2rem 2rem 1.5rem;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.07);
+  }
+
+  .graphique-carte__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .graphique-carte__header h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gris-fonce);
+  }
+
+  .badge-hausse {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #15803d;
+    background: #dcfce7;
+    padding: 0.3rem 0.8rem;
+    border-radius: 2rem;
+  }
+
+  .graphique-carte__canvas-wrapper {
+    height: 220px;
+    position: relative;
+  }
+
+  /* Légende barres */
+  .graphique-carte__legende {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .legende-row {
+    display: grid;
+    grid-template-columns: 40px 1fr 90px;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .legende-annee {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--gris-moyen);
+  }
+
+  .legende-barre-bg {
+    height: 6px;
+    background: var(--gris-clair);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .legende-barre {
+    height: 100%;
+    background: var(--rouge);
+    border-radius: 3px;
+    transition: width 1s ease;
+  }
+
+  .legende-barre--bleu {
+    background: var(--bleu-marine);
+  }
+
+  .legende-val {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--gris-fonce);
+    text-align: right;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .histoire__grid,
+    .graphiques-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .kpi-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .kpi-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
