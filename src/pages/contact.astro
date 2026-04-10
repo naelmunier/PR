@@ -104,30 +104,26 @@ const contacts = [
         <h2 class="titre-section">Notre <span>adresse</span></h2>
         <address class="adresse-details">
           <p><strong>PR Logistics</strong></p>
-          <p>PLPN 1 – Port 4935</p>
-          <p>76700 Rogerville</p>
-          <p style="margin-top:1rem;">Au cœur du port du Havre</p>
+          <a
+            href="https://www.google.com/maps/search/PLPN+1+Port+4935+76700+Rogerville"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="adresse-maps-link"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            PLPN 1, Port 4935 — 76700 Rogerville
+          </a>
+          <p style="margin-top:0.8rem; font-size:0.9rem; color:var(--gris-moyen);">Au cœur du port du Havre</p>
         </address>
-        <div class="adresse-infos">
-          <div class="adresse-info-item">
-            <span class="adresse-info-ico" aria-hidden="true">🏭</span>
-            <span>18 500 m² de terrain clos</span>
-          </div>
-          <div class="adresse-info-item">
-            <span class="adresse-info-ico" aria-hidden="true">📹</span>
-            <span>Télésurveillé 24h/7j</span>
-          </div>
-          <div class="adresse-info-item">
-            <span class="adresse-info-ico" aria-hidden="true">🔒</span>
-            <span>Sécurité portuaire</span>
-          </div>
-        </div>
       </div>
 
       <!-- Formulaire -->
       <div class="formulaire-bloc reveal" style="transition-delay:0.15s;">
         <h2 class="titre-section" style="font-size:1.6rem;">Envoyer un <span>message</span></h2>
-        <form class="formulaire" action="mailto:lehavre@pr-logistics.fr" method="get" enctype="text/plain">
+        <form class="formulaire" id="contactForm" novalidate>
           <div class="champ-groupe">
             <label for="nom" class="champ-label">Nom complet *</label>
             <input type="text" id="nom" name="Nom" class="champ-input" placeholder="Votre nom" required />
@@ -164,6 +160,31 @@ const contacts = [
   </section>
 
 </MainLayout>
+
+<script>
+  const form = document.getElementById('contactForm') as HTMLFormElement;
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const nom     = (document.getElementById('nom')     as HTMLInputElement).value.trim();
+    const email   = (document.getElementById('email')   as HTMLInputElement).value.trim();
+    const tel     = (document.getElementById('tel')     as HTMLInputElement).value.trim();
+    const sujet   = (document.getElementById('sujet')   as HTMLSelectElement).value;
+    const message = (document.getElementById('message') as HTMLTextAreaElement).value.trim();
+
+    if (!nom || !email || !sujet || !message) {
+      alert('Merci de remplir tous les champs obligatoires (*).');
+      return;
+    }
+
+    const objet = `demande via le site: ${sujet}`;
+    const corps = `Nom : ${nom}\nEmail : ${email}${tel ? `\nTéléphone : ${tel}` : ''}\n\n${message}`;
+
+    const mailto = `mailto:lehavre@pr-logistics.fr?subject=${encodeURIComponent(objet)}&body=${encodeURIComponent(corps)}`;
+    window.location.href = mailto;
+  });
+</script>
 
 <style>
   .page-hero {
@@ -278,23 +299,21 @@ const contacts = [
     font-weight: 700;
   }
 
-  .adresse-infos {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-
-  .adresse-info-item {
-    display: flex;
+  .adresse-maps-link {
+    display: inline-flex;
     align-items: center;
-    gap: 0.8rem;
-    font-size: 0.9rem;
-    color: var(--gris-fonce);
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--rouge);
+    text-decoration: none;
+    transition: opacity 0.2s;
   }
 
-  .adresse-info-ico {
-    font-size: 1.2rem;
+  .adresse-maps-link:hover {
+    opacity: 0.75;
+    text-decoration: underline;
   }
 
   /* Formulaire */
