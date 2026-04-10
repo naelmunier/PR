@@ -24,7 +24,8 @@ const items = [...partenaires, ...partenaires, ...partenaires];
 
 <section class="carousel-section" aria-label="Nos clients partenaires">
   <div class="carousel-header">
-    <p class="carousel-label">Ils nous ont fait confiance</p>
+    <p class="eyebrow">Ils nous ont fait</p>
+    <h2 class="titre">confiance</h2>
   </div>
 
   <div class="carousel-wrapper">
@@ -56,15 +57,24 @@ const items = [...partenaires, ...partenaires, ...partenaires];
 
   .carousel-header {
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
 
-  .carousel-label {
-    font-size: 0.8rem;
+  .eyebrow {
+    font-size: 0.85rem;
     font-weight: 600;
-    color: #86868b;
+    color: var(--rouge);
     text-transform: uppercase;
     letter-spacing: 0.12em;
+    margin-bottom: 0.5rem;
+  }
+
+  .titre {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--gris-fonce);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
   }
 
   .carousel-wrapper {
