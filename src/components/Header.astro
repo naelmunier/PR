@@ -1,8 +1,8 @@
 ---
 const navLinks = [
-  { href: '/', label: 'Présentation' },
-  { href: '/devis', label: 'Demander un devis' },
-  { href: '/contact', label: 'Nous contacter' },
+  { href: '/', label: 'Accueil' },
+  { href: '/devis', label: 'Obtenir un Devis' },
+  { href: '/contact', label: 'Nous Contacter' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -23,7 +23,6 @@ const currentPath = Astro.url.pathname;
           {link.label}
         </a>
       ))}
-      <a href="/devis" class="btn btn--rouge header__cta">Devis gratuit</a>
     </nav>
 
     <button class="header__burger" id="burger" aria-label="Menu" aria-expanded="false">
@@ -54,12 +53,12 @@ const currentPath = Astro.url.pathname;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 72px;
+    height: 84px;
     gap: 2rem;
   }
 
   .header__logo img {
-    height: 44px;
+    height: 64px;
     width: auto;
     border-radius: 0.4rem;
     object-fit: contain;
