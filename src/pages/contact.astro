@@ -1,0 +1,363 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+
+const contacts = [
+  {
+    categorie: 'Standard',
+    nom: 'PR Logistics',
+    email: 'lehavre@pr-logistics.fr',
+    tel: '02.32.72.48.03',
+    telHref: '+33232724803',
+  },
+  {
+    categorie: 'Direction',
+    nom: 'Patrick Richer',
+    email: 'p.richer@pr-logistics.fr',
+    tel: '02.32.72.48.04',
+    telHref: '+33232724804',
+    mobile: '06.89.05.00.25',
+    mobileHref: '+33689050025',
+  },
+  {
+    categorie: 'Exploitation',
+    nom: 'Service Exploitation',
+    email: 'lehavre@pr-logistics.fr',
+    tel: '02.32.72.48.05',
+    telHref: '+33232724805',
+  },
+  {
+    categorie: 'Transport',
+    nom: 'Mathieu Berthelot',
+    email: 'mathieu@lhaffretement.fr',
+    mobile: '06.52.24.29.31',
+    mobileHref: '+33652242931',
+  },
+];
+---
+
+<MainLayout title="Nous contacter" description="Contactez PR Logistics au Havre. Standard, direction, exploitation et transport – toutes les coordonnées de notre équipe.">
+
+  <!-- EN-TÊTE PAGE -->
+  <section class="page-hero">
+    <div class="container page-hero__inner">
+      <p class="eyebrow-rouge animate-in">Coordination</p>
+      <h1 class="titre-section animate-in" style="animation-delay:0.1s;">Nous <span>contacter</span></h1>
+      <p class="sous-titre animate-in" style="animation-delay:0.2s;">
+        Notre équipe est disponible du lundi au vendredi pour répondre à toutes vos demandes.
+      </p>
+    </div>
+  </section>
+
+  <!-- CARTES DE CONTACT -->
+  <section class="section">
+    <div class="container">
+      <div class="contacts-grid">
+        {contacts.map((c, i) => (
+          <div class="contact-carte reveal" style={`transition-delay: ${i * 0.1}s`}>
+            <div class="contact-carte__header">
+              <span class="contact-carte__categorie">{c.categorie}</span>
+              <div class="contact-carte__avatar">
+                {c.nom.split(' ').map(w => w[0]).join('').slice(0, 2)}
+              </div>
+            </div>
+            <h3 class="contact-carte__nom">{c.nom}</h3>
+            <div class="contact-carte__infos">
+              {c.email && (
+                <a href={`mailto:${c.email}`} class="contact-carte__ligne contact-carte__ligne--email">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                  </svg>
+                  {c.email}
+                </a>
+              )}
+              {c.tel && (
+                <a href={`tel:${c.telHref}`} class="contact-carte__ligne">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.1a16 16 0 006 6l.37-.37a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                  </svg>
+                  {c.tel}
+                </a>
+              )}
+              {c.mobile && (
+                <a href={`tel:${c.mobileHref}`} class="contact-carte__ligne">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                    <line x1="12" y1="18" x2="12.01" y2="18"/>
+                  </svg>
+                  {c.mobile}
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ADRESSE + FORMULAIRE -->
+  <section class="section section--gris">
+    <div class="container contact-bas">
+      <!-- Adresse -->
+      <div class="adresse-bloc reveal">
+        <p class="eyebrow-rouge">Nous trouver</p>
+        <h2 class="titre-section">Notre <span>adresse</span></h2>
+        <address class="adresse-details">
+          <p><strong>PR Logistics</strong></p>
+          <p>PLPN 1 – Port 4935</p>
+          <p>76700 Rogerville</p>
+          <p style="margin-top:1rem;">Au cœur du port du Havre</p>
+        </address>
+        <div class="adresse-infos">
+          <div class="adresse-info-item">
+            <span class="adresse-info-ico" aria-hidden="true">🏭</span>
+            <span>18 500 m² de terrain clos</span>
+          </div>
+          <div class="adresse-info-item">
+            <span class="adresse-info-ico" aria-hidden="true">📹</span>
+            <span>Télésurveillé 24h/7j</span>
+          </div>
+          <div class="adresse-info-item">
+            <span class="adresse-info-ico" aria-hidden="true">🔒</span>
+            <span>Sécurité portuaire</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulaire -->
+      <div class="formulaire-bloc reveal" style="transition-delay:0.15s;">
+        <h2 class="titre-section" style="font-size:1.6rem;">Envoyer un <span>message</span></h2>
+        <form class="formulaire" action="mailto:lehavre@pr-logistics.fr" method="get" enctype="text/plain">
+          <div class="champ-groupe">
+            <label for="nom" class="champ-label">Nom complet *</label>
+            <input type="text" id="nom" name="Nom" class="champ-input" placeholder="Votre nom" required />
+          </div>
+          <div class="champ-groupe">
+            <label for="email" class="champ-label">Email *</label>
+            <input type="email" id="email" name="Email" class="champ-input" placeholder="votre@email.fr" required />
+          </div>
+          <div class="champ-groupe">
+            <label for="tel" class="champ-label">Téléphone</label>
+            <input type="tel" id="tel" name="Telephone" class="champ-input" placeholder="06.00.00.00.00" />
+          </div>
+          <div class="champ-groupe">
+            <label for="sujet" class="champ-label">Sujet *</label>
+            <select id="sujet" name="Sujet" class="champ-input" required>
+              <option value="">Sélectionner…</option>
+              <option value="Dépotage/Empotage">Dépotage / Empotage</option>
+              <option value="Stockage">Stockage</option>
+              <option value="Transport">Transport</option>
+              <option value="Devis">Demande de devis</option>
+              <option value="Autre">Autre</option>
+            </select>
+          </div>
+          <div class="champ-groupe champ-groupe--pleine-largeur">
+            <label for="message" class="champ-label">Message *</label>
+            <textarea id="message" name="Message" class="champ-input champ-textarea" rows="5" placeholder="Décrivez votre besoin…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn--rouge" style="width:100%; justify-content:center;">
+            Envoyer le message
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>
+
+<style>
+  .page-hero {
+    background: linear-gradient(135deg, var(--gris-clair), white);
+    padding: 5rem 0 4rem;
+    text-align: center;
+  }
+
+  .page-hero__inner .sous-titre {
+    margin: 1rem auto 0;
+  }
+
+  /* Grille contacts */
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .contact-carte {
+    background: var(--blanc);
+    border-radius: var(--rayon-lg);
+    padding: 2rem;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .contact-carte:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+  }
+
+  .contact-carte__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  .contact-carte__categorie {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--rouge);
+    background: rgba(227,6,19,0.08);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2rem;
+  }
+
+  .contact-carte__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--bleu-marine), #2d4a7a);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.9rem;
+  }
+
+  .contact-carte__nom {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--gris-fonce);
+    margin-bottom: 1rem;
+  }
+
+  .contact-carte__infos {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .contact-carte__ligne {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    color: var(--gris-moyen);
+    transition: color 0.2s;
+  }
+
+  .contact-carte__ligne:hover {
+    color: var(--rouge);
+  }
+
+  .contact-carte__ligne--email {
+    word-break: break-all;
+  }
+
+  /* Adresse + Formulaire */
+  .contact-bas {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .adresse-details {
+    font-style: normal;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: var(--gris-moyen);
+    line-height: 1.8;
+  }
+
+  .adresse-details strong {
+    color: var(--gris-fonce);
+    font-weight: 700;
+  }
+
+  .adresse-infos {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .adresse-info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    color: var(--gris-fonce);
+  }
+
+  .adresse-info-ico {
+    font-size: 1.2rem;
+  }
+
+  /* Formulaire */
+  .formulaire {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+
+  .champ-groupe {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .champ-groupe--pleine-largeur {
+    grid-column: 1 / -1;
+  }
+
+  .champ-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--gris-fonce);
+  }
+
+  .champ-input {
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 0.8rem;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--gris-fonce);
+    background: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    width: 100%;
+  }
+
+  .champ-input:focus {
+    border-color: var(--rouge);
+    box-shadow: 0 0 0 3px rgba(227,6,19,0.1);
+  }
+
+  .champ-textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .contacts-grid {
+      grid-template-columns: 1fr;
+    }
+    .contact-bas {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .formulaire {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

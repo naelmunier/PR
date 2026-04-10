@@ -1,0 +1,105 @@
+---
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <img src="/assets/logo.jpeg" alt="PR Logistics" width="140" />
+      <p>Votre prestataire logistique et transport au Havre.</p>
+    </div>
+
+    <div class="footer__col">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="/">Présentation</a></li>
+        <li><a href="/devis">Demander un devis</a></li>
+        <li><a href="/contact">Nous contacter</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h3>Contact</h3>
+      <ul>
+        <li><a href="mailto:lehavre@pr-logistics.fr">lehavre@pr-logistics.fr</a></li>
+        <li><a href="tel:+33232724803">02.32.72.48.03</a></li>
+        <li>PLPN 1 – Port 4935<br />76700 Rogerville</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    <div class="container">
+      <p>&copy; {new Date().getFullYear()} PR Logistics. Tous droits réservés.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--gris-fonce);
+    color: rgba(255,255,255,0.7);
+    padding-top: 4rem;
+    margin-top: 0;
+  }
+
+  .footer__inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .footer__brand img {
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    filter: brightness(1.1);
+  }
+
+  .footer__brand p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .footer__col h3 {
+    color: var(--blanc);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+  }
+
+  .footer__col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .footer__col ul li,
+  .footer__col ul a {
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+
+  .footer__col ul a:hover {
+    color: var(--blanc);
+  }
+
+  .footer__bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 1.2rem 0;
+  }
+
+  .footer__bottom p {
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .footer__inner {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

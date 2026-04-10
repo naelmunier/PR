@@ -1,0 +1,569 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import PartenairesCarousel from '../components/PartenairesCarousel.astro';
+
+const prestations = [
+  { icone: '📦', titre: 'Dépotage / Empotage', desc: 'Déchargement et chargement de conteneurs et camions avec rigueur et réactivité.' },
+  { icone: '🔄', titre: 'Cross Docking', desc: 'Transfert direct de marchandises sans stockage intermédiaire pour optimiser vos flux.' },
+  { icone: '🔍', titre: 'Contrôle qualité', desc: 'Contrôles quantitatifs et qualitatifs rigoureux à réception de vos marchandises.' },
+  { icone: '📋', titre: 'Triage & Palettisation', desc: 'Tri, palettisation, filmage et cerclage selon vos spécifications.' },
+  { icone: '🛒', titre: 'Préparation commandes', desc: 'Picking et reconditionnement adaptés à vos besoins logistiques.' },
+  { icone: '🚛', titre: 'Transport', desc: 'Fret conventionnel et traction conteneur depuis et vers le port du Havre.' },
+];
+
+const chiffres = [
+  { valeur: '8 000', unite: 'm²', label: "d'entrepôt sous douane" },
+  { valeur: '8 000', unite: 'palettes', label: 'de capacité de stockage' },
+  { valeur: '2 177 000', unite: '€', label: 'de CA en 2023' },
+  { valeur: '2 100', unite: 'EVP', label: 'conteneurs traités en 2023' },
+  { valeur: '15', unite: 'collaborateurs', label: 'à votre service' },
+  { valeur: '24/7', unite: '', label: 'surveillance sécurité portuaire' },
+];
+
+const moyens = [
+  '8 000 m² sous douane',
+  '8 000 palettes de stockage',
+  '5 banderoleuses',
+  '1 chaîne de tri',
+  '10 chariots élévateurs (1,6T à 5T)',
+  '22 caméras de sécurité',
+  '1 WMS de gestion des stocks',
+  '1 tracteur de parc',
+];
+---
+
+<MainLayout title="Présentation">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__bg-accent"></div>
+    <div class="container hero__inner">
+      <div class="hero__content animate-in">
+        <p class="hero__eyebrow">Depuis 2017 · Le Havre</p>
+        <h1 class="hero__titre">Votre partenaire<br /><span>logistique</span> au cœur<br />du port du Havre</h1>
+        <p class="hero__desc">
+          PR Logistics est un prestataire indépendant spécialisé dans la logistique portuaire et le transport.
+          Entrepôt sous douane de 8 000 m², solutions sur mesure, réactivité garantie.
+        </p>
+        <div class="hero__ctas">
+          <a href="/contact" class="btn btn--rouge">Nous contacter</a>
+          <a href="/devis" class="btn btn--outline">Demander un devis</a>
+        </div>
+      </div>
+      <div class="hero__visuel animate-in" style="animation-delay: 0.2s;">
+        <div class="hero__carte-flottante">
+          <span class="hcf__val">8 000<small>m²</small></span>
+          <span class="hcf__label">Entrepôt sous douane</span>
+        </div>
+        <div class="hero__carte-flottante hero__carte-flottante--2">
+          <span class="hcf__val">+60%</span>
+          <span class="hcf__label">Croissance 2021–2023</span>
+        </div>
+        <div class="hero__logo-wrapper">
+          <img src="/assets/logo.jpeg" alt="PR Logistics" />
+        </div>
+      </div>
+    </div>
+    <div class="hero__scroll" aria-hidden="true">
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- QUI SOMMES-NOUS -->
+  <section class="section qui-sommes-nous">
+    <div class="container">
+      <div class="qsn__grid">
+        <div class="reveal">
+          <p class="eyebrow-rouge">Notre histoire</p>
+          <h2 class="titre-section">Qui sommes-<span>nous</span> ?</h2>
+          <p class="sous-titre">
+            C'est en <strong>2017</strong> que débute l'aventure PR Logistics. Après plus de 25 années passées
+            au poste de responsable logistique au sein de différentes structures, <strong>Patrick Richer</strong>
+            décide de créer la société PR Logistics.
+          </p>
+          <p class="sous-titre" style="margin-top: 1rem;">
+            Aujourd'hui, <strong>15 collaborateurs</strong> sont à votre service pour vous apporter des solutions
+            concrètes à toutes vos problématiques de logistique en entrepôt. Vos flux sont organisés et gérés
+            avec des moyens techniques adaptés pour répondre au mieux à vos besoins.
+          </p>
+          <a href="/contact" class="btn btn--rouge" style="margin-top: 2rem;">Prendre contact</a>
+        </div>
+        <div class="qsn__stats reveal" style="transition-delay: 0.15s;">
+          <div class="qsn__stat-badge">
+            <span class="qsn__annee">2017</span>
+            <span class="qsn__annee-label">Fondation</span>
+          </div>
+          <div class="qsn__info-grid">
+            {chiffres.slice(0, 4).map(c => (
+              <div class="qsn__info-item">
+                <span class="qsn__info-val">{c.valeur}<small>{c.unite}</small></span>
+                <span class="qsn__info-label">{c.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRESTATIONS -->
+  <section class="section section--gris">
+    <div class="container">
+      <div class="reveal" style="text-align:center; margin-bottom: 3.5rem;">
+        <p class="eyebrow-rouge">Ce que nous faisons</p>
+        <h2 class="titre-section">Nos <span>prestations</span></h2>
+        <p class="sous-titre" style="margin: 1rem auto 0;">
+          Une gamme complète de services logistiques adaptée aux exigences du commerce international.
+        </p>
+      </div>
+      <div class="prestations-grid">
+        {prestations.map((p, i) => (
+          <div class="carte reveal" style={`transition-delay: ${i * 0.07}s`}>
+            <div class="carte__icone">{p.icone}</div>
+            <h3 class="carte__titre">{p.titre}</h3>
+            <p class="carte__desc">{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- NOS MOYENS -->
+  <section class="section moyens">
+    <div class="container">
+      <div class="moyens__grid">
+        <div class="reveal">
+          <p class="eyebrow-rouge">Nos équipements</p>
+          <h2 class="titre-section">Des moyens à la <span>hauteur</span></h2>
+          <p class="sous-titre">
+            PR Logistics dispose d'un entrepôt de 8 000 m² sur un terrain de 18 500 m² entièrement clos,
+            télésurveillé 24h/7j par la sécurité portuaire.
+          </p>
+          <ul class="moyens__liste">
+            {moyens.map(m => (
+              <li class="moyens__item">
+                <span class="moyens__puce" aria-hidden="true"></span>
+                {m}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="moyens__chiffres reveal" style="transition-delay: 0.15s;">
+          <div class="chiffres-grid">
+            {chiffres.map(c => (
+              <div class="chiffre-item">
+                <span class="chiffre-val">{c.valeur}<small>{c.unite}</small></span>
+                <span class="chiffre-label">{c.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTENAIRES CARROUSEL -->
+  <PartenairesCarousel />
+
+  <!-- CTA FINAL -->
+  <section class="section cta-section">
+    <div class="container">
+      <div class="cta-bloc reveal">
+        <h2 class="titre-section" style="color:var(--blanc);">Prêt à optimiser votre <span style="color:#ff6b6b;">logistique</span> ?</h2>
+        <p style="color:rgba(255,255,255,0.75); max-width:520px; margin: 1.2rem auto 0; font-size:1.1rem;">
+          Contactez-nous dès aujourd'hui pour étudier ensemble vos besoins logistiques.
+        </p>
+        <div style="display:flex; gap:1rem; justify-content:center; margin-top:2.5rem; flex-wrap:wrap;">
+          <a href="/contact" class="btn btn--rouge" style="background:white; color:var(--gris-fonce);">Nous contacter</a>
+          <a href="/devis" class="btn btn--outline" style="border-color:white; color:white;">Demander un devis</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>
+
+<style>
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #fff 0%, var(--gris-clair) 100%);
+  }
+
+  .hero__bg-accent {
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(227,6,19,0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .hero__eyebrow {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--rouge);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero__titre {
+    font-size: var(--font-size-hero);
+    font-weight: 800;
+    color: var(--gris-fonce);
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero__titre span {
+    color: var(--rouge);
+  }
+
+  .hero__desc {
+    font-size: 1.15rem;
+    color: var(--gris-moyen);
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .hero__visuel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 380px;
+  }
+
+  .hero__logo-wrapper {
+    width: 280px;
+    height: 180px;
+    border-radius: var(--rayon-lg);
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    padding: 1.5rem;
+  }
+
+  .hero__logo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 0;
+  }
+
+  .hero__carte-flottante {
+    position: absolute;
+    background: white;
+    border-radius: var(--rayon);
+    padding: 1rem 1.5rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    top: 10%;
+    right: -10%;
+    animation: flottement 4s ease-in-out infinite;
+  }
+
+  .hero__carte-flottante--2 {
+    top: auto;
+    bottom: 10%;
+    right: auto;
+    left: -5%;
+    animation-delay: 2s;
+  }
+
+  @keyframes flottement {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .hcf__val {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--rouge);
+    line-height: 1;
+  }
+
+  .hcf__val small {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-left: 2px;
+  }
+
+  .hcf__label {
+    font-size: 0.75rem;
+    color: var(--gris-moyen);
+    margin-top: 0.2rem;
+  }
+
+  .hero__scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero__scroll-line {
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gris-moyen), transparent);
+    border-radius: 2px;
+    animation: scroll-down 1.5s ease-in-out infinite;
+  }
+
+  @keyframes scroll-down {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* QUI SOMMES-NOUS */
+  .eyebrow-rouge {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--rouge);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.8rem;
+  }
+
+  .qsn__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .qsn__stats {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .qsn__stat-badge {
+    background: linear-gradient(135deg, var(--rouge), #b00010);
+    border-radius: var(--rayon-lg);
+    padding: 2.5rem;
+    text-align: center;
+    color: white;
+  }
+
+  .qsn__annee {
+    display: block;
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .qsn__annee-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 0.3rem;
+    display: block;
+  }
+
+  .qsn__info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .qsn__info-item {
+    background: var(--gris-clair);
+    border-radius: var(--rayon);
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .qsn__info-val {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--gris-fonce);
+    line-height: 1;
+  }
+
+  .qsn__info-val small {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--rouge);
+    margin-left: 3px;
+  }
+
+  .qsn__info-label {
+    font-size: 0.75rem;
+    color: var(--gris-moyen);
+    margin-top: 0.3rem;
+  }
+
+  /* PRESTATIONS */
+  .prestations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .carte__icone {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .carte__titre {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--gris-fonce);
+    margin-bottom: 0.5rem;
+  }
+
+  .carte__desc {
+    font-size: 0.9rem;
+    color: var(--gris-moyen);
+    line-height: 1.6;
+  }
+
+  /* MOYENS */
+  .moyens__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .moyens__liste {
+    list-style: none;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .moyens__item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.95rem;
+    color: var(--gris-fonce);
+  }
+
+  .moyens__puce {
+    width: 8px;
+    height: 8px;
+    background: var(--rouge);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .chiffres-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .chiffre-item {
+    background: var(--gris-clair);
+    border-radius: var(--rayon);
+    padding: 1.5rem;
+    border-left: 3px solid var(--rouge);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .chiffre-val {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--gris-fonce);
+    line-height: 1;
+  }
+
+  .chiffre-val small {
+    font-size: 0.8rem;
+    color: var(--rouge);
+    font-weight: 700;
+    margin-left: 3px;
+  }
+
+  .chiffre-label {
+    font-size: 0.8rem;
+    color: var(--gris-moyen);
+  }
+
+  /* CTA FINAL */
+  .cta-section {
+    background: linear-gradient(135deg, var(--bleu-marine), #0a1628);
+  }
+
+  .cta-bloc {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero__inner,
+    .qsn__grid,
+    .moyens__grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .hero__visuel {
+      min-height: 260px;
+    }
+
+    .hero__carte-flottante {
+      right: 0;
+    }
+
+    .hero__carte-flottante--2 {
+      left: 0;
+    }
+
+    .prestations-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .prestations-grid,
+    .chiffres-grid,
+    .qsn__info-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__visuel {
+      display: none;
+    }
+  }
+</style>

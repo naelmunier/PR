@@ -1,0 +1,86 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="Demander un devis" description="Demandez un devis personnalisé à PR Logistics pour vos besoins de logistique et transport au Havre.">
+
+  <section class="page-hero">
+    <div class="container page-hero__inner animate-in">
+      <p class="eyebrow-rouge">Bientôt disponible</p>
+      <h1 class="titre-section">Demander un <span>devis</span></h1>
+      <p class="sous-titre">
+        Notre formulaire de demande de devis est en cours de préparation. En attendant, contactez-nous directement.
+      </p>
+      <div style="margin-top: 2.5rem; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="/contact" class="btn btn--rouge">Nous contacter</a>
+        <a href="mailto:lehavre@pr-logistics.fr" class="btn btn--outline">lehavre@pr-logistics.fr</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section devis-section">
+    <div class="container devis-centre">
+      <div class="devis-placeholder reveal">
+        <div class="devis-placeholder__icone" aria-hidden="true">📋</div>
+        <h2>Formulaire de devis</h2>
+        <p>Cette page est réservée au futur formulaire de demande de devis en ligne.</p>
+        <p style="margin-top:0.5rem; font-size:0.85rem;">En cours de construction.</p>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>
+
+<style>
+  .page-hero {
+    background: linear-gradient(135deg, var(--gris-clair), white);
+    padding: 5rem 0 4rem;
+    text-align: center;
+  }
+
+  .page-hero__inner .sous-titre {
+    margin: 1rem auto 0;
+  }
+
+  .devis-section {
+    background: var(--gris-clair);
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .devis-centre {
+    display: flex;
+    justify-content: center;
+  }
+
+  .devis-placeholder {
+    background: white;
+    border-radius: var(--rayon-lg);
+    padding: 4rem 3rem;
+    text-align: center;
+    max-width: 520px;
+    width: 100%;
+    border: 2px dashed #e0e0e0;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+  }
+
+  .devis-placeholder__icone {
+    font-size: 3.5rem;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+
+  .devis-placeholder h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--gris-fonce);
+    margin-bottom: 0.8rem;
+  }
+
+  .devis-placeholder p {
+    font-size: 0.95rem;
+    color: var(--gris-moyen);
+    line-height: 1.6;
+  }
+</style>

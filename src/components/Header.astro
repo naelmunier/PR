@@ -1,0 +1,176 @@
+---
+const navLinks = [
+  { href: '/', label: 'Présentation' },
+  { href: '/devis', label: 'Demander un devis' },
+  { href: '/contact', label: 'Nous contacter' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="/" class="header__logo" aria-label="PR Logistics — Accueil">
+      <img src="/assets/logo.jpeg" alt="PR Logistics" width="160" height="50" />
+    </a>
+
+    <nav class="header__nav" id="nav" aria-label="Navigation principale">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class={`header__link ${currentPath === link.href ? 'header__link--actif' : ''}`}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a href="/devis" class="btn btn--rouge header__cta">Devis gratuit</a>
+    </nav>
+
+    <button class="header__burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .header.scrolled {
+    box-shadow: 0 2px 30px rgba(0,0,0,0.08);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    gap: 2rem;
+  }
+
+  .header__logo img {
+    height: 44px;
+    width: auto;
+    border-radius: 0.4rem;
+    object-fit: contain;
+  }
+
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .header__link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--gris-fonce);
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .header__link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--rouge);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    border-radius: 1px;
+  }
+
+  .header__link:hover::after,
+  .header__link--actif::after {
+    transform: scaleX(1);
+  }
+
+  .header__link--actif {
+    color: var(--rouge);
+  }
+
+  .header__cta {
+    font-size: 0.9rem;
+    padding: 0.65rem 1.4rem;
+    margin-left: 0.5rem;
+  }
+
+  .header__burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .header__burger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--gris-fonce);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  @media (max-width: 768px) {
+    .header__nav {
+      display: none;
+      position: absolute;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(20px);
+      flex-direction: column;
+      padding: 1.5rem 2rem;
+      gap: 1.2rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    .header__nav.open {
+      display: flex;
+    }
+
+    .header__burger {
+      display: flex;
+    }
+
+    .header__cta {
+      width: 100%;
+      justify-content: center;
+      margin-left: 0;
+    }
+  }
+</style>
+
+<script>
+  const header = document.getElementById('header');
+  const burger = document.getElementById('burger');
+  const nav = document.getElementById('nav');
+
+  // Effet scroll
+  window.addEventListener('scroll', () => {
+    header?.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Menu burger
+  burger?.addEventListener('click', () => {
+    const isOpen = nav?.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(isOpen));
+  });
+</script>
