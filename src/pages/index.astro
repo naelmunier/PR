@@ -3,15 +3,15 @@ import MainLayout from '../layouts/MainLayout.astro';
 import PartenairesCarousel from '../components/PartenairesCarousel.astro';
 
 const prestations = [
-  { icone: '📦', titre: 'Dépotage & Empotage',      desc: 'Déchargement et chargement de conteneurs et de camions avec rigueur et réactivité.' },
-  { icone: '🔄', titre: 'Cross Docking',             desc: 'Transfert direct de marchandises sans stockage intermédiaire pour optimiser vos flux.' },
-  { icone: '🗂️', titre: 'Triage',                   desc: 'Tri rigoureux de vos marchandises selon vos critères de classification.' },
-  { icone: '🔍', titre: 'Contrôle Qualité',          desc: 'Contrôles quantitatifs et qualitatifs (aspect extérieur) à réception de vos marchandises.' },
-  { icone: '🏗️', titre: 'Palettisation',             desc: 'Mise sur palettes selon vos spécifications pour une manutention optimale.' },
-  { icone: '🎬', titre: 'Filmage & Cerclage',        desc: 'Sécurisation de vos palettes par filmage et cerclage pour un transport en toute sécurité.' },
-  { icone: '🛒', titre: 'Préparation de commande',   desc: 'Picking précis et préparation de commandes adaptés à vos besoins logistiques.' },
-  { icone: '📋', titre: 'Reconditionnement',         desc: 'Remise en état et reconditionnement de vos produits selon vos exigences.' },
-  { icone: '🚛', titre: 'Transport',                 desc: 'Fret conventionnel et traction conteneur depuis et vers le port du Havre.' },
+  { icone: '/assets/nos prestations/depotage-empotage.png', titre: 'Dépotage & Empotage',      desc: 'Déchargement et chargement de conteneurs et de camions avec rigueur et réactivité.' },
+  { icone: '/assets/nos prestations/cross-docking.png',     titre: 'Cross Docking',             desc: 'Transfert direct de marchandises sans stockage intermédiaire pour optimiser vos flux.' },
+  { icone: '/assets/nos prestations/trier.png',             titre: 'Triage',                    desc: 'Tri rigoureux de vos marchandises selon vos critères de classification.' },
+  { icone: '/assets/nos prestations/qualite.png',           titre: 'Contrôle Qualité',          desc: 'Contrôles quantitatifs et qualitatifs (aspect extérieur) à réception de vos marchandises.' },
+  { icone: '/assets/nos prestations/palette.png',           titre: 'Palettisation',             desc: 'Mise sur palettes selon vos spécifications pour une manutention optimale.' },
+  { icone: '/assets/nos prestations/film-plastique.png',    titre: 'Filmage & Cerclage',        desc: 'Sécurisation de vos palettes par filmage et cerclage pour un transport en toute sécurité.' },
+  { icone: '/assets/nos prestations/preparation-de-commande.png', titre: 'Préparation de commande', desc: 'Picking précis et préparation de commandes adaptés à vos besoins logistiques.' },
+  { icone: '/assets/nos prestations/reconditionnemenent.png', titre: 'Reconditionnement',       desc: 'Remise en état et reconditionnement de vos produits selon vos exigences.' },
+  { icone: '/assets/nos prestations/transport-de-livraison.png', titre: 'Transport',            desc: 'Fret conventionnel et traction conteneur depuis et vers le port du Havre.' },
 ];
 
 const chiffres = [
@@ -88,7 +88,9 @@ const moyens = [
       <div class="prestations-grid">
         {prestations.map((p, i) => (
           <div class="prestation-carte reveal" style={`transition-delay: ${i * 0.08}s`}>
-            <div class="prestation-carte__icone">{p.icone}</div>
+            <div class="prestation-carte__icone">
+              <img src={p.icone} alt={p.titre} width="48" height="48" loading="lazy" />
+            </div>
             <h3 class="prestation-carte__titre">{p.titre}</h3>
             <p class="prestation-carte__desc">{p.desc}</p>
             <div class="prestation-carte__accent"></div>
@@ -419,9 +421,17 @@ const moyens = [
   }
 
   .prestation-carte__icone {
-    font-size: 2.2rem;
+    width: 48px;
+    height: 48px;
     margin-bottom: 1rem;
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .prestation-carte__icone img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 0;
   }
 
   .prestation-carte:hover .prestation-carte__icone {
