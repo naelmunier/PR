@@ -114,6 +114,75 @@ import MainLayout from '../layouts/MainLayout.astro';
     </div>
   </section>
 
+  <!-- CERTIFICATIONS & AGRÉMENTS -->
+  <section class="section section--gris certif">
+    <div class="container">
+      <div class="reveal" style="text-align:center; margin-bottom:3rem;">
+        <p class="eyebrow-rouge">Conformité & qualité</p>
+        <h2 class="titre-section">Certifications & <span>agréments</span></h2>
+        <p class="sous-titre" style="margin:1rem auto 0;">
+          PR Logistics s'engage dans une démarche rigoureuse de conformité réglementaire et de performance environnementale, pour vous offrir un cadre de travail sûr, fiable et durable.
+        </p>
+      </div>
+
+      <!-- Rubrique ICPE + Certification BREEAM -->
+      <div class="certif-grid reveal">
+        <div class="certif-carte">
+          <div class="certif-carte__header">
+            <span class="certif-badge certif-badge--bleu">Rubrique réglementaire</span>
+          </div>
+          <h3 class="certif-carte__titre">ICPE</h3>
+          <p class="certif-carte__desc">
+            PR Logistics est classé <strong>Installation Classée pour la Protection de l'Environnement (ICPE)</strong>. Ce cadre réglementaire garantit que nos installations respectent les normes strictes imposées par les autorités en matière de sécurité industrielle, de prévention des risques et de protection de l'environnement. Nos activités sont régulièrement contrôlées et soumises à déclaration ou autorisation préfectorale.
+          </p>
+        </div>
+
+        <div class="certif-carte reveal" style="transition-delay:0.12s;">
+          <div class="certif-carte__header">
+            <span class="certif-badge certif-badge--vert">Certification internationale</span>
+          </div>
+          <h3 class="certif-carte__titre">BREEAM</h3>
+          <p class="certif-carte__desc">
+            Notre entrepôt est certifié <strong>BREEAM</strong> (Building Research Establishment Environmental Assessment Method), la référence mondiale d'évaluation de la performance environnementale des bâtiments. Cette certification atteste de la qualité de notre infrastructure, de son efficacité énergétique et de notre engagement concret pour un immobilier logistique durable et responsable.
+          </p>
+        </div>
+      </div>
+
+      <!-- Agréments -->
+      <div class="agrements-bloc reveal" style="margin-top:2.5rem;">
+        <div class="agrements-titre">
+          <p class="eyebrow-rouge" style="margin-bottom:0.5rem;">Marchandises spécifiques</p>
+          <h3 style="font-size:1.2rem; font-weight:700; color:var(--gris-fonce); margin-bottom:0.8rem;">Nos agréments</h3>
+          <p style="font-size:1.1rem; color:var(--gris-moyen); max-width:620px; line-height:1.7;">
+            PR Logistics dispose des agréments officiels pour la gestion de marchandises soumises à des réglementations spécifiques, vous assurant un traitement conforme et sécurisé quel que soit le type de flux.
+          </p>
+        </div>
+        <div class="agrements-liste">
+          <div class="agrement agrement--actif">
+            <span class="agrement__icone">⚠️</span>
+            <span class="agrement__nom">Marchandises dangereuses</span>
+            <span class="agrement__statut agrement__statut--ok">Agréé</span>
+          </div>
+          <div class="agrement agrement--actif">
+            <span class="agrement__icone">❄️</span>
+            <span class="agrement__nom">Froid</span>
+            <span class="agrement__statut agrement__statut--ok">Agréé</span>
+          </div>
+          <div class="agrement agrement--bientot">
+            <span class="agrement__icone">🌿</span>
+            <span class="agrement__nom">Bio</span>
+            <span class="agrement__statut agrement__statut--soon">À venir</span>
+          </div>
+          <div class="agrement agrement--bientot">
+            <span class="agrement__icone">🍷</span>
+            <span class="agrement__nom">Alcool</span>
+            <span class="agrement__statut agrement__statut--soon">À venir</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- GRAPHIQUES DE CROISSANCE -->
   <section class="section croissance">
     <div class="container">
@@ -482,11 +551,125 @@ import MainLayout from '../layouts/MainLayout.astro';
 
 
   /* Responsive */
+  /* CERTIFICATIONS */
+  .certif-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .certif-carte {
+    background: white;
+    border-radius: var(--rayon-lg);
+    padding: 2rem 2rem 2rem;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .certif-carte__header { display: flex; }
+
+  .certif-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.85rem;
+    border-radius: 2rem;
+  }
+
+  .certif-badge--bleu {
+    background: rgba(27,42,74,0.09);
+    color: var(--bleu-marine);
+  }
+
+  .certif-badge--vert {
+    background: #dcfce7;
+    color: #15803d;
+  }
+
+  .certif-carte__titre {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--gris-fonce);
+    letter-spacing: -0.02em;
+  }
+
+  .certif-carte__desc {
+    font-size: 1.05rem;
+    color: var(--gris-moyen);
+    line-height: 1.75;
+  }
+
+  .certif-carte__desc strong {
+    color: var(--gris-fonce);
+    font-weight: 600;
+  }
+
+  /* AGRÉMENTS */
+  .agrements-bloc {
+    background: white;
+    border-radius: var(--rayon-lg);
+    padding: 2rem 2rem 2rem;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .agrements-liste {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .agrement {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.75rem 1.2rem;
+    border-radius: 0.9rem;
+    background: var(--gris-clair);
+  }
+
+  .agrement__icone { font-size: 1.2rem; }
+
+  .agrement__nom {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gris-fonce);
+  }
+
+  .agrement__statut {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+  }
+
+  .agrement__statut--ok {
+    background: #dcfce7;
+    color: #15803d;
+  }
+
+  .agrement__statut--soon {
+    background: #fef9c3;
+    color: #a16207;
+  }
+
   @media (max-width: 900px) {
     .histoire__grid,
-    .graphiques-grid {
+    .graphiques-grid,
+    .certif-grid {
       grid-template-columns: 1fr;
       gap: 3rem;
+    }
+
+    .agrements-bloc {
+      grid-template-columns: 1fr;
     }
 
     .kpi-grid {
