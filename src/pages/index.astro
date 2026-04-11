@@ -3,15 +3,15 @@ import MainLayout from '../layouts/MainLayout.astro';
 import PartenairesCarousel from '../components/PartenairesCarousel.astro';
 
 const prestations = [
-  { img: '/assets/nos prestations/depotage-empotage.png', titre: 'Dépotage & Empotage', desc: 'Déchargement et chargement de conteneurs et de camions avec rigueur et réactivité.' },
-  { img: '/assets/nos prestations/cross-docking.png',     titre: 'Cross Docking',       desc: 'Transfert direct de marchandises sans stockage intermédiaire pour optimiser vos flux.' },
-  { img: '/assets/nos prestations/trier.png',             titre: 'Triage',               desc: 'Tri rigoureux de vos marchandises selon vos critères de classification.' },
-  { img: '/assets/nos prestations/qualite.png',           titre: 'Contrôle Qualité',     desc: 'Contrôles quantitatifs et qualitatifs (aspect extérieur) à réception de vos marchandises.' },
-  { img: '/assets/nos prestations/palette.png',           titre: 'Palettisation',        desc: 'Mise sur palettes selon vos spécifications pour une manutention optimale.' },
-  { img: '/assets/nos prestations/film-plastique.png',    titre: 'Filmage & Cerclage',   desc: 'Sécurisation de vos palettes par filmage et cerclage pour un transport en toute sécurité.' },
-  { img: '/assets/nos prestations/preparation-de-commande.png', titre: 'Préparation de commande', desc: 'Picking précis et préparation de commandes adaptés à vos besoins logistiques.' },
-  { img: '/assets/nos prestations/reconditionnemenent.png', titre: 'Reconditionnement',  desc: 'Remise en état et reconditionnement de vos produits selon vos exigences.' },
-  { img: '/assets/nos prestations/transport-de-livraison.png', titre: 'Transport',       desc: 'Fret conventionnel et traction conteneur depuis et vers le port du Havre.' },
+  { icone: '📦', titre: 'Dépotage & Empotage',      desc: 'Déchargement et chargement de conteneurs et de camions avec rigueur et réactivité.' },
+  { icone: '🔄', titre: 'Cross Docking',             desc: 'Transfert direct de marchandises sans stockage intermédiaire pour optimiser vos flux.' },
+  { icone: '🗂️', titre: 'Triage',                   desc: 'Tri rigoureux de vos marchandises selon vos critères de classification.' },
+  { icone: '🔍', titre: 'Contrôle Qualité',          desc: 'Contrôles quantitatifs et qualitatifs (aspect extérieur) à réception de vos marchandises.' },
+  { icone: '🏗️', titre: 'Palettisation',             desc: 'Mise sur palettes selon vos spécifications pour une manutention optimale.' },
+  { icone: '🎬', titre: 'Filmage & Cerclage',        desc: 'Sécurisation de vos palettes par filmage et cerclage pour un transport en toute sécurité.' },
+  { icone: '🛒', titre: 'Préparation de commande',   desc: 'Picking précis et préparation de commandes adaptés à vos besoins logistiques.' },
+  { icone: '📋', titre: 'Reconditionnement',         desc: 'Remise en état et reconditionnement de vos produits selon vos exigences.' },
+  { icone: '🚛', titre: 'Transport',                 desc: 'Fret conventionnel et traction conteneur depuis et vers le port du Havre.' },
 ];
 
 const chiffres = [
@@ -88,14 +88,9 @@ const moyens = [
       <div class="prestations-grid">
         {prestations.map((p, i) => (
           <div class="prestation-carte reveal" style={`transition-delay: ${i * 0.08}s`}>
-            <div class="prestation-carte__img-wrapper">
-              <img src={p.img} alt={p.titre} loading="lazy" />
-              <div class="prestation-carte__overlay"></div>
-            </div>
-            <div class="prestation-carte__body">
-              <h3 class="prestation-carte__titre">{p.titre}</h3>
-              <p class="prestation-carte__desc">{p.desc}</p>
-            </div>
+            <div class="prestation-carte__icone">{p.icone}</div>
+            <h3 class="prestation-carte__titre">{p.titre}</h3>
+            <p class="prestation-carte__desc">{p.desc}</p>
             <div class="prestation-carte__accent"></div>
           </div>
         ))}
@@ -409,6 +404,7 @@ const moyens = [
     background: white;
     border-radius: var(--rayon-lg);
     overflow: hidden;
+    padding: 2rem;
     box-shadow: 0 2px 16px rgba(0,0,0,0.06);
     transition:
       transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
@@ -422,45 +418,14 @@ const moyens = [
     box-shadow: 0 20px 50px rgba(0,0,0,0.14);
   }
 
-  .prestation-carte__img-wrapper {
-    width: 100%;
-    height: 18px;
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.4rem 1.5rem 0;
-    height: auto;
-    background: none;
+  .prestation-carte__icone {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
-  .prestation-carte__img-wrapper img {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-    border-radius: 0;
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    display: block;
-  }
-
-  .prestation-carte:hover .prestation-carte__img-wrapper img {
-    transform: scale(1.15);
-  }
-
-  .prestation-carte__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.18) 100%);
-    transition: opacity 0.4s;
-  }
-
-  .prestation-carte:hover .prestation-carte__overlay {
-    opacity: 0.5;
-  }
-
-  .prestation-carte__body {
-    padding: 1.4rem 1.5rem 1.6rem;
+  .prestation-carte:hover .prestation-carte__icone {
+    transform: scale(1.2) translateY(-3px);
   }
 
   .prestation-carte__titre {
