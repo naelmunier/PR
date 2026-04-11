@@ -15,14 +15,14 @@ const prestations = [
 ];
 
 const equipements = [
-  { ico: '🏭', val: '8 000 m²',  label: 'Entrepôt sous douane' },
-  { ico: '📦', val: '8 000',      label: 'Palettes de stockage' },
-  { ico: '🔧', val: '5',          label: 'Banderoleuses' },
-  { ico: '⛓️',  val: '1',          label: 'Chaîne de tri' },
-  { ico: '🏗️',  val: '10',         label: 'Chariots élévateurs 1,6T – 5T' },
-  { ico: '📹', val: '22',         label: 'Caméras sécurité 24/7' },
-  { ico: '💻', val: '1',          label: 'WMS gestion des stocks' },
-  { ico: '🚛', val: '1',          label: 'Tracteur de parc' },
+  { ico: '/assets/carousel-equipement/entrepots.png',         val: '8 000 m²', label: 'Entrepôt sous douane' },
+  { ico: '/assets/carousel-equipement/pallet.png',            val: '8 000',    label: 'Palettes de stockage' },
+  { ico: '/assets/carousel-equipement/banderoleuse.png',      val: '5',        label: 'Banderoleuses' },
+  { ico: '/assets/carousel-equipement/chaine-de-tri.png',     val: '1',        label: 'Chaîne de tri' },
+  { ico: '/assets/carousel-equipement/chariot-elevateur.png', val: '10',       label: 'Chariots élévateurs 1,6T – 5T' },
+  { ico: '/assets/carousel-equipement/videosurveillance.png', val: '22',       label: 'Caméras sécurité 24/7' },
+  { ico: '/assets/carousel-equipement/wms.png',               val: '1',        label: 'WMS gestion des stocks' },
+  { ico: '/assets/carousel-equipement/tracteur-de-parc.png',  val: '1',        label: 'Tracteur de parc' },
 ];
 ---
 
@@ -94,7 +94,7 @@ const equipements = [
           <div class="c3d-ring" id="c3dRing">
             {equipements.map((e, i) => (
               <div class="c3d-card" data-index={i}>
-                <span class="c3d-card__ico" aria-hidden="true">{e.ico}</span>
+                <img class="c3d-card__ico" src={e.ico} alt={e.label} width="40" height="40" loading="lazy" />
                 <span class="c3d-card__val">{e.val}</span>
                 <span class="c3d-card__label">{e.label}</span>
               </div>
@@ -145,44 +145,53 @@ const equipements = [
     const DEG       = 360 / total;         // 45° par carte
     const TO_RAD    = Math.PI / 180;
 
-    /* — Ellipse : rayon horizontal large, rayon profondeur petit — */
-    const RX = 330;   // demi-axe horizontal (px)
-    const RZ = 80;    // demi-axe profondeur  (px) → plus petit = plus plat/elliptique
+    /* — Ellipse — */
+    const RX = 350;   // demi-axe horizontal (px)
+    const RZ = 85;    // demi-axe profondeur (px) — petit = très plat/elliptique
 
-    /* Seuil au-delà duquel une carte devient invisible (en degrés absolus) */
-    const VISIBLE_DEG = 100;
+    /* Taille relative min (carte arrière) → max (carte avant) */
+    const SCALE_MIN = 0.50;
+    const SCALE_MAX = 1.00;
+
+    /* Opacité min (carte arrière) */
+    const OPACITY_MIN = 0.32;
 
     let current   = 0;
     let autoTimer: ReturnType<typeof setInterval>;
 
-    /* — Applique les positions 3D de toutes les cartes selon l'index courant — */
+    /* — Applique les positions 3D de toutes les cartes — */
     function updateCards() {
       cards.forEach((card, i) => {
         /* angle relatif à la carte avant, normalisé dans [-180, 180] */
-        let a = ((i - current) * DEG % 360 + 540) % 360 - 180;
+        const a    = ((i - current) * DEG % 360 + 540) % 360 - 180;
+        const rad  = a * TO_RAD;
+        const cosA = Math.cos(rad);
 
-        const tx =  RX * Math.sin(a * TO_RAD);
-        const tz = -RZ * (1 - Math.cos(a * TO_RAD)); // 0 à l'avant, -2RZ à l'arrière
+        const tx = RX * Math.sin(rad);
+        const tz = -RZ * (1 - cosA);                             // 0 devant, −2RZ derrière
 
-        const abs  = Math.abs(a);
-        const vis  = abs < VISIBLE_DEG;
+        /* Scale et opacité progressifs : max devant, min derrière */
+        const t       = (cosA + 1) / 2;                          // 1 devant, 0 derrière
+        const scale   = SCALE_MIN + (SCALE_MAX - SCALE_MIN) * t;
+        const opacity = OPACITY_MIN + (1 - OPACITY_MIN) * t;
 
-        /* Opacité : pleine devant, réduite sur les côtés */
-        const opacity = vis ? (abs < 50 ? 1 : 1 - (abs - 50) / 60) : 0;
-
-        card.style.transform  = `translateX(${tx}px) translateZ(${tz}px)`;
-        card.style.opacity    = String(Math.max(0, opacity));
-        card.style.zIndex     = String(Math.round(100 - abs));
+        card.style.transform = `translateX(${tx.toFixed(1)}px) translateZ(${tz.toFixed(1)}px) scale(${scale.toFixed(3)})`;
+        card.style.opacity   = opacity.toFixed(3);
+        card.style.zIndex    = String(Math.round(t * 100));
         card.classList.toggle('c3d-card--active', i === current);
       });
 
       if (counterEl) counterEl.textContent = `${current + 1} / ${total}`;
     }
 
-    /* — Navigation — */
+    /* — Navigation avec animation pop sur la carte active — */
     function goTo(index: number) {
       current = ((index % total) + total) % total;
       updateCards();
+      /* Pop lumineux sur la nouvelle carte active */
+      const active = cards[current];
+      active.classList.remove('c3d-card--pop');
+      requestAnimationFrame(() => requestAnimationFrame(() => active.classList.add('c3d-card--pop')));
     }
 
     function startAuto() { autoTimer = setInterval(() => goTo(current + 1), 3400); }
@@ -536,14 +545,14 @@ const equipements = [
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1.4rem;
   }
 
   .c3d-scene {
     position: relative;
     width: 100%;
-    height: 180px;
-    perspective: 820px;
+    height: 240px;
+    perspective: 900px;
     perspective-origin: 50% 50%;
     overflow: visible;
   }
@@ -557,63 +566,75 @@ const equipements = [
 
   .c3d-card {
     position: absolute;
-    width: 148px;
-    height: 114px;
+    width: 172px;
+    height: 152px;
     left: 50%;
     top: 50%;
-    margin-left: -74px;
-    margin-top: -57px;
+    margin-left: -86px;
+    margin-top: -76px;
     background: white;
-    border-radius: 1.2rem;
+    border-radius: 1.4rem;
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     border: 1.5px solid transparent;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.35rem;
-    padding: 0.9rem 0.8rem;
+    gap: 0.45rem;
+    padding: 1.1rem 1rem;
     text-align: center;
-    transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity  0.5s ease,
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity   0.6s ease,
                 box-shadow 0.4s,
                 border-color 0.4s;
     cursor: grab;
     user-select: none;
+    will-change: transform, opacity;
   }
 
   .c3d-card:active { cursor: grabbing; }
 
   .c3d-card--active {
-    box-shadow: 0 12px 40px rgba(227,6,19,0.15), 0 3px 12px rgba(0,0,0,0.07);
-    border-color: rgba(227,6,19,0.2);
+    box-shadow: 0 16px 50px rgba(227,6,19,0.18), 0 4px 14px rgba(0,0,0,0.08);
+    border-color: rgba(227,6,19,0.22);
+  }
+
+  /* Animation "pop" quand la carte arrive devant */
+  @keyframes card-arrive {
+    0%   { filter: brightness(1.4) saturate(1.2); }
+    100% { filter: brightness(1)   saturate(1);   }
+  }
+
+  .c3d-card--pop {
+    animation: card-arrive 0.55s ease-out forwards;
   }
 
   .c3d-card__ico {
-    font-size: 1.8rem;
-    line-height: 1;
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
   }
 
   .c3d-card__val {
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     font-weight: 800;
     color: var(--rouge);
     line-height: 1;
   }
 
   .c3d-card__label {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     color: var(--gris-moyen);
-    line-height: 1.3;
+    line-height: 1.35;
   }
 
-  /* Flèches positionnées absolues, centrées verticalement sur la scène */
+  /* Flèches centrées verticalement sur la scène */
   .c3d-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     border: 1.5px solid #e0e0e0;
     background: white;
@@ -627,8 +648,8 @@ const equipements = [
     z-index: 20;
   }
 
-  .c3d-arrow--prev { left: 0; }
-  .c3d-arrow--next { right: 0; }
+  .c3d-arrow--prev { left: 4px; }
+  .c3d-arrow--next { right: 4px; }
 
   .c3d-arrow:hover {
     background: var(--rouge);
@@ -637,11 +658,11 @@ const equipements = [
     box-shadow: 0 4px 18px rgba(227,6,19,0.25);
   }
 
-  /* Compteur 1 / 8 */
+  /* Compteur */
   .c3d-counter {
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     color: #aaa;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     margin: 0;
   }
 
