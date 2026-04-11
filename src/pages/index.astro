@@ -42,32 +42,18 @@ const moyens = [
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero__bg-accent"></div>
-    <div class="container hero__inner">
-      <div class="hero__content animate-in">
-        <p class="hero__eyebrow">Depuis 2017 · Le Havre</p>
-        <h1 class="hero__titre">Votre partenaire<br /><span>logistique</span> au cœur<br />du port du Havre</h1>
-        <p class="hero__desc">
-          PR Logistics est un prestataire indépendant spécialisé dans la logistique portuaire et le transport.
-          Entrepôt sous douane de 8 000 m², solutions sur mesure, réactivité garantie.
-        </p>
-        <div class="hero__ctas">
-          <a href="/contact" class="btn btn--rouge">Nous contacter</a>
-          <a href="/devis" class="btn btn--outline">Demander un devis</a>
-        </div>
-      </div>
-      <div class="hero__visuel animate-in" style="animation-delay: 0.2s;">
-        <div class="hero__carte-flottante">
-          <span class="hcf__val">8 000<small>m²</small></span>
-          <span class="hcf__label">Entrepôt sous douane</span>
-        </div>
-        <div class="hero__carte-flottante hero__carte-flottante--2">
-          <span class="hcf__val">+60%</span>
-          <span class="hcf__label">Croissance 2021–2023</span>
-        </div>
-        <div class="hero__logo-wrapper">
-          <img src="/assets/logo.jpeg" alt="PR Logistics" />
-        </div>
+    <div class="hero__bg-photo" aria-hidden="true"></div>
+    <div class="hero__overlay" aria-hidden="true"></div>
+    <div class="container hero__inner animate-in">
+      <p class="hero__eyebrow">Depuis 2017 · Le Havre</p>
+      <h1 class="hero__titre">Votre partenaire <span>logistique</span><br />au cœur du port du Havre</h1>
+      <p class="hero__desc">
+        PR Logistics est un prestataire indépendant spécialisé dans la logistique portuaire et le transport.
+        Entrepôt sous douane de 8 000 m², solutions sur mesure, réactivité garantie.
+      </p>
+      <div class="hero__ctas">
+        <a href="/contact" class="btn btn--rouge">Nous contacter</a>
+        <a href="/devis" class="btn btn--outline hero__btn-outline">Demander un devis</a>
       </div>
     </div>
     <div class="hero__scroll" aria-hidden="true">
@@ -162,136 +148,98 @@ const moyens = [
     display: flex;
     align-items: center;
     overflow: hidden;
-    background: linear-gradient(135deg, #fff 0%, var(--gris-clair) 100%);
   }
 
-  .hero__bg-accent {
+  /* Photo de fond */
+  .hero__bg-photo {
     position: absolute;
-    top: -200px;
-    right: -200px;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(227,6,19,0.06) 0%, transparent 70%);
-    border-radius: 50%;
+    inset: 0;
+    background: url('/assets/home/port-havre-2.jpg') center center / cover no-repeat;
+    filter: blur(3px) brightness(0.45);
+    transform: scale(1.05); /* évite les bords blancs du blur */
+    animation: hero-zoom 18s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+
+  @keyframes hero-zoom {
+    from { transform: scale(1.05); }
+    to   { transform: scale(1.12); }
+  }
+
+  /* Dégradé sombre en bas pour transition douce */
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(10,10,10,0.1) 0%,
+      rgba(10,10,10,0.05) 50%,
+      rgba(10,10,10,0.45) 100%
+    );
     pointer-events: none;
   }
 
   .hero__inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    position: relative;
+    text-align: center;
+    max-width: 860px;
+    margin: 0 auto;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
   }
 
   .hero__eyebrow {
+    display: inline-block;
     font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--rouge);
+    font-weight: 700;
+    color: rgba(255,255,255,0.75);
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-bottom: 1.2rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.4rem;
+    background: rgba(255,255,255,0.1);
+    padding: 0.35rem 1rem;
+    border-radius: 2rem;
+    backdrop-filter: blur(6px);
   }
 
   .hero__titre {
-    font-size: var(--font-size-hero);
+    font-size: calc(var(--font-size-hero) * 0.9);
     font-weight: 800;
-    color: var(--gris-fonce);
+    color: #ffffff;
     letter-spacing: -0.03em;
-    line-height: 1.05;
-    margin-bottom: 1.5rem;
+    line-height: 1.08;
+    margin-bottom: 1.6rem;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
   }
 
   .hero__titre span {
-    color: var(--rouge);
+    color: #ff4d57;
   }
 
   .hero__desc {
     font-size: 1.15rem;
-    color: var(--gris-moyen);
-    max-width: 480px;
-    line-height: 1.7;
-    margin-bottom: 2.5rem;
+    color: rgba(255,255,255,0.82);
+    max-width: 600px;
+    margin: 0 auto 2.8rem;
+    line-height: 1.75;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.25);
   }
 
   .hero__ctas {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
-  }
-
-  .hero__visuel {
-    position: relative;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    min-height: 380px;
   }
 
-  .hero__logo-wrapper {
-    width: 280px;
-    height: 180px;
-    border-radius: var(--rayon-lg);
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: white;
-    padding: 1.5rem;
+  .hero__btn-outline {
+    border-color: rgba(255,255,255,0.7) !important;
+    color: white !important;
   }
 
-  .hero__logo-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 0;
-  }
-
-  .hero__carte-flottante {
-    position: absolute;
-    background: white;
-    border-radius: var(--rayon);
-    padding: 1rem 1.5rem;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    top: 10%;
-    right: -10%;
-    animation: flottement 4s ease-in-out infinite;
-  }
-
-  .hero__carte-flottante--2 {
-    top: auto;
-    bottom: 10%;
-    right: auto;
-    left: -5%;
-    animation-delay: 2s;
-  }
-
-  @keyframes flottement {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-  .hcf__val {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--rouge);
-    line-height: 1;
-  }
-
-  .hcf__val small {
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-left: 2px;
-  }
-
-  .hcf__label {
-    font-size: 0.75rem;
-    color: var(--gris-moyen);
-    margin-top: 0.2rem;
+  .hero__btn-outline:hover {
+    background: rgba(255,255,255,0.15) !important;
+    border-color: white !important;
   }
 
   .hero__scroll {
@@ -306,7 +254,7 @@ const moyens = [
   .hero__scroll-line {
     width: 2px;
     height: 40px;
-    background: linear-gradient(to bottom, var(--gris-moyen), transparent);
+    background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
     border-radius: 2px;
     animation: scroll-down 1.5s ease-in-out infinite;
   }
@@ -579,23 +527,14 @@ const moyens = [
 
   /* RESPONSIVE */
   @media (max-width: 900px) {
-    .hero__inner,
     .qsn__grid,
     .moyens__grid {
       grid-template-columns: 1fr;
       gap: 3rem;
     }
 
-    .hero__visuel {
-      min-height: 260px;
-    }
-
-    .hero__carte-flottante {
-      right: 0;
-    }
-
-    .hero__carte-flottante--2 {
-      left: 0;
+    .hero__titre {
+      font-size: 2.4rem;
     }
 
     .prestations-grid {
@@ -610,8 +549,8 @@ const moyens = [
       grid-template-columns: 1fr;
     }
 
-    .hero__visuel {
-      display: none;
+    .hero__titre {
+      font-size: 2rem;
     }
   }
 </style>
