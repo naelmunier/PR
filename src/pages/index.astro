@@ -48,8 +48,8 @@ const moyens = [
       <p class="hero__eyebrow">Depuis 2017 · Le Havre</p>
       <h1 class="hero__titre">Votre partenaire <span>logistique</span><br />au cœur du port du Havre</h1>
       <p class="hero__desc">
-        PR Logistics est un prestataire indépendant spécialisé dans la logistique portuaire et le transport.
-        Entrepôt sous douane de 8 000 m², solutions sur mesure, réactivité garantie.
+        PR Logistics est un prestataire indépendant spécialisé dans la <span class="hero__desc-rouge">logistique portuaire</span> et le <span class="hero__desc-rouge">transport</span>.
+        Entrepôt sous douane de <span class="hero__desc-rouge">8 000 m²</span>, solutions sur mesure, réactivité garantie.
       </p>
       <div class="hero__ctas">
         <a href="/contact" class="btn btn--rouge">Nous contacter</a>
@@ -221,12 +221,17 @@ const moyens = [
   }
 
   .hero__desc {
-    font-size: 1.15rem;
-    color: rgba(255,255,255,0.82);
+    font-size: 1.25rem;
+    color: rgba(255,255,255,0.93);
     max-width: 600px;
     margin: 0 auto 2.8rem;
     line-height: 1.75;
     text-shadow: 0 1px 8px rgba(0,0,0,0.25);
+  }
+
+  .hero__desc-rouge {
+    color: #ff4d57;
+    font-weight: 600;
   }
 
   .hero__ctas {
