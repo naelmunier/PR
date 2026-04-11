@@ -135,24 +135,6 @@ import MainLayout from '../layouts/MainLayout.astro';
           <div class="graphique-carte__canvas-wrapper">
             <canvas id="chartCA" aria-label="Évolution du chiffre d'affaires 2021-2023"></canvas>
           </div>
-          <div class="graphique-carte__legende">
-            {[
-              { annee: '2021', val: '1 322 000 €' },
-              { annee: '2022', val: '1 698 000 €' },
-              { annee: '2023', val: '2 177 000 €' },
-            ].map(r => (
-              <div class="legende-row">
-                <span class="legende-annee">{r.annee}</span>
-                <div class="legende-barre-bg">
-                  <div
-                    class="legende-barre"
-                    style={`width: ${Math.round((parseInt(r.val.replace(/\s/g,'').replace('€','')) / 2177000) * 100)}%`}
-                  ></div>
-                </div>
-                <span class="legende-val">{r.val}</span>
-              </div>
-            ))}
-          </div>
         </div>
 
         <!-- Graphique Conteneurs -->
@@ -163,24 +145,6 @@ import MainLayout from '../layouts/MainLayout.astro';
           </div>
           <div class="graphique-carte__canvas-wrapper">
             <canvas id="chartConteneurs" aria-label="Évolution du volume de conteneurs 2021-2023"></canvas>
-          </div>
-          <div class="graphique-carte__legende">
-            {[
-              { annee: '2021', val: '1 500', raw: 1500 },
-              { annee: '2022', val: '1 700', raw: 1700 },
-              { annee: '2023', val: '2 100', raw: 2100 },
-            ].map(r => (
-              <div class="legende-row">
-                <span class="legende-annee">{r.annee}</span>
-                <div class="legende-barre-bg">
-                  <div
-                    class="legende-barre legende-barre--bleu"
-                    style={`width: ${Math.round((r.raw / 2100) * 100)}%`}
-                  ></div>
-                </div>
-                <span class="legende-val">{r.val} EVP</span>
-              </div>
-            ))}
           </div>
         </div>
       </div>
@@ -196,25 +160,28 @@ import MainLayout from '../layouts/MainLayout.astro';
   document.addEventListener('DOMContentLoaded', () => {
     const rouge = '#e30613';
     const bleu  = '#1b2a4a';
-    const gris  = '#f5f5f7';
 
-    // Dégradé rouge
-    function gradientRouge(ctx) {
-      const g = ctx.createLinearGradient(0, 0, 0, 260);
-      g.addColorStop(0,   'rgba(227,6,19,0.35)');
-      g.addColorStop(0.6, 'rgba(227,6,19,0.08)');
-      g.addColorStop(1,   'rgba(227,6,19,0)');
-      return g;
-    }
-
-    // Dégradé bleu
-    function gradientBleu(ctx) {
-      const g = ctx.createLinearGradient(0, 0, 0, 260);
-      g.addColorStop(0,   'rgba(27,42,74,0.35)');
-      g.addColorStop(0.6, 'rgba(27,42,74,0.08)');
-      g.addColorStop(1,   'rgba(27,42,74,0)');
-      return g;
-    }
+    // Plugin inline : affiche les valeurs au-dessus des barres
+    const labelAuDessus = {
+      id: 'labelAuDessus',
+      afterDatasetsDraw(chart: any) {
+        const { ctx, data } = chart;
+        chart.data.datasets.forEach((_: any, di: number) => {
+          const meta = chart.getDatasetMeta(di);
+          meta.data.forEach((bar: any, index: number) => {
+            const val = data.datasets[di].data[index];
+            const label = data.datasets[di].labels?.[index] ?? '';
+            ctx.save();
+            ctx.font = 'bold 13px -apple-system, BlinkMacSystemFont, Inter, sans-serif';
+            ctx.fillStyle = '#1d1d1f';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'bottom';
+            ctx.fillText(label, bar.x, bar.y - 6);
+            ctx.restore();
+          });
+        });
+      },
+    };
 
     const optionsCommun = {
       responsive: true,
@@ -227,7 +194,6 @@ import MainLayout from '../layouts/MainLayout.astro';
           cornerRadius: 10,
           titleFont: { size: 13, weight: '700' },
           bodyFont: { size: 13 },
-          callbacks: {},
         },
       },
       scales: {
@@ -243,20 +209,11 @@ import MainLayout from '../layouts/MainLayout.astro';
           display: false,
           grid: { display: false },
           border: { display: false },
-          beginAtZero: false,
+          beginAtZero: true,
         },
       },
       elements: {
-        line: {
-          tension: 0.45,
-          borderWidth: 3,
-        },
-        point: {
-          radius: 6,
-          hoverRadius: 9,
-          borderWidth: 3,
-          backgroundColor: '#ffffff',
-        },
+        bar: { borderRadius: 8, borderSkipped: false },
       },
     };
 
@@ -264,15 +221,20 @@ import MainLayout from '../layouts/MainLayout.astro';
     const ctxCA = (document.getElementById('chartCA') as HTMLCanvasElement)?.getContext('2d');
     if (ctxCA) {
       new (window as any).Chart(ctxCA, {
-        type: 'line',
+        type: 'bar',
+        plugins: [labelAuDessus],
         data: {
           labels: ['2021', '2022', '2023'],
           datasets: [{
             data: [1322000, 1698000, 2177000],
-            borderColor: rouge,
-            backgroundColor: gradientRouge(ctxCA),
-            fill: true,
-            pointBorderColor: rouge,
+            labels: ['1,3M€', '1,7M€', '2,2M€'],
+            backgroundColor: [
+              'rgba(227,6,19,0.55)',
+              'rgba(227,6,19,0.75)',
+              'rgba(227,6,19,1)',
+            ],
+            borderColor: 'transparent',
+            borderWidth: 0,
           }],
         },
         options: {
@@ -288,11 +250,7 @@ import MainLayout from '../layouts/MainLayout.astro';
           },
           scales: {
             ...optionsCommun.scales,
-            y: {
-              ...optionsCommun.scales.y,
-              min: 1000000,
-              max: 2400000,
-            },
+            y: { ...optionsCommun.scales.y, max: 2600000 },
           },
         },
       });
@@ -302,15 +260,20 @@ import MainLayout from '../layouts/MainLayout.astro';
     const ctxC = (document.getElementById('chartConteneurs') as HTMLCanvasElement)?.getContext('2d');
     if (ctxC) {
       new (window as any).Chart(ctxC, {
-        type: 'line',
+        type: 'bar',
+        plugins: [labelAuDessus],
         data: {
           labels: ['2021', '2022', '2023'],
           datasets: [{
             data: [1500, 1700, 2100],
-            borderColor: bleu,
-            backgroundColor: gradientBleu(ctxC),
-            fill: true,
-            pointBorderColor: bleu,
+            labels: ['1 500', '1 700', '2 100'],
+            backgroundColor: [
+              'rgba(27,42,74,0.45)',
+              'rgba(27,42,74,0.65)',
+              'rgba(27,42,74,1)',
+            ],
+            borderColor: 'transparent',
+            borderWidth: 0,
           }],
         },
         options: {
@@ -326,8 +289,7 @@ import MainLayout from '../layouts/MainLayout.astro';
           },
           scales: {
             ...optionsCommun.scales,
-            y: {
-              ...optionsCommun.scales.y,
+            y: { ...optionsCommun.scales.y,
               min: 1200,
               max: 2400,
             },
@@ -518,43 +480,6 @@ import MainLayout from '../layouts/MainLayout.astro';
     gap: 0.6rem;
   }
 
-  .legende-row {
-    display: grid;
-    grid-template-columns: 40px 1fr 90px;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .legende-annee {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--gris-moyen);
-  }
-
-  .legende-barre-bg {
-    height: 6px;
-    background: var(--gris-clair);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-
-  .legende-barre {
-    height: 100%;
-    background: var(--rouge);
-    border-radius: 3px;
-    transition: width 1s ease;
-  }
-
-  .legende-barre--bleu {
-    background: var(--bleu-marine);
-  }
-
-  .legende-val {
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: var(--gris-fonce);
-    text-align: right;
-  }
 
   /* Responsive */
   @media (max-width: 900px) {
