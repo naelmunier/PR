@@ -94,7 +94,7 @@ const equipements = [
           <div class="c3d-ring" id="c3dRing">
             {equipements.map((e, i) => (
               <div class="c3d-card" data-index={i}>
-                <img class="c3d-card__ico" src={e.ico} alt={e.label} width="40" height="40" loading="lazy" />
+                <img class="c3d-card__ico" src={e.ico} alt={e.label} width="46" height="46" loading="lazy" />
                 <span class="c3d-card__val">{e.val}</span>
                 <span class="c3d-card__label">{e.label}</span>
               </div>
@@ -551,7 +551,7 @@ const equipements = [
   .c3d-scene {
     position: relative;
     width: 100%;
-    height: 240px;
+    height: 270px;
     perspective: 900px;
     perspective-origin: 50% 50%;
     overflow: visible;
@@ -566,12 +566,12 @@ const equipements = [
 
   .c3d-card {
     position: absolute;
-    width: 172px;
-    height: 152px;
+    width: 192px;
+    height: 172px;
     left: 50%;
     top: 50%;
-    margin-left: -86px;
-    margin-top: -76px;
+    margin-left: -96px;
+    margin-top: -86px;
     background: white;
     border-radius: 1.4rem;
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
@@ -610,20 +610,21 @@ const equipements = [
   }
 
   .c3d-card__ico {
-    width: 40px;
-    height: 40px;
+    width: 46px;
+    height: 46px;
     object-fit: contain;
+    border-radius: 0 !important;  /* annule le border-radius global sur img */
   }
 
   .c3d-card__val {
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     font-weight: 800;
     color: var(--rouge);
     line-height: 1;
   }
 
   .c3d-card__label {
-    font-size: 0.75rem;
+    font-size: 0.82rem;
     color: var(--gris-moyen);
     line-height: 1.35;
   }
