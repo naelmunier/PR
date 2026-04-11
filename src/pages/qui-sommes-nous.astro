@@ -129,8 +129,6 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   <!-- AGRÉMENTS -->
   <section class="section agrements-section">
-    <div class="agr-blob agr-blob--1" aria-hidden="true"></div>
-    <div class="agr-blob agr-blob--2" aria-hidden="true"></div>
     <div class="container" style="position:relative;">
       <div class="agrements-inner reveal">
         <div class="agrements-texte">
@@ -169,16 +167,11 @@ import MainLayout from '../layouts/MainLayout.astro';
     </div>
   </section>
 
-  <!-- SÉPARATEUR -->
-  <div class="separateur-section" aria-hidden="true">
-    <span class="separateur-trait"></span>
-    <span class="separateur-losange"></span>
-    <span class="separateur-trait"></span>
-  </div>
-
   <!-- GRAPHIQUES DE CROISSANCE -->
   <section class="section croissance">
-    <div class="container">
+    <div class="agr-blob agr-blob--1" aria-hidden="true"></div>
+    <div class="agr-blob agr-blob--2" aria-hidden="true"></div>
+    <div class="container" style="position:relative;">
       <div class="reveal" style="text-align:center; margin-bottom:3.5rem;">
         <p class="eyebrow-rouge">Performances</p>
         <h2 class="titre-section">Notre <span>croissance</span></h2>
@@ -573,11 +566,14 @@ import MainLayout from '../layouts/MainLayout.astro';
   /* AGRÉMENTS */
   .agrements-section {
     background: linear-gradient(135deg, #fff 0%, var(--gris-clair) 100%);
+  }
+
+  /* Blobs rouges flous sur la section Croissance */
+  .croissance {
     position: relative;
     overflow: hidden;
   }
 
-  /* Blobs rouges flous (même style que CTA accueil) */
   .agr-blob {
     position: absolute;
     border-radius: 50%;
@@ -590,7 +586,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     height: 480px;
     top: -140px;
     right: -120px;
-    background: rgba(227, 6, 19, 0.12);
+    background: rgba(227, 6, 19, 0.07);
   }
 
   .agr-blob--2 {
@@ -598,32 +594,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     height: 380px;
     bottom: -120px;
     left: -90px;
-    background: rgba(227, 6, 19, 0.10);
-  }
-
-  /* SÉPARATEUR */
-  .separateur-section {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0 var(--container-padding, 2rem);
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .separateur-trait {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, transparent, #d0d0d0, transparent);
-  }
-
-  .separateur-losange {
-    width: 8px;
-    height: 8px;
-    background: var(--rouge);
-    transform: rotate(45deg);
-    opacity: 0.4;
-    flex-shrink: 0;
+    background: rgba(227, 6, 19, 0.06);
   }
 
   .agrements-inner {
