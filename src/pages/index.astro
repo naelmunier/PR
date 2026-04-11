@@ -196,7 +196,7 @@ const equipements = [
       requestAnimationFrame(() => requestAnimationFrame(() => active.classList.add('c3d-card--pop')));
     }
 
-    function startAuto() { autoTimer = setInterval(() => goTo(current + 1), 3400); }
+    function startAuto() { autoTimer = setInterval(() => goTo(current + 1), 2000); }
     function clearAuto()  { clearInterval(autoTimer); }
 
     prevBtn?.addEventListener('click', () => { clearAuto(); goTo(current - 1); startAuto(); });
@@ -267,7 +267,7 @@ const equipements = [
     inset: 0;
     background: url('/assets/home/port-havre-2.jpg') center center / cover no-repeat;
     pointer-events: none;
-    animation: hero-dezoom 18s ease-out forwards;
+    animation: hero-dezoom 9s ease-out forwards;
   }
 
   @keyframes hero-dezoom {
