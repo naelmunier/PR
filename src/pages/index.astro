@@ -14,24 +14,15 @@ const prestations = [
   { icone: '/assets/nos prestations/transport-de-livraison.png', titre: 'Transport',            desc: 'Fret conventionnel et traction conteneur depuis et vers le port du Havre.' },
 ];
 
-const chiffres = [
-  { valeur: '8 000', unite: 'm²', label: "d'entrepôt sous douane" },
-  { valeur: '8 000', unite: 'palettes', label: 'de capacité de stockage' },
-  { valeur: '2 177 000', unite: '€', label: 'de CA en 2023' },
-  { valeur: '2 100', unite: 'EVP', label: 'conteneurs traités en 2023' },
-  { valeur: '15', unite: 'collaborateurs', label: 'à votre service' },
-  { valeur: '24/7', unite: '', label: 'surveillance sécurité portuaire' },
-];
-
-const moyens = [
-  '8 000 m² sous douane',
-  '8 000 palettes de stockage',
-  '5 banderoleuses',
-  '1 chaîne de tri',
-  '10 chariots élévateurs (1,6T à 5T)',
-  '22 caméras de sécurité',
-  '1 WMS de gestion des stocks',
-  '1 tracteur de parc',
+const equipements = [
+  { ico: '🏭', val: '8 000 m²',  label: 'Entrepôt sous douane' },
+  { ico: '📦', val: '8 000',      label: 'Palettes de stockage' },
+  { ico: '🔧', val: '5',          label: 'Banderoleuses' },
+  { ico: '⛓️',  val: '1',          label: 'Chaîne de tri' },
+  { ico: '🏗️',  val: '10',         label: 'Chariots élévateurs 1,6T – 5T' },
+  { ico: '📹', val: '22',         label: 'Caméras sécurité 24/7' },
+  { ico: '💻', val: '1',          label: 'WMS gestion des stocks' },
+  { ico: '🚛', val: '1',          label: 'Tracteur de parc' },
 ];
 ---
 
@@ -89,34 +80,36 @@ const moyens = [
   <!-- NOS MOYENS -->
   <section class="section moyens">
     <div class="container">
-      <div class="moyens__grid">
-        <div class="reveal">
-          <p class="eyebrow-rouge">Nos équipements</p>
-          <h2 class="titre-section">Des moyens à la <span>hauteur</span></h2>
-          <p class="sous-titre">
-            PR Logistics dispose d'un entrepôt de 8 000 m² sur un terrain de 18 500 m² entièrement clos,
-            télésurveillé 24h/7j par la sécurité portuaire.
-          </p>
-          <ul class="moyens__liste">
-            {moyens.map(m => (
-              <li class="moyens__item">
-                <span class="moyens__puce" aria-hidden="true"></span>
-                {m}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div class="moyens__chiffres reveal" style="transition-delay: 0.15s;">
-          <div class="chiffres-grid">
-            {chiffres.map(c => (
-              <div class="chiffre-item">
-                <span class="chiffre-val">{c.valeur}<small>{c.unite}</small></span>
-                <span class="chiffre-label">{c.label}</span>
+      <div class="reveal" style="text-align:center; margin-bottom:3.5rem;">
+        <p class="eyebrow-rouge">Nos équipements</p>
+        <h2 class="titre-section">Des moyens à la <span>hauteur</span></h2>
+        <p class="sous-titre" style="margin:1rem auto 0;">
+          PR Logistics dispose d'un entrepôt de 8 000 m² sur un terrain de 18 500 m² entièrement clos,
+          télésurveillé 24h/7j par la sécurité portuaire.
+        </p>
+      </div>
+
+      <div class="c3d-wrapper reveal">
+        <button class="c3d-arrow c3d-arrow--prev" id="c3dPrev" aria-label="Précédent">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="c3d-scene">
+          <div class="c3d-ring" id="c3dRing">
+            {equipements.map((e, i) => (
+              <div class="c3d-card" data-index={i}>
+                <span class="c3d-card__ico" aria-hidden="true">{e.ico}</span>
+                <span class="c3d-card__val">{e.val}</span>
+                <span class="c3d-card__label">{e.label}</span>
               </div>
             ))}
           </div>
         </div>
+        <button class="c3d-arrow c3d-arrow--next" id="c3dNext" aria-label="Suivant">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
       </div>
+
+      <div class="c3d-dots" id="c3dDots"></div>
     </div>
   </section>
 
@@ -139,6 +132,66 @@ const moyens = [
   </section>
 
 </MainLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const ring    = document.getElementById('c3dRing') as HTMLElement;
+    const dotsEl  = document.getElementById('c3dDots') as HTMLElement;
+    const prevBtn = document.getElementById('c3dPrev') as HTMLButtonElement;
+    const nextBtn = document.getElementById('c3dNext') as HTMLButtonElement;
+    if (!ring) return;
+
+    const cards      = Array.from(ring.querySelectorAll<HTMLElement>('.c3d-card'));
+    const total      = cards.length;          // 8
+    const angleStep  = 360 / total;           // 45°
+    const radius     = 260;                   // px
+
+    let current  = 0;
+    let autoTimer: ReturnType<typeof setInterval>;
+
+    /* — Position initiale de chaque carte dans l'anneau 3D — */
+    cards.forEach((card, i) => {
+      card.style.transform = `rotateY(${i * angleStep}deg) translateZ(${radius}px)`;
+    });
+
+    /* — Création des points de navigation — */
+    cards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'c3d-dot';
+      dot.setAttribute('aria-label', `Élément ${i + 1}`);
+      dot.addEventListener('click', () => { clearAuto(); goTo(i); startAuto(); });
+      dotsEl.appendChild(dot);
+    });
+
+    /* — Rotation vers l'index donné — */
+    function goTo(index: number) {
+      current = ((index % total) + total) % total;
+      ring.style.transform = `rotateY(${-current * angleStep}deg)`;
+
+      cards.forEach((card, i) =>
+        card.classList.toggle('c3d-card--active', i === current)
+      );
+      dotsEl.querySelectorAll<HTMLElement>('.c3d-dot').forEach((dot, i) =>
+        dot.classList.toggle('c3d-dot--active', i === current)
+      );
+    }
+
+    function startAuto() {
+      autoTimer = setInterval(() => goTo(current + 1), 3400);
+    }
+    function clearAuto() { clearInterval(autoTimer); }
+
+    prevBtn?.addEventListener('click', () => { clearAuto(); goTo(current - 1); startAuto(); });
+    nextBtn?.addEventListener('click', () => { clearAuto(); goTo(current + 1); startAuto(); });
+
+    /* Pause au survol */
+    ring.addEventListener('mouseenter', clearAuto);
+    ring.addEventListener('mouseleave', startAuto);
+
+    goTo(0);
+    startAuto();
+  });
+</script>
 
 <style>
   /* HERO */
@@ -431,71 +484,123 @@ const moyens = [
     width: 100%;
   }
 
-  /* MOYENS */
-  .moyens__grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: start;
-  }
-
-  .moyens__liste {
-    list-style: none;
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-  }
-
-  .moyens__item {
+  /* MOYENS — CARROUSEL 3D */
+  .c3d-wrapper {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-    font-size: 0.95rem;
-    color: var(--gris-fonce);
+    justify-content: center;
+    gap: 1rem;
   }
 
-  .moyens__puce {
-    width: 8px;
-    height: 8px;
-    background: var(--rouge);
-    border-radius: 50%;
-    flex-shrink: 0;
+  .c3d-scene {
+    flex: 1;
+    height: 300px;
+    perspective: 920px;
+    perspective-origin: 50% 50%;
+    overflow: visible;
   }
 
-  .chiffres-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+  .c3d-ring {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
-  .chiffre-item {
-    background: var(--gris-clair);
-    border-radius: var(--rayon);
-    padding: 1.5rem;
-    border-left: 3px solid var(--rouge);
+  .c3d-card {
+    position: absolute;
+    width: 152px;
+    height: 190px;
+    left: 50%;
+    top: 50%;
+    margin-left: -76px;
+    margin-top: -95px;
+    background: white;
+    border-radius: 1.4rem;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.09);
+    border: 1.5px solid transparent;
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 1.4rem 1rem;
+    text-align: center;
+    backface-visibility: hidden;
+    transition: box-shadow 0.4s, border-color 0.4s;
+    user-select: none;
   }
 
-  .chiffre-val {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: var(--gris-fonce);
+  .c3d-card--active {
+    box-shadow: 0 16px 48px rgba(227,6,19,0.16), 0 4px 16px rgba(0,0,0,0.08);
+    border-color: rgba(227,6,19,0.2);
+  }
+
+  .c3d-card__ico {
+    font-size: 2.4rem;
     line-height: 1;
   }
 
-  .chiffre-val small {
-    font-size: 0.8rem;
+  .c3d-card__val {
+    font-size: 1.25rem;
+    font-weight: 800;
     color: var(--rouge);
-    font-weight: 700;
-    margin-left: 3px;
+    line-height: 1;
   }
 
-  .chiffre-label {
-    font-size: 0.95rem;
+  .c3d-card__label {
+    font-size: 0.78rem;
     color: var(--gris-moyen);
+    line-height: 1.35;
+  }
+
+  .c3d-arrow {
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1.5px solid #e0e0e0;
+    background: white;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
+    color: var(--gris-fonce);
+    z-index: 10;
+  }
+
+  .c3d-arrow:hover {
+    background: var(--rouge);
+    border-color: var(--rouge);
+    color: white;
+    box-shadow: 0 4px 20px rgba(227,6,19,0.25);
+  }
+
+  .c3d-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.55rem;
+    margin-top: 2.8rem;
+  }
+
+  .c3d-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #d0d0d0;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+
+  .c3d-dot--active {
+    background: var(--rouge);
+    transform: scale(1.4);
   }
 
   /* CTA FINAL */
@@ -536,8 +641,7 @@ const moyens = [
 
   /* RESPONSIVE */
   @media (max-width: 900px) {
-    .qsn__grid,
-    .moyens__grid {
+    .qsn__grid {
       grid-template-columns: 1fr;
       gap: 3rem;
     }
@@ -549,17 +653,23 @@ const moyens = [
     .prestations-grid {
       grid-template-columns: repeat(2, 1fr);
     }
+
+    .c3d-scene {
+      height: 260px;
+    }
   }
 
   @media (max-width: 600px) {
-    .prestations-grid,
-    .chiffres-grid,
-    .qsn__info-grid {
+    .prestations-grid {
       grid-template-columns: 1fr;
     }
 
     .hero__titre {
       font-size: 2rem;
+    }
+
+    .c3d-scene {
+      height: 240px;
     }
   }
 </style>
