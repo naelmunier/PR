@@ -136,15 +136,17 @@ const moyens = [
 
   <!-- CTA FINAL -->
   <section class="section cta-section">
-    <div class="container">
+    <div class="cta-blob cta-blob--1" aria-hidden="true"></div>
+    <div class="cta-blob cta-blob--2" aria-hidden="true"></div>
+    <div class="container" style="position:relative;">
       <div class="cta-bloc reveal">
-        <h2 class="titre-section" style="color:var(--blanc);">Prêt à optimiser votre <span style="color:#ff6b6b;">logistique</span> ?</h2>
-        <p style="color:rgba(255,255,255,0.75); max-width:520px; margin: 1.2rem auto 0; font-size:1.1rem;">
+        <h2 class="titre-section">Prêt à optimiser votre <span>logistique</span> ?</h2>
+        <p style="color:var(--gris-moyen); max-width:520px; margin: 1.2rem auto 0; font-size:1.1rem;">
           Contactez-nous dès aujourd'hui pour étudier ensemble vos besoins logistiques.
         </p>
         <div style="display:flex; gap:1rem; justify-content:center; margin-top:2.5rem; flex-wrap:wrap;">
-          <a href="/contact" class="btn btn--rouge" style="background:white; color:var(--gris-fonce);">Nous contacter</a>
-          <a href="/devis" class="btn btn--outline" style="border-color:white; color:white;">Demander un devis</a>
+          <a href="/contact" class="btn btn--rouge">Nous contacter</a>
+          <a href="/devis" class="btn btn--outline">Demander un devis</a>
         </div>
       </div>
     </div>
@@ -541,7 +543,32 @@ const moyens = [
 
   /* CTA FINAL */
   .cta-section {
-    background: linear-gradient(135deg, #c8000f, #8a000a);
+    position: relative;
+    background: linear-gradient(135deg, #fff 0%, var(--gris-clair) 100%);
+    overflow: hidden;
+  }
+
+  .cta-blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(80px);
+  }
+
+  .cta-blob--1 {
+    width: 500px;
+    height: 500px;
+    top: -150px;
+    right: -100px;
+    background: radial-gradient(circle, rgba(227,6,19,0.08) 0%, transparent 70%);
+  }
+
+  .cta-blob--2 {
+    width: 400px;
+    height: 400px;
+    bottom: -120px;
+    left: -80px;
+    background: radial-gradient(circle, rgba(227,6,19,0.06) 0%, transparent 70%);
   }
 
   .cta-bloc {
