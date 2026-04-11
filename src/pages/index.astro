@@ -3,12 +3,15 @@ import MainLayout from '../layouts/MainLayout.astro';
 import PartenairesCarousel from '../components/PartenairesCarousel.astro';
 
 const prestations = [
-  { icone: '📦', titre: 'Dépotage / Empotage', desc: 'Déchargement et chargement de conteneurs et camions avec rigueur et réactivité.' },
-  { icone: '🔄', titre: 'Cross Docking', desc: 'Transfert direct de marchandises sans stockage intermédiaire pour optimiser vos flux.' },
-  { icone: '🔍', titre: 'Contrôle qualité', desc: 'Contrôles quantitatifs et qualitatifs rigoureux à réception de vos marchandises.' },
-  { icone: '📋', titre: 'Triage & Palettisation', desc: 'Tri, palettisation, filmage et cerclage selon vos spécifications.' },
-  { icone: '🛒', titre: 'Préparation commandes', desc: 'Picking et reconditionnement adaptés à vos besoins logistiques.' },
-  { icone: '🚛', titre: 'Transport', desc: 'Fret conventionnel et traction conteneur depuis et vers le port du Havre.' },
+  { img: '/assets/nos prestations/dépotage empotage.png', titre: 'Dépotage & Empotage', desc: 'Déchargement et chargement de conteneurs et de camions avec rigueur et réactivité.' },
+  { img: '/assets/nos prestations/cross-docking.png',     titre: 'Cross Docking',       desc: 'Transfert direct de marchandises sans stockage intermédiaire pour optimiser vos flux.' },
+  { img: '/assets/nos prestations/trier.png',             titre: 'Triage',               desc: 'Tri rigoureux de vos marchandises selon vos critères de classification.' },
+  { img: '/assets/nos prestations/qualite.png',           titre: 'Contrôle Qualité',     desc: 'Contrôles quantitatifs et qualitatifs (aspect extérieur) à réception de vos marchandises.' },
+  { img: '/assets/nos prestations/palette.png',           titre: 'Palettisation',        desc: 'Mise sur palettes selon vos spécifications pour une manutention optimale.' },
+  { img: '/assets/nos prestations/film-plastique.png',    titre: 'Filmage & Cerclage',   desc: 'Sécurisation de vos palettes par filmage et cerclage pour un transport en toute sécurité.' },
+  { img: '/assets/nos prestations/preparation-de-commande.png', titre: 'Préparation de commande', desc: 'Picking précis et préparation de commandes adaptés à vos besoins logistiques.' },
+  { img: '/assets/nos prestations/reconditionnemenent.png', titre: 'Reconditionnement',  desc: 'Remise en état et reconditionnement de vos produits selon vos exigences.' },
+  { img: '/assets/nos prestations/transport-de-livraison.png', titre: 'Transport',       desc: 'Fret conventionnel et traction conteneur depuis et vers le port du Havre.' },
 ];
 
 const chiffres = [
@@ -73,7 +76,7 @@ const moyens = [
   </section>
 
   <!-- PRESTATIONS -->
-  <section class="section section--gris">
+  <section class="section section--gris prestations-section">
     <div class="container">
       <div class="reveal" style="text-align:center; margin-bottom: 3.5rem;">
         <p class="eyebrow-rouge">Ce que nous faisons</p>
@@ -84,10 +87,16 @@ const moyens = [
       </div>
       <div class="prestations-grid">
         {prestations.map((p, i) => (
-          <div class="carte reveal" style={`transition-delay: ${i * 0.07}s`}>
-            <div class="carte__icone">{p.icone}</div>
-            <h3 class="carte__titre">{p.titre}</h3>
-            <p class="carte__desc">{p.desc}</p>
+          <div class="prestation-carte reveal" style={`transition-delay: ${i * 0.08}s`}>
+            <div class="prestation-carte__img-wrapper">
+              <img src={p.img} alt={p.titre} loading="lazy" />
+              <div class="prestation-carte__overlay"></div>
+            </div>
+            <div class="prestation-carte__body">
+              <h3 class="prestation-carte__titre">{p.titre}</h3>
+              <p class="prestation-carte__desc">{p.desc}</p>
+            </div>
+            <div class="prestation-carte__accent"></div>
           </div>
         ))}
       </div>
@@ -396,22 +405,90 @@ const moyens = [
     gap: 1.5rem;
   }
 
-  .carte__icone {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+  .prestation-carte {
+    background: white;
+    border-radius: var(--rayon-lg);
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    transition:
+      transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    cursor: default;
   }
 
-  .carte__titre {
+  .prestation-carte:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.14);
+  }
+
+  .prestation-carte__img-wrapper {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .prestation-carte__img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: block;
+  }
+
+  .prestation-carte:hover .prestation-carte__img-wrapper img {
+    transform: scale(1.1);
+  }
+
+  .prestation-carte__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.18) 100%);
+    transition: opacity 0.4s;
+  }
+
+  .prestation-carte:hover .prestation-carte__overlay {
+    opacity: 0.5;
+  }
+
+  .prestation-carte__body {
+    padding: 1.4rem 1.5rem 1.6rem;
+  }
+
+  .prestation-carte__titre {
     font-size: 1.05rem;
     font-weight: 700;
     color: var(--gris-fonce);
     margin-bottom: 0.5rem;
+    transition: color 0.3s;
   }
 
-  .carte__desc {
-    font-size: 1.05rem;
+  .prestation-carte:hover .prestation-carte__titre {
+    color: var(--rouge);
+  }
+
+  .prestation-carte__desc {
+    font-size: 0.92rem;
     color: var(--gris-moyen);
-    line-height: 1.6;
+    line-height: 1.65;
+  }
+
+  /* Barre rouge animée en bas de carte */
+  .prestation-carte__accent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: var(--rouge);
+    border-radius: 0 0 var(--rayon-lg) var(--rayon-lg);
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .prestation-carte:hover .prestation-carte__accent {
+    width: 100%;
   }
 
   /* MOYENS */
