@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" width="240" height="80">
-  <rect width="240" height="80" rx="8" fill="#ffffff"/>
-  <rect width="6" height="80" rx="3" fill="#e30613"/>
-  <text x="20" y="30" font-family="Arial,sans-serif" font-size="13" font-weight="900" fill="#e30613" letter-spacing="1">i</text>
-  <text x="28" y="30" font-family="Arial,sans-serif" font-size="13" font-weight="900" fill="#1d2646">C</text>
-  <text x="16" y="48" font-family="Arial,sans-serif" font-size="16" font-weight="900" fill="#1d2646" letter-spacing="1.5">INTER<tspan fill="#e30613">CARGO</tspan></text>
-  <text x="16" y="62" font-family="Arial,sans-serif" font-size="9" fill="#666" letter-spacing="0.5">International transports</text>
-</svg>
