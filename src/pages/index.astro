@@ -3,7 +3,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 import PartenairesCarousel from '../components/PartenairesCarousel.astro';
 
 const prestations = [
-  { img: '/assets/nos prestations/dépotage empotage.png', titre: 'Dépotage & Empotage', desc: 'Déchargement et chargement de conteneurs et de camions avec rigueur et réactivité.' },
+  { img: '/assets/nos prestations/depotage-empotage.png', titre: 'Dépotage & Empotage', desc: 'Déchargement et chargement de conteneurs et de camions avec rigueur et réactivité.' },
   { img: '/assets/nos prestations/cross-docking.png',     titre: 'Cross Docking',       desc: 'Transfert direct de marchandises sans stockage intermédiaire pour optimiser vos flux.' },
   { img: '/assets/nos prestations/trier.png',             titre: 'Triage',               desc: 'Tri rigoureux de vos marchandises selon vos critères de classification.' },
   { img: '/assets/nos prestations/qualite.png',           titre: 'Contrôle Qualité',     desc: 'Contrôles quantitatifs et qualitatifs (aspect extérieur) à réception de vos marchandises.' },
@@ -424,22 +424,28 @@ const moyens = [
 
   .prestation-carte__img-wrapper {
     width: 100%;
-    height: 180px;
+    height: 18px;
     overflow: hidden;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.4rem 1.5rem 0;
+    height: auto;
+    background: none;
   }
 
   .prestation-carte__img-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
     border-radius: 0;
     transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     display: block;
   }
 
   .prestation-carte:hover .prestation-carte__img-wrapper img {
-    transform: scale(1.1);
+    transform: scale(1.15);
   }
 
   .prestation-carte__overlay {
