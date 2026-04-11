@@ -155,15 +155,19 @@ const moyens = [
     position: absolute;
     inset: 0;
     background: url('/assets/home/port-havre-2.jpg') center center / cover no-repeat;
-    filter: blur(1.5px) brightness(0.62);
-    transform: scale(1.05); /* évite les bords blancs du blur */
-    animation: hero-zoom 18s ease-in-out infinite alternate;
     pointer-events: none;
+    animation: hero-dezoom 18s ease-out forwards;
   }
 
-  @keyframes hero-zoom {
-    from { transform: scale(1.05); }
-    to   { transform: scale(1.12); }
+  @keyframes hero-dezoom {
+    from {
+      transform: scale(1.12);
+      filter: blur(1.5px) brightness(0.62);
+    }
+    to {
+      transform: scale(1.04);
+      filter: blur(0.8px) brightness(0.62);
+    }
   }
 
   /* Dégradé sombre en bas pour transition douce */
