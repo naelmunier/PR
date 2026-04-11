@@ -129,13 +129,15 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   <!-- AGRÉMENTS -->
   <section class="section agrements-section">
-    <div class="container">
+    <div class="agr-blob agr-blob--1" aria-hidden="true"></div>
+    <div class="agr-blob agr-blob--2" aria-hidden="true"></div>
+    <div class="container" style="position:relative;">
       <div class="agrements-inner reveal">
         <div class="agrements-texte">
           <span class="certif-badge certif-badge--bleu" style="align-self:flex-start;">Marchandises spécifiques</span>
           <div class="agrements-titre-row">
-            <h2 class="titre-section" style="font-size:1.8rem; margin:0;">Nos <span>agréments</span></h2>
-            <img src="/assets/certifications/agrement-logo.jpg" alt="Agréments" class="agrements-img" />
+            <h2 class="titre-section" style="font-size:2.34rem; margin:0;">Nos <span>agréments</span></h2>
+            <img src="/assets/certifications/agrement-logo.jpg" alt="Agréments" class="agrements-img" style="margin-left:1rem;" />
           </div>
           <p class="sous-titre" style="margin:0.8rem 0 0; font-size:1rem;">
             PR Logistics est habilité à traiter des marchandises soumises à réglementation stricte — vous garantissant conformité et sécurité à chaque flux.
@@ -166,6 +168,13 @@ import MainLayout from '../layouts/MainLayout.astro';
       </div>
     </div>
   </section>
+
+  <!-- SÉPARATEUR -->
+  <div class="separateur-section" aria-hidden="true">
+    <span class="separateur-trait"></span>
+    <span class="separateur-losange"></span>
+    <span class="separateur-trait"></span>
+  </div>
 
   <!-- GRAPHIQUES DE CROISSANCE -->
   <section class="section croissance">
@@ -562,7 +571,60 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   /* AGRÉMENTS */
-  .agrements-section { background: white; }
+  .agrements-section {
+    background: linear-gradient(135deg, #fff 0%, var(--gris-clair) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Blobs rouges flous (même style que CTA accueil) */
+  .agr-blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(90px);
+  }
+
+  .agr-blob--1 {
+    width: 480px;
+    height: 480px;
+    top: -140px;
+    right: -120px;
+    background: rgba(227, 6, 19, 0.12);
+  }
+
+  .agr-blob--2 {
+    width: 380px;
+    height: 380px;
+    bottom: -120px;
+    left: -90px;
+    background: rgba(227, 6, 19, 0.10);
+  }
+
+  /* SÉPARATEUR */
+  .separateur-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 var(--container-padding, 2rem);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .separateur-trait {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #d0d0d0, transparent);
+  }
+
+  .separateur-losange {
+    width: 8px;
+    height: 8px;
+    background: var(--rouge);
+    transform: rotate(45deg);
+    opacity: 0.4;
+    flex-shrink: 0;
+  }
 
   .agrements-inner {
     display: grid;
