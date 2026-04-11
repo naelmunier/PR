@@ -132,31 +132,33 @@ import MainLayout from '../layouts/MainLayout.astro';
     <div class="container">
       <div class="agrements-inner reveal">
         <div class="agrements-texte">
-          <p class="eyebrow-rouge">Marchandises spécifiques</p>
-          <h2 class="titre-section" style="font-size:1.8rem;">Nos <span>agréments</span></h2>
+          <span class="certif-badge certif-badge--bleu" style="align-self:flex-start;">Marchandises spécifiques</span>
+          <div class="agrements-titre-row">
+            <h2 class="titre-section" style="font-size:1.8rem; margin:0;">Nos <span>agréments</span></h2>
+            <img src="/assets/certifications/agrement-logo.jpg" alt="Agréments" class="agrements-img" />
+          </div>
           <p class="sous-titre" style="margin:0.8rem 0 0; font-size:1rem;">
             PR Logistics est habilité à traiter des marchandises soumises à réglementation stricte — vous garantissant conformité et sécurité à chaque flux.
           </p>
-          <img src="/assets/certifications/agrement-logo.jpg" alt="Agréments" class="agrements-img reveal" style="transition-delay:0.1s;" />
         </div>
         <div class="agrements-liste">
           <div class="agrement">
-            <span class="agrement__icone">⚠️</span>
+            <img src="/assets/certifications/dangereux.png" alt="Marchandises dangereuses" class="agrement__logo" />
             <span class="agrement__nom">Marchandises dangereuses</span>
             <span class="agrement__statut agrement__statut--ok">Agréé</span>
           </div>
           <div class="agrement">
-            <span class="agrement__icone">❄️</span>
+            <img src="/assets/certifications/froid.png" alt="Froid" class="agrement__logo" />
             <span class="agrement__nom">Froid</span>
             <span class="agrement__statut agrement__statut--ok">Agréé</span>
           </div>
           <div class="agrement">
-            <span class="agrement__icone">🌿</span>
+            <img src="/assets/certifications/bio.png" alt="Bio" class="agrement__logo" />
             <span class="agrement__nom">Bio</span>
             <span class="agrement__statut agrement__statut--soon">À venir</span>
           </div>
           <div class="agrement">
-            <span class="agrement__icone">🍷</span>
+            <img src="/assets/certifications/alcool.png" alt="Alcool" class="agrement__logo" />
             <span class="agrement__nom">Alcool</span>
             <span class="agrement__statut agrement__statut--soon">À venir</span>
           </div>
@@ -569,14 +571,21 @@ import MainLayout from '../layouts/MainLayout.astro';
     align-items: center;
   }
 
-  .agrements-texte { display: flex; flex-direction: column; gap: 0.5rem; }
+  .agrements-texte { display: flex; flex-direction: column; gap: 0.6rem; }
+
+  .agrements-titre-row {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
 
   .agrements-img {
-    margin-top: 1.5rem;
-    height: 70px;
+    height: 56px;
     width: auto;
     object-fit: contain;
     border-radius: 0 !important;
+    flex-shrink: 0;
   }
 
   .agrements-liste {
@@ -594,7 +603,13 @@ import MainLayout from '../layouts/MainLayout.astro';
     background: var(--gris-clair);
   }
 
-  .agrement__icone { font-size: 1.2rem; }
+  .agrement__logo {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    border-radius: 0 !important;
+    flex-shrink: 0;
+  }
 
   .agrement__nom {
     flex: 1;
