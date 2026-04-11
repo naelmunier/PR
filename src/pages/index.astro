@@ -172,7 +172,8 @@ const equipements = [
 
         /* Scale et opacité progressifs : max devant, min derrière */
         const t       = (cosA + 1) / 2;                          // 1 devant, 0 derrière
-        const scale   = SCALE_MIN + (SCALE_MAX - SCALE_MIN) * t;
+        const baseScale = SCALE_MIN + (SCALE_MAX - SCALE_MIN) * t;
+        const scale   = i === current ? baseScale * 1.10 : baseScale;  // +10% sur la carte active
         const opacity = OPACITY_MIN + (1 - OPACITY_MIN) * t;
 
         card.style.transform = `translateX(${tx.toFixed(1)}px) translateZ(${tz.toFixed(1)}px) scale(${scale.toFixed(3)})`;
