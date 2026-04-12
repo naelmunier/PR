@@ -1,6 +1,6 @@
 # Build
-dist/
 .astro/
+# dist/ intentionnellement inclus pour déploiement Hostinger
 
 # Dependencies
 node_modules/
