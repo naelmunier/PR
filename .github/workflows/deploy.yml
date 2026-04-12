@@ -1,4 +1,4 @@
-name: Build & Deploy sur Hostinger
+name: Build & Push branche deploy
 
 on:
   push:
@@ -29,13 +29,12 @@ jobs:
       - name: Build Astro
         run: npm run build
 
-      # 5. Déployer dist/ vers public_html/ via FTP
-      - name: Déployer sur Hostinger via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      # 5. Pousser le contenu de dist/ dans la branche deploy
+      #    GITHUB_TOKEN est fourni automatiquement par GitHub, aucun secret à créer
+      - name: Publier dans la branche deploy
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          server:          ${{ secrets.FTP_SERVER }}
-          username:        ${{ secrets.FTP_USERNAME }}
-          password:        ${{ secrets.FTP_PASSWORD }}
-          local-dir:       ./dist/
-          server-dir:      /public_html/
-          dangerous-clean-slate: false   # ne supprime pas les fichiers existants non liés
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir:  ./dist
+          publish_branch: deploy
+          force_orphan: true   # branche deploy = uniquement les fichiers buildés, propre
