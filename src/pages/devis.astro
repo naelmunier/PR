@@ -84,7 +84,7 @@ const departementsJson = JSON.stringify(departements);
           <div class="adresses-grid">
             <!-- Départ -->
             <div class="adresse-card">
-              <div class="adresse-card__header">
+              <div class="adresse-card__header adresse-card__header--neutre">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
                 Adresse de départ
               </div>
@@ -110,10 +110,9 @@ const departementsJson = JSON.stringify(departements);
               </div>
             </div>
 
-            <!-- Flèche centrale -->
-            <div class="adresses-arrow" aria-hidden="true">
-              <div class="adresses-arrow__line"></div>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            <!-- Séparateur discret -->
+            <div class="adresses-sep" aria-hidden="true">
+              <div class="adresses-sep__dot"></div>
             </div>
 
             <!-- Livraison -->
@@ -151,14 +150,6 @@ const departementsJson = JSON.stringify(departements);
           <div class="form-bloc__titre">
             <span class="form-step">2</span>
             <h2>Détails de la marchandise</h2>
-          </div>
-
-          <div class="lots-header">
-            <span class="lots-col lots-col--num"></span>
-            <span class="lots-col">Palettes</span>
-            <span class="lots-col">Format</span>
-            <span class="lots-col">Contenu de la marchandise</span>
-            <span class="lots-col lots-col--action"></span>
           </div>
 
           <div id="lotsContainer"></div>
@@ -239,19 +230,6 @@ const departementsJson = JSON.stringify(departements);
 </MainLayout>
 
 <script is:inline define:vars={{ departementsJson }}>
-  // ============================================================
-  // CONFIGURATION EMAILJS
-  // 1. Créez un compte gratuit sur https://emailjs.com
-  // 2. Ajoutez un service e-mail (Gmail, Outlook…)
-  // 3. Créez un template avec les variables :
-  //    {{to_email}}, {{subject}}, {{message_html}}, {{reply_to}}
-  // 4. Remplacez les 3 valeurs ci-dessous
-  // ============================================================
-  const EMAILJS_PUBLIC_KEY  = 'VOTRE_CLE_PUBLIQUE';
-  const EMAILJS_SERVICE_ID  = 'VOTRE_SERVICE_ID';
-  const EMAILJS_TEMPLATE_ID = 'VOTRE_TEMPLATE_ID';
-  const EMAILJS_CONFIGURED  = EMAILJS_PUBLIC_KEY !== 'VOTRE_CLE_PUBLIQUE';
-
   const PR_EMAIL = 'lehavre@pr-logistics.fr';
 
   const DEPARTEMENTS = JSON.parse(departementsJson);
@@ -282,24 +260,31 @@ const departementsJson = JSON.stringify(departements);
 
   function createLotRow(id, num) {
     const div = document.createElement('div');
-    div.className = 'lot-row';
+    div.className = 'lot-card';
     div.dataset.lotId = id;
     div.innerHTML = `
-      <div class="lot-num">${num}</div>
-      <div class="form-group lot-group">
-        <input type="number" name="pal_${id}" id="pal_${id}" min="1" max="9999"
-          class="form-input" placeholder="Ex : 5" required />
+      <div class="lot-card__header">
+        <div class="lot-num">Lot ${num}</div>
+        <button type="button" class="btn-remove-lot" title="Supprimer ce lot">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
       </div>
-      <div class="form-group lot-group">
-        ${selectHTML(`tai_${id}`, `tai_${id}`)}
-      </div>
-      <div class="form-group lot-group">
-        <input type="text" name="con_${id}" id="con_${id}"
-          class="form-input" placeholder="Ex : Électronique, textile…" required />
-      </div>
-      <button type="button" class="btn-remove-lot" title="Supprimer ce lot" style="${lots.length === 0 ? 'visibility:hidden;' : ''}">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>`;
+      <div class="lot-card__fields">
+        <div class="form-group">
+          <label class="form-label" for="pal_${id}">Nombre de palettes</label>
+          <input type="number" name="pal_${id}" id="pal_${id}" min="1" max="9999"
+            class="form-input" placeholder="Ex : 5" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="tai_${id}">Format palette</label>
+          ${selectHTML(`tai_${id}`, `tai_${id}`)}
+        </div>
+        <div class="form-group lot-card__contenu">
+          <label class="form-label" for="con_${id}">Contenu de la marchandise</label>
+          <input type="text" name="con_${id}" id="con_${id}"
+            class="form-input" placeholder="Ex : Électronique, textile, produits alimentaires…" required />
+        </div>
+      </div>`;
 
     div.querySelector('.btn-remove-lot').addEventListener('click', () => removeLot(id, div));
     return div;
@@ -527,87 +512,37 @@ const departementsJson = JSON.stringify(departements);
     return doc;
   }
 
-  // ── Envoi e-mail ──────────────────────────────────────────────
-  function buildHTML(data) {
-    const lotsRows = data.lots.map((l, i) =>
-      `<tr style="background:${i%2===0?'#f8f8f8':'#fff'}">
-        <td style="padding:6px 12px;border-bottom:1px solid #e8e8e8;">${i+1}</td>
-        <td style="padding:6px 12px;border-bottom:1px solid #e8e8e8;">${l.palettes}</td>
-        <td style="padding:6px 12px;border-bottom:1px solid #e8e8e8;">${l.taille}</td>
-        <td style="padding:6px 12px;border-bottom:1px solid #e8e8e8;">${l.contenu}</td>
-      </tr>`
-    ).join('');
+  // ── Envoi via mailto (TO: PR Logistics, CC: client) ──────────
+  function sendMailto(data) {
+    const totalPal = data.lots.reduce((s, l) => s + (parseInt(l.palettes)||0), 0);
+    const lotsText = data.lots.map((l, i) =>
+      `  Lot ${i+1} : ${l.palettes} palette(s) — Format ${l.taille} — Contenu : ${l.contenu}`
+    ).join('\n');
 
-    return `<div style="font-family:sans-serif;max-width:600px;margin:0 auto;">
-      <div style="background:#e30613;padding:24px 28px;border-radius:8px 8px 0 0;">
-        <h1 style="color:#fff;margin:0;font-size:22px;">PR Logistics</h1>
-        <p style="color:rgba(255,255,255,0.85);margin:4px 0 0;font-size:12px;">Demande de devis reçue</p>
-      </div>
-      <div style="background:#fff;padding:24px 28px;border:1px solid #e8e8e8;border-top:none;">
-        <h2 style="font-size:16px;color:#1d1d1f;margin:0 0 16px;">Client</h2>
-        <p style="margin:0;color:#555;">${data.nom} &nbsp;·&nbsp; ${data.email}${data.telephone ? ' &nbsp;·&nbsp; ' + data.telephone : ''}</p>
-        <hr style="border:none;border-top:1px solid #eee;margin:20px 0;" />
-        <h2 style="font-size:16px;color:#1d1d1f;margin:0 0 12px;">Transport</h2>
-        <table style="width:100%;border-collapse:collapse;">
-          <tr>
-            <td style="padding:8px 12px;background:#f8f8f8;border-radius:6px;width:48%;">
-              <div style="font-size:10px;font-weight:700;color:#e30613;text-transform:uppercase;margin-bottom:4px;">Départ</div>
-              <div style="font-weight:700;">${data.depart_ville}</div>
-              <div style="font-size:12px;color:#888;">${deptLabel(data.depart_dept)}</div>
-            </td>
-            <td style="text-align:center;color:#e30613;font-size:20px;">→</td>
-            <td style="padding:8px 12px;background:#f8f8f8;border-radius:6px;width:48%;">
-              <div style="font-size:10px;font-weight:700;color:#e30613;text-transform:uppercase;margin-bottom:4px;">Livraison</div>
-              <div style="font-weight:700;">${data.arrivee_ville}</div>
-              <div style="font-size:12px;color:#888;">${deptLabel(data.arrivee_dept)}</div>
-            </td>
-          </tr>
-        </table>
-        <hr style="border:none;border-top:1px solid #eee;margin:20px 0;" />
-        <h2 style="font-size:16px;color:#1d1d1f;margin:0 0 12px;">Marchandise</h2>
-        <table style="width:100%;border-collapse:collapse;font-size:13px;">
-          <thead><tr style="background:#e30613;color:#fff;">
-            <th style="padding:7px 12px;text-align:left;">Lot</th>
-            <th style="padding:7px 12px;text-align:left;">Palettes</th>
-            <th style="padding:7px 12px;text-align:left;">Format</th>
-            <th style="padding:7px 12px;text-align:left;">Contenu</th>
-          </tr></thead>
-          <tbody>${lotsRows}</tbody>
-        </table>
-        ${data.message ? `<hr style="border:none;border-top:1px solid #eee;margin:20px 0;" /><h2 style="font-size:14px;color:#1d1d1f;margin:0 0 8px;">Informations complémentaires</h2><p style="color:#555;font-size:13px;">${data.message}</p>` : ''}
-      </div>
-      <div style="background:#f5f5f7;padding:14px 28px;text-align:center;border-radius:0 0 8px 8px;font-size:11px;color:#888;">
-        PR Logistics · PLPN 1 – Port 4935, 76700 Rogerville · 02.32.72.48.03
-      </div>
-    </div>`;
-  }
+    const sujet = `Demande de devis via le site — ${data.nom} — ${totalPal} palette(s) — ${data.depart_ville} → ${data.arrivee_ville}`;
+    const corps =
+`Demande de devis PR Logistics
+==============================
 
-  async function sendEmails(data, pdfBase64) {
-    if (!EMAILJS_CONFIGURED) return false;
+Client : ${data.nom}
+Email  : ${data.email}${data.telephone ? '\nTél    : '+data.telephone : ''}
 
-    const html = buildHTML(data);
-    const totalPal = data.lots.reduce((s, l) => s + (parseInt(l.palettes) || 0), 0);
-    const subject  = `Demande de devis — ${data.nom} — ${totalPal} palette(s) — ${data.depart_ville} → ${data.arrivee_ville}`;
+TRANSPORT
+---------
+Départ   : ${data.depart_ville} (${deptLabel(data.depart_dept)})
+Livraison: ${data.arrivee_ville} (${deptLabel(data.arrivee_dept)})
 
-    // Mail vers PR Logistics
-    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-      to_email:     PR_EMAIL,
-      reply_to:     data.email,
-      subject:      subject,
-      message_html: html,
-    });
+MARCHANDISE
+-----------
+${lotsText}
+Total : ${totalPal} palette(s)${data.message ? '\n\nINFORMATIONS COMPLÉMENTAIRES\n'+data.message : ''}
 
-    // Mail de confirmation vers le client (même template)
-    const confirmHtml = html.replace('Demande de devis reçue', 'Votre demande a bien été reçue')
-      .replace('<p style="color:rgba(255,255,255,0.85)', '<p style="color:rgba(255,255,255,0.85)">Nous vous répondrons sous 24h.</p><p style="color:rgba(255,255,255,0.85)');
-    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-      to_email:     data.email,
-      reply_to:     PR_EMAIL,
-      subject:      `Confirmation de votre demande de devis – PR Logistics`,
-      message_html: confirmHtml,
-    });
+---
+PR Logistics · PLPN 1 – Port 4935, 76700 Rogerville
+02.32.72.48.03 · lehavre@pr-logistics.fr`;
 
-    return true;
+    const url = `mailto:${PR_EMAIL}?cc=${encodeURIComponent(data.email)}&subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`;
+    window.location.href = url;
   }
 
   // ── Initialisation ────────────────────────────────────────────
@@ -616,14 +551,6 @@ const departementsJson = JSON.stringify(departements);
     const jsPDFScript = document.createElement('script');
     jsPDFScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
     document.head.appendChild(jsPDFScript);
-
-    // Charger EmailJS si configuré
-    if (EMAILJS_CONFIGURED) {
-      const ejsScript = document.createElement('script');
-      ejsScript.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
-      ejsScript.onload = () => emailjs.init(EMAILJS_PUBLIC_KEY);
-      document.head.appendChild(ejsScript);
-    }
 
     // Premier lot
     addLot();
@@ -646,48 +573,33 @@ const departementsJson = JSON.stringify(departements);
         return;
       }
 
-      // Bouton en chargement
       btn.disabled = true;
-      label.textContent = 'Génération en cours…';
+      label.textContent = 'Génération du PDF…';
 
       const fd = new FormData(form);
       const data = {
-        nom:          fd.get('nom'),
-        email:        fd.get('email'),
-        telephone:    fd.get('telephone'),
-        message:      fd.get('message'),
-        depart_ville: fd.get('depart_ville'),
-        depart_dept:  fd.get('depart_dept'),
-        arrivee_ville:fd.get('arrivee_ville'),
-        arrivee_dept: fd.get('arrivee_dept'),
-        lots:         collectLots(),
+        nom:           fd.get('nom'),
+        email:         fd.get('email'),
+        telephone:     fd.get('telephone'),
+        message:       fd.get('message'),
+        depart_ville:  fd.get('depart_ville'),
+        depart_dept:   fd.get('depart_dept'),
+        arrivee_ville: fd.get('arrivee_ville'),
+        arrivee_dept:  fd.get('arrivee_dept'),
+        lots:          collectLots(),
       };
 
-      // Attendre que jsPDF soit prêt
+      // Attendre jsPDF
       let tries = 0;
       while (!window.jspdf && tries++ < 20) await new Promise(r => setTimeout(r, 200));
 
-      // Générer et télécharger le PDF
+      // Télécharger le PDF
       const pdf = generatePDF(data);
-      let pdfBase64 = null;
-      if (pdf) {
-        pdf.save(`Devis_PR_Logistics_${data.nom.replace(/\s+/g,'_')}.pdf`);
-        pdfBase64 = pdf.output('datauristring');
-      }
+      if (pdf) pdf.save(`Devis_PR_Logistics_${data.nom.replace(/\s+/g,'_')}.pdf`);
 
-      // Envoyer les e-mails
-      label.textContent = 'Envoi en cours…';
-      const sent = await sendEmails(data, pdfBase64).catch(() => false);
-
-      // Fallback mailto si EmailJS non configuré
-      if (!EMAILJS_CONFIGURED) {
-        const totalPal = data.lots.reduce((s, l) => s + (parseInt(l.palettes)||0), 0);
-        const lotsText = data.lots.map((l, i) =>
-          `Lot ${i+1}: ${l.palettes} palette(s) ${l.taille} — ${l.contenu}`
-        ).join('\n');
-        const corps = `Demande de devis\n\nClient : ${data.nom} (${data.email})${data.telephone ? ' — Tél : '+data.telephone : ''}\n\nDépart : ${data.depart_ville} (${data.depart_dept})\nLivraison : ${data.arrivee_ville} (${data.arrivee_dept})\n\nMarchandise :\n${lotsText}\nTotal : ${totalPal} palettes${data.message ? '\n\nNotes : '+data.message : ''}`;
-        window.open(`mailto:${PR_EMAIL}?subject=${encodeURIComponent('Demande de devis — '+data.nom)}&body=${encodeURIComponent(corps)}`, '_blank');
-      }
+      // Ouvrir le client mail (TO: PR, CC: client)
+      label.textContent = 'Ouverture du mail…';
+      setTimeout(() => sendMailto(data), 300);
 
       // Afficher la confirmation
       setTimeout(() => {
@@ -813,82 +725,70 @@ const departementsJson = JSON.stringify(departements);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--rouge);
+    color: var(--gris-moyen);
     margin-bottom: 0.2rem;
   }
 
-  .adresse-card--livraison .adresse-card__header { color: var(--bleu-marine); }
-
-  .adresses-arrow {
+  /* Séparateur discret entre les deux cartes adresse */
+  .adresses-sep {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding-top: 5rem;
-    color: var(--rouge);
-    opacity: 0.5;
-    gap: 0.3rem;
   }
 
-  .adresses-arrow__line {
-    width: 1px;
-    height: 16px;
-    background: currentColor;
-    opacity: 0.4;
+  .adresses-sep__dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #ddd;
   }
 
-  /* LOTS */
-  .lots-header {
-    display: grid;
-    grid-template-columns: 28px 1fr 1.4fr 2fr 32px;
-    gap: 0.8rem;
-    padding: 0 0 0.5rem;
-    border-bottom: 1.5px solid #f0f0f0;
-    margin-bottom: 0.6rem;
-  }
-
-  .lots-col {
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    color: var(--gris-moyen);
-  }
-
-  .lot-row {
-    display: grid;
-    grid-template-columns: 28px 1fr 1.4fr 2fr 32px;
-    gap: 0.8rem;
-    align-items: center;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #f5f5f5;
-    animation: lot-in 0.25s ease-out;
-  }
-
+  /* LOTS — cartes empilées */
   @keyframes lot-in {
     from { opacity: 0; transform: translateY(-6px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  .lot-num {
-    width: 26px; height: 26px;
-    border-radius: 50%;
+  .lot-card {
     background: var(--gris-clair);
-    color: var(--gris-moyen);
-    font-size: 0.78rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+    border-radius: var(--rayon);
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 0.8rem;
+    animation: lot-in 0.25s ease-out;
+    border: 1.5px solid transparent;
+    transition: border-color 0.2s;
   }
 
-  .lot-group { margin: 0; }
+  .lot-card:focus-within { border-color: rgba(227,6,19,0.15); }
+
+  .lot-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .lot-num {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--rouge);
+  }
+
+  .lot-card__fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .lot-card__contenu { grid-column: span 1; }
 
   .btn-remove-lot {
-    width: 28px; height: 28px;
+    width: 26px; height: 26px;
     border-radius: 50%;
-    border: 1.5px solid #e8e8e8;
+    border: 1.5px solid #ddd;
     background: white;
     display: flex;
     align-items: center;
