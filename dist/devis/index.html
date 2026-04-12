@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="fr"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Demandez un devis personnalisé à PR Logistics pour vos besoins de logistique et transport au Havre."><title>Demander un devis | PR Logistics – Le Havre</title><link rel="icon" type="image/jpeg" href="/assets/logo.jpeg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/_astro/devis.BdCWArTd.css">
+<!DOCTYPE html><html lang="fr"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Demandez un devis personnalisé à PR Logistics pour vos besoins de logistique et transport au Havre."><title>Demander un devis | PR Logistics – Le Havre</title><link rel="icon" type="image/jpeg" href="/assets/logo.jpeg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/_astro/devis.B95PtM43.css">
 <link rel="stylesheet" href="/_astro/contact.D4ldK_As.css"><script type="module" src="/_astro/hoisted.3qPOf3_h.js"></script></head> <body> <header class="header" id="header" data-astro-cid-3ef6ksr2> <div class="container header__inner" data-astro-cid-3ef6ksr2> <a href="/" class="header__logo" aria-label="PR Logistics — Accueil" data-astro-cid-3ef6ksr2> <img src="/assets/logo.jpeg" alt="PR Logistics" width="160" height="50" data-astro-cid-3ef6ksr2> </a> <nav class="header__nav" id="nav" aria-label="Navigation principale" data-astro-cid-3ef6ksr2> <a href="/" class="header__link " data-astro-cid-3ef6ksr2> Accueil </a><a href="/devis" class="header__link " data-astro-cid-3ef6ksr2> Obtenir un Devis </a><a href="/qui-sommes-nous" class="header__link " data-astro-cid-3ef6ksr2> Qui sommes-nous </a><a href="/contact" class="header__link " data-astro-cid-3ef6ksr2> Nous Contacter </a> </nav> <button class="header__burger" id="burger" aria-label="Menu" aria-expanded="false" data-astro-cid-3ef6ksr2> <span data-astro-cid-3ef6ksr2></span><span data-astro-cid-3ef6ksr2></span><span data-astro-cid-3ef6ksr2></span> </button> </div> </header>   <main style="padding-top: 84px;">   <section class="devis-hero" data-astro-cid-w572o7fx> <div class="devis-blob devis-blob--1" aria-hidden="true" data-astro-cid-w572o7fx></div> <div class="devis-blob devis-blob--2" aria-hidden="true" data-astro-cid-w572o7fx></div> <div class="container devis-hero__inner animate-in" data-astro-cid-w572o7fx> <p class="eyebrow-rouge" data-astro-cid-w572o7fx>Gratuit & sans engagement</p> <h1 class="titre-section" data-astro-cid-w572o7fx>Demander un <span data-astro-cid-w572o7fx>devis</span></h1> <p class="sous-titre" style="margin:1rem auto 0; max-width:520px;" data-astro-cid-w572o7fx>
 Choisissez votre prestation, remplissez le formulaire et notre équipe vous répond sous 24h.
 </p> </div> </section>  <section class="section services-select" id="servicesSelect" data-astro-cid-w572o7fx> <div class="container" data-astro-cid-w572o7fx> <div class="services-intro reveal" data-astro-cid-w572o7fx> <p class="eyebrow-rouge" data-astro-cid-w572o7fx>Étape 1 — Votre besoin</p> <h2 class="titre-section" style="margin:0.4rem 0 0.8rem" data-astro-cid-w572o7fx>Quel service<br data-astro-cid-w572o7fx>vous intéresse ?</h2> <p class="sous-titre" style="margin:0 auto; max-width:480px; font-size:1rem;" data-astro-cid-w572o7fx>
@@ -71,7 +71,9 @@ PLPN 1 – Port 4935<br data-astro-cid-sz7xmlte>76700 Rogerville
     currentService = name;
     const info = SERVICE_INFO[name];
 
-    // Mise à jour visuelle des cartes
+    // Mise à jour visuelle des cartes + état de la grille
+    const grid = document.querySelector('.services-grid');
+    grid.classList.add('has-selection');
     document.querySelectorAll('.service-card').forEach(c => {
       c.classList.toggle('selected', c.dataset.service === name);
     });
@@ -111,25 +113,51 @@ PLPN 1 – Port 4935<br data-astro-cid-sz7xmlte>76700 Rogerville
     // Renuméroter les étapes
     updateStepNumbers();
 
-    // Afficher la section formulaire avec animation
+    // Afficher la section formulaire
     const section = document.getElementById('devisSection');
     section.style.display = 'block';
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      section.classList.add('form-visible');
-    }));
 
-    // Scroll vers le formulaire
+    // Préparer les blocs visibles pour le stagger (état initial masqué)
+    const visibleBlocs = [...document.querySelectorAll('.form-bloc[data-for]')]
+      .filter(b => b.style.display !== 'none');
+    const formTopbar  = document.querySelector('.form-topbar');
+    const formFooter  = document.querySelector('.form-footer');
+    const allEls = [formTopbar, ...visibleBlocs, formFooter].filter(Boolean);
+    allEls.forEach(el => {
+      el.style.transition = 'none';
+      el.style.opacity    = '0';
+      el.style.transform  = 'translateY(28px)';
+    });
+
+    // Délai léger pour laisser l'animation de la carte jouer
     setTimeout(() => {
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 80);
+      // Révéler le conteneur
+      section.classList.add('form-visible');
+
+      // Stagger des éléments
+      allEls.forEach((el, i) => {
+        setTimeout(() => {
+          el.style.transition = 'opacity 0.52s cubic-bezier(0.16,1,0.3,1), transform 0.52s cubic-bezier(0.16,1,0.3,1)';
+          el.style.opacity    = '1';
+          el.style.transform  = 'translateY(0)';
+        }, i * 80);
+      });
+
+      // Scroll fluide après le début de l'animation
+      setTimeout(() => {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 160);
+    }, 220);
   }
 
   function resetToSelection() {
     currentService = null;
+    const grid = document.querySelector('.services-grid');
+    grid.classList.remove('has-selection');
     document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
     const section = document.getElementById('devisSection');
     section.classList.remove('form-visible');
-    setTimeout(() => { section.style.display = 'none'; }, 420);
+    setTimeout(() => { section.style.display = 'none'; }, 450);
     document.getElementById('servicesSelect').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 

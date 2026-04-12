@@ -623,7 +623,9 @@ const departementsJson = JSON.stringify(departements);
     currentService = name;
     const info = SERVICE_INFO[name];
 
-    // Mise à jour visuelle des cartes
+    // Mise à jour visuelle des cartes + état de la grille
+    const grid = document.querySelector('.services-grid');
+    grid.classList.add('has-selection');
     document.querySelectorAll('.service-card').forEach(c => {
       c.classList.toggle('selected', c.dataset.service === name);
     });
@@ -663,25 +665,51 @@ const departementsJson = JSON.stringify(departements);
     // Renuméroter les étapes
     updateStepNumbers();
 
-    // Afficher la section formulaire avec animation
+    // Afficher la section formulaire
     const section = document.getElementById('devisSection');
     section.style.display = 'block';
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      section.classList.add('form-visible');
-    }));
 
-    // Scroll vers le formulaire
+    // Préparer les blocs visibles pour le stagger (état initial masqué)
+    const visibleBlocs = [...document.querySelectorAll('.form-bloc[data-for]')]
+      .filter(b => b.style.display !== 'none');
+    const formTopbar  = document.querySelector('.form-topbar');
+    const formFooter  = document.querySelector('.form-footer');
+    const allEls = [formTopbar, ...visibleBlocs, formFooter].filter(Boolean);
+    allEls.forEach(el => {
+      el.style.transition = 'none';
+      el.style.opacity    = '0';
+      el.style.transform  = 'translateY(28px)';
+    });
+
+    // Délai léger pour laisser l'animation de la carte jouer
     setTimeout(() => {
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 80);
+      // Révéler le conteneur
+      section.classList.add('form-visible');
+
+      // Stagger des éléments
+      allEls.forEach((el, i) => {
+        setTimeout(() => {
+          el.style.transition = 'opacity 0.52s cubic-bezier(0.16,1,0.3,1), transform 0.52s cubic-bezier(0.16,1,0.3,1)';
+          el.style.opacity    = '1';
+          el.style.transform  = 'translateY(0)';
+        }, i * 80);
+      });
+
+      // Scroll fluide après le début de l'animation
+      setTimeout(() => {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 160);
+    }, 220);
   }
 
   function resetToSelection() {
     currentService = null;
+    const grid = document.querySelector('.services-grid');
+    grid.classList.remove('has-selection');
     document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
     const section = document.getElementById('devisSection');
     section.classList.remove('form-visible');
-    setTimeout(() => { section.style.display = 'none'; }, 420);
+    setTimeout(() => { section.style.display = 'none'; }, 450);
     document.getElementById('servicesSelect').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -1185,6 +1213,13 @@ const departementsJson = JSON.stringify(departements);
     to   { opacity: 1; transform: translateY(0); }
   }
 
+  @keyframes card-select-bounce {
+    0%   { transform: translateY(0)   scale(1); }
+    35%  { transform: translateY(-8px) scale(1.04); }
+    65%  { transform: translateY(-4px) scale(1.01); }
+    100% { transform: translateY(-4px) scale(1); }
+  }
+
   .service-card {
     position: relative;
     background: white;
@@ -1195,7 +1230,8 @@ const departementsJson = JSON.stringify(departements);
     flex-direction: column;
     gap: 0;
     cursor: pointer;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease,
+                opacity 0.35s ease, filter 0.35s ease;
     outline: none;
     animation: card-arrive 0.5s ease both;
     overflow: hidden;
@@ -1212,13 +1248,25 @@ const departementsJson = JSON.stringify(departements);
   }
   .service-card:focus-visible { box-shadow: 0 0 0 3px rgba(227,6,19,0.25); }
 
+  /* Cartes non-sélectionnées s'atténuent */
+  .services-grid.has-selection .service-card:not(.selected) {
+    opacity: 0.38;
+    transform: scale(0.97);
+    filter: grayscale(0.2);
+  }
+  .services-grid.has-selection .service-card:not(.selected):hover {
+    opacity: 0.65;
+    transform: scale(0.99);
+    filter: grayscale(0);
+  }
+
   /* État sélectionné */
   .service-card.selected {
     border-color: var(--rouge);
     border-top-width: 3px;
     background: rgba(227,6,19,0.02);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 32px rgba(227,6,19,0.12);
+    box-shadow: 0 10px 36px rgba(227,6,19,0.14);
+    animation: card-select-bounce 0.55s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
   }
 
   /* Badge "Sélectionné" */
@@ -1300,8 +1348,9 @@ const departementsJson = JSON.stringify(departements);
   .devis-section {
     background: var(--gris-clair);
     opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.45s ease, transform 0.45s ease;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .devis-section.form-visible { opacity: 1; transform: translateY(0); }
 
