@@ -163,3 +163,11 @@ a {
   transform: translateY(-4px);
   box-shadow: 0 8px 40px rgba(0,0,0,0.12);
 }
+
+/* ── Classes générées dynamiquement par le JS i18n ──────────────────
+   Ces styles doivent être globaux (pas scopés Astro) car les éléments
+   sont créés via innerHTML après le chargement de la page.          */
+.hero__desc-rouge   { color: #e30613; font-weight: 600; }
+.hero__titre span   { color: #ff4d57; }
+.titre-section span { color: var(--rouge); }
+.i18n-accent        { color: var(--rouge); }

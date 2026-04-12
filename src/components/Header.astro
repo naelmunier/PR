@@ -26,21 +26,29 @@ const currentPath = Astro.url.pathname;
         </a>
       ))}
 
-      <!-- Sélecteur de langue -->
-      <div class="lang-switcher" role="group" aria-label="Language">
-        <button
-          class="lang-btn"
-          data-lang-btn="fr"
-          onclick="window.I18N.set('fr')"
-          aria-label="Français"
-        >FR</button>
-        <span class="lang-sep" aria-hidden="true">|</span>
-        <button
-          class="lang-btn"
-          data-lang-btn="en"
-          onclick="window.I18N.set('en')"
-          aria-label="English"
-        >EN</button>
+      <!-- Sélecteur de langue dropdown -->
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="lang-trigger" id="langTrigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Langue / Language">
+          <span class="lang-trigger__flag" id="langFlag">🇫🇷</span>
+          <span class="lang-trigger__code" id="langCode">FR</span>
+          <svg class="lang-trigger__chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <ul class="lang-menu" id="langMenu" role="listbox">
+          <li>
+            <button class="lang-option" data-lang-btn="fr" onclick="window.I18N.set('fr')" role="option" aria-label="Français">
+              <span class="lang-option__flag">🇫🇷</span>
+              <span class="lang-option__name">Français</span>
+            </button>
+          </li>
+          <li>
+            <button class="lang-option" data-lang-btn="en" onclick="window.I18N.set('en')" role="option" aria-label="English">
+              <span class="lang-option__flag">🇬🇧</span>
+              <span class="lang-option__name">English</span>
+            </button>
+          </li>
+        </ul>
       </div>
     </nav>
 
@@ -119,48 +127,124 @@ const currentPath = Astro.url.pathname;
     color: var(--rouge);
   }
 
-  /* Sélecteur de langue */
-  .lang-switcher {
-    display: flex;
-    align-items: center;
-    gap: 0;
+  /* ── Dropdown langue ─────────────────────────────── */
+  .lang-dropdown {
+    position: relative;
     margin-left: 0.5rem;
-    border: 1.5px solid rgba(0,0,0,0.13);
-    border-radius: 2rem;
-    padding: 0.18rem 0.28rem;
-    background: rgba(0,0,0,0.02);
   }
 
-  .lang-btn {
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    padding: 0.22rem 0.55rem;
-    border: none;
-    background: none;
+  .lang-trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.32rem 0.72rem 0.32rem 0.52rem;
+    border: 1.5px solid rgba(0,0,0,0.13);
+    border-radius: 2rem;
+    background: rgba(0,0,0,0.02);
     cursor: pointer;
-    color: var(--gris-moyen);
-    border-radius: 1.5rem;
-    transition: background 0.18s, color 0.18s;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--gris-fonce);
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  .lang-trigger:hover {
+    border-color: rgba(0,0,0,0.25);
+    background: rgba(0,0,0,0.04);
+  }
+
+  .lang-dropdown.open .lang-trigger {
+    border-color: var(--gris-fonce);
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+  }
+
+  .lang-trigger__flag {
+    font-size: 1rem;
     line-height: 1;
   }
 
-  .lang-btn:hover {
+  .lang-trigger__code {
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  .lang-trigger__chevron {
+    margin-left: 0.05rem;
+    color: var(--gris-moyen);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .lang-dropdown.open .lang-trigger__chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Menu déroulant */
+  .lang-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    list-style: none;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.09);
+    border-radius: 0.9rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+    min-width: 130px;
+    padding: 0.35rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px) scale(0.97);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+    z-index: 200;
+  }
+
+  .lang-dropdown.open .lang-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+
+  .lang-menu li {
+    padding: 0;
+  }
+
+  .lang-option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    padding: 0.55rem 0.75rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-radius: 0.6rem;
+    transition: background 0.15s;
+    text-align: left;
+  }
+
+  .lang-option:hover {
+    background: var(--gris-clair);
+  }
+
+  .lang-option.lang-active {
+    background: rgba(227,6,19,0.07);
+  }
+
+  .lang-option__flag {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  .lang-option__name {
+    font-size: 0.85rem;
+    font-weight: 500;
     color: var(--gris-fonce);
   }
 
-  .lang-btn.lang-active {
-    background: var(--gris-fonce);
-    color: #fff;
-  }
-
-  .lang-sep {
-    font-size: 0.65rem;
-    color: rgba(0,0,0,0.2);
-    pointer-events: none;
-    user-select: none;
-  }
-
+  /* ── Burger mobile ─────────────────────────────────── */
   .header__burger {
     display: none;
     flex-direction: column;
@@ -204,16 +288,24 @@ const currentPath = Astro.url.pathname;
       display: flex;
     }
 
-    .lang-switcher {
+    .lang-dropdown {
       margin-left: 0;
+    }
+
+    .lang-menu {
+      right: auto;
+      left: 0;
     }
   }
 </style>
 
 <script>
-  const header = document.getElementById('header');
-  const burger = document.getElementById('burger');
-  const nav    = document.getElementById('nav');
+  const header  = document.getElementById('header');
+  const burger  = document.getElementById('burger');
+  const nav     = document.getElementById('nav');
+  const dropdown  = document.getElementById('langDropdown');
+  const trigger   = document.getElementById('langTrigger');
+  const menu      = document.getElementById('langMenu');
 
   // Effet scroll
   window.addEventListener('scroll', () => {
@@ -224,5 +316,28 @@ const currentPath = Astro.url.pathname;
   burger?.addEventListener('click', () => {
     const isOpen = nav?.classList.toggle('open');
     burger.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Dropdown langue — ouverture / fermeture
+  trigger?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = dropdown?.classList.toggle('open');
+    trigger.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Fermer si clic extérieur
+  document.addEventListener('click', (e) => {
+    if (!dropdown?.contains(e.target as Node)) {
+      dropdown?.classList.remove('open');
+      trigger?.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Fermer sur Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      dropdown?.classList.remove('open');
+      trigger?.setAttribute('aria-expanded', 'false');
+    }
   });
 </script>

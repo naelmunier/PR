@@ -138,6 +138,7 @@ const jsonLd = {
             'devis.card.traction.title':'Traction','devis.card.traction.desc':'Déplacement de vos semi-remorques et conteneurs entre le port et leur destination finale.',
             'devis.card.transport.title':'Transport & Livraison','devis.card.transport.desc':"Prise en charge et livraison de vos palettes jusqu'à votre client final partout en France.",
             'devis.card.cta':'Demander un devis','devis.card.selected':'Sélectionné','devis.back':'Changer de prestation',
+            'carousel.title':'Ils nous ont fait <span class="i18n-accent">confiance</span>',
           },
           en: {
             'nav.home':'Home','nav.devis':'Get a Quote','nav.about':'About Us','nav.contact':'Contact Us',
@@ -183,6 +184,7 @@ const jsonLd = {
             'devis.card.traction.title':'Traction','devis.card.traction.desc':'Moving your semi-trailers and containers between the port and their final destination.',
             'devis.card.transport.title':'Transport & Delivery','devis.card.transport.desc':'Handling and delivery of your pallets to your final customer anywhere in France.',
             'devis.card.cta':'Request a quote','devis.card.selected':'Selected','devis.back':'Change service',
+            'carousel.title':'They <span class="i18n-accent">trusted</span> us',
           }
         };
 
@@ -204,6 +206,16 @@ const jsonLd = {
           document.querySelectorAll('[data-lang-btn]').forEach(function(btn) {
             btn.classList.toggle('lang-active', btn.getAttribute('data-lang-btn') === lang);
           });
+          // Mettre à jour l'affichage du sélecteur (drapeau + code)
+          var flagEl = document.getElementById('langFlag');
+          var codeEl = document.getElementById('langCode');
+          if (flagEl) flagEl.textContent = lang === 'fr' ? '🇫🇷' : '🇬🇧';
+          if (codeEl) codeEl.textContent = lang === 'fr' ? 'FR' : 'EN';
+          // Fermer la dropdown si ouverte
+          var dd = document.getElementById('langDropdown');
+          var tr = document.getElementById('langTrigger');
+          if (dd) dd.classList.remove('open');
+          if (tr) tr.setAttribute('aria-expanded', 'false');
           window.__lang = lang;
         }
 
