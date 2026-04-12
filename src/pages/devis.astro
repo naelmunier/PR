@@ -56,7 +56,7 @@ const departementsJson = JSON.stringify(departements);
 
 <MainLayout title="Demander un devis" description="Demandez un devis personnalisé à PR Logistics pour vos besoins de logistique et transport au Havre.">
 
-  <!-- HERO -->
+  <!-- ═══ HERO ═══ -->
   <section class="devis-hero">
     <div class="devis-blob devis-blob--1" aria-hidden="true"></div>
     <div class="devis-blob devis-blob--2" aria-hidden="true"></div>
@@ -64,29 +64,151 @@ const departementsJson = JSON.stringify(departements);
       <p class="eyebrow-rouge">Gratuit & sans engagement</p>
       <h1 class="titre-section">Demander un <span>devis</span></h1>
       <p class="sous-titre" style="margin:1rem auto 0; max-width:520px;">
-        Remplissez le formulaire ci-dessous et notre équipe vous répond sous 24h avec une offre personnalisée.
+        Choisissez votre prestation, remplissez le formulaire et notre équipe vous répond sous 24h.
       </p>
     </div>
   </section>
 
-  <!-- FORMULAIRE -->
-  <section class="section devis-section">
+  <!-- ═══ SÉLECTION DU SERVICE ═══ -->
+  <section class="section services-select" id="servicesSelect">
     <div class="container">
-      <form class="devis-form reveal" id="devisForm" novalidate>
+      <div class="services-intro reveal">
+        <p class="eyebrow-rouge">Étape 1 — Votre besoin</p>
+        <h2 class="titre-section" style="margin:0.4rem 0 0.8rem">Quel service<br>vous intéresse ?</h2>
+        <p class="sous-titre" style="margin:0 auto; max-width:480px; font-size:1rem;">
+          Sélectionnez votre prestation pour accéder au formulaire correspondant.
+        </p>
+      </div>
 
-        <!-- ① Adresses -->
-        <div class="form-bloc">
+      <div class="services-grid reveal">
+
+        <!-- Dépotage / Empotage -->
+        <div class="service-card" data-service="depotage" role="button" tabindex="0"
+             aria-label="Demander un devis Dépotage / Empotage">
+          <div class="service-card__icon-wrap">
+            <img src="/assets/devis/depotage.png" alt="" class="service-card__icon">
+          </div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Dépotage / Empotage</h3>
+            <p class="service-card__desc">Chargement et déchargement de vos conteneurs dans nos entrepôts au cœur du port du Havre.</p>
+          </div>
+          <div class="service-card__footer">
+            <span class="service-card__cta">
+              Demander un devis
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+          <div class="service-card__selected-badge" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            Sélectionné
+          </div>
+        </div>
+
+        <!-- Stockage -->
+        <div class="service-card" data-service="stockage" role="button" tabindex="0"
+             aria-label="Demander un devis Stockage">
+          <div class="service-card__icon-wrap">
+            <img src="/assets/devis/Storage.png" alt="" class="service-card__icon">
+          </div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Stockage</h3>
+            <p class="service-card__desc">Entreposage sécurisé de vos marchandises dans notre entrepôt de 8 000 m² au Havre.</p>
+          </div>
+          <div class="service-card__footer">
+            <span class="service-card__cta">
+              Demander un devis
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+          <div class="service-card__selected-badge" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            Sélectionné
+          </div>
+        </div>
+
+        <!-- Traction -->
+        <div class="service-card" data-service="traction" role="button" tabindex="0"
+             aria-label="Demander un devis Traction">
+          <div class="service-card__icon-wrap">
+            <img src="/assets/devis/traction.png" alt="" class="service-card__icon">
+          </div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Traction</h3>
+            <p class="service-card__desc">Déplacement de vos semi-remorques et conteneurs entre le port et leur destination finale.</p>
+          </div>
+          <div class="service-card__footer">
+            <span class="service-card__cta">
+              Demander un devis
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+          <div class="service-card__selected-badge" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            Sélectionné
+          </div>
+        </div>
+
+        <!-- Transport & Livraison -->
+        <div class="service-card" data-service="transport" role="button" tabindex="0"
+             aria-label="Demander un devis Transport et Livraison">
+          <div class="service-card__icon-wrap">
+            <img src="/assets/devis/livraison.png" alt="" class="service-card__icon">
+          </div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Transport & Livraison</h3>
+            <p class="service-card__desc">Prise en charge et livraison de vos palettes jusqu'à votre client final partout en France.</p>
+          </div>
+          <div class="service-card__footer">
+            <span class="service-card__cta">
+              Demander un devis
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+          <div class="service-card__selected-badge" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            Sélectionné
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FORMULAIRE ═══ -->
+  <section class="section devis-section" id="devisSection">
+    <div class="container">
+
+      <!-- Barre de navigation du formulaire -->
+      <div class="form-topbar">
+        <button type="button" class="btn-retour" id="btnRetour">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Changer de prestation
+        </button>
+        <div class="form-service-badge" id="formServiceBadge">
+          <img id="formServiceIcon" src="" alt="" class="form-service-badge__icon">
+          <span id="formServiceLabel"></span>
+        </div>
+      </div>
+
+      <!-- Message d'erreur d'envoi -->
+      <p id="sendError" hidden style="color:#e30613; font-size:0.88rem; margin-bottom:0.8rem; text-align:right; max-width:900px; margin-left:auto; margin-right:auto;"></p>
+
+      <form class="devis-form" id="devisForm" novalidate>
+
+        <!-- ══════════════════════════════════════════════
+             BLOC: Adresses  [transport, traction]
+        ══════════════════════════════════════════════ -->
+        <div class="form-bloc" data-for="transport traction" id="bloc-adresses">
           <div class="form-bloc__titre">
             <span class="form-step">1</span>
-            <h2>Adresses de transport</h2>
+            <h2 id="adresses-titre">Adresses de transport</h2>
           </div>
 
           <div class="adresses-grid">
-            <!-- Départ -->
             <div class="adresse-card">
               <div class="adresse-card__header adresse-card__header--neutre">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
-                Adresse de départ
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+                <span id="label-depart">Adresse de départ</span>
               </div>
               <div class="form-group">
                 <label class="form-label" for="depart_ville">Ville</label>
@@ -110,16 +232,14 @@ const departementsJson = JSON.stringify(departements);
               </div>
             </div>
 
-            <!-- Séparateur discret -->
             <div class="adresses-sep" aria-hidden="true">
               <div class="adresses-sep__dot"></div>
             </div>
 
-            <!-- Livraison -->
             <div class="adresse-card adresse-card--livraison">
               <div class="adresse-card__header">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                Adresse de livraison
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span id="label-arrivee">Adresse de livraison</span>
               </div>
               <div class="form-group">
                 <label class="form-label" for="arrivee_ville">Ville</label>
@@ -145,23 +265,274 @@ const departementsJson = JSON.stringify(departements);
           </div>
         </div>
 
-        <!-- ② Marchandise -->
-        <div class="form-bloc">
+        <!-- ══════════════════════════════════════════════
+             BLOC: Site de stockage  [stockage]
+        ══════════════════════════════════════════════ -->
+        <div class="form-bloc" data-for="stockage" id="bloc-stockage-site">
+          <div class="form-bloc__titre">
+            <span class="form-step">1</span>
+            <h2>Site de stockage</h2>
+          </div>
+          <div class="info-banner">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Par défaut, stockage dans notre entrepôt au <strong>Port du Havre — 76700 Rogerville</strong>. Précisez ci-dessous si vous souhaitez un site différent.
+          </div>
+          <div class="form-row form-row--2" style="margin-top:1.2rem">
+            <div class="form-group">
+              <label class="form-label" for="stock_ville">Autre ville souhaitée <span class="label-optional">Optionnel</span></label>
+              <input type="text" id="stock_ville" name="stock_ville" class="form-input" placeholder="Le Havre" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="stock_dept">Département</label>
+              <div class="select-wrapper">
+                <select id="stock_dept" name="stock_dept" class="form-select">
+                  <option value="" disabled selected>Sélectionnez</option>
+                  {departements.map(d => <option value={d.code}>{d.code} — {d.nom}</option>)}
+                </select>
+                <span class="select-arrow" aria-hidden="true">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════
+             BLOC: Opération dépotage  [depotage]
+        ══════════════════════════════════════════════ -->
+        <div class="form-bloc" data-for="depotage" id="bloc-depotage-op">
+          <div class="form-bloc__titre">
+            <span class="form-step">1</span>
+            <h2>Détails de l'opération</h2>
+          </div>
+
+          <!-- Type d'opération — radio visuel -->
+          <div class="form-group" style="margin-bottom:1.6rem">
+            <label class="form-label">Type d'opération</label>
+            <div class="radio-group">
+              <label class="radio-card">
+                <input type="radio" name="depot_operation" value="depotage" required>
+                <div class="radio-card__content">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="7.5 4.21 12 6.81 16.5 4.21"/><polyline points="7.5 19.79 7.5 14.6 3 12"/><polyline points="21 12 16.5 14.6 16.5 19.79"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                  <strong>Dépotage</strong>
+                  <span>Conteneur → Entrepôt</span>
+                </div>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="depot_operation" value="empotage">
+                <div class="radio-card__content">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                  <strong>Empotage</strong>
+                  <span>Entrepôt → Conteneur</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-row form-row--3">
+            <div class="form-group">
+              <label class="form-label" for="depot_nb">Nombre de conteneurs</label>
+              <input type="number" id="depot_nb" name="depot_nb" class="form-input" min="1" max="999" placeholder="Ex : 2" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="depot_type_cont">Type de conteneur</label>
+              <div class="select-wrapper">
+                <select id="depot_type_cont" name="depot_type_cont" class="form-select" required>
+                  <option value="" disabled selected>Sélectionnez</option>
+                  <option value="20">20' — standard</option>
+                  <option value="40">40' — standard</option>
+                  <option value="40hc">40' High Cube</option>
+                  <option value="45hc">45' High Cube</option>
+                  <option value="reefer">Réfrigéré (Reefer)</option>
+                  <option value="autre">Autre</option>
+                </select>
+                <span class="select-arrow" aria-hidden="true">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="depot_date">Date souhaitée</label>
+              <input type="date" id="depot_date" name="depot_date" class="form-input" required />
+            </div>
+          </div>
+
+          <div class="form-row form-row--2" style="margin-top:1.2rem">
+            <div class="form-group">
+              <label class="form-label" for="depot_port">Port / Terminal</label>
+              <input type="text" id="depot_port" name="depot_port" class="form-input" placeholder="Port du Havre" value="Port du Havre" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="depot_poids">Poids total estimé <span class="label-optional">Optionnel</span></label>
+              <div class="input-with-unit">
+                <input type="number" id="depot_poids" name="depot_poids" class="form-input" placeholder="Ex : 15 000" />
+                <div class="select-wrapper input-unit">
+                  <select name="depot_poids_unite" class="form-select">
+                    <option value="kg">kg</option>
+                    <option value="t" selected>t</option>
+                  </select>
+                  <span class="select-arrow" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════
+             BLOC: Détails traction  [traction]
+        ══════════════════════════════════════════════ -->
+        <div class="form-bloc" data-for="traction" id="bloc-traction">
+          <div class="form-bloc__titre">
+            <span class="form-step">2</span>
+            <h2>Détails de la traction</h2>
+          </div>
+          <div class="form-row form-row--3">
+            <div class="form-group">
+              <label class="form-label" for="trac_vehicule">Type de véhicule</label>
+              <div class="select-wrapper">
+                <select id="trac_vehicule" name="trac_vehicule" class="form-select" required>
+                  <option value="" disabled selected>Sélectionnez</option>
+                  <option value="bache">Semi bâchée</option>
+                  <option value="frigo">Semi frigorifique</option>
+                  <option value="plateau">Plateau</option>
+                  <option value="citerne">Citerne</option>
+                  <option value="conteneur">Porte-conteneur</option>
+                  <option value="autre">Autre</option>
+                </select>
+                <span class="select-arrow" aria-hidden="true">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="trac_poids">Poids total <span class="label-optional">Optionnel</span></label>
+              <div class="input-with-unit">
+                <input type="number" id="trac_poids" name="trac_poids" class="form-input" placeholder="Ex : 22 000" />
+                <div class="select-wrapper input-unit">
+                  <select name="trac_poids_unite" class="form-select">
+                    <option value="kg">kg</option>
+                    <option value="t" selected>t</option>
+                  </select>
+                  <span class="select-arrow" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="trac_date">Date souhaitée</label>
+              <input type="date" id="trac_date" name="trac_date" class="form-input" required />
+            </div>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════
+             BLOC: Marchandise — lots  [tous les services]
+        ══════════════════════════════════════════════ -->
+        <div class="form-bloc" data-for="transport stockage depotage traction" id="bloc-marchandise">
           <div class="form-bloc__titre">
             <span class="form-step">2</span>
             <h2>Détails de la marchandise</h2>
           </div>
-
           <div id="lotsContainer"></div>
-
           <button type="button" id="addLotBtn" class="btn-add-lot">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             Ajouter un lot
           </button>
         </div>
 
-        <!-- ③ Coordonnées -->
-        <div class="form-bloc">
+        <!-- ══════════════════════════════════════════════
+             BLOC: Conditions de stockage  [stockage]
+        ══════════════════════════════════════════════ -->
+        <div class="form-bloc" data-for="stockage" id="bloc-stockage-details">
+          <div class="form-bloc__titre">
+            <span class="form-step">3</span>
+            <h2>Conditions de stockage</h2>
+          </div>
+
+          <div class="form-row form-row--2" style="margin-bottom:1.2rem">
+            <div class="form-group">
+              <label class="form-label" for="stock_poids">Poids total estimé <span class="label-optional">Optionnel</span></label>
+              <div class="input-with-unit">
+                <input type="number" id="stock_poids" name="stock_poids" class="form-input" placeholder="Ex : 5 000" />
+                <div class="select-wrapper input-unit">
+                  <select name="stock_poids_unite" class="form-select">
+                    <option value="kg">kg</option>
+                    <option value="t" selected>t</option>
+                  </select>
+                  <span class="select-arrow" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="stock_duree">Durée souhaitée</label>
+              <div class="select-wrapper">
+                <select id="stock_duree" name="stock_duree" class="form-select" required>
+                  <option value="" disabled selected>Sélectionnez</option>
+                  <option value="<1sem">Moins d'une semaine</option>
+                  <option value="1mois">Environ 1 mois</option>
+                  <option value="1-3mois">1 à 3 mois</option>
+                  <option value="3-6mois">3 à 6 mois</option>
+                  <option value=">6mois">Plus de 6 mois</option>
+                  <option value="indetermine">Durée indéterminée</option>
+                </select>
+                <span class="select-arrow" aria-hidden="true">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row form-row--2" style="margin-bottom:1.4rem">
+            <div class="form-group">
+              <label class="form-label" for="stock_date_entree">Date d'entrée souhaitée</label>
+              <input type="date" id="stock_date_entree" name="stock_date_entree" class="form-input" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="stock_date_sortie">Date de sortie estimée <span class="label-optional">Optionnel</span></label>
+              <input type="date" id="stock_date_sortie" name="stock_date_sortie" class="form-input" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Conditions particulières <span class="label-optional">Optionnel</span></label>
+            <div class="checkboxes-grid">
+              <label class="checkbox-item">
+                <input type="checkbox" name="cond_froid" value="1">
+                <span>Température dirigée</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="cond_dangereux" value="1">
+                <span>Matières dangereuses</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="cond_alcool" value="1">
+                <span>Alcool / produits réglementés</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="cond_bio" value="1">
+                <span>Produits biologiques</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="cond_racks" value="1">
+                <span>Stockage en racks</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="cond_securite" value="1">
+                <span>Sécurité renforcée</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════
+             BLOC: Vos coordonnées  [tous les services]
+        ══════════════════════════════════════════════ -->
+        <div class="form-bloc" data-for="transport stockage depotage traction" id="bloc-coordonnees">
           <div class="form-bloc__titre">
             <span class="form-step">3</span>
             <h2>Vos coordonnées</h2>
@@ -191,18 +562,15 @@ const departementsJson = JSON.stringify(departements);
             </div>
           </div>
 
-          <div class="form-group" style="margin-top:1.2rem;">
+          <div class="form-group" style="margin-top:1.2rem">
             <label class="form-label" for="message">
               <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
               Informations complémentaires <span class="label-optional">Optionnel</span>
             </label>
             <textarea id="message" name="message" class="form-input form-textarea" rows="3"
-              placeholder="Marchandises dangereuses, température dirigée, délais particuliers, accès particulier…"></textarea>
+              placeholder="Délais particuliers, accès spécifique, contraintes techniques…"></textarea>
           </div>
         </div>
-
-        <!-- Message d'erreur d'envoi -->
-        <p id="sendError" hidden style="color:#e30613; font-size:0.88rem; margin-bottom:0.8rem; text-align:right;"></p>
 
         <!-- Pied de formulaire -->
         <div class="form-footer">
@@ -227,15 +595,104 @@ const departementsJson = JSON.stringify(departements);
         <p>Un email de confirmation avec votre devis en PDF a été envoyé à votre adresse.<br />Notre équipe vous contactera sous 24h.</p>
         <a href="/" class="btn btn--outline" style="margin-top:1.5rem;">Retour à l'accueil</a>
       </div>
+
     </div>
   </section>
 
 </MainLayout>
 
+<!-- ═══════════════════════════════════════════════════════════
+     SCRIPT
+═══════════════════════════════════════════════════════════ -->
 <script is:inline define:vars={{ departementsJson }}>
-  const PR_EMAIL = 'lehavre@pr-logistics.fr';
-
+  const PR_EMAIL   = 'lehavre@pr-logistics.fr';
   const DEPARTEMENTS = JSON.parse(departementsJson);
+
+  // ── Infos par service ────────────────────────────────────────
+  const SERVICE_INFO = {
+    depotage:  { label: 'Dépotage / Empotage',   icon: '/assets/devis/depotage.png' },
+    stockage:  { label: 'Stockage',               icon: '/assets/devis/Storage.png' },
+    traction:  { label: 'Traction',               icon: '/assets/devis/traction.png' },
+    transport: { label: 'Transport & Livraison',  icon: '/assets/devis/livraison.png' },
+  };
+
+  let currentService = null;
+
+  // ── Sélection du service ─────────────────────────────────────
+  function selectService(name) {
+    currentService = name;
+    const info = SERVICE_INFO[name];
+
+    // Mise à jour visuelle des cartes
+    document.querySelectorAll('.service-card').forEach(c => {
+      c.classList.toggle('selected', c.dataset.service === name);
+    });
+
+    // Badge service dans le formulaire
+    const icon  = document.getElementById('formServiceIcon');
+    const label = document.getElementById('formServiceLabel');
+    if (icon)  { icon.src = info.icon; icon.alt = info.label; }
+    if (label) { label.textContent = info.label; }
+
+    // Labels adresses selon service
+    const labelDepart  = document.getElementById('label-depart');
+    const labelArrivee = document.getElementById('label-arrivee');
+    const adressesTitre = document.getElementById('adresses-titre');
+    if (name === 'traction') {
+      if (labelDepart)  labelDepart.textContent  = "Point d'enlèvement";
+      if (labelArrivee) labelArrivee.textContent = 'Point de livraison';
+      if (adressesTitre) adressesTitre.textContent = 'Itinéraire de traction';
+    } else {
+      if (labelDepart)  labelDepart.textContent  = 'Adresse de départ';
+      if (labelArrivee) labelArrivee.textContent = 'Adresse de livraison';
+      if (adressesTitre) adressesTitre.textContent = 'Adresses de transport';
+    }
+
+    // Afficher / masquer les blocs + activer/désactiver les inputs
+    document.querySelectorAll('.form-bloc[data-for]').forEach(bloc => {
+      const services = bloc.dataset.for.split(' ');
+      const active   = services.includes(name);
+      bloc.style.display = active ? '' : 'none';
+      bloc.querySelectorAll('input, select, textarea').forEach(el => {
+        if (!el.classList.contains('input--disabled')) {
+          el.disabled = !active;
+        }
+      });
+    });
+
+    // Renuméroter les étapes
+    updateStepNumbers();
+
+    // Afficher la section formulaire avec animation
+    const section = document.getElementById('devisSection');
+    section.style.display = 'block';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      section.classList.add('form-visible');
+    }));
+
+    // Scroll vers le formulaire
+    setTimeout(() => {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
+  }
+
+  function resetToSelection() {
+    currentService = null;
+    document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
+    const section = document.getElementById('devisSection');
+    section.classList.remove('form-visible');
+    setTimeout(() => { section.style.display = 'none'; }, 420);
+    document.getElementById('servicesSelect').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function updateStepNumbers() {
+    const visibles = [...document.querySelectorAll('.form-bloc[data-for]')]
+      .filter(b => b.style.display !== 'none');
+    visibles.forEach((bloc, i) => {
+      const step = bloc.querySelector('.form-step');
+      if (step) step.textContent = i + 1;
+    });
+  }
 
   // ── Gestion des lots ─────────────────────────────────────────
   let lots   = [];
@@ -247,22 +704,8 @@ const departementsJson = JSON.stringify(departements);
     { val: '130x150', label: '130 × 150 cm (Industrielle)' },
   ];
 
-  function selectHTML(name, id) {
-    const opts = FORMATS.map(f =>
-      `<option value="${f.val}"${f.val === '' ? ' disabled selected' : ''}>${f.label}</option>`
-    ).join('');
-    return `<div class="select-wrapper">
-      <select name="${name}" id="${id}" class="form-select" required>
-        ${opts}
-      </select>
-      <span class="select-arrow" aria-hidden="true">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </span>
-    </div>`;
-  }
-
   const TYPES_MARCHANDISE = [
-    { val: '',           label: 'Type de marchandise…' },
+    { val: '',          label: 'Type de marchandise…' },
     { val: 'standard',  label: 'Marchandise standard' },
     { val: 'froid',     label: 'Température dirigée (froid)' },
     { val: 'dangereux', label: 'Marchandise dangereuse' },
@@ -271,18 +714,18 @@ const departementsJson = JSON.stringify(departements);
     { val: 'autre',     label: 'Autre' },
   ];
 
+  function selectHTML(name, id) {
+    const opts = FORMATS.map(f =>
+      `<option value="${f.val}"${f.val === '' ? ' disabled selected' : ''}>${f.label}</option>`
+    ).join('');
+    return `<div class="select-wrapper"><select name="${name}" id="${id}" class="form-select" required>${opts}</select><span class="select-arrow" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span></div>`;
+  }
+
   function typeSelectHTML(name, id) {
     const opts = TYPES_MARCHANDISE.map(t =>
       `<option value="${t.val}"${t.val === '' ? ' disabled selected' : ''}>${t.label}</option>`
     ).join('');
-    return `<div class="select-wrapper">
-      <select name="${name}" id="${id}" class="form-select" required>
-        ${opts}
-      </select>
-      <span class="select-arrow" aria-hidden="true">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </span>
-    </div>`;
+    return `<div class="select-wrapper"><select name="${name}" id="${id}" class="form-select" required>${opts}</select><span class="select-arrow" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span></div>`;
   }
 
   function createLotRow(id, num) {
@@ -300,8 +743,7 @@ const departementsJson = JSON.stringify(departements);
       <div class="lot-card__fields lot-card__fields--row1">
         <div class="form-group">
           <label class="form-label" for="pal_${id}">Nombre de palettes</label>
-          <input type="number" name="pal_${id}" id="pal_${id}" min="1" max="9999"
-            class="form-input" placeholder="Ex : 5" required />
+          <input type="number" name="pal_${id}" id="pal_${id}" min="1" max="9999" class="form-input" placeholder="Ex : 5" required />
         </div>
         <div class="form-group">
           <label class="form-label" for="tai_${id}">Taille des palettes</label>
@@ -315,11 +757,9 @@ const departementsJson = JSON.stringify(departements);
         </div>
         <div class="form-group">
           <label class="form-label" for="con_${id}">Contenu de la marchandise</label>
-          <input type="text" name="con_${id}" id="con_${id}"
-            class="form-input" placeholder="Ex : Électronique, textile, produits alimentaires…" required />
+          <input type="text" name="con_${id}" id="con_${id}" class="form-input" placeholder="Ex : Électronique, textile…" required />
         </div>
       </div>`;
-
     div.querySelector('.btn-remove-lot').addEventListener('click', () => removeLot(id, div));
     return div;
   }
@@ -328,8 +768,7 @@ const departementsJson = JSON.stringify(departements);
     const id  = nextId++;
     const num = lots.length + 1;
     lots.push(id);
-    const container = document.getElementById('lotsContainer');
-    container.appendChild(createLotRow(id, num));
+    document.getElementById('lotsContainer').appendChild(createLotRow(id, num));
     updateRemoveBtns();
   }
 
@@ -360,7 +799,7 @@ const departementsJson = JSON.stringify(departements);
     }));
   }
 
-  // ── Génération PDF ────────────────────────────────────────────
+  // ── PDF ───────────────────────────────────────────────────────
   function deptLabel(code) {
     const d = DEPARTEMENTS.find(d => d.code === code);
     return d ? `${d.code} — ${d.nom}` : code;
@@ -378,21 +817,19 @@ const departementsJson = JSON.stringify(departements);
     const LITE = [245, 245, 247];
     const ref  = 'DEV-' + Date.now().toString().slice(-6).toUpperCase();
     const date = new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
+    const serviceLabel = SERVICE_INFO[data.service]?.label ?? data.service;
 
-    // ── En-tête rouge
+    // En-tête rouge
     doc.setFillColor(...RED);
     doc.rect(0, 0, W, 40, 'F');
-
     doc.setTextColor(255, 255, 255);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(22);
     doc.text('PR Logistics', 18, 18);
-
     doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
-    doc.text('Prestataire logistique & transport · Le Havre', 18, 26);
-    doc.text(`Demande de devis · ${date}`, 18, 33);
-
+    doc.text(`Demande de devis — ${serviceLabel}`, 18, 26);
+    doc.text(`${date}`, 18, 33);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(11);
     doc.text(ref, W - 18, 24, { align: 'right' });
@@ -400,7 +837,7 @@ const departementsJson = JSON.stringify(departements);
     doc.setFont('helvetica', 'normal');
     doc.text('Référence', W - 18, 30, { align: 'right' });
 
-    // ── Bloc client
+    // Bloc client
     let y = 50;
     doc.setFillColor(...LITE);
     doc.roundedRect(15, y, W - 30, 22, 3, 3, 'F');
@@ -413,103 +850,133 @@ const departementsJson = JSON.stringify(departements);
     doc.text(data.nom, 22, y + 14);
     doc.setTextColor(...MID);
     doc.setFontSize(9);
-    const contactLine = [data.email, data.telephone].filter(Boolean).join('   ·   ');
-    doc.text(contactLine, 22, y + 20);
+    doc.text([data.email, data.telephone].filter(Boolean).join('   ·   '), 22, y + 20);
 
-    // ── Adresses
     y += 32;
-    doc.setTextColor(...DARK);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(9);
-    doc.setFillColor(...RED);
-    doc.rect(15, y - 1, 2, 7, 'F');
-    doc.text('TRANSPORT', 20, y + 5);
 
-    y += 12;
-    const colW = (W - 46) / 2;
+    // ── Sections selon le service ─────────────────────────────
+    function sectionTitle(title) {
+      doc.setFillColor(...RED);
+      doc.rect(15, y - 1, 2, 7, 'F');
+      doc.setTextColor(...DARK);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.text(title, 20, y + 5);
+      y += 12;
+    }
 
-    // Départ
-    doc.setFillColor(...LITE);
-    doc.roundedRect(15, y, colW, 26, 3, 3, 'F');
-    doc.setTextColor(...RED);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(7.5);
-    doc.text('DÉPART', 22, y + 7);
-    doc.setTextColor(...DARK);
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'bold');
-    doc.text(data.depart_ville, 22, y + 14);
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(...MID);
-    doc.setFontSize(8.5);
-    doc.text(deptLabel(data.depart_dept), 22, y + 20);
+    if (data.service === 'transport' || data.service === 'traction') {
+      sectionTitle(data.service === 'traction' ? 'ITINÉRAIRE DE TRACTION' : 'TRANSPORT');
+      const colW = (W - 46) / 2;
+      // Départ
+      doc.setFillColor(...LITE);
+      doc.roundedRect(15, y, colW, 24, 3, 3, 'F');
+      doc.setTextColor(...RED);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(7.5);
+      doc.text(data.service === 'traction' ? 'ENLÈVEMENT' : 'DÉPART', 22, y + 7);
+      doc.setTextColor(...DARK);
+      doc.setFontSize(10);
+      doc.text(data.depart_ville, 22, y + 14);
+      doc.setTextColor(...MID);
+      doc.setFontSize(8.5);
+      doc.setFont('helvetica', 'normal');
+      doc.text(deptLabel(data.depart_dept), 22, y + 20);
+      // Flèche
+      const cx = W / 2;
+      doc.setDrawColor(...RED);
+      doc.setLineWidth(0.6);
+      doc.line(15 + colW + 2, y + 12, cx + 5, y + 12);
+      doc.setFillColor(...RED);
+      doc.triangle(cx + 6, y + 10, cx + 6, y + 14, cx + 10, y + 12, 'F');
+      // Arrivée
+      doc.setFillColor(...LITE);
+      doc.roundedRect(W - 15 - colW, y, colW, 24, 3, 3, 'F');
+      doc.setTextColor(...RED);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(7.5);
+      doc.text('LIVRAISON', W - 15 - colW + 7, y + 7);
+      doc.setTextColor(...DARK);
+      doc.setFontSize(10);
+      doc.text(data.arrivee_ville, W - 15 - colW + 7, y + 14);
+      doc.setTextColor(...MID);
+      doc.setFontSize(8.5);
+      doc.setFont('helvetica', 'normal');
+      doc.text(deptLabel(data.arrivee_dept), W - 15 - colW + 7, y + 20);
+      y += 34;
 
-    // Flèche
-    const cx = W / 2;
-    doc.setDrawColor(...RED);
-    doc.setLineWidth(0.6);
-    doc.line(15 + colW + 2, y + 13, cx + 6, y + 13);
-    doc.setFillColor(...RED);
-    doc.triangle(cx + 7, y + 11, cx + 7, y + 15, cx + 11, y + 13, 'F');
+      if (data.service === 'traction' && data.trac_vehicule) {
+        sectionTitle('DÉTAILS TRACTION');
+        doc.setFontSize(9);
+        doc.setTextColor(...DARK);
+        doc.text(`Véhicule : ${data.trac_vehicule}`, 22, y);
+        y += 6;
+        if (data.trac_poids) doc.text(`Poids : ${data.trac_poids} ${data.trac_poids_unite}`, 22, y), y += 6;
+        if (data.trac_date)  doc.text(`Date : ${data.trac_date}`, 22, y), y += 6;
+        y += 4;
+      }
+    }
 
-    // Arrivée
-    doc.setFillColor(...LITE);
-    doc.roundedRect(W - 15 - colW, y, colW, 26, 3, 3, 'F');
-    doc.setTextColor(...RED);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(7.5);
-    doc.text('LIVRAISON', W - 15 - colW + 7, y + 7);
-    doc.setTextColor(...DARK);
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'bold');
-    doc.text(data.arrivee_ville, W - 15 - colW + 7, y + 14);
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(...MID);
-    doc.setFontSize(8.5);
-    doc.text(deptLabel(data.arrivee_dept), W - 15 - colW + 7, y + 20);
+    if (data.service === 'stockage') {
+      sectionTitle('SITE DE STOCKAGE');
+      doc.setFontSize(9);
+      doc.setTextColor(...DARK);
+      doc.setFont('helvetica', 'normal');
+      const site = data.stock_ville ? `${data.stock_ville} (${deptLabel(data.stock_dept)})` : 'Port du Havre — 76700 Rogerville (entrepôt PR Logistics)';
+      doc.text(site, 22, y);
+      y += 14;
+      sectionTitle('CONDITIONS DE STOCKAGE');
+      if (data.stock_poids) { doc.text(`Poids estimé : ${data.stock_poids} ${data.stock_poids_unite}`, 22, y); y += 6; }
+      if (data.stock_duree) { doc.text(`Durée : ${data.stock_duree}`, 22, y); y += 6; }
+      if (data.stock_date_entree) { doc.text(`Entrée : ${data.stock_date_entree}`, 22, y); y += 6; }
+      if (data.stock_date_sortie) { doc.text(`Sortie estimée : ${data.stock_date_sortie}`, 22, y); y += 6; }
+      if (data.stock_conditions?.length) { doc.text(`Conditions : ${data.stock_conditions.join(', ')}`, 22, y); y += 6; }
+      y += 6;
+    }
 
-    // ── Lots
-    y += 36;
-    doc.setTextColor(...DARK);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(9);
-    doc.setFillColor(...RED);
-    doc.rect(15, y - 1, 2, 7, 'F');
-    doc.text('MARCHANDISE', 20, y + 5);
+    if (data.service === 'depotage') {
+      sectionTitle('DÉTAILS DE L\'OPÉRATION');
+      doc.setFontSize(9);
+      doc.setTextColor(...DARK);
+      doc.setFont('helvetica', 'normal');
+      if (data.depot_operation) { doc.text(`Opération : ${data.depot_operation}`, 22, y); y += 6; }
+      if (data.depot_nb)        { doc.text(`Nombre de conteneurs : ${data.depot_nb}`, 22, y); y += 6; }
+      if (data.depot_type_cont) { doc.text(`Type de conteneur : ${data.depot_type_cont}`, 22, y); y += 6; }
+      if (data.depot_date)      { doc.text(`Date souhaitée : ${data.depot_date}`, 22, y); y += 6; }
+      if (data.depot_port)      { doc.text(`Port / Terminal : ${data.depot_port}`, 22, y); y += 6; }
+      if (data.depot_poids)     { doc.text(`Poids estimé : ${data.depot_poids} ${data.depot_poids_unite}`, 22, y); y += 6; }
+      y += 6;
+    }
 
-    y += 12;
-    // En-tête tableau
+    // Tableau des lots
+    sectionTitle('MARCHANDISE');
     doc.setFillColor(...RED);
     doc.roundedRect(15, y, W - 30, 8, 2, 2, 'F');
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(8);
     doc.setFont('helvetica', 'bold');
-    doc.text('Lot',        22, y + 5.5);
-    doc.text('Palettes',   42, y + 5.5);
-    doc.text('Format',     72, y + 5.5);
-    doc.text('Type',      105, y + 5.5);
-    doc.text('Contenu',   145, y + 5.5);
-
+    doc.text('Lot', 22, y + 5.5);
+    doc.text('Palettes', 42, y + 5.5);
+    doc.text('Format', 72, y + 5.5);
+    doc.text('Type', 105, y + 5.5);
+    doc.text('Contenu', 145, y + 5.5);
     y += 8;
     let totalPalettes = 0;
     data.lots.forEach((lot, i) => {
-      const bg = i % 2 === 0 ? [255, 255, 255] : LITE;
-      doc.setFillColor(...bg);
+      doc.setFillColor(...(i % 2 === 0 ? [255,255,255] : LITE));
       doc.rect(15, y, W - 30, 9, 'F');
       doc.setTextColor(...DARK);
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(9);
-      doc.text(String(i + 1),     22, y + 6);
-      doc.text(lot.palettes,      42, y + 6);
-      doc.text(lot.taille,        72, y + 6);
-      doc.text(lot.type,         105, y + 6);
-      const contenuMax = doc.splitTextToSize(lot.contenu, 45);
-      doc.text(contenuMax[0] + (contenuMax.length > 1 ? '…' : ''), 145, y + 6);
+      doc.text(String(i + 1), 22, y + 6);
+      doc.text(lot.palettes, 42, y + 6);
+      doc.text(lot.taille, 72, y + 6);
+      doc.text(lot.type, 105, y + 6);
+      const c = doc.splitTextToSize(lot.contenu, 45);
+      doc.text(c[0] + (c.length > 1 ? '…' : ''), 145, y + 6);
       totalPalettes += parseInt(lot.palettes) || 0;
       y += 9;
     });
-
-    // Total
     doc.setFillColor(...LITE);
     doc.rect(15, y, W - 30, 8, 'F');
     doc.setFont('helvetica', 'bold');
@@ -517,10 +984,9 @@ const departementsJson = JSON.stringify(departements);
     doc.setTextColor(...RED);
     doc.text('TOTAL', 22, y + 5.5);
     doc.setTextColor(...DARK);
-    doc.text(String(totalPalettes) + ' palettes', 42, y + 5.5);
-    y += 16;
+    doc.text(String(totalPalettes) + ' palette(s)', 42, y + 5.5);
+    y += 14;
 
-    // ── Message
     if (data.message) {
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(8.5);
@@ -532,24 +998,22 @@ const departementsJson = JSON.stringify(departements);
       doc.setTextColor(...DARK);
       const lines = doc.splitTextToSize(data.message, W - 30);
       doc.text(lines, 15, y);
-      y += lines.length * 5 + 8;
     }
 
-    // ── Pied de page
-    const footerY = 280;
+    // Pied de page
     doc.setDrawColor(220, 220, 220);
     doc.setLineWidth(0.4);
-    doc.line(15, footerY, W - 15, footerY);
+    doc.line(15, 280, W - 15, 280);
     doc.setTextColor(...MID);
     doc.setFontSize(8);
     doc.setFont('helvetica', 'normal');
-    doc.text('PR Logistics  ·  PLPN 1 – Port 4935, 76700 Rogerville', W / 2, footerY + 5, { align: 'center' });
-    doc.text('02.32.72.48.03  ·  lehavre@pr-logistics.fr', W / 2, footerY + 10, { align: 'center' });
+    doc.text('PR Logistics  ·  PLPN 1 – Port 4935, 76700 Rogerville', W / 2, 285, { align: 'center' });
+    doc.text('02.32.72.48.03  ·  lehavre@pr-logistics.fr', W / 2, 290, { align: 'center' });
 
     return doc;
   }
 
-  // ── Envoi via PHP + Brevo API ────────────────────────────────────
+  // ── Envoi serveur ─────────────────────────────────────────────
   async function sendToServer(data, pdfBase64) {
     try {
       const res = await fetch('/send-devis.php', {
@@ -564,17 +1028,32 @@ const departementsJson = JSON.stringify(departements);
   }
 
   // ── Initialisation ────────────────────────────────────────────
-  document.addEventListener('DOMContentLoaded', async () => {
+  document.addEventListener('DOMContentLoaded', () => {
     // Charger jsPDF
-    const jsPDFScript = document.createElement('script');
-    jsPDFScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
-    document.head.appendChild(jsPDFScript);
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    document.head.appendChild(s);
 
-    // Premier lot
+    // Cacher la section formulaire au départ
+    const devisSection = document.getElementById('devisSection');
+    devisSection.style.display = 'none';
+
+    // Clics sur les cartes de service
+    document.querySelectorAll('.service-card').forEach(card => {
+      card.addEventListener('click', () => selectService(card.dataset.service));
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectService(card.dataset.service); }
+      });
+    });
+
+    // Bouton retour
+    document.getElementById('btnRetour')?.addEventListener('click', resetToSelection);
+
+    // Initialiser un premier lot
     addLot();
     document.getElementById('addLotBtn')?.addEventListener('click', addLot);
 
-    // Soumission
+    // Soumission du formulaire
     const form    = document.getElementById('devisForm');
     const success = document.getElementById('formSuccess');
     const btn     = document.getElementById('submitBtn');
@@ -582,8 +1061,6 @@ const departementsJson = JSON.stringify(departements);
 
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      // Validation native
       const invalids = form.querySelectorAll(':invalid');
       if (invalids.length) {
         invalids.forEach(el => el.classList.add('input--error'));
@@ -596,63 +1073,84 @@ const departementsJson = JSON.stringify(departements);
 
       const fd = new FormData(form);
       const data = {
+        service:       currentService,
         nom:           fd.get('nom'),
         email:         fd.get('email'),
         telephone:     fd.get('telephone'),
         message:       fd.get('message'),
-        depart_ville:  fd.get('depart_ville'),
-        depart_dept:   fd.get('depart_dept'),
-        arrivee_ville: fd.get('arrivee_ville'),
-        arrivee_dept:  fd.get('arrivee_dept'),
         lots:          collectLots(),
+        // Transport & traction
+        depart_ville:  fd.get('depart_ville')  || '',
+        depart_dept:   fd.get('depart_dept')   || '',
+        arrivee_ville: fd.get('arrivee_ville') || '',
+        arrivee_dept:  fd.get('arrivee_dept')  || '',
+        // Traction
+        trac_vehicule:     fd.get('trac_vehicule')     || '',
+        trac_poids:        fd.get('trac_poids')        || '',
+        trac_poids_unite:  fd.get('trac_poids_unite')  || 't',
+        trac_date:         fd.get('trac_date')         || '',
+        // Stockage
+        stock_ville:        fd.get('stock_ville')       || '',
+        stock_dept:         fd.get('stock_dept')        || '',
+        stock_poids:        fd.get('stock_poids')       || '',
+        stock_poids_unite:  fd.get('stock_poids_unite') || 't',
+        stock_duree:        fd.get('stock_duree')       || '',
+        stock_date_entree:  fd.get('stock_date_entree') || '',
+        stock_date_sortie:  fd.get('stock_date_sortie') || '',
+        stock_conditions:   ['froid','dangereux','alcool','bio','racks','securite']
+                              .filter(c => fd.get(`cond_${c}`) === '1'),
+        // Dépotage
+        depot_operation:    fd.get('depot_operation')    || '',
+        depot_nb:           fd.get('depot_nb')           || '',
+        depot_type_cont:    fd.get('depot_type_cont')    || '',
+        depot_date:         fd.get('depot_date')         || '',
+        depot_port:         fd.get('depot_port')         || '',
+        depot_poids:        fd.get('depot_poids')        || '',
+        depot_poids_unite:  fd.get('depot_poids_unite')  || 't',
       };
 
       // Attendre jsPDF
       let tries = 0;
       while (!window.jspdf && tries++ < 20) await new Promise(r => setTimeout(r, 200));
 
-      // Générer le PDF et extraire le base64
+      // Générer PDF en base64
       const pdf = generatePDF(data);
       let pdfBase64 = null;
-      if (pdf) {
-        const dataUri = pdf.output('datauristring');
-        pdfBase64 = dataUri.split(',')[1];
-      }
+      if (pdf) pdfBase64 = pdf.output('datauristring').split(',')[1];
 
-      // Envoyer au serveur PHP
+      // Envoyer au serveur
       label.textContent = 'Envoi des emails…';
       const result = await sendToServer(data, pdfBase64);
 
       if (!result.success) {
-        // Erreur serveur : on repasse en mailto de secours
         btn.disabled = false;
         label.textContent = 'Envoyer ma demande';
         const errMsg = document.getElementById('sendError');
         if (errMsg) {
           errMsg.hidden = false;
-          errMsg.textContent = 'L\'envoi automatique a échoué. Veuillez réessayer ou nous contacter directement.';
+          errMsg.textContent = "L'envoi automatique a échoué. Veuillez réessayer ou nous contacter directement.";
         }
         return;
       }
 
-      // Télécharger le PDF en local
+      // Télécharger le PDF
       if (pdf) pdf.save(`Devis_PR_Logistics_${data.nom.replace(/\s+/g,'_')}.pdf`);
 
       // Afficher la confirmation
       form.style.transition = 'opacity 0.4s';
       form.style.opacity = '0';
-      setTimeout(() => {
-        form.hidden = true;
-        success.hidden = false;
-      }, 380);
+      setTimeout(() => { form.hidden = true; success.hidden = false; }, 380);
     });
 
     form?.addEventListener('input', e => e.target.classList.remove('input--error'));
   });
 </script>
 
+<!-- ═══════════════════════════════════════════════════════════
+     STYLES
+═══════════════════════════════════════════════════════════ -->
 <style>
-  /* HERO */
+  /* ── HERO ─────────────────────────────────────────────────── */
   .devis-hero {
     position: relative;
     background: linear-gradient(135deg, #fff 0%, var(--gris-clair) 100%);
@@ -660,32 +1158,200 @@ const departementsJson = JSON.stringify(departements);
     text-align: center;
     overflow: hidden;
   }
-
   .devis-blob {
     position: absolute;
     border-radius: 50%;
     pointer-events: none;
     filter: blur(80px);
   }
-
-  .devis-blob--1 {
-    width: 400px; height: 400px;
-    top: -150px; right: -80px;
-    background: rgba(227,6,19,0.08);
-  }
-
-  .devis-blob--2 {
-    width: 300px; height: 300px;
-    bottom: -100px; left: -60px;
-    background: rgba(227,6,19,0.06);
-  }
-
+  .devis-blob--1 { width:400px; height:400px; top:-150px; right:-80px; background:rgba(227,6,19,0.08); }
+  .devis-blob--2 { width:300px; height:300px; bottom:-100px; left:-60px; background:rgba(227,6,19,0.06); }
   .devis-hero__inner { position: relative; }
 
-  /* FOND SECTION */
-  .devis-section { background: var(--gris-clair); }
+  /* ── SECTION SERVICES ────────────────────────────────────── */
+  .services-select { background: var(--gris-clair); }
 
-  /* FORMULAIRE */
+  .services-intro { text-align: center; margin-bottom: 3rem; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.4rem;
+  }
+
+  /* ── CARTES DE SERVICE ───────────────────────────────────── */
+  @keyframes card-arrive {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .service-card {
+    position: relative;
+    background: white;
+    border: 1.5px solid #e8e8e8;
+    border-radius: var(--rayon-lg);
+    padding: 2rem 1.6rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    outline: none;
+    animation: card-arrive 0.5s ease both;
+    overflow: hidden;
+  }
+  .service-card:nth-child(1) { animation-delay: 0s; }
+  .service-card:nth-child(2) { animation-delay: 0.08s; }
+  .service-card:nth-child(3) { animation-delay: 0.16s; }
+  .service-card:nth-child(4) { animation-delay: 0.24s; }
+
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.10);
+    border-color: #ddd;
+  }
+  .service-card:focus-visible { box-shadow: 0 0 0 3px rgba(227,6,19,0.25); }
+
+  /* État sélectionné */
+  .service-card.selected {
+    border-color: var(--rouge);
+    border-top-width: 3px;
+    background: rgba(227,6,19,0.02);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(227,6,19,0.12);
+  }
+
+  /* Badge "Sélectionné" */
+  .service-card__selected-badge {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.8rem;
+    display: none;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--rouge);
+    background: rgba(227,6,19,0.08);
+    padding: 0.25rem 0.6rem;
+    border-radius: 2rem;
+  }
+  .service-card.selected .service-card__selected-badge { display: flex; }
+
+  .service-card__icon-wrap {
+    width: 60px; height: 60px;
+    background: var(--gris-clair);
+    border-radius: var(--rayon);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.2rem;
+    transition: background 0.25s;
+  }
+  .service-card.selected .service-card__icon-wrap { background: rgba(227,6,19,0.08); }
+
+  .service-card__icon {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    border-radius: 0 !important;
+  }
+
+  .service-card__body { flex: 1; }
+
+  .service-card__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gris-fonce);
+    margin: 0 0 0.55rem;
+    line-height: 1.3;
+  }
+  .service-card.selected .service-card__title { color: var(--rouge); }
+
+  .service-card__desc {
+    font-size: 0.84rem;
+    color: var(--gris-moyen);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .service-card__footer {
+    margin-top: 1.4rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+  }
+  .service-card.selected .service-card__footer { border-color: rgba(227,6,19,0.12); }
+
+  .service-card__cta {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--gris-moyen);
+    transition: color 0.2s, gap 0.2s;
+  }
+  .service-card:hover .service-card__cta,
+  .service-card.selected .service-card__cta { color: var(--rouge); gap: 0.6rem; }
+
+  /* ── SECTION FORMULAIRE ──────────────────────────────────── */
+  .devis-section {
+    background: var(--gris-clair);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+  .devis-section.form-visible { opacity: 1; transform: translateY(0); }
+
+  /* Barre de navigation */
+  .form-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto 1.8rem;
+    gap: 1rem;
+  }
+
+  .btn-retour {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--gris-moyen);
+    background: white;
+    border: 1.5px solid #e8e8e8;
+    border-radius: 2rem;
+    padding: 0.45rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .btn-retour:hover { border-color: var(--rouge); color: var(--rouge); }
+
+  .form-service-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    background: white;
+    border: 1.5px solid #e8e8e8;
+    border-radius: 2rem;
+    padding: 0.45rem 1rem;
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--gris-fonce);
+  }
+  .form-service-badge__icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    border-radius: 0 !important;
+  }
+
+  /* ── FORMULAIRE ──────────────────────────────────────────── */
   .devis-form {
     max-width: 900px;
     margin: 0 auto;
@@ -694,7 +1360,6 @@ const departementsJson = JSON.stringify(departements);
     gap: 1.6rem;
   }
 
-  /* Blocs */
   .form-bloc {
     background: white;
     border-radius: var(--rayon-lg);
@@ -708,6 +1373,7 @@ const departementsJson = JSON.stringify(departements);
     gap: 0.9rem;
     margin-bottom: 1.8rem;
   }
+  .form-bloc__titre h2 { font-size: 1rem; font-weight: 700; color: var(--gris-fonce); margin: 0; }
 
   .form-step {
     width: 30px; height: 30px;
@@ -722,14 +1388,22 @@ const departementsJson = JSON.stringify(departements);
     flex-shrink: 0;
   }
 
-  .form-bloc__titre h2 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--gris-fonce);
-    margin: 0;
+  /* Bannière info */
+  .info-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 0.75rem;
+    padding: 0.9rem 1.1rem;
+    font-size: 0.88rem;
+    color: #1e40af;
+    line-height: 1.5;
   }
+  .info-banner svg { flex-shrink: 0; margin-top: 0.1rem; }
 
-  /* ADRESSES */
+  /* ── ADRESSES ────────────────────────────────────────────── */
   .adresses-grid {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -747,44 +1421,93 @@ const departementsJson = JSON.stringify(departements);
     border: 1.5px solid transparent;
     transition: border-color 0.2s;
   }
-
-  .adresse-card:focus-within { border-color: rgba(227,6,19,0.2); }
-
+  .adresse-card:focus-within      { border-color: rgba(227,6,19,0.2); }
   .adresse-card--livraison:focus-within { border-color: rgba(27,42,74,0.2); }
 
   .adresse-card__header {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--gris-moyen);
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.78rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--rouge);
     margin-bottom: 0.2rem;
   }
+  .adresse-card__header--neutre { color: var(--gris-moyen); }
 
-  /* Séparateur discret entre les deux cartes adresse */
-  .adresses-sep {
+  .adresses-sep { display:flex; align-items:center; justify-content:center; padding-top:5rem; }
+  .adresses-sep__dot { width:6px; height:6px; border-radius:50%; background:#ddd; }
+
+  /* ── RADIO CARDS (dépotage) ──────────────────────────────── */
+  .radio-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .radio-card {
+    position: relative;
+    cursor: pointer;
+  }
+  .radio-card input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+  .radio-card__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 1.2rem 1rem;
+    border: 1.5px solid #e8e8e8;
+    border-radius: var(--rayon);
+    text-align: center;
+    transition: all 0.2s;
+    background: var(--gris-clair);
+  }
+  .radio-card__content svg { color: var(--gris-moyen); transition: color 0.2s; }
+  .radio-card__content strong { font-size: 0.92rem; font-weight: 700; color: var(--gris-fonce); }
+  .radio-card__content span  { font-size: 0.78rem; color: var(--gris-moyen); }
+
+  .radio-card:has(input:checked) .radio-card__content {
+    border-color: var(--rouge);
+    background: rgba(227,6,19,0.03);
+  }
+  .radio-card:has(input:checked) .radio-card__content svg   { color: var(--rouge); }
+  .radio-card:has(input:checked) .radio-card__content strong { color: var(--rouge); }
+  .radio-card:hover .radio-card__content { border-color: #ccc; }
+
+  /* ── INPUT AVEC UNITÉ ────────────────────────────────────── */
+  .input-with-unit { display: flex; gap: 0.5rem; }
+  .input-unit { width: 80px; flex-shrink: 0; }
+
+  /* ── CHECKBOXES ──────────────────────────────────────────── */
+  .checkboxes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem 2rem;
+    margin-top: 0.6rem;
+  }
+
+  .checkbox-item {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding-top: 5rem;
+    gap: 0.65rem;
+    font-size: 0.9rem;
+    color: var(--gris-fonce);
+    cursor: pointer;
+    user-select: none;
+  }
+  .checkbox-item input[type="checkbox"] {
+    width: 17px; height: 17px;
+    accent-color: var(--rouge);
+    cursor: pointer;
+    flex-shrink: 0;
   }
 
-  .adresses-sep__dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: #ddd;
-  }
-
-  /* LOTS — cartes empilées */
+  /* ── LOTS ────────────────────────────────────────────────── */
   @keyframes lot-in {
-    from { opacity: 0; transform: translateY(-6px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from { opacity:0; transform:translateY(-6px); }
+    to   { opacity:1; transform:translateY(0); }
   }
 
-  /* styles des lots en :global car créés dynamiquement par JS */
   :global(.lot-card) {
     background: var(--gris-clair);
     border-radius: var(--rayon);
@@ -794,240 +1517,148 @@ const departementsJson = JSON.stringify(departements);
     border: 1.5px solid transparent;
     transition: border-color 0.2s;
   }
-
   :global(.lot-card:focus-within) { border-color: rgba(227,6,19,0.15); }
 
   :global(.lot-card__header) {
-    display: flex;
-    align-items: center;
+    display: flex; align-items: center;
     justify-content: space-between;
     margin-bottom: 1rem;
   }
 
   :global(.lot-badge) {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    font-size: 0.75rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
     color: var(--rouge);
   }
 
   :global(.lot-card__fields) {
-    display: grid;
-    gap: 1.2rem;
-    align-items: start;
-    margin-bottom: 1rem;
+    display: grid; gap: 1.2rem;
+    align-items: start; margin-bottom: 1rem;
   }
-
-  :global(.lot-card__fields--row1) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  :global(.lot-card__fields--row2) {
-    grid-template-columns: 1fr 1fr;
-    margin-bottom: 0;
-  }
+  :global(.lot-card__fields--row1) { grid-template-columns: 1fr 1fr; }
+  :global(.lot-card__fields--row2) { grid-template-columns: 1fr 1fr; margin-bottom: 0; }
 
   :global(.btn-remove-lot) {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.78rem;
-    font-weight: 600;
+    display: flex; align-items: center; gap: 0.35rem;
+    font-size: 0.78rem; font-weight: 600;
     padding: 0.3rem 0.75rem;
-    border-radius: 2rem;
-    border: 1.5px solid #ddd;
-    background: white;
-    color: #bbb;
-    cursor: pointer;
-    transition: all 0.2s;
-    flex-shrink: 0;
-    font-family: inherit;
+    border-radius: 2rem; border: 1.5px solid #ddd;
+    background: white; color: #bbb;
+    cursor: pointer; transition: all 0.2s;
+    flex-shrink: 0; font-family: inherit;
   }
-
-  :global(.btn-remove-lot:hover) { background: #fff0f0; border-color: var(--rouge); color: var(--rouge); }
+  :global(.btn-remove-lot:hover) { background:#fff0f0; border-color:var(--rouge); color:var(--rouge); }
 
   .btn-add-lot {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 1rem;
-    padding: 0.6rem 1.2rem;
+    display: flex; align-items: center; gap: 0.5rem;
+    margin-top: 1rem; padding: 0.6rem 1.2rem;
     border: 1.5px dashed #d0d0d0;
-    border-radius: 0.75rem;
-    background: transparent;
-    color: var(--gris-moyen);
-    font-size: 0.88rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: inherit;
+    border-radius: 0.75rem; background: transparent;
+    color: var(--gris-moyen); font-size: 0.88rem;
+    font-weight: 600; cursor: pointer;
+    transition: all 0.2s; font-family: inherit;
   }
+  .btn-add-lot:hover { border-color: var(--rouge); color: var(--rouge); background: rgba(227,6,19,0.03); }
 
-  .btn-add-lot:hover {
-    border-color: var(--rouge);
-    color: var(--rouge);
-    background: rgba(227,6,19,0.03);
-  }
-
-  /* INPUTS */
+  /* ── INPUTS (global pour les lots dynamiques) ────────────── */
   .form-row { display: grid; gap: 1.2rem; }
+  .form-row--2 { grid-template-columns: 1fr 1fr; }
   .form-row--3 { grid-template-columns: 1fr 1fr 1fr; }
 
-  /* form-group/label/input en :global car réutilisés dans les lots créés dynamiquement */
   :global(.form-group) { display: flex; flex-direction: column; gap: 0.45rem; }
 
   :global(.form-label) {
-    font-size: 0.78rem;
-    font-weight: 700;
+    font-size: 0.78rem; font-weight: 700;
     color: var(--gris-fonce);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    display: flex; align-items: center; gap: 0.35rem;
   }
 
-  :global(.label-icon) { width: 13px; height: 13px; color: var(--rouge); flex-shrink: 0; }
-
-  :global(.label-optional) {
-    font-size: 0.7rem;
-    font-weight: 500;
-    color: #bbb;
-    text-transform: none;
-    letter-spacing: 0;
-  }
+  :global(.label-icon)    { width:13px; height:13px; color:var(--rouge); flex-shrink:0; }
+  :global(.label-optional){ font-size:0.7rem; font-weight:500; color:#bbb; text-transform:none; letter-spacing:0; }
 
   :global(.form-input) {
-    width: 100%;
-    padding: 0.7rem 1rem;
-    border: 1.5px solid #e8e8e8;
-    border-radius: 0.7rem;
-    font-size: 0.92rem;
-    color: var(--gris-fonce);
-    background: white;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    font-family: inherit;
-    box-sizing: border-box;
+    width: 100%; padding: 0.7rem 1rem;
+    border: 1.5px solid #e8e8e8; border-radius: 0.7rem;
+    font-size: 0.92rem; color: var(--gris-fonce);
+    background: white; transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: inherit; box-sizing: border-box;
   }
-
   :global(.form-input:focus) {
-    outline: none;
-    border-color: var(--rouge);
+    outline: none; border-color: var(--rouge);
     box-shadow: 0 0 0 3px rgba(227,6,19,0.07);
   }
-
   :global(.form-input::placeholder) { color: #ccc; }
-  :global(.form-input.input--error) { border-color: var(--rouge); box-shadow: 0 0 0 3px rgba(227,6,19,0.1); }
+  :global(.form-input.input--error) { border-color:var(--rouge); box-shadow:0 0 0 3px rgba(227,6,19,0.1); }
+  :global(.input--disabled) { background:#f5f5f7; color:#aaa; cursor:not-allowed; border-color:#ebebeb; }
+  :global(.form-textarea)   { resize:vertical; min-height:80px; }
 
-  :global(.input--disabled) {
-    background: #f5f5f7;
-    color: #aaa;
-    cursor: not-allowed;
-    border-color: #ebebeb;
-  }
-
-  :global(.form-textarea) { resize: vertical; min-height: 80px; }
-
-  /* SELECT */
   :global(.select-wrapper) { position: relative; }
-
   :global(.select-wrapper .form-select) {
-    width: 100%;
-    padding: 0.7rem 2.4rem 0.7rem 1rem;
-    border: 1.5px solid #e8e8e8;
-    border-radius: 0.7rem;
-    font-size: 0.92rem;
-    color: var(--gris-fonce);
-    background: white;
-    appearance: none;
-    cursor: pointer;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    font-family: inherit;
+    width: 100%; padding: 0.7rem 2.4rem 0.7rem 1rem;
+    border: 1.5px solid #e8e8e8; border-radius: 0.7rem;
+    font-size: 0.92rem; color: var(--gris-fonce);
+    background: white; appearance: none; cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s; font-family: inherit;
   }
-
   :global(.select-wrapper .form-select:focus) {
-    outline: none;
-    border-color: var(--rouge);
+    outline: none; border-color: var(--rouge);
     box-shadow: 0 0 0 3px rgba(227,6,19,0.07);
   }
-
   :global(.select-arrow) {
-    position: absolute;
-    right: 0.85rem;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    color: var(--gris-moyen);
+    position: absolute; right: 0.85rem; top: 50%;
+    transform: translateY(-50%); pointer-events: none; color: var(--gris-moyen);
   }
 
-  /* FOOTER */
+  /* ── PIED DE FORMULAIRE ──────────────────────────────────── */
   .form-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    padding: 0 0.2rem;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 1.5rem;
+    flex-wrap: wrap; padding: 0 0.2rem;
+    max-width: 900px; margin: 0 auto;
   }
-
   .form-footer__mention {
-    font-size: 0.8rem;
-    color: #bbb;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
+    font-size: 0.8rem; color: #bbb;
+    display: flex; align-items: center; gap: 0.4rem;
   }
+  .btn--lg { padding: 0.9rem 2rem; font-size: 0.98rem; display: flex; align-items: center; gap: 0.6rem; }
 
-  .btn--lg {
-    padding: 0.9rem 2rem;
-    font-size: 0.98rem;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-
-  /* SUCCÈS */
+  /* ── SUCCÈS ──────────────────────────────────────────────── */
   .form-success {
-    background: white;
-    border-radius: var(--rayon-lg);
-    padding: 4rem 2rem;
-    text-align: center;
+    background: white; border-radius: var(--rayon-lg);
+    padding: 4rem 2rem; text-align: center;
     box-shadow: 0 2px 24px rgba(0,0,0,0.06);
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: 900px; margin: 0 auto;
   }
-
   .form-success__icon {
-    width: 72px; height: 72px;
-    background: #dcfce7;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.2rem;
-    color: #15803d;
+    width:72px; height:72px; background:#dcfce7;
+    border-radius:50%; display:flex; align-items:center;
+    justify-content:center; margin:0 auto 1.2rem; color:#15803d;
+  }
+  .form-success h3 { font-size:1.6rem; font-weight:800; color:var(--gris-fonce); margin-bottom:0.5rem; }
+  .form-success p  { font-size:1rem; color:var(--gris-moyen); line-height:1.7; }
+
+  /* ── RESPONSIVE ──────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .services-grid { grid-template-columns: 1fr 1fr; }
   }
 
-  .form-success h3 { font-size: 1.6rem; font-weight: 800; color: var(--gris-fonce); margin-bottom: 0.5rem; }
-  .form-success p { font-size: 1rem; color: var(--gris-moyen); line-height: 1.7; }
-
-  /* RESPONSIVE */
   @media (max-width: 780px) {
     .adresses-grid { grid-template-columns: 1fr; }
-    .adresses-arrow { flex-direction: row; padding: 0; justify-content: center; }
-    .adresses-arrow__line { width: 24px; height: 1px; }
-    .form-row--3 { grid-template-columns: 1fr 1fr; }
-    .lots-header, .lot-row { grid-template-columns: 24px 1fr 1fr; }
-    .lots-header .lots-col:nth-child(4),
-    .lots-header .lots-col:nth-child(5),
-    .lot-row > :nth-child(4),
-    .lot-row > :nth-child(5) { display: none; }
+    .adresses-sep  { display: none; }
+    .form-row--3   { grid-template-columns: 1fr 1fr; }
+    .form-row--2   { grid-template-columns: 1fr; }
+    .radio-group   { grid-template-columns: 1fr 1fr; }
+    .checkboxes-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 500px) {
-    .form-row--3 { grid-template-columns: 1fr; }
-    .form-footer { flex-direction: column; align-items: stretch; }
-    .btn--lg { justify-content: center; }
+    .services-grid   { grid-template-columns: 1fr; }
+    .form-row--3     { grid-template-columns: 1fr; }
+    .form-footer     { flex-direction: column; align-items: stretch; }
+    .btn--lg         { justify-content: center; }
+    .form-topbar     { flex-direction: column; align-items: stretch; }
+    .input-with-unit { flex-direction: column; }
+    .input-unit      { width: 100%; }
   }
 </style>
