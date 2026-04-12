@@ -264,23 +264,33 @@ const departementsJson = JSON.stringify(departements);
     div.dataset.lotId = id;
     div.innerHTML = `
       <div class="lot-card__header">
-        <div class="lot-num">Lot ${num}</div>
+        <div class="lot-badge">Lot ${num}</div>
         <button type="button" class="btn-remove-lot" title="Supprimer ce lot">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Supprimer
         </button>
       </div>
       <div class="lot-card__fields">
-        <div class="form-group">
-          <label class="form-label" for="pal_${id}">Nombre de palettes</label>
+        <div class="lot-field">
+          <div class="lot-field__label">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="14" width="20" height="3" rx="1"/><rect x="4" y="8" width="16" height="6" rx="1"/></svg>
+            Nombre de palettes
+          </div>
           <input type="number" name="pal_${id}" id="pal_${id}" min="1" max="9999"
             class="form-input" placeholder="Ex : 5" required />
         </div>
-        <div class="form-group">
-          <label class="form-label" for="tai_${id}">Format palette</label>
+        <div class="lot-field">
+          <div class="lot-field__label">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 3v18"/></svg>
+            Taille des palettes
+          </div>
           ${selectHTML(`tai_${id}`, `tai_${id}`)}
         </div>
-        <div class="form-group lot-card__contenu">
-          <label class="form-label" for="con_${id}">Contenu de la marchandise</label>
+        <div class="lot-field lot-field--wide">
+          <div class="lot-field__label">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+            Contenu de la marchandise
+          </div>
           <input type="text" name="con_${id}" id="con_${id}"
             class="form-input" placeholder="Ex : Électronique, textile, produits alimentaires…" required />
         </div>
@@ -307,8 +317,8 @@ const departementsJson = JSON.stringify(departements);
   }
 
   function updateLotNumbers() {
-    document.querySelectorAll('.lot-row .lot-num').forEach((el, i) => {
-      el.textContent = i + 1;
+    document.querySelectorAll('.lot-card .lot-badge').forEach((el, i) => {
+      el.textContent = `Lot ${i + 1}`;
     });
   }
 
@@ -768,8 +778,8 @@ PR Logistics · PLPN 1 – Port 4935, 76700 Rogerville
     margin-bottom: 1rem;
   }
 
-  .lot-num {
-    font-size: 0.78rem;
+  .lot-badge {
+    font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -779,24 +789,47 @@ PR Logistics · PLPN 1 – Port 4935, 76700 Rogerville
   .lot-card__fields {
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
-    gap: 1rem;
+    gap: 1.2rem;
     align-items: start;
   }
 
-  .lot-card__contenu { grid-column: span 1; }
+  .lot-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
 
-  .btn-remove-lot {
-    width: 26px; height: 26px;
-    border-radius: 50%;
-    border: 1.5px solid #ddd;
-    background: white;
+  .lot-field__label {
     display: flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
+    gap: 0.35rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--gris-fonce);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .lot-field__label svg {
+    color: var(--rouge);
+    flex-shrink: 0;
+  }
+
+  .btn-remove-lot {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.3rem 0.75rem;
+    border-radius: 2rem;
+    border: 1.5px solid #ddd;
+    background: white;
     color: #bbb;
+    cursor: pointer;
     transition: all 0.2s;
     flex-shrink: 0;
+    font-family: inherit;
   }
 
   .btn-remove-lot:hover { background: #fff0f0; border-color: var(--rouge); color: var(--rouge); }
