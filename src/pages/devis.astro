@@ -11,7 +11,7 @@ const departements = [
   { code: '15', nom: 'Cantal' }, { code: '16', nom: 'Charente' },
   { code: '17', nom: 'Charente-Maritime' }, { code: '18', nom: 'Cher' },
   { code: '19', nom: 'Corrèze' }, { code: '2A', nom: 'Corse-du-Sud' },
-  { code: '2B', nom: "Haute-Corse" }, { code: '21', nom: "Côte-d'Or" },
+  { code: '2B', nom: 'Haute-Corse' }, { code: '21', nom: "Côte-d'Or" },
   { code: '22', nom: "Côtes-d'Armor" }, { code: '23', nom: 'Creuse' },
   { code: '24', nom: 'Dordogne' }, { code: '25', nom: 'Doubs' }, { code: '26', nom: 'Drôme' },
   { code: '27', nom: 'Eure' }, { code: '28', nom: 'Eure-et-Loir' }, { code: '29', nom: 'Finistère' },
@@ -50,6 +50,8 @@ const departements = [
   { code: '973', nom: 'Guyane' }, { code: '974', nom: 'La Réunion' },
   { code: '976', nom: 'Mayotte' },
 ];
+
+const departementsJson = JSON.stringify(departements);
 ---
 
 <MainLayout title="Demander un devis" description="Demandez un devis personnalisé à PR Logistics pour vos besoins de logistique et transport au Havre.">
@@ -72,217 +74,633 @@ const departements = [
     <div class="container">
       <form class="devis-form reveal" id="devisForm" novalidate>
 
-        <!-- Étape 1 : Adresses -->
+        <!-- ① Adresses -->
         <div class="form-bloc">
           <div class="form-bloc__titre">
             <span class="form-step">1</span>
             <h2>Adresses de transport</h2>
           </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="depart" class="form-label">
-                <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
-                Département de départ
-              </label>
-              <div class="select-wrapper">
-                <select id="depart" name="depart" class="form-select" required>
-                  <option value="" disabled selected>Sélectionnez un département</option>
-                  {departements.map(d => (
-                    <option value={d.code}>{d.code} — {d.nom}</option>
-                  ))}
-                </select>
-                <span class="select-arrow" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-                </span>
+
+          <div class="adresses-grid">
+            <!-- Départ -->
+            <div class="adresse-card">
+              <div class="adresse-card__header">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+                Adresse de départ
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="depart_ville">Ville</label>
+                <input type="text" id="depart_ville" name="depart_ville" class="form-input" placeholder="Le Havre" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="depart_dept">Département</label>
+                <div class="select-wrapper">
+                  <select id="depart_dept" name="depart_dept" class="form-select" required>
+                    <option value="" disabled selected>Sélectionnez</option>
+                    {departements.map(d => <option value={d.code}>{d.code} — {d.nom}</option>)}
+                  </select>
+                  <span class="select-arrow" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Pays</label>
+                <input type="text" value="France" class="form-input input--disabled" disabled />
               </div>
             </div>
 
-            <div class="form-separateur-h" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            <!-- Flèche centrale -->
+            <div class="adresses-arrow" aria-hidden="true">
+              <div class="adresses-arrow__line"></div>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </div>
 
-            <div class="form-group">
-              <label for="arrivee" class="form-label">
-                <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                Département d'arrivée
-              </label>
-              <div class="select-wrapper">
-                <select id="arrivee" name="arrivee" class="form-select" required>
-                  <option value="" disabled selected>Sélectionnez un département</option>
-                  {departements.map(d => (
-                    <option value={d.code}>{d.code} — {d.nom}</option>
-                  ))}
-                </select>
-                <span class="select-arrow" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-                </span>
+            <!-- Livraison -->
+            <div class="adresse-card adresse-card--livraison">
+              <div class="adresse-card__header">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Adresse de livraison
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="arrivee_ville">Ville</label>
+                <input type="text" id="arrivee_ville" name="arrivee_ville" class="form-input" placeholder="Paris" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="arrivee_dept">Département</label>
+                <div class="select-wrapper">
+                  <select id="arrivee_dept" name="arrivee_dept" class="form-select" required>
+                    <option value="" disabled selected>Sélectionnez</option>
+                    {departements.map(d => <option value={d.code}>{d.code} — {d.nom}</option>)}
+                  </select>
+                  <span class="select-arrow" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Pays</label>
+                <input type="text" value="France" class="form-input input--disabled" disabled />
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Étape 2 : Marchandise -->
+        <!-- ② Marchandise -->
         <div class="form-bloc">
           <div class="form-bloc__titre">
             <span class="form-step">2</span>
             <h2>Détails de la marchandise</h2>
           </div>
-          <div class="form-row form-row--3">
-            <div class="form-group">
-              <label for="palettes" class="form-label">
-                <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="14" width="20" height="3" rx="1"/><rect x="4" y="8" width="16" height="6" rx="1"/><line x1="8" y1="14" x2="8" y2="17"/><line x1="16" y1="14" x2="16" y2="17"/></svg>
-                Nombre de palettes
-              </label>
-              <input
-                type="number"
-                id="palettes"
-                name="palettes"
-                class="form-input"
-                min="1"
-                max="9999"
-                placeholder="Ex : 12"
-                required
-              />
-            </div>
 
-            <div class="form-group">
-              <label for="taille" class="form-label">
-                <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 3v18"/></svg>
-                Taille des palettes
-              </label>
-              <div class="select-wrapper">
-                <select id="taille" name="taille" class="form-select" required>
-                  <option value="" disabled selected>Choisissez un format</option>
-                  <option value="120x150">120 × 150 cm (Europe)</option>
-                  <option value="130x150">130 × 150 cm (Industrielle)</option>
-                </select>
-                <span class="select-arrow" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-                </span>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="poids" class="form-label">
-                <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 014 4H8a4 4 0 014-4z"/><path d="M5 8h14l-1.5 12h-11L5 8z"/></svg>
-                Poids total estimé (kg)
-                <span class="label-optional">Optionnel</span>
-              </label>
-              <input
-                type="number"
-                id="poids"
-                name="poids"
-                class="form-input"
-                min="1"
-                placeholder="Ex : 5 000"
-              />
-            </div>
+          <div class="lots-header">
+            <span class="lots-col lots-col--num"></span>
+            <span class="lots-col">Palettes</span>
+            <span class="lots-col">Format</span>
+            <span class="lots-col">Contenu de la marchandise</span>
+            <span class="lots-col lots-col--action"></span>
           </div>
+
+          <div id="lotsContainer"></div>
+
+          <button type="button" id="addLotBtn" class="btn-add-lot">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Ajouter un lot
+          </button>
         </div>
 
-        <!-- Étape 3 : Contact -->
+        <!-- ③ Coordonnées -->
         <div class="form-bloc">
           <div class="form-bloc__titre">
             <span class="form-step">3</span>
             <h2>Vos coordonnées</h2>
           </div>
-          <div class="form-row">
+
+          <div class="form-row form-row--3">
             <div class="form-group">
-              <label for="nom" class="form-label">Nom / Société</label>
+              <label class="form-label" for="nom">
+                <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Nom / Société
+              </label>
               <input type="text" id="nom" name="nom" class="form-input" placeholder="PR Logistics" required />
             </div>
             <div class="form-group">
-              <label for="email" class="form-label">Adresse e-mail</label>
+              <label class="form-label" for="email">
+                <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Adresse e-mail
+              </label>
               <input type="email" id="email" name="email" class="form-input" placeholder="contact@exemple.fr" required />
             </div>
-          </div>
-          <div class="form-row">
             <div class="form-group">
-              <label for="telephone" class="form-label">Téléphone <span class="label-optional">Optionnel</span></label>
+              <label class="form-label" for="telephone">
+                <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                Téléphone <span class="label-optional">Optionnel</span>
+              </label>
               <input type="tel" id="telephone" name="telephone" class="form-input" placeholder="06 00 00 00 00" />
             </div>
-            <div class="form-group">
-              <label for="message" class="form-label">Informations complémentaires <span class="label-optional">Optionnel</span></label>
-              <textarea id="message" name="message" class="form-input form-textarea" placeholder="Marchandises dangereuses, température dirigée, délais particuliers…" rows="3"></textarea>
-            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:1.2rem;">
+            <label class="form-label" for="message">
+              <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              Informations complémentaires <span class="label-optional">Optionnel</span>
+            </label>
+            <textarea id="message" name="message" class="form-input form-textarea" rows="3"
+              placeholder="Marchandises dangereuses, température dirigée, délais particuliers, accès particulier…"></textarea>
           </div>
         </div>
 
-        <!-- Récap + bouton -->
+        <!-- Pied de formulaire -->
         <div class="form-footer">
           <p class="form-footer__mention">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             Vos données sont utilisées uniquement pour traiter votre demande.
           </p>
           <button type="submit" class="btn btn--rouge btn--lg" id="submitBtn">
-            Envoyer ma demande
+            <span id="submitLabel">Envoyer ma demande</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
           </button>
         </div>
 
-        <!-- Message de confirmation -->
-        <div class="form-success" id="formSuccess" aria-live="polite" hidden>
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          <h3>Demande envoyée !</h3>
-          <p>Notre équipe vous contactera sous 24h avec une offre personnalisée.</p>
-        </div>
-
       </form>
+
+      <!-- Confirmation -->
+      <div class="form-success" id="formSuccess" hidden>
+        <div class="form-success__icon">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3>Demande envoyée !</h3>
+        <p>Un récapitulatif PDF a été téléchargé.<br />Notre équipe vous contactera sous 24h.</p>
+        <a href="/" class="btn btn--outline" style="margin-top:1.5rem;">Retour à l'accueil</a>
+      </div>
     </div>
   </section>
 
 </MainLayout>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const form    = document.getElementById('devisForm')    as HTMLFormElement;
-    const success = document.getElementById('formSuccess')  as HTMLElement;
-    const btn     = document.getElementById('submitBtn')    as HTMLButtonElement;
+<script is:inline define:vars={{ departementsJson }}>
+  // ============================================================
+  // CONFIGURATION EMAILJS
+  // 1. Créez un compte gratuit sur https://emailjs.com
+  // 2. Ajoutez un service e-mail (Gmail, Outlook…)
+  // 3. Créez un template avec les variables :
+  //    {{to_email}}, {{subject}}, {{message_html}}, {{reply_to}}
+  // 4. Remplacez les 3 valeurs ci-dessous
+  // ============================================================
+  const EMAILJS_PUBLIC_KEY  = 'VOTRE_CLE_PUBLIQUE';
+  const EMAILJS_SERVICE_ID  = 'VOTRE_SERVICE_ID';
+  const EMAILJS_TEMPLATE_ID = 'VOTRE_TEMPLATE_ID';
+  const EMAILJS_CONFIGURED  = EMAILJS_PUBLIC_KEY !== 'VOTRE_CLE_PUBLIQUE';
 
-    form?.addEventListener('submit', (e: Event) => {
+  const PR_EMAIL = 'lehavre@pr-logistics.fr';
+
+  const DEPARTEMENTS = JSON.parse(departementsJson);
+
+  // ── Gestion des lots ─────────────────────────────────────────
+  let lots   = [];
+  let nextId = 1;
+
+  const FORMATS = [
+    { val: '',        label: 'Format…' },
+    { val: '120x150', label: '120 × 150 cm (Europe)' },
+    { val: '130x150', label: '130 × 150 cm (Industrielle)' },
+  ];
+
+  function selectHTML(name, id) {
+    const opts = FORMATS.map(f =>
+      `<option value="${f.val}"${f.val === '' ? ' disabled selected' : ''}>${f.label}</option>`
+    ).join('');
+    return `<div class="select-wrapper">
+      <select name="${name}" id="${id}" class="form-select" required>
+        ${opts}
+      </select>
+      <span class="select-arrow" aria-hidden="true">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </span>
+    </div>`;
+  }
+
+  function createLotRow(id, num) {
+    const div = document.createElement('div');
+    div.className = 'lot-row';
+    div.dataset.lotId = id;
+    div.innerHTML = `
+      <div class="lot-num">${num}</div>
+      <div class="form-group lot-group">
+        <input type="number" name="pal_${id}" id="pal_${id}" min="1" max="9999"
+          class="form-input" placeholder="Ex : 5" required />
+      </div>
+      <div class="form-group lot-group">
+        ${selectHTML(`tai_${id}`, `tai_${id}`)}
+      </div>
+      <div class="form-group lot-group">
+        <input type="text" name="con_${id}" id="con_${id}"
+          class="form-input" placeholder="Ex : Électronique, textile…" required />
+      </div>
+      <button type="button" class="btn-remove-lot" title="Supprimer ce lot" style="${lots.length === 0 ? 'visibility:hidden;' : ''}">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>`;
+
+    div.querySelector('.btn-remove-lot').addEventListener('click', () => removeLot(id, div));
+    return div;
+  }
+
+  function addLot() {
+    const id  = nextId++;
+    const num = lots.length + 1;
+    lots.push(id);
+    const container = document.getElementById('lotsContainer');
+    container.appendChild(createLotRow(id, num));
+    updateRemoveBtns();
+  }
+
+  function removeLot(id, el) {
+    lots = lots.filter(l => l !== id);
+    el.remove();
+    updateLotNumbers();
+    updateRemoveBtns();
+  }
+
+  function updateLotNumbers() {
+    document.querySelectorAll('.lot-row .lot-num').forEach((el, i) => {
+      el.textContent = i + 1;
+    });
+  }
+
+  function updateRemoveBtns() {
+    const btns = document.querySelectorAll('.btn-remove-lot');
+    btns.forEach(b => { b.style.visibility = btns.length === 1 ? 'hidden' : 'visible'; });
+  }
+
+  function collectLots() {
+    return lots.map(id => ({
+      palettes: document.getElementById(`pal_${id}`)?.value ?? '',
+      taille:   document.querySelector(`[name="tai_${id}"]`)?.value ?? '',
+      contenu:  document.getElementById(`con_${id}`)?.value ?? '',
+    }));
+  }
+
+  // ── Génération PDF ────────────────────────────────────────────
+  function deptLabel(code) {
+    const d = DEPARTEMENTS.find(d => d.code === code);
+    return d ? `${d.code} — ${d.nom}` : code;
+  }
+
+  function generatePDF(data) {
+    const jsPDF = window.jspdf?.jsPDF;
+    if (!jsPDF) return null;
+
+    const doc  = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    const W    = 210;
+    const RED  = [227, 6, 19];
+    const DARK = [29, 29, 31];
+    const MID  = [100, 100, 100];
+    const LITE = [245, 245, 247];
+    const ref  = 'DEV-' + Date.now().toString().slice(-6).toUpperCase();
+    const date = new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
+
+    // ── En-tête rouge
+    doc.setFillColor(...RED);
+    doc.rect(0, 0, W, 40, 'F');
+
+    doc.setTextColor(255, 255, 255);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(22);
+    doc.text('PR Logistics', 18, 18);
+
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Prestataire logistique & transport · Le Havre', 18, 26);
+    doc.text(`Demande de devis · ${date}`, 18, 33);
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.text(ref, W - 18, 24, { align: 'right' });
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Référence', W - 18, 30, { align: 'right' });
+
+    // ── Bloc client
+    let y = 50;
+    doc.setFillColor(...LITE);
+    doc.roundedRect(15, y, W - 30, 22, 3, 3, 'F');
+    doc.setTextColor(...DARK);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8);
+    doc.text('CLIENT', 22, y + 7);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.text(data.nom, 22, y + 14);
+    doc.setTextColor(...MID);
+    doc.setFontSize(9);
+    const contactLine = [data.email, data.telephone].filter(Boolean).join('   ·   ');
+    doc.text(contactLine, 22, y + 20);
+
+    // ── Adresses
+    y += 32;
+    doc.setTextColor(...DARK);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setFillColor(...RED);
+    doc.rect(15, y - 1, 2, 7, 'F');
+    doc.text('TRANSPORT', 20, y + 5);
+
+    y += 12;
+    const colW = (W - 46) / 2;
+
+    // Départ
+    doc.setFillColor(...LITE);
+    doc.roundedRect(15, y, colW, 26, 3, 3, 'F');
+    doc.setTextColor(...RED);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7.5);
+    doc.text('DÉPART', 22, y + 7);
+    doc.setTextColor(...DARK);
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    doc.text(data.depart_ville, 22, y + 14);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(...MID);
+    doc.setFontSize(8.5);
+    doc.text(deptLabel(data.depart_dept), 22, y + 20);
+
+    // Flèche
+    const cx = W / 2;
+    doc.setDrawColor(...RED);
+    doc.setLineWidth(0.6);
+    doc.line(15 + colW + 2, y + 13, cx + 6, y + 13);
+    doc.setFillColor(...RED);
+    doc.triangle(cx + 7, y + 11, cx + 7, y + 15, cx + 11, y + 13, 'F');
+
+    // Arrivée
+    doc.setFillColor(...LITE);
+    doc.roundedRect(W - 15 - colW, y, colW, 26, 3, 3, 'F');
+    doc.setTextColor(...RED);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7.5);
+    doc.text('LIVRAISON', W - 15 - colW + 7, y + 7);
+    doc.setTextColor(...DARK);
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    doc.text(data.arrivee_ville, W - 15 - colW + 7, y + 14);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(...MID);
+    doc.setFontSize(8.5);
+    doc.text(deptLabel(data.arrivee_dept), W - 15 - colW + 7, y + 20);
+
+    // ── Lots
+    y += 36;
+    doc.setTextColor(...DARK);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setFillColor(...RED);
+    doc.rect(15, y - 1, 2, 7, 'F');
+    doc.text('MARCHANDISE', 20, y + 5);
+
+    y += 12;
+    // En-tête tableau
+    doc.setFillColor(...RED);
+    doc.roundedRect(15, y, W - 30, 8, 2, 2, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Lot',        22, y + 5.5);
+    doc.text('Palettes',   42, y + 5.5);
+    doc.text('Format',     75, y + 5.5);
+    doc.text('Contenu',   115, y + 5.5);
+
+    y += 8;
+    let totalPalettes = 0;
+    data.lots.forEach((lot, i) => {
+      const bg = i % 2 === 0 ? [255, 255, 255] : LITE;
+      doc.setFillColor(...bg);
+      doc.rect(15, y, W - 30, 9, 'F');
+      doc.setTextColor(...DARK);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.text(String(i + 1),     22, y + 6);
+      doc.text(lot.palettes,      42, y + 6);
+      doc.text(lot.taille,        75, y + 6);
+      const contenuMax = doc.splitTextToSize(lot.contenu, 75);
+      doc.text(contenuMax[0] + (contenuMax.length > 1 ? '…' : ''), 115, y + 6);
+      totalPalettes += parseInt(lot.palettes) || 0;
+      y += 9;
+    });
+
+    // Total
+    doc.setFillColor(...LITE);
+    doc.rect(15, y, W - 30, 8, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(...RED);
+    doc.text('TOTAL', 22, y + 5.5);
+    doc.setTextColor(...DARK);
+    doc.text(String(totalPalettes) + ' palettes', 42, y + 5.5);
+    y += 16;
+
+    // ── Message
+    if (data.message) {
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(8.5);
+      doc.setTextColor(...MID);
+      doc.text('INFORMATIONS COMPLÉMENTAIRES', 15, y);
+      y += 5;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(...DARK);
+      const lines = doc.splitTextToSize(data.message, W - 30);
+      doc.text(lines, 15, y);
+      y += lines.length * 5 + 8;
+    }
+
+    // ── Pied de page
+    const footerY = 280;
+    doc.setDrawColor(220, 220, 220);
+    doc.setLineWidth(0.4);
+    doc.line(15, footerY, W - 15, footerY);
+    doc.setTextColor(...MID);
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.text('PR Logistics  ·  PLPN 1 – Port 4935, 76700 Rogerville', W / 2, footerY + 5, { align: 'center' });
+    doc.text('02.32.72.48.03  ·  lehavre@pr-logistics.fr', W / 2, footerY + 10, { align: 'center' });
+
+    return doc;
+  }
+
+  // ── Envoi e-mail ──────────────────────────────────────────────
+  function buildHTML(data) {
+    const lotsRows = data.lots.map((l, i) =>
+      `<tr style="background:${i%2===0?'#f8f8f8':'#fff'}">
+        <td style="padding:6px 12px;border-bottom:1px solid #e8e8e8;">${i+1}</td>
+        <td style="padding:6px 12px;border-bottom:1px solid #e8e8e8;">${l.palettes}</td>
+        <td style="padding:6px 12px;border-bottom:1px solid #e8e8e8;">${l.taille}</td>
+        <td style="padding:6px 12px;border-bottom:1px solid #e8e8e8;">${l.contenu}</td>
+      </tr>`
+    ).join('');
+
+    return `<div style="font-family:sans-serif;max-width:600px;margin:0 auto;">
+      <div style="background:#e30613;padding:24px 28px;border-radius:8px 8px 0 0;">
+        <h1 style="color:#fff;margin:0;font-size:22px;">PR Logistics</h1>
+        <p style="color:rgba(255,255,255,0.85);margin:4px 0 0;font-size:12px;">Demande de devis reçue</p>
+      </div>
+      <div style="background:#fff;padding:24px 28px;border:1px solid #e8e8e8;border-top:none;">
+        <h2 style="font-size:16px;color:#1d1d1f;margin:0 0 16px;">Client</h2>
+        <p style="margin:0;color:#555;">${data.nom} &nbsp;·&nbsp; ${data.email}${data.telephone ? ' &nbsp;·&nbsp; ' + data.telephone : ''}</p>
+        <hr style="border:none;border-top:1px solid #eee;margin:20px 0;" />
+        <h2 style="font-size:16px;color:#1d1d1f;margin:0 0 12px;">Transport</h2>
+        <table style="width:100%;border-collapse:collapse;">
+          <tr>
+            <td style="padding:8px 12px;background:#f8f8f8;border-radius:6px;width:48%;">
+              <div style="font-size:10px;font-weight:700;color:#e30613;text-transform:uppercase;margin-bottom:4px;">Départ</div>
+              <div style="font-weight:700;">${data.depart_ville}</div>
+              <div style="font-size:12px;color:#888;">${deptLabel(data.depart_dept)}</div>
+            </td>
+            <td style="text-align:center;color:#e30613;font-size:20px;">→</td>
+            <td style="padding:8px 12px;background:#f8f8f8;border-radius:6px;width:48%;">
+              <div style="font-size:10px;font-weight:700;color:#e30613;text-transform:uppercase;margin-bottom:4px;">Livraison</div>
+              <div style="font-weight:700;">${data.arrivee_ville}</div>
+              <div style="font-size:12px;color:#888;">${deptLabel(data.arrivee_dept)}</div>
+            </td>
+          </tr>
+        </table>
+        <hr style="border:none;border-top:1px solid #eee;margin:20px 0;" />
+        <h2 style="font-size:16px;color:#1d1d1f;margin:0 0 12px;">Marchandise</h2>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+          <thead><tr style="background:#e30613;color:#fff;">
+            <th style="padding:7px 12px;text-align:left;">Lot</th>
+            <th style="padding:7px 12px;text-align:left;">Palettes</th>
+            <th style="padding:7px 12px;text-align:left;">Format</th>
+            <th style="padding:7px 12px;text-align:left;">Contenu</th>
+          </tr></thead>
+          <tbody>${lotsRows}</tbody>
+        </table>
+        ${data.message ? `<hr style="border:none;border-top:1px solid #eee;margin:20px 0;" /><h2 style="font-size:14px;color:#1d1d1f;margin:0 0 8px;">Informations complémentaires</h2><p style="color:#555;font-size:13px;">${data.message}</p>` : ''}
+      </div>
+      <div style="background:#f5f5f7;padding:14px 28px;text-align:center;border-radius:0 0 8px 8px;font-size:11px;color:#888;">
+        PR Logistics · PLPN 1 – Port 4935, 76700 Rogerville · 02.32.72.48.03
+      </div>
+    </div>`;
+  }
+
+  async function sendEmails(data, pdfBase64) {
+    if (!EMAILJS_CONFIGURED) return false;
+
+    const html = buildHTML(data);
+    const totalPal = data.lots.reduce((s, l) => s + (parseInt(l.palettes) || 0), 0);
+    const subject  = `Demande de devis — ${data.nom} — ${totalPal} palette(s) — ${data.depart_ville} → ${data.arrivee_ville}`;
+
+    // Mail vers PR Logistics
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email:     PR_EMAIL,
+      reply_to:     data.email,
+      subject:      subject,
+      message_html: html,
+    });
+
+    // Mail de confirmation vers le client (même template)
+    const confirmHtml = html.replace('Demande de devis reçue', 'Votre demande a bien été reçue')
+      .replace('<p style="color:rgba(255,255,255,0.85)', '<p style="color:rgba(255,255,255,0.85)">Nous vous répondrons sous 24h.</p><p style="color:rgba(255,255,255,0.85)');
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email:     data.email,
+      reply_to:     PR_EMAIL,
+      subject:      `Confirmation de votre demande de devis – PR Logistics`,
+      message_html: confirmHtml,
+    });
+
+    return true;
+  }
+
+  // ── Initialisation ────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', async () => {
+    // Charger jsPDF
+    const jsPDFScript = document.createElement('script');
+    jsPDFScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    document.head.appendChild(jsPDFScript);
+
+    // Charger EmailJS si configuré
+    if (EMAILJS_CONFIGURED) {
+      const ejsScript = document.createElement('script');
+      ejsScript.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+      ejsScript.onload = () => emailjs.init(EMAILJS_PUBLIC_KEY);
+      document.head.appendChild(ejsScript);
+    }
+
+    // Premier lot
+    addLot();
+    document.getElementById('addLotBtn')?.addEventListener('click', addLot);
+
+    // Soumission
+    const form    = document.getElementById('devisForm');
+    const success = document.getElementById('formSuccess');
+    const btn     = document.getElementById('submitBtn');
+    const label   = document.getElementById('submitLabel');
+
+    form?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      if (!form.checkValidity()) {
-        form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(
-          'input[required], select[required]'
-        ).forEach(el => {
-          if (!el.validity.valid) el.classList.add('input--error');
-        });
+
+      // Validation native
+      const invalids = form.querySelectorAll(':invalid');
+      if (invalids.length) {
+        invalids.forEach(el => el.classList.add('input--error'));
+        invalids[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
         return;
       }
 
-      const data  = new FormData(form);
-      const depart   = (document.getElementById('depart')    as HTMLSelectElement).options[(document.getElementById('depart') as HTMLSelectElement).selectedIndex]?.text ?? data.get('depart');
-      const arrivee  = (document.getElementById('arrivee')   as HTMLSelectElement).options[(document.getElementById('arrivee') as HTMLSelectElement).selectedIndex]?.text ?? data.get('arrivee');
-      const palettes = data.get('palettes');
-      const taille   = data.get('taille');
-      const poids    = data.get('poids') ? ` — Poids estimé : ${data.get('poids')} kg` : '';
-      const nom      = data.get('nom');
-      const email    = data.get('email');
-      const tel      = data.get('telephone') ? ` — Tél : ${data.get('telephone')}` : '';
-      const msg      = data.get('message')   ? `\n\nInformations complémentaires :\n${data.get('message')}` : '';
+      // Bouton en chargement
+      btn.disabled = true;
+      label.textContent = 'Génération en cours…';
 
-      const sujet = `Demande de devis via le site — ${palettes} palettes ${depart} → ${arrivee}`;
-      const corps = `Demande de devis PR Logistics\n\nExpéditeur : ${nom} (${email})${tel}\n\nDétails du transport :\n• Départ : ${depart}\n• Arrivée : ${arrivee}\n• Nombre de palettes : ${palettes}\n• Format palette : ${taille}${poids}${msg}`;
+      const fd = new FormData(form);
+      const data = {
+        nom:          fd.get('nom'),
+        email:        fd.get('email'),
+        telephone:    fd.get('telephone'),
+        message:      fd.get('message'),
+        depart_ville: fd.get('depart_ville'),
+        depart_dept:  fd.get('depart_dept'),
+        arrivee_ville:fd.get('arrivee_ville'),
+        arrivee_dept: fd.get('arrivee_dept'),
+        lots:         collectLots(),
+      };
 
-      const mailto = `mailto:lehavre@pr-logistics.fr?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`;
-      window.location.href = mailto;
+      // Attendre que jsPDF soit prêt
+      let tries = 0;
+      while (!window.jspdf && tries++ < 20) await new Promise(r => setTimeout(r, 200));
 
-      /* Affiche la confirmation après un court délai */
+      // Générer et télécharger le PDF
+      const pdf = generatePDF(data);
+      let pdfBase64 = null;
+      if (pdf) {
+        pdf.save(`Devis_PR_Logistics_${data.nom.replace(/\s+/g,'_')}.pdf`);
+        pdfBase64 = pdf.output('datauristring');
+      }
+
+      // Envoyer les e-mails
+      label.textContent = 'Envoi en cours…';
+      const sent = await sendEmails(data, pdfBase64).catch(() => false);
+
+      // Fallback mailto si EmailJS non configuré
+      if (!EMAILJS_CONFIGURED) {
+        const totalPal = data.lots.reduce((s, l) => s + (parseInt(l.palettes)||0), 0);
+        const lotsText = data.lots.map((l, i) =>
+          `Lot ${i+1}: ${l.palettes} palette(s) ${l.taille} — ${l.contenu}`
+        ).join('\n');
+        const corps = `Demande de devis\n\nClient : ${data.nom} (${data.email})${data.telephone ? ' — Tél : '+data.telephone : ''}\n\nDépart : ${data.depart_ville} (${data.depart_dept})\nLivraison : ${data.arrivee_ville} (${data.arrivee_dept})\n\nMarchandise :\n${lotsText}\nTotal : ${totalPal} palettes${data.message ? '\n\nNotes : '+data.message : ''}`;
+        window.open(`mailto:${PR_EMAIL}?subject=${encodeURIComponent('Demande de devis — '+data.nom)}&body=${encodeURIComponent(corps)}`, '_blank');
+      }
+
+      // Afficher la confirmation
       setTimeout(() => {
+        form.style.transition = 'opacity 0.4s';
         form.style.opacity = '0';
-        form.style.transform = 'translateY(-10px)';
-        form.style.transition = 'opacity 0.4s, transform 0.4s';
         setTimeout(() => {
           form.hidden = true;
           success.hidden = false;
-        }, 400);
-      }, 600);
+        }, 380);
+      }, 400);
     });
 
-    /* Enlève la classe erreur dès que l'utilisateur corrige */
-    form?.addEventListener('input', (e: Event) => {
-      (e.target as HTMLElement).classList.remove('input--error');
-    });
+    form?.addEventListener('input', e => e.target.classList.remove('input--error'));
   });
 </script>
 
@@ -310,28 +728,26 @@ const departements = [
   }
 
   .devis-blob--2 {
-    width: 320px; height: 320px;
-    bottom: -120px; left: -60px;
+    width: 300px; height: 300px;
+    bottom: -100px; left: -60px;
     background: rgba(227,6,19,0.06);
   }
 
   .devis-hero__inner { position: relative; }
 
-  /* SECTION */
-  .devis-section {
-    background: var(--gris-clair);
-  }
+  /* FOND SECTION */
+  .devis-section { background: var(--gris-clair); }
 
   /* FORMULAIRE */
   .devis-form {
-    max-width: 860px;
+    max-width: 900px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 1.8rem;
+    gap: 1.6rem;
   }
 
-  /* Blocs numérotés */
+  /* Blocs */
   .form-bloc {
     background: white;
     border-radius: var(--rayon-lg);
@@ -343,16 +759,15 @@ const departements = [
     display: flex;
     align-items: center;
     gap: 0.9rem;
-    margin-bottom: 1.6rem;
+    margin-bottom: 1.8rem;
   }
 
   .form-step {
-    width: 32px;
-    height: 32px;
+    width: 30px; height: 30px;
     border-radius: 50%;
     background: var(--rouge);
     color: white;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 800;
     display: flex;
     align-items: center;
@@ -361,111 +776,221 @@ const departements = [
   }
 
   .form-bloc__titre h2 {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--gris-fonce);
     margin: 0;
   }
 
-  /* Rangées */
-  .form-row {
+  /* ADRESSES */
+  .adresses-grid {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     gap: 1.2rem;
-    align-items: end;
+    align-items: start;
   }
 
-  .form-row--3 {
-    grid-template-columns: 1fr 1fr 1fr;
+  .adresse-card {
+    background: var(--gris-clair);
+    border-radius: var(--rayon);
+    padding: 1.4rem 1.4rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    border: 1.5px solid transparent;
+    transition: border-color 0.2s;
   }
 
-  /* Flèche séparatrice */
-  .form-separateur-h {
+  .adresse-card:focus-within { border-color: rgba(227,6,19,0.2); }
+
+  .adresse-card--livraison:focus-within { border-color: rgba(27,42,74,0.2); }
+
+  .adresse-card__header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--rouge);
+    margin-bottom: 0.2rem;
+  }
+
+  .adresse-card--livraison .adresse-card__header { color: var(--bleu-marine); }
+
+  .adresses-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5rem;
+    color: var(--rouge);
+    opacity: 0.5;
+    gap: 0.3rem;
+  }
+
+  .adresses-arrow__line {
+    width: 1px;
+    height: 16px;
+    background: currentColor;
+    opacity: 0.4;
+  }
+
+  /* LOTS */
+  .lots-header {
+    display: grid;
+    grid-template-columns: 28px 1fr 1.4fr 2fr 32px;
+    gap: 0.8rem;
+    padding: 0 0 0.5rem;
+    border-bottom: 1.5px solid #f0f0f0;
+    margin-bottom: 0.6rem;
+  }
+
+  .lots-col {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--gris-moyen);
+  }
+
+  .lot-row {
+    display: grid;
+    grid-template-columns: 28px 1fr 1.4fr 2fr 32px;
+    gap: 0.8rem;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f5f5f5;
+    animation: lot-in 0.25s ease-out;
+  }
+
+  @keyframes lot-in {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .lot-num {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--gris-clair);
+    color: var(--gris-moyen);
+    font-size: 0.78rem;
+    font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 0.65rem;
-    color: var(--rouge);
-    opacity: 0.6;
+    flex-shrink: 0;
   }
 
-  /* Groupes */
-  .form-group {
+  .lot-group { margin: 0; }
+
+  .btn-remove-lot {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid #e8e8e8;
+    background: white;
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #bbb;
+    transition: all 0.2s;
+    flex-shrink: 0;
   }
+
+  .btn-remove-lot:hover { background: #fff0f0; border-color: var(--rouge); color: var(--rouge); }
+
+  .btn-add-lot {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    border: 1.5px dashed #d0d0d0;
+    border-radius: 0.75rem;
+    background: transparent;
+    color: var(--gris-moyen);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+
+  .btn-add-lot:hover {
+    border-color: var(--rouge);
+    color: var(--rouge);
+    background: rgba(227,6,19,0.03);
+  }
+
+  /* INPUTS */
+  .form-row { display: grid; gap: 1.2rem; }
+  .form-row--3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.45rem; }
 
   .form-label {
-    font-size: 0.82rem;
-    font-weight: 600;
+    font-size: 0.78rem;
+    font-weight: 700;
     color: var(--gris-fonce);
     text-transform: uppercase;
     letter-spacing: 0.06em;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.35rem;
   }
 
-  .label-icon {
-    width: 14px;
-    height: 14px;
-    color: var(--rouge);
-    flex-shrink: 0;
-  }
+  .label-icon { width: 13px; height: 13px; color: var(--rouge); flex-shrink: 0; }
 
   .label-optional {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 500;
-    color: #aaa;
+    color: #bbb;
     text-transform: none;
     letter-spacing: 0;
-    margin-left: 0.3rem;
   }
 
-  /* Inputs */
   .form-input {
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: 0.7rem 1rem;
     border: 1.5px solid #e8e8e8;
-    border-radius: 0.75rem;
-    font-size: 0.95rem;
+    border-radius: 0.7rem;
+    font-size: 0.92rem;
     color: var(--gris-fonce);
     background: white;
     transition: border-color 0.2s, box-shadow 0.2s;
     font-family: inherit;
-    appearance: none;
+    box-sizing: border-box;
   }
 
   .form-input:focus {
     outline: none;
     border-color: var(--rouge);
-    box-shadow: 0 0 0 3px rgba(227,6,19,0.08);
+    box-shadow: 0 0 0 3px rgba(227,6,19,0.07);
   }
 
-  .form-input::placeholder { color: #bbb; }
+  .form-input::placeholder { color: #ccc; }
+  .form-input.input--error { border-color: var(--rouge); box-shadow: 0 0 0 3px rgba(227,6,19,0.1); }
 
-  .form-textarea {
-    resize: vertical;
-    min-height: 80px;
+  .input--disabled {
+    background: #f5f5f7;
+    color: #aaa;
+    cursor: not-allowed;
+    border-color: #ebebeb;
   }
 
-  .form-input.input--error {
-    border-color: #e30613;
-    box-shadow: 0 0 0 3px rgba(227,6,19,0.1);
-  }
+  .form-textarea { resize: vertical; min-height: 80px; }
 
-  /* Select custom */
-  .select-wrapper {
-    position: relative;
-  }
+  /* SELECT */
+  .select-wrapper { position: relative; }
 
   .select-wrapper .form-select {
     width: 100%;
-    padding: 0.75rem 2.5rem 0.75rem 1rem;
+    padding: 0.7rem 2.4rem 0.7rem 1rem;
     border: 1.5px solid #e8e8e8;
-    border-radius: 0.75rem;
-    font-size: 0.95rem;
+    border-radius: 0.7rem;
+    font-size: 0.92rem;
     color: var(--gris-fonce);
     background: white;
     appearance: none;
@@ -477,19 +1002,19 @@ const departements = [
   .select-wrapper .form-select:focus {
     outline: none;
     border-color: var(--rouge);
-    box-shadow: 0 0 0 3px rgba(227,6,19,0.08);
+    box-shadow: 0 0 0 3px rgba(227,6,19,0.07);
   }
 
   .select-arrow {
     position: absolute;
-    right: 0.9rem;
+    right: 0.85rem;
     top: 50%;
     transform: translateY(-50%);
     pointer-events: none;
     color: var(--gris-moyen);
   }
 
-  /* Footer du formulaire */
+  /* FOOTER */
   .form-footer {
     display: flex;
     align-items: center;
@@ -500,8 +1025,8 @@ const departements = [
   }
 
   .form-footer__mention {
-    font-size: 0.82rem;
-    color: #aaa;
+    font-size: 0.8rem;
+    color: #bbb;
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -509,54 +1034,53 @@ const departements = [
 
   .btn--lg {
     padding: 0.9rem 2rem;
-    font-size: 1rem;
+    font-size: 0.98rem;
     display: flex;
     align-items: center;
     gap: 0.6rem;
   }
 
-  /* Confirmation */
+  /* SUCCÈS */
   .form-success {
     background: white;
     border-radius: var(--rayon-lg);
     padding: 4rem 2rem;
     text-align: center;
     box-shadow: 0 2px 24px rgba(0,0,0,0.06);
-    max-width: 860px;
+    max-width: 900px;
     margin: 0 auto;
   }
 
-  .form-success svg {
+  .form-success__icon {
+    width: 72px; height: 72px;
+    background: #dcfce7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.2rem;
     color: #15803d;
-    margin-bottom: 1rem;
   }
 
-  .form-success h3 {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--gris-fonce);
-    margin-bottom: 0.6rem;
+  .form-success h3 { font-size: 1.6rem; font-weight: 800; color: var(--gris-fonce); margin-bottom: 0.5rem; }
+  .form-success p { font-size: 1rem; color: var(--gris-moyen); line-height: 1.7; }
+
+  /* RESPONSIVE */
+  @media (max-width: 780px) {
+    .adresses-grid { grid-template-columns: 1fr; }
+    .adresses-arrow { flex-direction: row; padding: 0; justify-content: center; }
+    .adresses-arrow__line { width: 24px; height: 1px; }
+    .form-row--3 { grid-template-columns: 1fr 1fr; }
+    .lots-header, .lot-row { grid-template-columns: 24px 1fr 1fr; }
+    .lots-header .lots-col:nth-child(4),
+    .lots-header .lots-col:nth-child(5),
+    .lot-row > :nth-child(4),
+    .lot-row > :nth-child(5) { display: none; }
   }
 
-  .form-success p {
-    font-size: 1rem;
-    color: var(--gris-moyen);
-  }
-
-  /* Responsive */
-  @media (max-width: 700px) {
-    .form-row {
-      grid-template-columns: 1fr;
-    }
-    .form-row--3 {
-      grid-template-columns: 1fr;
-    }
-    .form-separateur-h { display: none; }
-    .form-footer {
-      flex-direction: column;
-      align-items: stretch;
-      text-align: center;
-    }
+  @media (max-width: 500px) {
+    .form-row--3 { grid-template-columns: 1fr; }
+    .form-footer { flex-direction: column; align-items: stretch; }
     .btn--lg { justify-content: center; }
   }
 </style>
