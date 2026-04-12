@@ -1,0 +1,41 @@
+name: Build & Deploy sur Hostinger
+
+on:
+  push:
+    branches:
+      - main   # se déclenche à chaque push sur main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Récupérer le code
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Installer Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # 3. Installer les dépendances
+      - name: Installer les dépendances
+        run: npm ci
+
+      # 4. Builder le site Astro → génère le dossier dist/
+      - name: Build Astro
+        run: npm run build
+
+      # 5. Déployer dist/ vers public_html/ via FTP
+      - name: Déployer sur Hostinger via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server:          ${{ secrets.FTP_SERVER }}
+          username:        ${{ secrets.FTP_USERNAME }}
+          password:        ${{ secrets.FTP_PASSWORD }}
+          local-dir:       ./dist/
+          server-dir:      /public_html/
+          dangerous-clean-slate: false   # ne supprime pas les fichiers existants non liés
