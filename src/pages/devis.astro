@@ -258,6 +258,30 @@ const departementsJson = JSON.stringify(departements);
     </div>`;
   }
 
+  const TYPES_MARCHANDISE = [
+    { val: '',           label: 'Type de marchandise…' },
+    { val: 'standard',  label: 'Marchandise standard' },
+    { val: 'froid',     label: 'Température dirigée (froid)' },
+    { val: 'dangereux', label: 'Marchandise dangereuse' },
+    { val: 'alcool',    label: 'Alcool' },
+    { val: 'bio',       label: 'Produits biologiques' },
+    { val: 'autre',     label: 'Autre' },
+  ];
+
+  function typeSelectHTML(name, id) {
+    const opts = TYPES_MARCHANDISE.map(t =>
+      `<option value="${t.val}"${t.val === '' ? ' disabled selected' : ''}>${t.label}</option>`
+    ).join('');
+    return `<div class="select-wrapper">
+      <select name="${name}" id="${id}" class="form-select" required>
+        ${opts}
+      </select>
+      <span class="select-arrow" aria-hidden="true">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </span>
+    </div>`;
+  }
+
   function createLotRow(id, num) {
     const div = document.createElement('div');
     div.className = 'lot-card';
@@ -270,27 +294,24 @@ const departementsJson = JSON.stringify(departements);
           Supprimer
         </button>
       </div>
-      <div class="lot-card__fields">
-        <div class="lot-field">
-          <div class="lot-field__label">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="14" width="20" height="3" rx="1"/><rect x="4" y="8" width="16" height="6" rx="1"/></svg>
-            Nombre de palettes
-          </div>
+      <div class="lot-card__fields lot-card__fields--row1">
+        <div class="form-group">
+          <label class="form-label" for="pal_${id}">Nombre de palettes</label>
           <input type="number" name="pal_${id}" id="pal_${id}" min="1" max="9999"
             class="form-input" placeholder="Ex : 5" required />
         </div>
-        <div class="lot-field">
-          <div class="lot-field__label">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 3v18"/></svg>
-            Taille des palettes
-          </div>
+        <div class="form-group">
+          <label class="form-label" for="tai_${id}">Taille des palettes</label>
           ${selectHTML(`tai_${id}`, `tai_${id}`)}
         </div>
-        <div class="lot-field lot-field--wide">
-          <div class="lot-field__label">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
-            Contenu de la marchandise
-          </div>
+      </div>
+      <div class="lot-card__fields lot-card__fields--row2">
+        <div class="form-group">
+          <label class="form-label" for="typ_${id}">Type de marchandise</label>
+          ${typeSelectHTML(`typ_${id}`, `typ_${id}`)}
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="con_${id}">Contenu de la marchandise</label>
           <input type="text" name="con_${id}" id="con_${id}"
             class="form-input" placeholder="Ex : Électronique, textile, produits alimentaires…" required />
         </div>
@@ -331,6 +352,7 @@ const departementsJson = JSON.stringify(departements);
     return lots.map(id => ({
       palettes: document.getElementById(`pal_${id}`)?.value ?? '',
       taille:   document.querySelector(`[name="tai_${id}"]`)?.value ?? '',
+      type:     document.querySelector(`[name="typ_${id}"]`)?.value ?? '',
       contenu:  document.getElementById(`con_${id}`)?.value ?? '',
     }));
   }
@@ -461,8 +483,9 @@ const departementsJson = JSON.stringify(departements);
     doc.setFont('helvetica', 'bold');
     doc.text('Lot',        22, y + 5.5);
     doc.text('Palettes',   42, y + 5.5);
-    doc.text('Format',     75, y + 5.5);
-    doc.text('Contenu',   115, y + 5.5);
+    doc.text('Format',     72, y + 5.5);
+    doc.text('Type',      105, y + 5.5);
+    doc.text('Contenu',   145, y + 5.5);
 
     y += 8;
     let totalPalettes = 0;
@@ -475,9 +498,10 @@ const departementsJson = JSON.stringify(departements);
       doc.setFontSize(9);
       doc.text(String(i + 1),     22, y + 6);
       doc.text(lot.palettes,      42, y + 6);
-      doc.text(lot.taille,        75, y + 6);
-      const contenuMax = doc.splitTextToSize(lot.contenu, 75);
-      doc.text(contenuMax[0] + (contenuMax.length > 1 ? '…' : ''), 115, y + 6);
+      doc.text(lot.taille,        72, y + 6);
+      doc.text(lot.type,         105, y + 6);
+      const contenuMax = doc.splitTextToSize(lot.contenu, 45);
+      doc.text(contenuMax[0] + (contenuMax.length > 1 ? '…' : ''), 145, y + 6);
       totalPalettes += parseInt(lot.palettes) || 0;
       y += 9;
     });
@@ -789,31 +813,18 @@ PR Logistics · PLPN 1 – Port 4935, 76700 Rogerville
 
   :global(.lot-card__fields) {
     display: grid;
-    grid-template-columns: 1fr 1fr 2fr;
     gap: 1.2rem;
     align-items: start;
+    margin-bottom: 1rem;
   }
 
-  :global(.lot-field) {
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
+  :global(.lot-card__fields--row1) {
+    grid-template-columns: 1fr 1fr;
   }
 
-  :global(.lot-field__label) {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--gris-fonce);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-
-  :global(.lot-field__label svg) {
-    color: var(--rouge);
-    flex-shrink: 0;
+  :global(.lot-card__fields--row2) {
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 0;
   }
 
   :global(.btn-remove-lot) {
@@ -862,9 +873,10 @@ PR Logistics · PLPN 1 – Port 4935, 76700 Rogerville
   .form-row { display: grid; gap: 1.2rem; }
   .form-row--3 { grid-template-columns: 1fr 1fr 1fr; }
 
-  .form-group { display: flex; flex-direction: column; gap: 0.45rem; }
+  /* form-group/label/input en :global car réutilisés dans les lots créés dynamiquement */
+  :global(.form-group) { display: flex; flex-direction: column; gap: 0.45rem; }
 
-  .form-label {
+  :global(.form-label) {
     font-size: 0.78rem;
     font-weight: 700;
     color: var(--gris-fonce);
@@ -875,9 +887,9 @@ PR Logistics · PLPN 1 – Port 4935, 76700 Rogerville
     gap: 0.35rem;
   }
 
-  .label-icon { width: 13px; height: 13px; color: var(--rouge); flex-shrink: 0; }
+  :global(.label-icon) { width: 13px; height: 13px; color: var(--rouge); flex-shrink: 0; }
 
-  .label-optional {
+  :global(.label-optional) {
     font-size: 0.7rem;
     font-weight: 500;
     color: #bbb;
@@ -885,7 +897,7 @@ PR Logistics · PLPN 1 – Port 4935, 76700 Rogerville
     letter-spacing: 0;
   }
 
-  .form-input {
+  :global(.form-input) {
     width: 100%;
     padding: 0.7rem 1rem;
     border: 1.5px solid #e8e8e8;
@@ -898,28 +910,28 @@ PR Logistics · PLPN 1 – Port 4935, 76700 Rogerville
     box-sizing: border-box;
   }
 
-  .form-input:focus {
+  :global(.form-input:focus) {
     outline: none;
     border-color: var(--rouge);
     box-shadow: 0 0 0 3px rgba(227,6,19,0.07);
   }
 
-  .form-input::placeholder { color: #ccc; }
-  .form-input.input--error { border-color: var(--rouge); box-shadow: 0 0 0 3px rgba(227,6,19,0.1); }
+  :global(.form-input::placeholder) { color: #ccc; }
+  :global(.form-input.input--error) { border-color: var(--rouge); box-shadow: 0 0 0 3px rgba(227,6,19,0.1); }
 
-  .input--disabled {
+  :global(.input--disabled) {
     background: #f5f5f7;
     color: #aaa;
     cursor: not-allowed;
     border-color: #ebebeb;
   }
 
-  .form-textarea { resize: vertical; min-height: 80px; }
+  :global(.form-textarea) { resize: vertical; min-height: 80px; }
 
   /* SELECT */
-  .select-wrapper { position: relative; }
+  :global(.select-wrapper) { position: relative; }
 
-  .select-wrapper .form-select {
+  :global(.select-wrapper .form-select) {
     width: 100%;
     padding: 0.7rem 2.4rem 0.7rem 1rem;
     border: 1.5px solid #e8e8e8;
@@ -933,13 +945,13 @@ PR Logistics · PLPN 1 – Port 4935, 76700 Rogerville
     font-family: inherit;
   }
 
-  .select-wrapper .form-select:focus {
+  :global(.select-wrapper .form-select:focus) {
     outline: none;
     border-color: var(--rouge);
     box-shadow: 0 0 0 3px rgba(227,6,19,0.07);
   }
 
-  .select-arrow {
+  :global(.select-arrow) {
     position: absolute;
     right: 0.85rem;
     top: 50%;
