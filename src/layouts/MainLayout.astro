@@ -89,6 +89,152 @@ const jsonLd = {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- i18n — traductions FR / EN -->
+    <script is:inline>
+      (function () {
+        var T = {
+          fr: {
+            'nav.home':'Accueil','nav.devis':'Obtenir un Devis','nav.about':'Qui sommes-nous','nav.contact':'Nous Contacter',
+            'footer.tagline':'Votre prestataire logistique et transport au Havre.','footer.nav.title':'Navigation','footer.nav.home':'Accueil','footer.nav.devis':'Demander un devis','footer.nav.contact':'Nous contacter','footer.contact.title':'Contact','footer.rights':'Tous droits réservés.',
+            'hero.eyebrow':'Depuis 2017 · Le Havre','hero.title':'Votre partenaire <span>logistique</span><br>au cœur du port du Havre','hero.desc':'PR Logistics est un prestataire indépendant spécialisé dans la <span class="hero__desc-rouge">logistique portuaire</span> et le <span class="hero__desc-rouge">transport</span>. Entrepôt sous douane de <span class="hero__desc-rouge">8\u202f000\u00a0m²</span>, solutions sur mesure, réactivité garantie.','hero.cta.contact':'Nous contacter','hero.cta.devis':'Demander un devis',
+            'prestations.eyebrow':'Ce que nous faisons','prestations.title':'Nos <span>prestations</span>','prestations.subtitle':'Une gamme complète de services logistiques adaptée aux exigences du commerce international.',
+            'prestation.depotage.titre':'Dépotage & Empotage','prestation.depotage.desc':'Déchargement et chargement de conteneurs et de camions avec rigueur et réactivité.',
+            'prestation.crossdocking.titre':'Cross Docking','prestation.crossdocking.desc':'Transfert direct de marchandises sans stockage intermédiaire pour optimiser vos flux.',
+            'prestation.triage.titre':'Triage','prestation.triage.desc':'Tri rigoureux de vos marchandises selon vos critères de classification.',
+            'prestation.qualite.titre':'Contrôle Qualité','prestation.qualite.desc':'Contrôles quantitatifs et qualitatifs (aspect extérieur) à réception de vos marchandises.',
+            'prestation.palettisation.titre':'Palettisation','prestation.palettisation.desc':'Mise sur palettes selon vos spécifications pour une manutention optimale.',
+            'prestation.filmage.titre':'Filmage & Cerclage','prestation.filmage.desc':'Sécurisation de vos palettes par filmage et cerclage pour un transport en toute sécurité.',
+            'prestation.preparation.titre':'Préparation de commande','prestation.preparation.desc':'Picking précis et préparation de commandes adaptés à vos besoins logistiques.',
+            'prestation.reconditionnement.titre':'Reconditionnement','prestation.reconditionnement.desc':'Remise en état et reconditionnement de vos produits selon vos exigences.',
+            'prestation.transport.titre':'Transport','prestation.transport.desc':'Fret conventionnel et traction conteneur depuis et vers le port du Havre.',
+            'moyens.eyebrow':'Nos équipements','moyens.title':'Des moyens à la <span>hauteur</span>','moyens.subtitle':"PR Logistics dispose d'un entrepôt de 8\u202f000\u00a0m² sur un terrain de 18\u202f500\u00a0m² entièrement clos, télésurveillé 24h/7j par la sécurité portuaire.",
+            'equip.entrepot':'Entrepôt sous douane','equip.palettes':'Palettes de stockage','equip.banderoleuses':'Banderoleuses','equip.chaine':'Chaîne de tri','equip.chariots':'Chariots élévateurs 1,6T – 5T','equip.cameras':'Caméras sécurité 24/7','equip.wms':'WMS gestion des stocks','equip.tracteur':'Tracteur de parc','equip.collaborateurs':'Collaborateurs','equip.quais':'Quais de chargement',
+            'cta.title':'Prêt à optimiser votre <span>logistique</span>\u00a0?','cta.subtitle':"Contactez-nous dès aujourd'hui pour étudier ensemble vos besoins logistiques.",'cta.contact':'Nous contacter','cta.devis':'Demander un devis',
+            'contact.eyebrow':'Coordination','contact.title':'Nous <span>contacter</span>','contact.subtitle':'Notre équipe est disponible du lundi au vendredi pour répondre à toutes vos demandes.',
+            'contact.addr.eyebrow':'Nous trouver','contact.addr.title':'Notre <span>adresse</span>','contact.addr.sub':'Au cœur du port du Havre',
+            'contact.form.title':'Envoyer un <span>message</span>','contact.form.nom':'Nom complet *','contact.form.nom.ph':'Votre nom','contact.form.email':'Email *','contact.form.email.ph':'votre@email.fr','contact.form.tel':'Téléphone','contact.form.tel.ph':'06.00.00.00.00','contact.form.sujet':'Sujet *','contact.form.sujet.select':'Sélectionner…','contact.form.sujet.depotage':'Dépotage / Empotage','contact.form.sujet.stockage':'Stockage','contact.form.sujet.transport':'Transport','contact.form.sujet.devis':'Demande de devis','contact.form.sujet.autre':'Autre','contact.form.message':'Message *','contact.form.message.ph':'Décrivez votre besoin…','contact.form.submit':'Envoyer le message','contact.form.required':'Merci de remplir tous les champs obligatoires (*).',
+            'about.eyebrow':'Notre entreprise','about.title':'Qui sommes-<span>nous</span>\u00a0?','about.subtitle':"Prestataire logistique indépendant au cœur du port du Havre, nous mettons notre expertise au service de vos flux depuis 2017.",
+            'about.history.eyebrow':'Notre histoire','about.history.title':'L\'aventure <span>PR Logistics</span>',
+            'about.history.p1':"C'est en <strong>2017</strong> que débute l'aventure PR Logistics. Après plus de <strong>25 années</strong> passées au poste de responsable logistique au sein de différentes structures, <strong>Patrick Richer</strong> décide de créer la société PR Logistics.",
+            'about.history.p2':"Aujourd'hui, PR Logistics c'est <strong>15 collaborateurs</strong> à votre service pour vous apporter des solutions concrètes à toutes vos problématiques de logistique en entrepôt. Vos flux sont organisés et gérés avec des moyens techniques adaptés pour répondre au mieux à vos besoins.",
+            'about.history.p3':"PR Logistics est une société <strong>indépendante</strong> située au cœur du port du Havre, disposant d'un entrepôt de <strong>8\u202f000\u00a0m²</strong> sur un terrain de <strong>18\u202f500\u00a0m²</strong> entièrement clos et télésurveillé 24h/7j par la sécurité portuaire.",
+            'about.tl.2017.h':'Fondation','about.tl.2017.p':'Patrick Richer crée PR Logistics au cœur du port du Havre.',
+            'about.tl.2021.h':'Consolidation','about.tl.2021.p':'1\u202f322\u202f000\u00a0€ de CA — 1\u202f500 conteneurs traités.',
+            'about.tl.2022.h':'Développement','about.tl.2022.p':'1\u202f698\u202f000\u00a0€ de CA — 1\u202f700 conteneurs traités.',
+            'about.tl.2023.h':'Accélération','about.tl.2023.p':'2\u202f177\u202f000\u00a0€ de CA — 2\u202f100 conteneurs traités.',
+            'about.tl.2026.h':'Expansion','about.tl.2026.p':"Acquisition d'un nouvel entrepôt.",
+            'about.certif.eyebrow':'Conformité & qualité','about.certif.title':'PR Logistics <span>aujourd\'hui</span>','about.certif.subtitle':'Nos installations respectent les exigences réglementaires les plus strictes, pour vous offrir un cadre logistique sûr, durable et certifié.',
+            'about.icpe.badge':'Rubrique réglementaire','about.icpe.desc':"Installation Classée pour la Protection de l'Environnement. Nos activités sont soumises à déclaration préfectorale et contrôlées régulièrement, garantissant la sécurité industrielle et la protection de l'environnement.",
+            'about.breeam.badge':'Certification internationale','about.breeam.desc':"Certification mondiale de performance environnementale des bâtiments. Notre entrepôt atteste d'une efficacité énergétique optimale et d'un engagement concret pour une logistique durable.",
+            'about.agr.badge':'Marchandises spécifiques','about.agr.title':'Nos <span>agréments</span>','about.agr.subtitle':'PR Logistics est habilité à traiter des marchandises soumises à réglementation stricte — vous garantissant conformité et sécurité à chaque flux.',
+            'about.agr.dangereux':'Marchandises dangereuses','about.agr.froid':'Froid','about.agr.bio':'Bio','about.agr.alcool':'Alcool','about.agr.agree':'Agréé','about.agr.soon':'À venir',
+            'about.growth.eyebrow':'Performances','about.growth.title':'Notre <span>croissance</span>','about.growth.subtitle':'Une croissance continue depuis la création, portée par la confiance de nos partenaires.',
+            'about.chart.ca':"Chiffre d'affaires",'about.chart.ca.badge':'+65% en 2 ans','about.chart.cont':'Volume de conteneurs traités','about.chart.cont.badge':'+40% en 2 ans',
+            'devis.hero.eyebrow':'Gratuit & sans engagement','devis.hero.title':'Demander un <span>devis</span>','devis.hero.subtitle':'Choisissez votre prestation, remplissez le formulaire et notre équipe vous répond sous 24h.',
+            'devis.step1.eyebrow':'Étape 1 — Votre besoin','devis.step1.title':'Quel service<br>vous intéresse\u00a0?','devis.step1.subtitle':'Sélectionnez votre prestation pour accéder au formulaire correspondant.',
+            'devis.card.depotage.title':'Dépotage / Empotage','devis.card.depotage.desc':'Chargement et déchargement de vos conteneurs dans nos entrepôts au cœur du port du Havre.',
+            'devis.card.stockage.title':'Stockage','devis.card.stockage.desc':"Entreposage sécurisé de vos marchandises dans notre entrepôt de 8\u202f000\u00a0m² au Havre.",
+            'devis.card.traction.title':'Traction','devis.card.traction.desc':'Déplacement de vos semi-remorques et conteneurs entre le port et leur destination finale.',
+            'devis.card.transport.title':'Transport & Livraison','devis.card.transport.desc':"Prise en charge et livraison de vos palettes jusqu'à votre client final partout en France.",
+            'devis.card.cta':'Demander un devis','devis.card.selected':'Sélectionné','devis.back':'Changer de prestation',
+          },
+          en: {
+            'nav.home':'Home','nav.devis':'Get a Quote','nav.about':'About Us','nav.contact':'Contact Us',
+            'footer.tagline':'Your logistics and transport provider in Le Havre.','footer.nav.title':'Navigation','footer.nav.home':'Home','footer.nav.devis':'Request a quote','footer.nav.contact':'Contact us','footer.contact.title':'Contact','footer.rights':'All rights reserved.',
+            'hero.eyebrow':'Since 2017 · Le Havre','hero.title':'Your <span>logistics</span> partner<br>at the heart of Le Havre port','hero.desc':'PR Logistics is an independent provider specializing in <span class="hero__desc-rouge">port logistics</span> and <span class="hero__desc-rouge">transport</span>. Bonded warehouse of <span class="hero__desc-rouge">8,000\u00a0m²</span>, tailored solutions, guaranteed responsiveness.','hero.cta.contact':'Contact us','hero.cta.devis':'Request a quote',
+            'prestations.eyebrow':'What we do','prestations.title':'Our <span>services</span>','prestations.subtitle':'A complete range of logistics services tailored to the demands of international trade.',
+            'prestation.depotage.titre':'Devanning & Stuffing','prestation.depotage.desc':'Unloading and loading of containers and trucks with rigor and responsiveness.',
+            'prestation.crossdocking.titre':'Cross Docking','prestation.crossdocking.desc':'Direct transfer of goods without intermediate storage to optimize your flows.',
+            'prestation.triage.titre':'Sorting','prestation.triage.desc':'Rigorous sorting of your goods according to your classification criteria.',
+            'prestation.qualite.titre':'Quality Control','prestation.qualite.desc':'Quantitative and qualitative checks (external appearance) upon receipt of your goods.',
+            'prestation.palettisation.titre':'Palletizing','prestation.palettisation.desc':'Palletizing according to your specifications for optimal handling.',
+            'prestation.filmage.titre':'Wrapping & Strapping','prestation.filmage.desc':'Securing your pallets by wrapping and strapping for safe transport.',
+            'prestation.preparation.titre':'Order Picking','prestation.preparation.desc':'Precise picking and order preparation tailored to your logistics needs.',
+            'prestation.reconditionnement.titre':'Repackaging','prestation.reconditionnement.desc':'Restoration and repackaging of your products according to your requirements.',
+            'prestation.transport.titre':'Transport','prestation.transport.desc':'Conventional freight and container traction to and from Le Havre port.',
+            'moyens.eyebrow':'Our equipment','moyens.title':'World-class <span>resources</span>','moyens.subtitle':'PR Logistics has an 8,000\u00a0m² warehouse on a fully enclosed 18,500\u00a0m² site, monitored 24/7 by port security.',
+            'equip.entrepot':'Bonded warehouse','equip.palettes':'Storage pallets','equip.banderoleuses':'Stretch wrappers','equip.chaine':'Sorting line','equip.chariots':'Forklifts 1.6T – 5T','equip.cameras':'Security cameras 24/7','equip.wms':'WMS inventory management','equip.tracteur':'Yard tractor','equip.collaborateurs':'Team members','equip.quais':'Loading docks',
+            'cta.title':'Ready to optimize your <span>logistics</span>?','cta.subtitle':'Contact us today to explore your logistics needs together.','cta.contact':'Contact us','cta.devis':'Request a quote',
+            'contact.eyebrow':'Get in touch','contact.title':'Contact <span>us</span>','contact.subtitle':'Our team is available Monday to Friday to answer all your inquiries.',
+            'contact.addr.eyebrow':'Find us','contact.addr.title':'Our <span>address</span>','contact.addr.sub':'At the heart of Le Havre port',
+            'contact.form.title':'Send a <span>message</span>','contact.form.nom':'Full name *','contact.form.nom.ph':'Your name','contact.form.email':'Email *','contact.form.email.ph':'your@email.com','contact.form.tel':'Phone','contact.form.tel.ph':'+1 000 000 0000','contact.form.sujet':'Subject *','contact.form.sujet.select':'Select…','contact.form.sujet.depotage':'Devanning / Stuffing','contact.form.sujet.stockage':'Storage','contact.form.sujet.transport':'Transport','contact.form.sujet.devis':'Quote request','contact.form.sujet.autre':'Other','contact.form.message':'Message *','contact.form.message.ph':'Describe your need…','contact.form.submit':'Send message','contact.form.required':'Please fill in all required fields (*).',
+            'about.eyebrow':'Our company','about.title':'Who are <span>we</span>?','about.subtitle':'An independent logistics provider at the heart of Le Havre port, putting our expertise at the service of your flows since 2017.',
+            'about.history.eyebrow':'Our story','about.history.title':'The <span>PR Logistics</span> adventure',
+            'about.history.p1':'In <strong>2017</strong>, the PR Logistics adventure began. After more than <strong>25 years</strong> as a logistics manager in various organizations, <strong>Patrick Richer</strong> decided to found PR Logistics.',
+            'about.history.p2':'Today, PR Logistics has <strong>15 employees</strong> dedicated to providing concrete solutions to all your warehouse logistics challenges. Your flows are organized and managed with tailored technical resources to best meet your needs.',
+            'about.history.p3':'PR Logistics is an <strong>independent company</strong> located at the heart of Le Havre port, with an <strong>8,000\u00a0m²</strong> warehouse on an <strong>18,500\u00a0m²</strong> fully enclosed and monitored 24/7 by port security.',
+            'about.tl.2017.h':'Foundation','about.tl.2017.p':'Patrick Richer founds PR Logistics at the heart of Le Havre port.',
+            'about.tl.2021.h':'Consolidation','about.tl.2021.p':'€1,322,000 in revenue — 1,500 containers processed.',
+            'about.tl.2022.h':'Development','about.tl.2022.p':'€1,698,000 in revenue — 1,700 containers processed.',
+            'about.tl.2023.h':'Acceleration','about.tl.2023.p':'€2,177,000 in revenue — 2,100 containers processed.',
+            'about.tl.2026.h':'Expansion','about.tl.2026.p':'Acquisition of a new warehouse.',
+            'about.certif.eyebrow':'Compliance & quality','about.certif.title':'PR Logistics <span>today</span>','about.certif.subtitle':'Our facilities meet the strictest regulatory requirements, providing you with a safe, sustainable and certified logistics environment.',
+            'about.icpe.badge':'Regulatory category','about.icpe.desc':'Classified Installation for Environmental Protection. Our activities are subject to prefectural declaration and regularly inspected, ensuring industrial safety and environmental protection.',
+            'about.breeam.badge':'International certification','about.breeam.desc':'Global certification for environmental performance of buildings. Our warehouse demonstrates optimal energy efficiency and a concrete commitment to sustainable logistics.',
+            'about.agr.badge':'Specific goods','about.agr.title':'Our <span>approvals</span>','about.agr.subtitle':'PR Logistics is authorized to handle goods subject to strict regulations — guaranteeing compliance and safety at every step.',
+            'about.agr.dangereux':'Hazardous goods','about.agr.froid':'Cold chain','about.agr.bio':'Organic','about.agr.alcool':'Alcohol','about.agr.agree':'Approved','about.agr.soon':'Coming soon',
+            'about.growth.eyebrow':'Performance','about.growth.title':'Our <span>growth</span>','about.growth.subtitle':'Continuous growth since founding, driven by the trust of our partners.',
+            'about.chart.ca':'Revenue','about.chart.ca.badge':'+65% in 2 years','about.chart.cont':'Volume of containers processed','about.chart.cont.badge':'+40% in 2 years',
+            'devis.hero.eyebrow':'Free & no commitment','devis.hero.title':'Request a <span>quote</span>','devis.hero.subtitle':'Choose your service, fill in the form and our team will get back to you within 24 hours.',
+            'devis.step1.eyebrow':'Step 1 — Your need','devis.step1.title':'Which service<br>interests you?','devis.step1.subtitle':'Select your service to access the corresponding form.',
+            'devis.card.depotage.title':'Devanning / Stuffing','devis.card.depotage.desc':'Loading and unloading of your containers in our warehouses at the heart of Le Havre port.',
+            'devis.card.stockage.title':'Storage','devis.card.stockage.desc':'Secure storage of your goods in our 8,000\u00a0m² warehouse in Le Havre.',
+            'devis.card.traction.title':'Traction','devis.card.traction.desc':'Moving your semi-trailers and containers between the port and their final destination.',
+            'devis.card.transport.title':'Transport & Delivery','devis.card.transport.desc':'Handling and delivery of your pallets to your final customer anywhere in France.',
+            'devis.card.cta':'Request a quote','devis.card.selected':'Selected','devis.back':'Change service',
+          }
+        };
+
+        function applyTranslations(lang) {
+          var t = T[lang] || T.en;
+          document.querySelectorAll('[data-i18n]').forEach(function(el) {
+            var k = el.getAttribute('data-i18n');
+            if (t[k] !== undefined) el.textContent = t[k];
+          });
+          document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+            var k = el.getAttribute('data-i18n-html');
+            if (t[k] !== undefined) el.innerHTML = t[k];
+          });
+          document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+            var k = el.getAttribute('data-i18n-placeholder');
+            if (t[k] !== undefined) el.setAttribute('placeholder', t[k]);
+          });
+          document.documentElement.lang = lang;
+          document.querySelectorAll('[data-lang-btn]').forEach(function(btn) {
+            btn.classList.toggle('lang-active', btn.getAttribute('data-lang-btn') === lang);
+          });
+          window.__lang = lang;
+        }
+
+        function detectLanguage() {
+          var saved = localStorage.getItem('pr-lang');
+          if (saved === 'fr' || saved === 'en') return saved;
+          var bl = (navigator.language || '').toLowerCase();
+          return bl.startsWith('fr') ? 'fr' : 'en';
+        }
+
+        window.I18N = {
+          t: function(key) {
+            var lang = window.__lang || 'en';
+            var t = T[lang] || T.en;
+            return t[key] !== undefined ? t[key] : (T.en[key] || key);
+          },
+          set: function(lang) {
+            localStorage.setItem('pr-lang', lang);
+            applyTranslations(lang);
+          },
+          apply: applyTranslations,
+          detect: detectLanguage
+        };
+
+        window.__lang = detectLanguage();
+
+        document.addEventListener('DOMContentLoaded', function() {
+          applyTranslations(window.__lang);
+        });
+      })();
+    </script>
   </head>
   <body>
     <Header />

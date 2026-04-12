@@ -10,11 +10,11 @@ import MainLayout from '../layouts/MainLayout.astro';
   <!-- EN-TÊTE -->
   <section class="page-hero">
     <div class="container page-hero__inner">
-      <p class="eyebrow-rouge animate-in">Notre entreprise</p>
-      <h1 class="titre-section animate-in" style="animation-delay:0.1s;">
+      <p class="eyebrow-rouge animate-in" data-i18n="about.eyebrow">Notre entreprise</p>
+      <h1 class="titre-section animate-in" style="animation-delay:0.1s;" data-i18n-html="about.title">
         Qui sommes-<span>nous</span> ?
       </h1>
-      <p class="sous-titre animate-in" style="animation-delay:0.2s; margin: 1rem auto 0;">
+      <p class="sous-titre animate-in" style="animation-delay:0.2s; margin: 1rem auto 0;" data-i18n="about.subtitle">
         Prestataire logistique indépendant au cœur du port du Havre, nous mettons notre expertise au service de vos flux depuis 2017.
       </p>
     </div>
@@ -25,21 +25,21 @@ import MainLayout from '../layouts/MainLayout.astro';
     <div class="container">
       <div class="histoire__grid">
         <div class="reveal">
-          <p class="eyebrow-rouge">Notre histoire</p>
-          <h2 class="titre-section">L'aventure <span>PR Logistics</span></h2>
-          <p class="histoire__texte">
+          <p class="eyebrow-rouge" data-i18n="about.history.eyebrow">Notre histoire</p>
+          <h2 class="titre-section" data-i18n-html="about.history.title">L'aventure <span>PR Logistics</span></h2>
+          <p class="histoire__texte" data-i18n-html="about.history.p1">
             C'est en <strong>2017</strong> que débute l'aventure PR Logistics. Après plus de
             <strong>25 années</strong> passées au poste de responsable logistique au sein de
             différentes structures, <strong>Patrick Richer</strong> décide de créer la société
             PR Logistics.
           </p>
-          <p class="histoire__texte">
+          <p class="histoire__texte" data-i18n-html="about.history.p2">
             Aujourd'hui, PR Logistics c'est <strong>15 collaborateurs</strong> à votre service
             pour vous apporter des solutions concrètes à toutes vos problématiques de logistique
             en entrepôt. Vos flux sont organisés et gérés avec des moyens techniques adaptés
             pour répondre au mieux à vos besoins.
           </p>
-          <p class="histoire__texte">
+          <p class="histoire__texte" data-i18n-html="about.history.p3">
             PR Logistics est une société <strong>indépendante</strong> située au cœur du port
             du Havre, disposant d'un entrepôt de <strong>8 000 m²</strong> sur un terrain de
             <strong>18 500 m²</strong> entièrement clos et télésurveillé 24h/7j par la sécurité
@@ -51,36 +51,36 @@ import MainLayout from '../layouts/MainLayout.astro';
           <div class="timeline__item">
             <div class="timeline__annee">2017</div>
             <div class="timeline__contenu">
-              <h3>Fondation</h3>
-              <p>Patrick Richer crée PR Logistics au cœur du port du Havre.</p>
+              <h3 data-i18n="about.tl.2017.h">Fondation</h3>
+              <p data-i18n="about.tl.2017.p">Patrick Richer crée PR Logistics au cœur du port du Havre.</p>
             </div>
           </div>
           <div class="timeline__item">
             <div class="timeline__annee">2021</div>
             <div class="timeline__contenu">
-              <h3>Consolidation</h3>
-              <p>1 322 000 € de CA — 1 500 conteneurs traités.</p>
+              <h3 data-i18n="about.tl.2021.h">Consolidation</h3>
+              <p data-i18n="about.tl.2021.p">1 322 000 € de CA — 1 500 conteneurs traités.</p>
             </div>
           </div>
           <div class="timeline__item">
             <div class="timeline__annee">2022</div>
             <div class="timeline__contenu">
-              <h3>Développement</h3>
-              <p>1 698 000 € de CA — 1 700 conteneurs traités.</p>
+              <h3 data-i18n="about.tl.2022.h">Développement</h3>
+              <p data-i18n="about.tl.2022.p">1 698 000 € de CA — 1 700 conteneurs traités.</p>
             </div>
           </div>
           <div class="timeline__item">
             <div class="timeline__annee">2023</div>
             <div class="timeline__contenu">
-              <h3>Accélération</h3>
-              <p>2 177 000 € de CA — 2 100 conteneurs traités.</p>
+              <h3 data-i18n="about.tl.2023.h">Accélération</h3>
+              <p data-i18n="about.tl.2023.p">2 177 000 € de CA — 2 100 conteneurs traités.</p>
             </div>
           </div>
           <div class="timeline__item timeline__item--actif">
             <div class="timeline__annee">2026</div>
             <div class="timeline__contenu">
-              <h3>Expansion</h3>
-              <p>Acquisition d'un nouvel entrepôt.</p>
+              <h3 data-i18n="about.tl.2026.h">Expansion</h3>
+              <p data-i18n="about.tl.2026.p">Acquisition d'un nouvel entrepôt.</p>
             </div>
           </div>
         </div>
@@ -92,9 +92,9 @@ import MainLayout from '../layouts/MainLayout.astro';
   <section class="section section--gris certif">
     <div class="container">
       <div class="reveal" style="text-align:center; margin-bottom:3rem;">
-        <p class="eyebrow-rouge">Conformité & qualité</p>
-        <h2 class="titre-section">PR Logistics <span>aujourd'hui</span></h2>
-        <p class="sous-titre" style="margin:1rem auto 0;">
+        <p class="eyebrow-rouge" data-i18n="about.certif.eyebrow">Conformité & qualité</p>
+        <h2 class="titre-section" data-i18n-html="about.certif.title">PR Logistics <span>aujourd'hui</span></h2>
+        <p class="sous-titre" style="margin:1rem auto 0;" data-i18n="about.certif.subtitle">
           Nos installations respectent les exigences réglementaires les plus strictes, pour vous offrir un cadre logistique sûr, durable et certifié.
         </p>
       </div>
@@ -103,11 +103,11 @@ import MainLayout from '../layouts/MainLayout.astro';
         <!-- ICPE -->
         <div class="certif-carte">
           <div class="certif-carte__header">
-            <span class="certif-badge certif-badge--bleu">Rubrique réglementaire</span>
+            <span class="certif-badge certif-badge--bleu" data-i18n="about.icpe.badge">Rubrique réglementaire</span>
             <img src="/assets/certifications/logo-icpe.png" alt="ICPE" class="certif-logo" />
           </div>
           <h3 class="certif-carte__titre">ICPE</h3>
-          <p class="certif-carte__desc">
+          <p class="certif-carte__desc" data-i18n="about.icpe.desc">
             Installation Classée pour la Protection de l'Environnement. Nos activités sont soumises à déclaration préfectorale et contrôlées régulièrement, garantissant la sécurité industrielle et la protection de l'environnement.
           </p>
         </div>
@@ -115,11 +115,11 @@ import MainLayout from '../layouts/MainLayout.astro';
         <!-- BREEAM -->
         <div class="certif-carte reveal" style="transition-delay:0.12s;">
           <div class="certif-carte__header">
-            <span class="certif-badge certif-badge--vert">Certification internationale</span>
+            <span class="certif-badge certif-badge--vert" data-i18n="about.breeam.badge">Certification internationale</span>
             <img src="/assets/certifications/BREEAM_Logo.png" alt="BREEAM" class="certif-logo" />
           </div>
           <h3 class="certif-carte__titre">BREEAM</h3>
-          <p class="certif-carte__desc">
+          <p class="certif-carte__desc" data-i18n="about.breeam.desc">
             Certification mondiale de performance environnementale des bâtiments. Notre entrepôt atteste d'une efficacité énergétique optimale et d'un engagement concret pour une logistique durable.
           </p>
         </div>
@@ -132,34 +132,34 @@ import MainLayout from '../layouts/MainLayout.astro';
     <div class="container" style="position:relative;">
       <div class="agrements-inner reveal">
         <div class="agrements-texte">
-          <span class="certif-badge certif-badge--bleu" style="align-self:flex-start;">Marchandises spécifiques</span>
+          <span class="certif-badge certif-badge--bleu" style="align-self:flex-start;" data-i18n="about.agr.badge">Marchandises spécifiques</span>
           <div class="agrements-titre-row">
-            <h2 class="titre-section" style="font-size:2.34rem; margin:0;">Nos <span>agréments</span></h2>
+            <h2 class="titre-section" style="font-size:2.34rem; margin:0;" data-i18n-html="about.agr.title">Nos <span>agréments</span></h2>
           </div>
-          <p class="sous-titre" style="margin:0.8rem 0 0; font-size:1rem;">
+          <p class="sous-titre" style="margin:0.8rem 0 0; font-size:1rem;" data-i18n="about.agr.subtitle">
             PR Logistics est habilité à traiter des marchandises soumises à réglementation stricte — vous garantissant conformité et sécurité à chaque flux.
           </p>
         </div>
         <div class="agrements-liste">
           <div class="agrement">
             <img src="/assets/certifications/dangereux.png" alt="Marchandises dangereuses" class="agrement__logo" />
-            <span class="agrement__nom">Marchandises dangereuses</span>
-            <span class="agrement__statut agrement__statut--ok">Agréé</span>
+            <span class="agrement__nom" data-i18n="about.agr.dangereux">Marchandises dangereuses</span>
+            <span class="agrement__statut agrement__statut--ok" data-i18n="about.agr.agree">Agréé</span>
           </div>
           <div class="agrement">
             <img src="/assets/certifications/froid.png" alt="Froid" class="agrement__logo" />
-            <span class="agrement__nom">Froid</span>
-            <span class="agrement__statut agrement__statut--ok">Agréé</span>
+            <span class="agrement__nom" data-i18n="about.agr.froid">Froid</span>
+            <span class="agrement__statut agrement__statut--ok" data-i18n="about.agr.agree">Agréé</span>
           </div>
           <div class="agrement">
             <img src="/assets/certifications/bio.png" alt="Bio" class="agrement__logo" />
-            <span class="agrement__nom">Bio</span>
-            <span class="agrement__statut agrement__statut--soon">À venir</span>
+            <span class="agrement__nom" data-i18n="about.agr.bio">Bio</span>
+            <span class="agrement__statut agrement__statut--soon" data-i18n="about.agr.soon">À venir</span>
           </div>
           <div class="agrement">
             <img src="/assets/certifications/alcool.png" alt="Alcool" class="agrement__logo" />
-            <span class="agrement__nom">Alcool</span>
-            <span class="agrement__statut agrement__statut--soon">À venir</span>
+            <span class="agrement__nom" data-i18n="about.agr.alcool">Alcool</span>
+            <span class="agrement__statut agrement__statut--soon" data-i18n="about.agr.soon">À venir</span>
           </div>
         </div>
       </div>
@@ -172,9 +172,9 @@ import MainLayout from '../layouts/MainLayout.astro';
     <div class="agr-blob agr-blob--2" aria-hidden="true"></div>
     <div class="container" style="position:relative;">
       <div class="reveal" style="text-align:center; margin-bottom:3.5rem;">
-        <p class="eyebrow-rouge">Performances</p>
-        <h2 class="titre-section">Notre <span>croissance</span></h2>
-        <p class="sous-titre" style="margin:1rem auto 0;">
+        <p class="eyebrow-rouge" data-i18n="about.growth.eyebrow">Performances</p>
+        <h2 class="titre-section" data-i18n-html="about.growth.title">Notre <span>croissance</span></h2>
+        <p class="sous-titre" style="margin:1rem auto 0;" data-i18n="about.growth.subtitle">
           Une croissance continue depuis la création, portée par la confiance de nos partenaires.
         </p>
       </div>
@@ -183,8 +183,8 @@ import MainLayout from '../layouts/MainLayout.astro';
         <!-- Graphique CA -->
         <div class="graphique-carte reveal">
           <div class="graphique-carte__header">
-            <h3>Chiffre d'affaires</h3>
-            <span class="badge-hausse">+65% en 2 ans</span>
+            <h3 data-i18n="about.chart.ca">Chiffre d'affaires</h3>
+            <span class="badge-hausse" data-i18n="about.chart.ca.badge">+65% en 2 ans</span>
           </div>
           <div class="graphique-carte__canvas-wrapper">
             <canvas id="chartCA" aria-label="Évolution du chiffre d'affaires 2021-2023"></canvas>
@@ -194,8 +194,8 @@ import MainLayout from '../layouts/MainLayout.astro';
         <!-- Graphique Conteneurs -->
         <div class="graphique-carte reveal" style="transition-delay:0.15s;">
           <div class="graphique-carte__header">
-            <h3>Volume de conteneurs traités</h3>
-            <span class="badge-hausse">+40% en 2 ans</span>
+            <h3 data-i18n="about.chart.cont">Volume de conteneurs traités</h3>
+            <span class="badge-hausse" data-i18n="about.chart.cont.badge">+40% en 2 ans</span>
           </div>
           <div class="graphique-carte__canvas-wrapper">
             <canvas id="chartConteneurs" aria-label="Évolution du volume de conteneurs 2021-2023"></canvas>

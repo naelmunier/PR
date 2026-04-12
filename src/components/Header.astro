@@ -1,9 +1,9 @@
 ---
 const navLinks = [
-  { href: '/', label: 'Accueil' },
-  { href: '/devis', label: 'Obtenir un Devis' },
-  { href: '/qui-sommes-nous', label: 'Qui sommes-nous' },
-  { href: '/contact', label: 'Nous Contacter' },
+  { href: '/', label: 'Accueil', key: 'nav.home' },
+  { href: '/devis', label: 'Obtenir un Devis', key: 'nav.devis' },
+  { href: '/qui-sommes-nous', label: 'Qui sommes-nous', key: 'nav.about' },
+  { href: '/contact', label: 'Nous Contacter', key: 'nav.contact' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -20,10 +20,28 @@ const currentPath = Astro.url.pathname;
         <a
           href={link.href}
           class={`header__link ${currentPath === link.href ? 'header__link--actif' : ''}`}
+          data-i18n={link.key}
         >
           {link.label}
         </a>
       ))}
+
+      <!-- Sélecteur de langue -->
+      <div class="lang-switcher" role="group" aria-label="Language">
+        <button
+          class="lang-btn"
+          data-lang-btn="fr"
+          onclick="window.I18N.set('fr')"
+          aria-label="Français"
+        >FR</button>
+        <span class="lang-sep" aria-hidden="true">|</span>
+        <button
+          class="lang-btn"
+          data-lang-btn="en"
+          onclick="window.I18N.set('en')"
+          aria-label="English"
+        >EN</button>
+      </div>
     </nav>
 
     <button class="header__burger" id="burger" aria-label="Menu" aria-expanded="false">
@@ -101,10 +119,46 @@ const currentPath = Astro.url.pathname;
     color: var(--rouge);
   }
 
-  .header__cta {
-    font-size: 0.9rem;
-    padding: 0.65rem 1.4rem;
+  /* Sélecteur de langue */
+  .lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0;
     margin-left: 0.5rem;
+    border: 1.5px solid rgba(0,0,0,0.13);
+    border-radius: 2rem;
+    padding: 0.18rem 0.28rem;
+    background: rgba(0,0,0,0.02);
+  }
+
+  .lang-btn {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 0.22rem 0.55rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--gris-moyen);
+    border-radius: 1.5rem;
+    transition: background 0.18s, color 0.18s;
+    line-height: 1;
+  }
+
+  .lang-btn:hover {
+    color: var(--gris-fonce);
+  }
+
+  .lang-btn.lang-active {
+    background: var(--gris-fonce);
+    color: #fff;
+  }
+
+  .lang-sep {
+    font-size: 0.65rem;
+    color: rgba(0,0,0,0.2);
+    pointer-events: none;
+    user-select: none;
   }
 
   .header__burger {
@@ -150,9 +204,7 @@ const currentPath = Astro.url.pathname;
       display: flex;
     }
 
-    .header__cta {
-      width: 100%;
-      justify-content: center;
+    .lang-switcher {
       margin-left: 0;
     }
   }
@@ -161,7 +213,7 @@ const currentPath = Astro.url.pathname;
 <script>
   const header = document.getElementById('header');
   const burger = document.getElementById('burger');
-  const nav = document.getElementById('nav');
+  const nav    = document.getElementById('nav');
 
   // Effet scroll
   window.addEventListener('scroll', () => {

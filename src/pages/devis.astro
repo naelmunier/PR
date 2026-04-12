@@ -61,9 +61,9 @@ const departementsJson = JSON.stringify(departements);
     <div class="devis-blob devis-blob--1" aria-hidden="true"></div>
     <div class="devis-blob devis-blob--2" aria-hidden="true"></div>
     <div class="container devis-hero__inner animate-in">
-      <p class="eyebrow-rouge">Gratuit & sans engagement</p>
-      <h1 class="titre-section">Demander un <span>devis</span></h1>
-      <p class="sous-titre" style="margin:1rem auto 0; max-width:520px;">
+      <p class="eyebrow-rouge" data-i18n="devis.hero.eyebrow">Gratuit & sans engagement</p>
+      <h1 class="titre-section" data-i18n-html="devis.hero.title">Demander un <span>devis</span></h1>
+      <p class="sous-titre" style="margin:1rem auto 0; max-width:520px;" data-i18n="devis.hero.subtitle">
         Choisissez votre prestation, remplissez le formulaire et notre équipe vous répond sous 24h.
       </p>
     </div>
@@ -73,9 +73,9 @@ const departementsJson = JSON.stringify(departements);
   <section class="section services-select" id="servicesSelect">
     <div class="container">
       <div class="services-intro reveal">
-        <p class="eyebrow-rouge">Étape 1 — Votre besoin</p>
-        <h2 class="titre-section" style="margin:0.4rem 0 0.8rem">Quel service<br>vous intéresse ?</h2>
-        <p class="sous-titre" style="margin:0 auto; max-width:480px; font-size:1rem;">
+        <p class="eyebrow-rouge" data-i18n="devis.step1.eyebrow">Étape 1 — Votre besoin</p>
+        <h2 class="titre-section" style="margin:0.4rem 0 0.8rem" data-i18n-html="devis.step1.title">Quel service<br>vous intéresse ?</h2>
+        <p class="sous-titre" style="margin:0 auto; max-width:480px; font-size:1rem;" data-i18n="devis.step1.subtitle">
           Sélectionnez votre prestation pour accéder au formulaire correspondant.
         </p>
       </div>
@@ -89,18 +89,18 @@ const departementsJson = JSON.stringify(departements);
             <img src="/assets/services/depotage.png" alt="" class="service-card__icon">
           </div>
           <div class="service-card__body">
-            <h3 class="service-card__title">Dépotage / Empotage</h3>
-            <p class="service-card__desc">Chargement et déchargement de vos conteneurs dans nos entrepôts au cœur du port du Havre.</p>
+            <h3 class="service-card__title" data-i18n="devis.card.depotage.title">Dépotage / Empotage</h3>
+            <p class="service-card__desc" data-i18n="devis.card.depotage.desc">Chargement et déchargement de vos conteneurs dans nos entrepôts au cœur du port du Havre.</p>
           </div>
           <div class="service-card__footer">
             <span class="service-card__cta">
-              Demander un devis
+              <span data-i18n="devis.card.cta">Demander un devis</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </span>
           </div>
           <div class="service-card__selected-badge" aria-hidden="true">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-            Sélectionné
+            <span data-i18n="devis.card.selected">Sélectionné</span>
           </div>
         </div>
 
@@ -111,18 +111,18 @@ const departementsJson = JSON.stringify(departements);
             <img src="/assets/services/Storage.png" alt="" class="service-card__icon">
           </div>
           <div class="service-card__body">
-            <h3 class="service-card__title">Stockage</h3>
-            <p class="service-card__desc">Entreposage sécurisé de vos marchandises dans notre entrepôt de 8 000 m² au Havre.</p>
+            <h3 class="service-card__title" data-i18n="devis.card.stockage.title">Stockage</h3>
+            <p class="service-card__desc" data-i18n="devis.card.stockage.desc">Entreposage sécurisé de vos marchandises dans notre entrepôt de 8 000 m² au Havre.</p>
           </div>
           <div class="service-card__footer">
             <span class="service-card__cta">
-              Demander un devis
+              <span data-i18n="devis.card.cta">Demander un devis</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </span>
           </div>
           <div class="service-card__selected-badge" aria-hidden="true">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-            Sélectionné
+            <span data-i18n="devis.card.selected">Sélectionné</span>
           </div>
         </div>
 
@@ -133,18 +133,18 @@ const departementsJson = JSON.stringify(departements);
             <img src="/assets/services/traction.png" alt="" class="service-card__icon">
           </div>
           <div class="service-card__body">
-            <h3 class="service-card__title">Traction</h3>
-            <p class="service-card__desc">Déplacement de vos semi-remorques et conteneurs entre le port et leur destination finale.</p>
+            <h3 class="service-card__title" data-i18n="devis.card.traction.title">Traction</h3>
+            <p class="service-card__desc" data-i18n="devis.card.traction.desc">Déplacement de vos semi-remorques et conteneurs entre le port et leur destination finale.</p>
           </div>
           <div class="service-card__footer">
             <span class="service-card__cta">
-              Demander un devis
+              <span data-i18n="devis.card.cta">Demander un devis</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </span>
           </div>
           <div class="service-card__selected-badge" aria-hidden="true">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-            Sélectionné
+            <span data-i18n="devis.card.selected">Sélectionné</span>
           </div>
         </div>
 
@@ -155,18 +155,18 @@ const departementsJson = JSON.stringify(departements);
             <img src="/assets/services/livraison.png" alt="" class="service-card__icon">
           </div>
           <div class="service-card__body">
-            <h3 class="service-card__title">Transport & Livraison</h3>
-            <p class="service-card__desc">Prise en charge et livraison de vos palettes jusqu'à votre client final partout en France.</p>
+            <h3 class="service-card__title" data-i18n="devis.card.transport.title">Transport & Livraison</h3>
+            <p class="service-card__desc" data-i18n="devis.card.transport.desc">Prise en charge et livraison de vos palettes jusqu'à votre client final partout en France.</p>
           </div>
           <div class="service-card__footer">
             <span class="service-card__cta">
-              Demander un devis
+              <span data-i18n="devis.card.cta">Demander un devis</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </span>
           </div>
           <div class="service-card__selected-badge" aria-hidden="true">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-            Sélectionné
+            <span data-i18n="devis.card.selected">Sélectionné</span>
           </div>
         </div>
 
@@ -182,7 +182,7 @@ const departementsJson = JSON.stringify(departements);
       <div class="form-topbar">
         <button type="button" class="btn-retour" id="btnRetour">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-          Changer de prestation
+          <span data-i18n="devis.back">Changer de prestation</span>
         </button>
         <div class="form-service-badge" id="formServiceBadge">
           <img id="formServiceIcon" src="" alt="" class="form-service-badge__icon">

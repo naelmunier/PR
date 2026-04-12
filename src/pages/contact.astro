@@ -40,9 +40,9 @@ const contacts = [
   <!-- EN-TÊTE PAGE -->
   <section class="page-hero">
     <div class="container page-hero__inner">
-      <p class="eyebrow-rouge animate-in">Coordination</p>
-      <h1 class="titre-section animate-in" style="animation-delay:0.1s;">Nous <span>contacter</span></h1>
-      <p class="sous-titre animate-in" style="animation-delay:0.2s;">
+      <p class="eyebrow-rouge animate-in" data-i18n="contact.eyebrow">Coordination</p>
+      <h1 class="titre-section animate-in" style="animation-delay:0.1s;" data-i18n-html="contact.title">Nous <span>contacter</span></h1>
+      <p class="sous-titre animate-in" style="animation-delay:0.2s;" data-i18n="contact.subtitle">
         Notre équipe est disponible du lundi au vendredi pour répondre à toutes vos demandes.
       </p>
     </div>
@@ -100,8 +100,8 @@ const contacts = [
     <div class="container contact-bas">
       <!-- Adresse -->
       <div class="adresse-bloc reveal">
-        <p class="eyebrow-rouge">Nous trouver</p>
-        <h2 class="titre-section">Notre <span>adresse</span></h2>
+        <p class="eyebrow-rouge" data-i18n="contact.addr.eyebrow">Nous trouver</p>
+        <h2 class="titre-section" data-i18n-html="contact.addr.title">Notre <span>adresse</span></h2>
         <address class="adresse-details">
           <p><strong>PR Logistics</strong></p>
           <a
@@ -116,43 +116,43 @@ const contacts = [
             </svg>
             PLPN 1, Port 4935 — 76700 Rogerville
           </a>
-          <p style="margin-top:0.8rem; font-size:1.05rem; color:var(--gris-moyen);">Au cœur du port du Havre</p>
+          <p style="margin-top:0.8rem; font-size:1.05rem; color:var(--gris-moyen);" data-i18n="contact.addr.sub">Au cœur du port du Havre</p>
         </address>
       </div>
 
       <!-- Formulaire -->
       <div class="formulaire-bloc reveal" style="transition-delay:0.15s;">
-        <h2 class="titre-section" style="font-size:1.6rem;">Envoyer un <span>message</span></h2>
+        <h2 class="titre-section" style="font-size:1.6rem;" data-i18n-html="contact.form.title">Envoyer un <span>message</span></h2>
         <form class="formulaire" id="contactForm" novalidate>
           <div class="champ-groupe">
-            <label for="nom" class="champ-label">Nom complet *</label>
-            <input type="text" id="nom" name="Nom" class="champ-input" placeholder="Votre nom" required />
+            <label for="nom" class="champ-label" data-i18n="contact.form.nom">Nom complet *</label>
+            <input type="text" id="nom" name="Nom" class="champ-input" placeholder="Votre nom" data-i18n-placeholder="contact.form.nom.ph" required />
           </div>
           <div class="champ-groupe">
-            <label for="email" class="champ-label">Email *</label>
-            <input type="email" id="email" name="Email" class="champ-input" placeholder="votre@email.fr" required />
+            <label for="email" class="champ-label" data-i18n="contact.form.email">Email *</label>
+            <input type="email" id="email" name="Email" class="champ-input" placeholder="votre@email.fr" data-i18n-placeholder="contact.form.email.ph" required />
           </div>
           <div class="champ-groupe">
-            <label for="tel" class="champ-label">Téléphone</label>
-            <input type="tel" id="tel" name="Telephone" class="champ-input" placeholder="06.00.00.00.00" />
+            <label for="tel" class="champ-label" data-i18n="contact.form.tel">Téléphone</label>
+            <input type="tel" id="tel" name="Telephone" class="champ-input" placeholder="06.00.00.00.00" data-i18n-placeholder="contact.form.tel.ph" />
           </div>
           <div class="champ-groupe">
-            <label for="sujet" class="champ-label">Sujet *</label>
+            <label for="sujet" class="champ-label" data-i18n="contact.form.sujet">Sujet *</label>
             <select id="sujet" name="Sujet" class="champ-input" required>
-              <option value="">Sélectionner…</option>
-              <option value="Dépotage/Empotage">Dépotage / Empotage</option>
-              <option value="Stockage">Stockage</option>
-              <option value="Transport">Transport</option>
-              <option value="Devis">Demande de devis</option>
-              <option value="Autre">Autre</option>
+              <option value="" data-i18n="contact.form.sujet.select">Sélectionner…</option>
+              <option value="Dépotage/Empotage" data-i18n="contact.form.sujet.depotage">Dépotage / Empotage</option>
+              <option value="Stockage" data-i18n="contact.form.sujet.stockage">Stockage</option>
+              <option value="Transport" data-i18n="contact.form.sujet.transport">Transport</option>
+              <option value="Devis" data-i18n="contact.form.sujet.devis">Demande de devis</option>
+              <option value="Autre" data-i18n="contact.form.sujet.autre">Autre</option>
             </select>
           </div>
           <div class="champ-groupe champ-groupe--pleine-largeur">
-            <label for="message" class="champ-label">Message *</label>
-            <textarea id="message" name="Message" class="champ-input champ-textarea" rows="5" placeholder="Décrivez votre besoin…" required></textarea>
+            <label for="message" class="champ-label" data-i18n="contact.form.message">Message *</label>
+            <textarea id="message" name="Message" class="champ-input champ-textarea" rows="5" placeholder="Décrivez votre besoin…" data-i18n-placeholder="contact.form.message.ph" required></textarea>
           </div>
           <button type="submit" class="btn btn--rouge" style="width:100%; justify-content:center;">
-            Envoyer le message
+            <span data-i18n="contact.form.submit">Envoyer le message</span>
           </button>
         </form>
       </div>
@@ -174,7 +174,7 @@ const contacts = [
     const message = (document.getElementById('message') as HTMLTextAreaElement).value.trim();
 
     if (!nom || !email || !sujet || !message) {
-      alert('Merci de remplir tous les champs obligatoires (*).');
+      alert(window.I18N ? window.I18N.t('contact.form.required') : 'Merci de remplir tous les champs obligatoires (*).');
       return;
     }
 

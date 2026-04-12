@@ -3,28 +3,28 @@ import MainLayout from '../layouts/MainLayout.astro';
 import PartenairesCarousel from '../components/PartenairesCarousel.astro';
 
 const prestations = [
-  { icone: '/assets/nos prestations/depotage-empotage.png', titre: 'Dépotage & Empotage',      desc: 'Déchargement et chargement de conteneurs et de camions avec rigueur et réactivité.' },
-  { icone: '/assets/nos prestations/cross-docking.png',     titre: 'Cross Docking',             desc: 'Transfert direct de marchandises sans stockage intermédiaire pour optimiser vos flux.' },
-  { icone: '/assets/nos prestations/trier.png',             titre: 'Triage',                    desc: 'Tri rigoureux de vos marchandises selon vos critères de classification.' },
-  { icone: '/assets/nos prestations/qualite.png',           titre: 'Contrôle Qualité',          desc: 'Contrôles quantitatifs et qualitatifs (aspect extérieur) à réception de vos marchandises.' },
-  { icone: '/assets/nos prestations/palette.png',           titre: 'Palettisation',             desc: 'Mise sur palettes selon vos spécifications pour une manutention optimale.' },
-  { icone: '/assets/nos prestations/film-plastique.png',    titre: 'Filmage & Cerclage',        desc: 'Sécurisation de vos palettes par filmage et cerclage pour un transport en toute sécurité.' },
-  { icone: '/assets/nos prestations/preparation-de-commande.png', titre: 'Préparation de commande', desc: 'Picking précis et préparation de commandes adaptés à vos besoins logistiques.' },
-  { icone: '/assets/nos prestations/reconditionnemenent.png', titre: 'Reconditionnement',       desc: 'Remise en état et reconditionnement de vos produits selon vos exigences.' },
-  { icone: '/assets/nos prestations/transport-de-livraison.png', titre: 'Transport',            desc: 'Fret conventionnel et traction conteneur depuis et vers le port du Havre.' },
+  { icone: '/assets/nos prestations/depotage-empotage.png', titre: 'Dépotage & Empotage',      desc: 'Déchargement et chargement de conteneurs et de camions avec rigueur et réactivité.',       key: 'depotage' },
+  { icone: '/assets/nos prestations/cross-docking.png',     titre: 'Cross Docking',             desc: 'Transfert direct de marchandises sans stockage intermédiaire pour optimiser vos flux.',     key: 'crossdocking' },
+  { icone: '/assets/nos prestations/trier.png',             titre: 'Triage',                    desc: 'Tri rigoureux de vos marchandises selon vos critères de classification.',                   key: 'triage' },
+  { icone: '/assets/nos prestations/qualite.png',           titre: 'Contrôle Qualité',          desc: 'Contrôles quantitatifs et qualitatifs (aspect extérieur) à réception de vos marchandises.', key: 'qualite' },
+  { icone: '/assets/nos prestations/palette.png',           titre: 'Palettisation',             desc: 'Mise sur palettes selon vos spécifications pour une manutention optimale.',                key: 'palettisation' },
+  { icone: '/assets/nos prestations/film-plastique.png',    titre: 'Filmage & Cerclage',        desc: 'Sécurisation de vos palettes par filmage et cerclage pour un transport en toute sécurité.', key: 'filmage' },
+  { icone: '/assets/nos prestations/preparation-de-commande.png', titre: 'Préparation de commande', desc: 'Picking précis et préparation de commandes adaptés à vos besoins logistiques.',       key: 'preparation' },
+  { icone: '/assets/nos prestations/reconditionnemenent.png', titre: 'Reconditionnement',       desc: 'Remise en état et reconditionnement de vos produits selon vos exigences.',                 key: 'reconditionnement' },
+  { icone: '/assets/nos prestations/transport-de-livraison.png', titre: 'Transport',            desc: 'Fret conventionnel et traction conteneur depuis et vers le port du Havre.',                key: 'transport' },
 ];
 
 const equipements = [
-  { ico: '/assets/carousel-equipement/entrepots.png',         val: '8 000 m²', label: 'Entrepôt sous douane' },
-  { ico: '/assets/carousel-equipement/pallet.png',            val: '8 000',    label: 'Palettes de stockage' },
-  { ico: '/assets/carousel-equipement/banderoleuse.png',      val: '5',        label: 'Banderoleuses' },
-  { ico: '/assets/carousel-equipement/chaine-de-tri.png',     val: '1',        label: 'Chaîne de tri' },
-  { ico: '/assets/carousel-equipement/chariot-elevateur.png', val: '10',       label: 'Chariots élévateurs 1,6T – 5T' },
-  { ico: '/assets/carousel-equipement/videosurveillance.png', val: '22',       label: 'Caméras sécurité 24/7' },
-  { ico: '/assets/carousel-equipement/wms.png',               val: '1',        label: 'WMS gestion des stocks' },
-  { ico: '/assets/carousel-equipement/tracteur-de-parc.png',  val: '1',        label: 'Tracteur de parc' },
-  { ico: '/assets/carousel-equipement/equipe.png',           val: '15',       label: 'Collaborateurs' },
-  { ico: '/assets/carousel-equipement/quais.png',            val: '50',       label: 'Quais de chargement' },
+  { ico: '/assets/carousel-equipement/entrepots.png',         val: '8 000 m²', label: 'Entrepôt sous douane',         key: 'entrepot' },
+  { ico: '/assets/carousel-equipement/pallet.png',            val: '8 000',    label: 'Palettes de stockage',         key: 'palettes' },
+  { ico: '/assets/carousel-equipement/banderoleuse.png',      val: '5',        label: 'Banderoleuses',                key: 'banderoleuses' },
+  { ico: '/assets/carousel-equipement/chaine-de-tri.png',     val: '1',        label: 'Chaîne de tri',                key: 'chaine' },
+  { ico: '/assets/carousel-equipement/chariot-elevateur.png', val: '10',       label: 'Chariots élévateurs 1,6T – 5T', key: 'chariots' },
+  { ico: '/assets/carousel-equipement/videosurveillance.png', val: '22',       label: 'Caméras sécurité 24/7',        key: 'cameras' },
+  { ico: '/assets/carousel-equipement/wms.png',               val: '1',        label: 'WMS gestion des stocks',       key: 'wms' },
+  { ico: '/assets/carousel-equipement/tracteur-de-parc.png',  val: '1',        label: 'Tracteur de parc',             key: 'tracteur' },
+  { ico: '/assets/carousel-equipement/equipe.png',           val: '15',       label: 'Collaborateurs',               key: 'collaborateurs' },
+  { ico: '/assets/carousel-equipement/quais.png',            val: '50',       label: 'Quais de chargement',          key: 'quais' },
 ];
 ---
 
@@ -38,15 +38,15 @@ const equipements = [
     <div class="hero__bg-photo" aria-hidden="true"></div>
     <div class="hero__overlay" aria-hidden="true"></div>
     <div class="container hero__inner animate-in">
-      <p class="hero__eyebrow">Depuis 2017 · Le Havre</p>
-      <h1 class="hero__titre">Votre partenaire <span>logistique</span><br />au cœur du port du Havre</h1>
-      <p class="hero__desc">
+      <p class="hero__eyebrow" data-i18n="hero.eyebrow">Depuis 2017 · Le Havre</p>
+      <h1 class="hero__titre" data-i18n-html="hero.title">Votre partenaire <span>logistique</span><br />au cœur du port du Havre</h1>
+      <p class="hero__desc" data-i18n-html="hero.desc">
         PR Logistics est un prestataire indépendant spécialisé dans la <span class="hero__desc-rouge">logistique portuaire</span> et le <span class="hero__desc-rouge">transport</span>.
         Entrepôt sous douane de <span class="hero__desc-rouge">8 000 m²</span>, solutions sur mesure, réactivité garantie.
       </p>
       <div class="hero__ctas">
-        <a href="/contact" class="btn btn--rouge">Nous contacter</a>
-        <a href="/devis" class="btn btn--outline hero__btn-outline">Demander un devis</a>
+        <a href="/contact" class="btn btn--rouge" data-i18n="hero.cta.contact">Nous contacter</a>
+        <a href="/devis" class="btn btn--outline hero__btn-outline" data-i18n="hero.cta.devis">Demander un devis</a>
       </div>
     </div>
     <div class="hero__scroll" aria-hidden="true">
@@ -58,9 +58,9 @@ const equipements = [
   <section class="section section--gris prestations-section">
     <div class="container">
       <div class="reveal" style="text-align:center; margin-bottom: 3.5rem;">
-        <p class="eyebrow-rouge">Ce que nous faisons</p>
-        <h2 class="titre-section">Nos <span>prestations</span></h2>
-        <p class="sous-titre" style="margin: 1rem auto 0;">
+        <p class="eyebrow-rouge" data-i18n="prestations.eyebrow">Ce que nous faisons</p>
+        <h2 class="titre-section" data-i18n-html="prestations.title">Nos <span>prestations</span></h2>
+        <p class="sous-titre" style="margin: 1rem auto 0;" data-i18n="prestations.subtitle">
           Une gamme complète de services logistiques adaptée aux exigences du commerce international.
         </p>
       </div>
@@ -70,8 +70,8 @@ const equipements = [
             <div class="prestation-carte__icone">
               <img src={p.icone} alt={p.titre} width="48" height="48" loading="lazy" />
             </div>
-            <h3 class="prestation-carte__titre">{p.titre}</h3>
-            <p class="prestation-carte__desc">{p.desc}</p>
+            <h3 class="prestation-carte__titre" data-i18n={`prestation.${p.key}.titre`}>{p.titre}</h3>
+            <p class="prestation-carte__desc" data-i18n={`prestation.${p.key}.desc`}>{p.desc}</p>
             <div class="prestation-carte__accent"></div>
           </div>
         ))}
@@ -83,9 +83,9 @@ const equipements = [
   <section class="section moyens">
     <div class="container">
       <div class="reveal" style="text-align:center; margin-bottom:3.5rem;">
-        <p class="eyebrow-rouge">Nos équipements</p>
-        <h2 class="titre-section">Des moyens à la <span>hauteur</span></h2>
-        <p class="sous-titre" style="margin:1rem auto 0;">
+        <p class="eyebrow-rouge" data-i18n="moyens.eyebrow">Nos équipements</p>
+        <h2 class="titre-section" data-i18n-html="moyens.title">Des moyens à la <span>hauteur</span></h2>
+        <p class="sous-titre" style="margin:1rem auto 0;" data-i18n="moyens.subtitle">
           PR Logistics dispose d'un entrepôt de 8 000 m² sur un terrain de 18 500 m² entièrement clos,
           télésurveillé 24h/7j par la sécurité portuaire.
         </p>
@@ -98,7 +98,7 @@ const equipements = [
               <div class="c3d-card" data-index={i}>
                 <img class="c3d-card__ico" src={e.ico} alt={e.label} width="46" height="46" loading="lazy" />
                 <span class="c3d-card__val">{e.val}</span>
-                <span class="c3d-card__label">{e.label}</span>
+                <span class="c3d-card__label" data-i18n={`equip.${e.key}`}>{e.label}</span>
               </div>
             ))}
           </div>
@@ -120,13 +120,13 @@ const equipements = [
     <div class="cta-blob cta-blob--2" aria-hidden="true"></div>
     <div class="container" style="position:relative;">
       <div class="cta-bloc reveal">
-        <h2 class="titre-section">Prêt à optimiser votre <span>logistique</span> ?</h2>
-        <p style="color:var(--gris-moyen); max-width:520px; margin: 1.2rem auto 0; font-size:1.1rem;">
+        <h2 class="titre-section" data-i18n-html="cta.title">Prêt à optimiser votre <span>logistique</span> ?</h2>
+        <p style="color:var(--gris-moyen); max-width:520px; margin: 1.2rem auto 0; font-size:1.1rem;" data-i18n="cta.subtitle">
           Contactez-nous dès aujourd'hui pour étudier ensemble vos besoins logistiques.
         </p>
         <div style="display:flex; gap:1rem; justify-content:center; margin-top:2.5rem; flex-wrap:wrap;">
-          <a href="/contact" class="btn btn--rouge">Nous contacter</a>
-          <a href="/devis" class="btn btn--outline">Demander un devis</a>
+          <a href="/contact" class="btn btn--rouge" data-i18n="cta.contact">Nous contacter</a>
+          <a href="/devis" class="btn btn--outline" data-i18n="cta.devis">Demander un devis</a>
         </div>
       </div>
     </div>
