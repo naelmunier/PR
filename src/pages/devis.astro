@@ -201,6 +201,9 @@ const departementsJson = JSON.stringify(departements);
           </div>
         </div>
 
+        <!-- Message d'erreur d'envoi -->
+        <p id="sendError" hidden style="color:#e30613; font-size:0.88rem; margin-bottom:0.8rem; text-align:right;"></p>
+
         <!-- Pied de formulaire -->
         <div class="form-footer">
           <p class="form-footer__mention">
@@ -221,7 +224,7 @@ const departementsJson = JSON.stringify(departements);
           <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         </div>
         <h3>Demande envoyée !</h3>
-        <p>Un récapitulatif PDF a été téléchargé.<br />Notre équipe vous contactera sous 24h.</p>
+        <p>Un email de confirmation avec votre devis en PDF a été envoyé à votre adresse.<br />Notre équipe vous contactera sous 24h.</p>
         <a href="/" class="btn btn--outline" style="margin-top:1.5rem;">Retour à l'accueil</a>
       </div>
     </div>
@@ -546,37 +549,18 @@ const departementsJson = JSON.stringify(departements);
     return doc;
   }
 
-  // ── Envoi via mailto (TO: PR Logistics, CC: client) ──────────
-  function sendMailto(data) {
-    const totalPal = data.lots.reduce((s, l) => s + (parseInt(l.palettes)||0), 0);
-    const lotsText = data.lots.map((l, i) =>
-      `  Lot ${i+1} : ${l.palettes} palette(s) — Format ${l.taille} — Contenu : ${l.contenu}`
-    ).join('\n');
-
-    const sujet = `Demande de devis via le site — ${data.nom} — ${totalPal} palette(s) — ${data.depart_ville} → ${data.arrivee_ville}`;
-    const corps =
-`Demande de devis PR Logistics
-==============================
-
-Client : ${data.nom}
-Email  : ${data.email}${data.telephone ? '\nTél    : '+data.telephone : ''}
-
-TRANSPORT
----------
-Départ   : ${data.depart_ville} (${deptLabel(data.depart_dept)})
-Livraison: ${data.arrivee_ville} (${deptLabel(data.arrivee_dept)})
-
-MARCHANDISE
------------
-${lotsText}
-Total : ${totalPal} palette(s)${data.message ? '\n\nINFORMATIONS COMPLÉMENTAIRES\n'+data.message : ''}
-
----
-PR Logistics · PLPN 1 – Port 4935, 76700 Rogerville
-02.32.72.48.03 · lehavre@pr-logistics.fr`;
-
-    const url = `mailto:${PR_EMAIL}?cc=${encodeURIComponent(data.email)}&subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`;
-    window.location.href = url;
+  // ── Envoi via PHP + Brevo API ────────────────────────────────────
+  async function sendToServer(data, pdfBase64) {
+    try {
+      const res = await fetch('/send-devis.php', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ ...data, pdf_base64: pdfBase64 }),
+      });
+      return await res.json();
+    } catch (err) {
+      return { success: false, error: err.message };
+    }
   }
 
   // ── Initialisation ────────────────────────────────────────────
@@ -627,23 +611,40 @@ PR Logistics · PLPN 1 – Port 4935, 76700 Rogerville
       let tries = 0;
       while (!window.jspdf && tries++ < 20) await new Promise(r => setTimeout(r, 200));
 
-      // Télécharger le PDF
+      // Générer le PDF et extraire le base64
       const pdf = generatePDF(data);
+      let pdfBase64 = null;
+      if (pdf) {
+        const dataUri = pdf.output('datauristring');
+        pdfBase64 = dataUri.split(',')[1];
+      }
+
+      // Envoyer au serveur PHP
+      label.textContent = 'Envoi des emails…';
+      const result = await sendToServer(data, pdfBase64);
+
+      if (!result.success) {
+        // Erreur serveur : on repasse en mailto de secours
+        btn.disabled = false;
+        label.textContent = 'Envoyer ma demande';
+        const errMsg = document.getElementById('sendError');
+        if (errMsg) {
+          errMsg.hidden = false;
+          errMsg.textContent = 'L\'envoi automatique a échoué. Veuillez réessayer ou nous contacter directement.';
+        }
+        return;
+      }
+
+      // Télécharger le PDF en local
       if (pdf) pdf.save(`Devis_PR_Logistics_${data.nom.replace(/\s+/g,'_')}.pdf`);
 
-      // Ouvrir le client mail (TO: PR, CC: client)
-      label.textContent = 'Ouverture du mail…';
-      setTimeout(() => sendMailto(data), 300);
-
       // Afficher la confirmation
+      form.style.transition = 'opacity 0.4s';
+      form.style.opacity = '0';
       setTimeout(() => {
-        form.style.transition = 'opacity 0.4s';
-        form.style.opacity = '0';
-        setTimeout(() => {
-          form.hidden = true;
-          success.hidden = false;
-        }, 380);
-      }, 400);
+        form.hidden = true;
+        success.hidden = false;
+      }, 380);
     });
 
     form?.addEventListener('input', e => e.target.classList.remove('input--error'));
