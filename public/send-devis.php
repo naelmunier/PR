@@ -163,178 +163,175 @@ $lotsTable  = buildLotsTable($lotsHtml, $totalPalettes);
 $telLigne   = $telephone ? "<p style='margin:4px 0;'>📞 $telephone</p>" : '';
 $msgLigne   = $message   ? "<p style='margin-top:12px;'><strong>Informations complémentaires :</strong><br>$message</p>" : '';
 
-// ── Bloc détails service (selon le type) ────────────────────────
+// ── Helpers HTML ────────────────────────────────────────────────
 function row(string $label, string $value): string {
     if (!$value) return '';
     return "<p style='margin:4px 0; font-size:13px;'><strong>$label :</strong> $value</p>";
 }
 
-$blocService = '';
-if ($service === 'depotage') {
-    $blocService = "
-    <div style='background:#f9f9f9; border-radius:8px; padding:20px 24px; margin-bottom:24px;'>
-      <h3 style='margin:0 0 12px; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:#e30613;'>Détails de l'opération</h3>
-      " . row('Type d\'opération', $depotOpLabel)
-      . row('Nombre de conteneurs', $depotNb ? "$depotNb conteneur(s)" : '')
-      . row('Type de conteneur', $depotTypeLabel)
-      . row('Date souhaitée', $depotDate)
-      . row('Port / Terminal', $depotPort)
-      . row('Poids estimé', $depotPoids ? "$depotPoids $depotPoidsU" : '') . "
-    </div>";
-} elseif ($service === 'transport' || $service === 'traction') {
-    $titreSection = $service === 'traction' ? 'Itinéraire de traction' : 'Transport';
-    $labelDepart  = $service === 'traction' ? 'Point d\'enlèvement' : 'Adresse de départ';
-    $labelArrivee = $service === 'traction' ? 'Point de livraison' : 'Adresse de livraison';
-    $blocService = "
-    <div style='background:#f9f9f9; border-radius:8px; padding:20px 24px; margin-bottom:24px;'>
-      <h3 style='margin:0 0 12px; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:#e30613;'>$titreSection</h3>
-      " . row($labelDepart, $departVille ? "$departVille ($departDept)" : '')
-      . row($labelArrivee, $arriveVille ? "$arriveVille ($arriveDept)" : '');
-    if ($service === 'traction') {
-        $blocService .= row('Véhicule', $tracVehicule)
-            . row('Poids total', $tracPoids ? "$tracPoids $tracPoidsU" : '')
-            . row('Date souhaitée', $tracDate);
-    }
-    $blocService .= "</div>";
-} elseif ($service === 'stockage') {
-    $siteStockage = $stockVille ? "$stockVille ($stockDept)" : 'Port du Havre — 76700 Rogerville (entrepôt PR Logistics)';
-    $condsStr     = !empty($stockConds) ? implode(', ', $stockConds) : '';
-    $blocService = "
-    <div style='background:#f9f9f9; border-radius:8px; padding:20px 24px; margin-bottom:24px;'>
-      <h3 style='margin:0 0 12px; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:#e30613;'>Conditions de stockage</h3>
-      " . row('Site de stockage', $siteStockage)
-      . row('Poids estimé', $stockPoids ? "$stockPoids $stockPoidsU" : '')
-      . row('Durée souhaitée', $stockDuree)
-      . row('Date d\'entrée', $stockEntree)
-      . row('Date de sortie estimée', $stockSortie)
-      . row('Conditions particulières', $condsStr) . "
+function section(string $titre, string $contenu, string $accent = '#e30613'): string {
+    if (!trim($contenu)) return '';
+    return "
+    <div style='background:#f9f9f9; border-radius:8px; padding:20px 24px; margin-bottom:20px;'>
+      <h3 style='margin:0 0 12px; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:$accent;'>$titre</h3>
+      $contenu
     </div>";
 }
 
+// ── Blocs de contenu par service ─────────────────────────────────
+
+// Coordonnées client (commun)
+$blocCoordonnees = row('Nom / Société', $nom)
+    . row('Email', $clientEmail)
+    . ($telephone ? "<p style='margin:4px 0; font-size:13px;'><strong>Téléphone :</strong> $telephone</p>" : '');
+
+// Détails selon le service
+$blocDetails = '';
+$blocMarchandise = "
+    <table width='100%' cellpadding='0' cellspacing='0' style='border-collapse:collapse; font-size:13px; margin-top:8px;'>
+      <thead>
+        <tr style='background:#e30613; color:#fff;'>
+          <th style='padding:8px 12px; text-align:left;'>Lot</th>
+          <th style='padding:8px 12px; text-align:left;'>Palettes</th>
+          <th style='padding:8px 12px; text-align:left;'>Format</th>
+          <th style='padding:8px 12px; text-align:left;'>Type</th>
+          <th style='padding:8px 12px; text-align:left;'>Contenu</th>
+        </tr>
+      </thead>
+      <tbody>
+        $lotsHtml
+        <tr style='background:#fff3f3; font-weight:700;'>
+          <td colspan='1' style='padding:8px 12px; color:#e30613;'>TOTAL</td>
+          <td style='padding:8px 12px; color:#e30613;'>$totalPalettes palette(s)</td>
+          <td colspan='3'></td>
+        </tr>
+      </tbody>
+    </table>"
+    . ($message ? "<p style='margin-top:12px; font-size:13px;'><strong>Informations complémentaires :</strong><br>$message</p>" : '');
+
+if ($service === 'depotage') {
+    $blocDetails = row('Type d\'opération', $depotOpLabel)
+        . row('Nombre de conteneurs', $depotNb ? "$depotNb conteneur(s)" : '')
+        . row('Type de conteneur', $depotTypeLabel)
+        . row('Date souhaitée', $depotDate)
+        . row('Port / Terminal', $depotPort)
+        . row('Poids estimé', $depotPoids ? "$depotPoids $depotPoidsU" : '');
+
+} elseif ($service === 'transport') {
+    $blocDetails = row('Adresse de départ', $departVille ? "$departVille ($departDept)" : '')
+        . row('Adresse de livraison', $arriveVille ? "$arriveVille ($arriveDept)" : '');
+
+} elseif ($service === 'traction') {
+    $blocDetails = row('Point d\'enlèvement', $departVille ? "$departVille ($departDept)" : '')
+        . row('Point de livraison', $arriveVille ? "$arriveVille ($arriveDept)" : '')
+        . row('Type de véhicule', $tracVehicule)
+        . row('Poids total', $tracPoids ? "$tracPoids $tracPoidsU" : '')
+        . row('Date souhaitée', $tracDate);
+
+} elseif ($service === 'stockage') {
+    $siteStockage = $stockVille ? "$stockVille ($stockDept)" : 'Port du Havre — 76700 Rogerville (entrepôt PR Logistics)';
+    $condsStr     = !empty($stockConds) ? implode(', ', $stockConds) : '';
+    $blocDetails  = row('Site de stockage', $siteStockage)
+        . row('Durée souhaitée', $stockDuree)
+        . row('Date d\'entrée', $stockEntree)
+        . row('Date de sortie estimée', $stockSortie)
+        . row('Poids estimé', $stockPoids ? "$stockPoids $stockPoidsU" : '')
+        . row('Conditions particulières', $condsStr);
+}
+
+// Titres des sections selon le service
+$titreDetails = [
+    'depotage'  => 'Détails de l\'opération',
+    'transport' => 'Transport',
+    'traction'  => 'Itinéraire de traction',
+    'stockage'  => 'Conditions de stockage',
+][$service] ?? 'Détails';
+
+// ── Email 1 : Confirmation client ───────────────────────────────
 $htmlClient = "
 <!DOCTYPE html>
 <html lang='fr'>
 <head><meta charset='UTF-8'></head>
-<body style='margin:0; padding:0; background:#f5f5f7; font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;'>
-  <table width='100%' cellpadding='0' cellspacing='0' style='background:#f5f5f7; padding:40px 0;'>
-    <tr><td align='center'>
-      <table width='600' cellpadding='0' cellspacing='0' style='background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.08);'>
+<body style='margin:0;padding:0;background:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;'>
+<table width='100%' cellpadding='0' cellspacing='0' style='background:#f5f5f7;padding:40px 0;'>
+<tr><td align='center'>
+<table width='600' cellpadding='0' cellspacing='0' style='background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.08);'>
 
-        <!-- En-tête rouge -->
-        <tr>
-          <td style='background:#e30613; padding:28px 36px;'>
-            <h1 style='margin:0; color:#ffffff; font-size:22px; font-weight:700;'>PR Logistics</h1>
-            <p style='margin:4px 0 0; color:rgba(255,255,255,0.8); font-size:13px;'>Prestataire logistique & transport · Le Havre</p>
-          </td>
-        </tr>
+  <tr><td style='background:#e30613;padding:28px 36px;'>
+    <h1 style='margin:0;color:#fff;font-size:22px;font-weight:700;'>PR Logistics</h1>
+    <p style='margin:4px 0 0;color:rgba(255,255,255,0.8);font-size:13px;'>Prestataire logistique &amp; transport · Le Havre</p>
+  </td></tr>
 
-        <!-- Corps -->
-        <tr>
-          <td style='padding:32px 36px;'>
-            <h2 style='margin:0 0 8px; font-size:18px; color:#1d1d1f;'>Votre demande de devis a bien été reçue ✅</h2>
-            <p style='margin:0 0 24px; color:#666; font-size:14px; line-height:1.6;'>
-              Bonjour <strong>$nom</strong>, merci pour votre demande. Notre équipe l'a reçue et vous contactera dans les plus brefs délais.
-            </p>
+  <tr><td style='padding:32px 36px;'>
+    <h2 style='margin:0 0 8px;font-size:18px;color:#1d1d1f;'>Votre demande de devis a bien été reçue ✅</h2>
+    <p style='margin:0 0 24px;color:#666;font-size:14px;line-height:1.6;'>
+      Bonjour <strong>$nom</strong>, merci pour votre demande. Notre équipe l'a reçue et vous enverra un devis personnalisé sous 24h.
+    </p>
 
-            <!-- Référence & service -->
-            <div style='background:#f9f9f9; border-radius:8px; padding:20px 24px; margin-bottom:24px;'>
-              <h3 style='margin:0 0 12px; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:#e30613;'>Récapitulatif</h3>
-              <p style='margin:4px 0; font-size:13px;'><strong>Référence :</strong> $ref</p>
-              <p style='margin:4px 0; font-size:13px;'><strong>Date :</strong> $date</p>
-              <p style='margin:4px 0; font-size:13px;'><strong>Service demandé :</strong> $serviceLabel</p>
-              <p style='margin:4px 0; font-size:13px;'><strong>Nom / Société :</strong> $nom</p>
-              $telLigne
-            </div>
+    " . section('Récapitulatif',
+        "<p style='margin:4px 0;font-size:13px;'><strong>Référence :</strong> $ref</p>"
+      . "<p style='margin:4px 0;font-size:13px;'><strong>Date :</strong> $date</p>"
+      . "<p style='margin:4px 0;font-size:13px;'><strong>Service demandé :</strong> $serviceLabel</p>"
+    ) . "
 
-            <!-- Détails selon le service -->
-            $blocService
+    " . section('Vos coordonnées', $blocCoordonnees) . "
 
-            <!-- Marchandise -->
-            <div style='background:#f9f9f9; border-radius:8px; padding:20px 24px; margin-bottom:24px;'>
-              <h3 style='margin:0 0 12px; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:#e30613;'>Détail de la marchandise ($totalPalettes palette(s))</h3>
-              $lotsTable
-              $msgLigne
-            </div>
+    " . section($titreDetails, $blocDetails) . "
 
-            <p style='font-size:13px; color:#666; line-height:1.6;'>
-              Notre équipe va étudier votre demande et vous enverra un devis personnalisé sous 24h.<br>
-              Pour toute question, contactez-nous à
-              <a href='mailto:lehavre@pr-logistics.fr' style='color:#e30613;'>lehavre@pr-logistics.fr</a>
-              ou au <strong>02.32.72.48.03</strong>.
-            </p>
-          </td>
-        </tr>
+    " . section("Détails de la marchandise ($totalPalettes palette(s))", $blocMarchandise) . "
 
-        <!-- Pied de page -->
-        <tr>
-          <td style='background:#f5f5f7; padding:16px 36px; border-top:1px solid #e8e8e8;'>
-            <p style='margin:0; font-size:12px; color:#999; text-align:center;'>
-              PR Logistics · PLPN 1 – Port 4935, 76700 Rogerville<br>
-              02.32.72.48.03 · lehavre@pr-logistics.fr
-            </p>
-          </td>
-        </tr>
+    <p style='font-size:13px;color:#666;line-height:1.6;margin-top:8px;'>
+      Pour toute question, contactez-nous à
+      <a href='mailto:lehavre@pr-logistics.fr' style='color:#e30613;'>lehavre@pr-logistics.fr</a>
+      ou au <strong>02.32.72.48.03</strong>.
+    </p>
+  </td></tr>
 
-      </table>
-    </td></tr>
-  </table>
+  <tr><td style='background:#f5f5f7;padding:16px 36px;border-top:1px solid #e8e8e8;'>
+    <p style='margin:0;font-size:12px;color:#999;text-align:center;'>
+      PR Logistics · PLPN 1 – Port 4935, 76700 Rogerville<br>
+      02.32.72.48.03 · lehavre@pr-logistics.fr
+    </p>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
 </body>
 </html>";
 
-// ── Email 2 : Notification interne à PR Logistics ─────────────────
+// ── Email 2 : Notification interne PR Logistics ──────────────────
 $htmlPR = "
 <!DOCTYPE html>
 <html lang='fr'>
 <head><meta charset='UTF-8'></head>
-<body style='margin:0; padding:0; background:#f5f5f7; font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;'>
-  <table width='100%' cellpadding='0' cellspacing='0' style='background:#f5f5f7; padding:40px 0;'>
-    <tr><td align='center'>
-      <table width='600' cellpadding='0' cellspacing='0' style='background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.08);'>
+<body style='margin:0;padding:0;background:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;'>
+<table width='100%' cellpadding='0' cellspacing='0' style='background:#f5f5f7;padding:40px 0;'>
+<tr><td align='center'>
+<table width='600' cellpadding='0' cellspacing='0' style='background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.08);'>
 
-        <tr>
-          <td style='background:#1b2a4a; padding:28px 36px;'>
-            <h1 style='margin:0; color:#ffffff; font-size:18px; font-weight:700;'>🔔 Nouvelle demande de devis</h1>
-            <p style='margin:4px 0 0; color:rgba(255,255,255,0.6); font-size:13px;'>Reçue le $date · Réf. $ref</p>
-          </td>
-        </tr>
+  <tr><td style='background:#1b2a4a;padding:28px 36px;'>
+    <h1 style='margin:0;color:#fff;font-size:18px;font-weight:700;'>🔔 Nouvelle demande de devis — $serviceLabel</h1>
+    <p style='margin:4px 0 0;color:rgba(255,255,255,0.6);font-size:13px;'>Reçue le $date · Réf. $ref</p>
+  </td></tr>
 
-        <tr>
-          <td style='padding:32px 36px;'>
+  <tr><td style='padding:32px 36px;'>
 
-            <!-- Contact -->
-            <div style='background:#f9f9f9; border-radius:8px; padding:20px 24px; margin-bottom:20px;'>
-              <h3 style='margin:0 0 12px; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:#1b2a4a;'>Client</h3>
-              <p style='margin:4px 0; font-size:14px;'><strong>$nom</strong></p>
-              <p style='margin:4px 0; font-size:13px;'><a href='mailto:$clientEmail' style='color:#e30613;'>$clientEmail</a></p>
-              $telLigne
-            </div>
+    " . section('Client', $blocCoordonnees, '#1b2a4a') . "
 
-            <!-- Transport -->
-            <div style='background:#f9f9f9; border-radius:8px; padding:20px 24px; margin-bottom:20px;'>
-              <h3 style='margin:0 0 12px; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:#1b2a4a;'>Transport</h3>
-              <p style='margin:4px 0; font-size:13px;'><strong>Départ :</strong> $departVille ($departDept)</p>
-              <p style='margin:4px 0; font-size:13px;'><strong>Livraison :</strong> $arriveVille ($arriveDept)</p>
-            </div>
+    " . section($titreDetails, $blocDetails, '#1b2a4a') . "
 
-            <!-- Marchandise -->
-            <div style='background:#f9f9f9; border-radius:8px; padding:20px 24px; margin-bottom:20px;'>
-              <h3 style='margin:0 0 12px; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:#1b2a4a;'>Marchandise — $totalPalettes palette(s)</h3>
-              $lotsTable
-              $msgLigne
-            </div>
+    " . section("Marchandise ($totalPalettes palette(s))", $blocMarchandise, '#1b2a4a') . "
 
-          </td>
-        </tr>
+  </td></tr>
 
-        <tr>
-          <td style='background:#f5f5f7; padding:16px 36px; border-top:1px solid #e8e8e8;'>
-            <p style='margin:0; font-size:12px; color:#999; text-align:center;'>Email généré automatiquement par le formulaire de devis · pr-logistics.fr</p>
-          </td>
-        </tr>
+  <tr><td style='background:#f5f5f7;padding:16px 36px;border-top:1px solid #e8e8e8;'>
+    <p style='margin:0;font-size:12px;color:#999;text-align:center;'>Email généré automatiquement · pr-logistics.fr</p>
+  </td></tr>
 
-      </table>
-    </td></tr>
-  </table>
+</table>
+</td></tr>
+</table>
 </body>
 </html>";
 
