@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // ── Configuration ────────────────────────────────────────────────
-define('BREVO_API_KEY', 'VOTRE_CLE_API_BREVO_ICI');
+define('BREVO_API_KEY', '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');
 define('PR_EMAIL',      'lehavre@pr-logistics.fr');
 define('PR_NOM',        'PR Logistics');
 
