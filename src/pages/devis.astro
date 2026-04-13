@@ -771,22 +771,22 @@ const departementsJson = JSON.stringify(departements);
       </div>
       <div class="lot-card__fields lot-card__fields--row1">
         <div class="form-group">
-          <label class="form-label" for="pal_${id}">Nombre de palettes</label>
+          <label class="form-label" for="pal_${id}">Nombre de palettes <span class="req-star">*</span></label>
           <input type="number" name="pal_${id}" id="pal_${id}" min="1" max="9999" class="form-input" placeholder="Ex : 5" required />
         </div>
         <div class="form-group">
-          <label class="form-label" for="tai_${id}">Taille des palettes</label>
+          <label class="form-label" for="tai_${id}">Taille des palettes <span class="req-star">*</span></label>
           ${selectHTML(`tai_${id}`, `tai_${id}`)}
         </div>
       </div>
       <div class="lot-card__fields lot-card__fields--row2">
         <div class="form-group">
-          <label class="form-label" for="typ_${id}">Type de marchandise</label>
+          <label class="form-label" for="typ_${id}">Type de marchandise <span class="req-star">*</span></label>
           ${typeSelectHTML(`typ_${id}`, `typ_${id}`)}
         </div>
         <div class="form-group">
-          <label class="form-label" for="con_${id}">Contenu de la marchandise</label>
-          <input type="text" name="con_${id}" id="con_${id}" class="form-input" placeholder="Ex : Électronique, textile…" required />
+          <label class="form-label" for="con_${id}">Contenu de la marchandise <span class="label-optional">Optionnel</span></label>
+          <input type="text" name="con_${id}" id="con_${id}" class="form-input" placeholder="Ex : Électronique, textile…" />
         </div>
       </div>`;
     div.querySelector('.btn-remove-lot').addEventListener('click', () => removeLot(id, div));
@@ -1166,8 +1166,7 @@ const departementsJson = JSON.stringify(departements);
         return;
       }
 
-      // Télécharger le PDF
-      if (pdf) pdf.save(`Devis_PR_Logistics_${data.nom.replace(/\s+/g,'_')}.pdf`);
+      // PDF envoyé par mail uniquement — pas de téléchargement direct
 
       // Afficher la confirmation
       form.style.transition = 'opacity 0.4s';
@@ -1632,6 +1631,7 @@ const departementsJson = JSON.stringify(departements);
 
   :global(.label-icon)    { width:13px; height:13px; color:var(--rouge); flex-shrink:0; }
   :global(.label-optional){ font-size:0.7rem; font-weight:500; color:#bbb; text-transform:none; letter-spacing:0; }
+  :global(.req-star)      { color:var(--rouge); font-size:0.85rem; font-weight:700; margin-left:1px; }
 
   :global(.form-input) {
     width: 100%; padding: 0.7rem 1rem;
