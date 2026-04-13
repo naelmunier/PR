@@ -29,7 +29,7 @@ const currentPath = Astro.url.pathname;
       <!-- Sélecteur de langue dropdown -->
       <div class="lang-dropdown" id="langDropdown">
         <button class="lang-trigger" id="langTrigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Langue / Language">
-          <span class="lang-trigger__flag" id="langFlag">🇫🇷</span>
+          <img class="lang-trigger__flag" id="langFlag" src="/assets/home/france.png" alt="FR" width="20" height="20" />
           <span class="lang-trigger__code" id="langCode">FR</span>
           <svg class="lang-trigger__chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
             <polyline points="6 9 12 15 18 9"/>
@@ -38,13 +38,13 @@ const currentPath = Astro.url.pathname;
         <ul class="lang-menu" id="langMenu" role="listbox">
           <li>
             <button class="lang-option" data-lang-btn="fr" onclick="window.I18N.set('fr')" role="option" aria-label="Français">
-              <span class="lang-option__flag">🇫🇷</span>
+              <img class="lang-option__flag" src="/assets/home/france.png" alt="FR" width="22" height="22" />
               <span class="lang-option__name">Français</span>
             </button>
           </li>
           <li>
             <button class="lang-option" data-lang-btn="en" onclick="window.I18N.set('en')" role="option" aria-label="English">
-              <span class="lang-option__flag">🇬🇧</span>
+              <img class="lang-option__flag" src="/assets/home/english.png" alt="EN" width="22" height="22" />
               <span class="lang-option__name">English</span>
             </button>
           </li>
@@ -161,8 +161,11 @@ const currentPath = Astro.url.pathname;
   }
 
   .lang-trigger__flag {
-    font-size: 1rem;
-    line-height: 1;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    object-fit: cover;
+    flex-shrink: 0;
   }
 
   .lang-trigger__code {
@@ -234,8 +237,11 @@ const currentPath = Astro.url.pathname;
   }
 
   .lang-option__flag {
-    font-size: 1.1rem;
-    line-height: 1;
+    width: 22px;
+    height: 22px;
+    border-radius: 3px;
+    object-fit: cover;
+    flex-shrink: 0;
   }
 
   .lang-option__name {

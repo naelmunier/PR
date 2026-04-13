@@ -49,6 +49,9 @@ if (!$clientEmail) {
     exit;
 }
 
+// ── Langue du client ─────────────────────────────────────────────
+$lang = (isset($input['lang']) && $input['lang'] === 'en') ? 'en' : 'fr';
+
 // ── Données du formulaire ────────────────────────────────────────
 $nom          = htmlspecialchars($input['nom']          ?? '');
 $telephone    = htmlspecialchars($input['telephone']    ?? '');
@@ -86,22 +89,33 @@ $depotPort    = htmlspecialchars($input['depot_port']        ?? '');
 $depotPoids   = htmlspecialchars($input['depot_poids']       ?? '');
 $depotPoidsU  = htmlspecialchars($input['depot_poids_unite'] ?? 't');
 
-// Labels lisibles
-$serviceLabels = [
+// ── Labels bilingues ─────────────────────────────────────────────
+$serviceLabels = $lang === 'en' ? [
+    'depotage'  => 'Devanning / Stuffing',
+    'stockage'  => 'Storage',
+    'traction'  => 'Traction',
+    'transport' => 'Transport & Delivery',
+] : [
     'depotage'  => 'Dépotage / Empotage',
     'stockage'  => 'Stockage',
     'traction'  => 'Traction',
     'transport' => 'Transport & Livraison',
 ];
 $serviceLabel = $serviceLabels[$service] ?? $service;
-$depotOpLabel = $depotOp === 'depotage' ? 'Dépotage (Conteneur → Entrepôt)' : ($depotOp === 'empotage' ? 'Empotage (Entrepôt → Conteneur)' : '');
+
+if ($lang === 'en') {
+    $depotOpLabel = $depotOp === 'depotage' ? 'Devanning (Container → Warehouse)' : ($depotOp === 'empotage' ? 'Stuffing (Warehouse → Container)' : '');
+} else {
+    $depotOpLabel = $depotOp === 'depotage' ? 'Dépotage (Conteneur → Entrepôt)' : ($depotOp === 'empotage' ? 'Empotage (Entrepôt → Conteneur)' : '');
+}
+
 $conteneurLabels = [
     '20'     => "20' Standard",
     '40'     => "40' Standard",
     '40hc'   => "40' High Cube",
     '45hc'   => "45' High Cube",
-    'reefer' => 'Réfrigéré (Reefer)',
-    'autre'  => 'Autre / Spécial',
+    'reefer' => $lang === 'en' ? 'Refrigerated (Reefer)' : 'Réfrigéré (Reefer)',
+    'autre'  => $lang === 'en' ? 'Other / Special' : 'Autre / Spécial',
 ];
 $depotTypeLabel = $conteneurLabels[$depotType] ?? $depotType;
 
@@ -117,6 +131,7 @@ $date = (new DateTime())->format('d/m/Y à H:i');
 
 // ── Construction des lignes de lots (HTML) ────────────────────────
 $lotsHtml = '';
+$lotLabel = $lang === 'en' ? 'Lot' : 'Lot';
 foreach ($lots as $i => $lot) {
     $num     = $i + 1;
     $pal     = htmlspecialchars($lot['palettes'] ?? '');
@@ -124,10 +139,11 @@ foreach ($lots as $i => $lot) {
     $type    = htmlspecialchars($lot['type']      ?? '');
     $contenu = htmlspecialchars($lot['contenu']   ?? '');
     $bg      = $i % 2 === 0 ? '#ffffff' : '#f9f9f9';
+    $palText = $lang === 'en' ? "$pal pallet(s)" : "$pal palette(s)";
     $lotsHtml .= "
     <tr style='background:$bg;'>
-      <td style='padding:8px 12px; color:#666; font-weight:600;'>Lot $num</td>
-      <td style='padding:8px 12px;'>$pal palette(s)</td>
+      <td style='padding:8px 12px; color:#666; font-weight:600;'>$lotLabel $num</td>
+      <td style='padding:8px 12px;'>$palText</td>
       <td style='padding:8px 12px;'>$taille</td>
       <td style='padding:8px 12px;'>$type</td>
       <td style='padding:8px 12px;'>$contenu</td>
@@ -135,33 +151,35 @@ foreach ($lots as $i => $lot) {
 }
 
 // ── Template email commun (tableau de lots) ───────────────────────
-function buildLotsTable(string $lotsHtml, int $totalPalettes): string {
+function buildLotsTable(string $lotsHtml, int $totalPalettes, string $lang = 'fr'): string {
+    $hLot     = 'Lot';
+    $hPal     = $lang === 'en' ? 'Pallets'  : 'Palettes';
+    $hFormat  = $lang === 'en' ? 'Format'   : 'Format';
+    $hType    = $lang === 'en' ? 'Type'     : 'Type';
+    $hContent = $lang === 'en' ? 'Content'  : 'Contenu';
+    $tTotal   = 'TOTAL';
+    $tPal     = $lang === 'en' ? "$totalPalettes pallet(s)" : "$totalPalettes palette(s)";
     return "
     <table width='100%' cellpadding='0' cellspacing='0' style='border-collapse:collapse; font-size:13px; margin-top:8px;'>
       <thead>
         <tr style='background:#e30613; color:#fff;'>
-          <th style='padding:8px 12px; text-align:left;'>Lot</th>
-          <th style='padding:8px 12px; text-align:left;'>Palettes</th>
-          <th style='padding:8px 12px; text-align:left;'>Format</th>
-          <th style='padding:8px 12px; text-align:left;'>Type</th>
-          <th style='padding:8px 12px; text-align:left;'>Contenu</th>
+          <th style='padding:8px 12px; text-align:left;'>$hLot</th>
+          <th style='padding:8px 12px; text-align:left;'>$hPal</th>
+          <th style='padding:8px 12px; text-align:left;'>$hFormat</th>
+          <th style='padding:8px 12px; text-align:left;'>$hType</th>
+          <th style='padding:8px 12px; text-align:left;'>$hContent</th>
         </tr>
       </thead>
       <tbody>
         $lotsHtml
         <tr style='background:#fff3f3; font-weight:700;'>
-          <td colspan='1' style='padding:8px 12px; color:#e30613;'>TOTAL</td>
-          <td style='padding:8px 12px; color:#e30613;'>$totalPalettes palette(s)</td>
+          <td colspan='1' style='padding:8px 12px; color:#e30613;'>$tTotal</td>
+          <td style='padding:8px 12px; color:#e30613;'>$tPal</td>
           <td colspan='3'></td>
         </tr>
       </tbody>
     </table>";
 }
-
-// ── Email 1 : Confirmation au client ─────────────────────────────
-$lotsTable  = buildLotsTable($lotsHtml, $totalPalettes);
-$telLigne   = $telephone ? "<p style='margin:4px 0;'>📞 $telephone</p>" : '';
-$msgLigne   = $message   ? "<p style='margin-top:12px;'><strong>Informations complémentaires :</strong><br>$message</p>" : '';
 
 // ── Helpers HTML ────────────────────────────────────────────────
 function row(string $label, string $value): string {
@@ -181,76 +199,130 @@ function section(string $titre, string $contenu, string $accent = '#e30613'): st
 // ── Blocs de contenu par service ─────────────────────────────────
 
 // Coordonnées client (commun)
-$blocCoordonnees = row('Nom / Société', $nom)
-    . row('Email', $clientEmail)
-    . ($telephone ? "<p style='margin:4px 0; font-size:13px;'><strong>Téléphone :</strong> $telephone</p>" : '');
+if ($lang === 'en') {
+    $blocCoordonnees = row('Name / Company', $nom)
+        . row('Email', $clientEmail)
+        . ($telephone ? "<p style='margin:4px 0; font-size:13px;'><strong>Phone :</strong> $telephone</p>" : '');
+} else {
+    $blocCoordonnees = row('Nom / Société', $nom)
+        . row('Email', $clientEmail)
+        . ($telephone ? "<p style='margin:4px 0; font-size:13px;'><strong>Téléphone :</strong> $telephone</p>" : '');
+}
 
 // Détails selon le service
 $blocDetails = '';
-$blocMarchandise = "
-    <table width='100%' cellpadding='0' cellspacing='0' style='border-collapse:collapse; font-size:13px; margin-top:8px;'>
-      <thead>
-        <tr style='background:#e30613; color:#fff;'>
-          <th style='padding:8px 12px; text-align:left;'>Lot</th>
-          <th style='padding:8px 12px; text-align:left;'>Palettes</th>
-          <th style='padding:8px 12px; text-align:left;'>Format</th>
-          <th style='padding:8px 12px; text-align:left;'>Type</th>
-          <th style='padding:8px 12px; text-align:left;'>Contenu</th>
-        </tr>
-      </thead>
-      <tbody>
-        $lotsHtml
-        <tr style='background:#fff3f3; font-weight:700;'>
-          <td colspan='1' style='padding:8px 12px; color:#e30613;'>TOTAL</td>
-          <td style='padding:8px 12px; color:#e30613;'>$totalPalettes palette(s)</td>
-          <td colspan='3'></td>
-        </tr>
-      </tbody>
-    </table>"
-    . ($message ? "<p style='margin-top:12px; font-size:13px;'><strong>Informations complémentaires :</strong><br>$message</p>" : '');
+$addInfoLabel = $lang === 'en' ? 'Additional information' : 'Informations complémentaires';
+$blocMarchandise = buildLotsTable($lotsHtml, $totalPalettes, $lang)
+    . ($message ? "<p style='margin-top:12px; font-size:13px;'><strong>$addInfoLabel :</strong><br>$message</p>" : '');
 
 if ($service === 'depotage') {
-    $blocDetails = row('Type d\'opération', $depotOpLabel)
-        . row('Nombre de conteneurs', $depotNb ? "$depotNb conteneur(s)" : '')
-        . row('Type de conteneur', $depotTypeLabel)
-        . row('Date souhaitée', $depotDate)
-        . row('Port / Terminal', $depotPort)
-        . row('Poids estimé', $depotPoids ? "$depotPoids $depotPoidsU" : '');
-
+    if ($lang === 'en') {
+        $blocDetails = row('Operation type', $depotOpLabel)
+            . row('Number of containers', $depotNb ? "$depotNb container(s)" : '')
+            . row('Container type', $depotTypeLabel)
+            . row('Requested date', $depotDate)
+            . row('Port / Terminal', $depotPort)
+            . row('Estimated weight', $depotPoids ? "$depotPoids $depotPoidsU" : '');
+    } else {
+        $blocDetails = row('Type d\'opération', $depotOpLabel)
+            . row('Nombre de conteneurs', $depotNb ? "$depotNb conteneur(s)" : '')
+            . row('Type de conteneur', $depotTypeLabel)
+            . row('Date souhaitée', $depotDate)
+            . row('Port / Terminal', $depotPort)
+            . row('Poids estimé', $depotPoids ? "$depotPoids $depotPoidsU" : '');
+    }
 } elseif ($service === 'transport') {
-    $blocDetails = row('Adresse de départ', $departVille ? "$departVille ($departDept)" : '')
-        . row('Adresse de livraison', $arriveVille ? "$arriveVille ($arriveDept)" : '');
-
+    if ($lang === 'en') {
+        $blocDetails = row('Pickup address', $departVille ? "$departVille ($departDept)" : '')
+            . row('Delivery address', $arriveVille ? "$arriveVille ($arriveDept)" : '');
+    } else {
+        $blocDetails = row('Adresse de départ', $departVille ? "$departVille ($departDept)" : '')
+            . row('Adresse de livraison', $arriveVille ? "$arriveVille ($arriveDept)" : '');
+    }
 } elseif ($service === 'traction') {
-    $blocDetails = row('Point d\'enlèvement', $departVille ? "$departVille ($departDept)" : '')
-        . row('Point de livraison', $arriveVille ? "$arriveVille ($arriveDept)" : '')
-        . row('Type de véhicule', $tracVehicule)
-        . row('Poids total', $tracPoids ? "$tracPoids $tracPoidsU" : '')
-        . row('Date souhaitée', $tracDate);
-
+    if ($lang === 'en') {
+        $blocDetails = row('Pickup point', $departVille ? "$departVille ($departDept)" : '')
+            . row('Delivery point', $arriveVille ? "$arriveVille ($arriveDept)" : '')
+            . row('Vehicle type', $tracVehicule)
+            . row('Total weight', $tracPoids ? "$tracPoids $tracPoidsU" : '')
+            . row('Requested date', $tracDate);
+    } else {
+        $blocDetails = row('Point d\'enlèvement', $departVille ? "$departVille ($departDept)" : '')
+            . row('Point de livraison', $arriveVille ? "$arriveVille ($arriveDept)" : '')
+            . row('Type de véhicule', $tracVehicule)
+            . row('Poids total', $tracPoids ? "$tracPoids $tracPoidsU" : '')
+            . row('Date souhaitée', $tracDate);
+    }
 } elseif ($service === 'stockage') {
-    $siteStockage = $stockVille ? "$stockVille ($stockDept)" : 'Port du Havre — 76700 Rogerville (entrepôt PR Logistics)';
-    $condsStr     = !empty($stockConds) ? implode(', ', $stockConds) : '';
-    $blocDetails  = row('Site de stockage', $siteStockage)
-        . row('Durée souhaitée', $stockDuree)
-        . row('Date d\'entrée', $stockEntree)
-        . row('Date de sortie estimée', $stockSortie)
-        . row('Poids estimé', $stockPoids ? "$stockPoids $stockPoidsU" : '')
-        . row('Conditions particulières', $condsStr);
+    $condsStr = !empty($stockConds) ? implode(', ', $stockConds) : '';
+    if ($lang === 'en') {
+        $siteStockage = $stockVille ? "$stockVille ($stockDept)" : 'Le Havre Port — 76700 Rogerville (PR Logistics warehouse)';
+        $blocDetails  = row('Storage site', $siteStockage)
+            . row('Desired duration', $stockDuree)
+            . row('Entry date', $stockEntree)
+            . row('Estimated exit date', $stockSortie)
+            . row('Estimated weight', $stockPoids ? "$stockPoids $stockPoidsU" : '')
+            . row('Special conditions', $condsStr);
+    } else {
+        $siteStockage = $stockVille ? "$stockVille ($stockDept)" : 'Port du Havre — 76700 Rogerville (entrepôt PR Logistics)';
+        $blocDetails  = row('Site de stockage', $siteStockage)
+            . row('Durée souhaitée', $stockDuree)
+            . row('Date d\'entrée', $stockEntree)
+            . row('Date de sortie estimée', $stockSortie)
+            . row('Poids estimé', $stockPoids ? "$stockPoids $stockPoidsU" : '')
+            . row('Conditions particulières', $condsStr);
+    }
 }
 
 // Titres des sections selon le service
-$titreDetails = [
-    'depotage'  => 'Détails de l\'opération',
-    'transport' => 'Transport',
-    'traction'  => 'Itinéraire de traction',
-    'stockage'  => 'Conditions de stockage',
-][$service] ?? 'Détails';
+if ($lang === 'en') {
+    $titreDetails = [
+        'depotage'  => 'Operation details',
+        'transport' => 'Transport',
+        'traction'  => 'Traction route',
+        'stockage'  => 'Storage conditions',
+    ][$service] ?? 'Details';
+} else {
+    $titreDetails = [
+        'depotage'  => 'Détails de l\'opération',
+        'transport' => 'Transport',
+        'traction'  => 'Itinéraire de traction',
+        'stockage'  => 'Conditions de stockage',
+    ][$service] ?? 'Détails';
+}
 
-// ── Email 1 : Confirmation client ───────────────────────────────
+// ── Email 1 : Confirmation client (bilingue) ────────────────────
+if ($lang === 'en') {
+    $htmlLang       = 'en';
+    $tagline        = 'Logistics &amp; transport provider · Le Havre';
+    $titleConfirm   = 'Your quote request has been received ✅';
+    $introText      = "Hello <strong>$nom</strong>, thank you for your request. Our team has received it and will send you a personalised quote within 24 hours.";
+    $sectionSummary = 'Summary';
+    $labelRef       = 'Reference';
+    $labelDate      = 'Date';
+    $labelService   = 'Service requested';
+    $sectionCoords  = 'Your details';
+    $sectionCargo   = "Cargo details ($totalPalettes pallet(s))";
+    $contactLine    = "For any questions, contact us at <a href='mailto:lehavre@pr-logistics.fr' style='color:#e30613;'>lehavre@pr-logistics.fr</a> or call <strong>+33 2 32 72 48 03</strong>.";
+    $subjectClient  = "Your PR Logistics quote request ($ref)";
+} else {
+    $htmlLang       = 'fr';
+    $tagline        = 'Prestataire logistique &amp; transport · Le Havre';
+    $titleConfirm   = 'Votre demande de devis a bien été reçue ✅';
+    $introText      = "Bonjour <strong>$nom</strong>, merci pour votre demande. Notre équipe l'a reçue et vous enverra un devis personnalisé sous 24h.";
+    $sectionSummary = 'Récapitulatif';
+    $labelRef       = 'Référence';
+    $labelDate      = 'Date';
+    $labelService   = 'Service demandé';
+    $sectionCoords  = 'Vos coordonnées';
+    $sectionCargo   = "Détails de la marchandise ($totalPalettes palette(s))";
+    $contactLine    = "Pour toute question, contactez-nous à <a href='mailto:lehavre@pr-logistics.fr' style='color:#e30613;'>lehavre@pr-logistics.fr</a> ou au <strong>02.32.72.48.03</strong>.";
+    $subjectClient  = "Votre demande de devis PR Logistics ($ref)";
+}
+
 $htmlClient = "
 <!DOCTYPE html>
-<html lang='fr'>
+<html lang='$htmlLang'>
 <head><meta charset='UTF-8'></head>
 <body style='margin:0;padding:0;background:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;'>
 <table width='100%' cellpadding='0' cellspacing='0' style='background:#f5f5f7;padding:40px 0;'>
@@ -259,32 +331,26 @@ $htmlClient = "
 
   <tr><td style='background:#e30613;padding:28px 36px;'>
     <h1 style='margin:0;color:#fff;font-size:22px;font-weight:700;'>PR Logistics</h1>
-    <p style='margin:4px 0 0;color:rgba(255,255,255,0.8);font-size:13px;'>Prestataire logistique &amp; transport · Le Havre</p>
+    <p style='margin:4px 0 0;color:rgba(255,255,255,0.8);font-size:13px;'>$tagline</p>
   </td></tr>
 
   <tr><td style='padding:32px 36px;'>
-    <h2 style='margin:0 0 8px;font-size:18px;color:#1d1d1f;'>Votre demande de devis a bien été reçue ✅</h2>
-    <p style='margin:0 0 24px;color:#666;font-size:14px;line-height:1.6;'>
-      Bonjour <strong>$nom</strong>, merci pour votre demande. Notre équipe l'a reçue et vous enverra un devis personnalisé sous 24h.
-    </p>
+    <h2 style='margin:0 0 8px;font-size:18px;color:#1d1d1f;'>$titleConfirm</h2>
+    <p style='margin:0 0 24px;color:#666;font-size:14px;line-height:1.6;'>$introText</p>
 
-    " . section('Récapitulatif',
-        "<p style='margin:4px 0;font-size:13px;'><strong>Référence :</strong> $ref</p>"
-      . "<p style='margin:4px 0;font-size:13px;'><strong>Date :</strong> $date</p>"
-      . "<p style='margin:4px 0;font-size:13px;'><strong>Service demandé :</strong> $serviceLabel</p>"
+    " . section($sectionSummary,
+        "<p style='margin:4px 0;font-size:13px;'><strong>$labelRef :</strong> $ref</p>"
+      . "<p style='margin:4px 0;font-size:13px;'><strong>$labelDate :</strong> $date</p>"
+      . "<p style='margin:4px 0;font-size:13px;'><strong>$labelService :</strong> $serviceLabel</p>"
     ) . "
 
-    " . section('Vos coordonnées', $blocCoordonnees) . "
+    " . section($sectionCoords, $blocCoordonnees) . "
 
     " . section($titreDetails, $blocDetails) . "
 
-    " . section("Détails de la marchandise ($totalPalettes palette(s))", $blocMarchandise) . "
+    " . section($sectionCargo, $blocMarchandise) . "
 
-    <p style='font-size:13px;color:#666;line-height:1.6;margin-top:8px;'>
-      Pour toute question, contactez-nous à
-      <a href='mailto:lehavre@pr-logistics.fr' style='color:#e30613;'>lehavre@pr-logistics.fr</a>
-      ou au <strong>02.32.72.48.03</strong>.
-    </p>
+    <p style='font-size:13px;color:#666;line-height:1.6;margin-top:8px;'>$contactLine</p>
   </td></tr>
 
   <tr><td style='background:#f5f5f7;padding:16px 36px;border-top:1px solid #e8e8e8;'>
@@ -300,7 +366,63 @@ $htmlClient = "
 </body>
 </html>";
 
-// ── Email 2 : Notification interne PR Logistics ──────────────────
+// ── Email 2 : Notification interne PR Logistics (toujours en FR) ──
+// Labels FR pour l'email interne (indépendant de la langue du client)
+$serviceLabels_FR = [
+    'depotage'  => 'Dépotage / Empotage',
+    'stockage'  => 'Stockage',
+    'traction'  => 'Traction',
+    'transport' => 'Transport & Livraison',
+];
+$serviceLabel_FR = $serviceLabels_FR[$service] ?? $service;
+
+$blocCoordonnees_FR = row('Nom / Société', $nom)
+    . row('Email', $clientEmail)
+    . ($telephone ? "<p style='margin:4px 0; font-size:13px;'><strong>Téléphone :</strong> $telephone</p>" : '');
+
+$titreDetails_FR = [
+    'depotage'  => 'Détails de l\'opération',
+    'transport' => 'Transport',
+    'traction'  => 'Itinéraire de traction',
+    'stockage'  => 'Conditions de stockage',
+][$service] ?? 'Détails';
+
+if ($service === 'depotage') {
+    $depotOpLabel_FR = $depotOp === 'depotage' ? 'Dépotage (Conteneur → Entrepôt)' : ($depotOp === 'empotage' ? 'Empotage (Entrepôt → Conteneur)' : '');
+    $depotTypeLabel_FR = ['20'=>"20' Standard",'40'=>"40' Standard",'40hc'=>"40' High Cube",'45hc'=>"45' High Cube",'reefer'=>'Réfrigéré (Reefer)','autre'=>'Autre / Spécial'][$depotType] ?? $depotType;
+    $blocDetails_FR = row('Type d\'opération', $depotOpLabel_FR)
+        . row('Nombre de conteneurs', $depotNb ? "$depotNb conteneur(s)" : '')
+        . row('Type de conteneur', $depotTypeLabel_FR)
+        . row('Date souhaitée', $depotDate)
+        . row('Port / Terminal', $depotPort)
+        . row('Poids estimé', $depotPoids ? "$depotPoids $depotPoidsU" : '');
+} elseif ($service === 'transport') {
+    $blocDetails_FR = row('Adresse de départ', $departVille ? "$departVille ($departDept)" : '')
+        . row('Adresse de livraison', $arriveVille ? "$arriveVille ($arriveDept)" : '');
+} elseif ($service === 'traction') {
+    $blocDetails_FR = row('Point d\'enlèvement', $departVille ? "$departVille ($departDept)" : '')
+        . row('Point de livraison', $arriveVille ? "$arriveVille ($arriveDept)" : '')
+        . row('Type de véhicule', $tracVehicule)
+        . row('Poids total', $tracPoids ? "$tracPoids $tracPoidsU" : '')
+        . row('Date souhaitée', $tracDate);
+} elseif ($service === 'stockage') {
+    $condsStr_FR    = !empty($stockConds) ? implode(', ', $stockConds) : '';
+    $siteStockage_FR = $stockVille ? "$stockVille ($stockDept)" : 'Port du Havre — 76700 Rogerville (entrepôt PR Logistics)';
+    $blocDetails_FR  = row('Site de stockage', $siteStockage_FR)
+        . row('Durée souhaitée', $stockDuree)
+        . row('Date d\'entrée', $stockEntree)
+        . row('Date de sortie estimée', $stockSortie)
+        . row('Poids estimé', $stockPoids ? "$stockPoids $stockPoidsU" : '')
+        . row('Conditions particulières', $condsStr_FR);
+} else {
+    $blocDetails_FR = '';
+}
+
+$blocMarchandise_FR = buildLotsTable($lotsHtml, $totalPalettes, 'fr')
+    . ($message ? "<p style='margin-top:12px; font-size:13px;'><strong>Informations complémentaires :</strong><br>$message</p>" : '');
+
+$langBadge = $lang === 'en' ? " <span style='background:#1b2a4a;color:#a0b4d0;font-size:11px;padding:2px 7px;border-radius:10px;margin-left:8px;'>🇬🇧 EN</span>" : '';
+
 $htmlPR = "
 <!DOCTYPE html>
 <html lang='fr'>
@@ -311,17 +433,17 @@ $htmlPR = "
 <table width='600' cellpadding='0' cellspacing='0' style='background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.08);'>
 
   <tr><td style='background:#1b2a4a;padding:28px 36px;'>
-    <h1 style='margin:0;color:#fff;font-size:18px;font-weight:700;'>🔔 Nouvelle demande de devis — $serviceLabel</h1>
+    <h1 style='margin:0;color:#fff;font-size:18px;font-weight:700;'>🔔 Nouvelle demande de devis — $serviceLabel_FR$langBadge</h1>
     <p style='margin:4px 0 0;color:rgba(255,255,255,0.6);font-size:13px;'>Reçue le $date · Réf. $ref</p>
   </td></tr>
 
   <tr><td style='padding:32px 36px;'>
 
-    " . section('Client', $blocCoordonnees, '#1b2a4a') . "
+    " . section('Client', $blocCoordonnees_FR, '#1b2a4a') . "
 
-    " . section($titreDetails, $blocDetails, '#1b2a4a') . "
+    " . section($titreDetails_FR, $blocDetails_FR ?? '', '#1b2a4a') . "
 
-    " . section("Marchandise ($totalPalettes palette(s))", $blocMarchandise, '#1b2a4a') . "
+    " . section("Marchandise ($totalPalettes palette(s))", $blocMarchandise_FR, '#1b2a4a') . "
 
   </td></tr>
 
@@ -381,28 +503,29 @@ function sendBrevoEmail(
 }
 
 // ── Envoi des deux emails ─────────────────────────────────────────
-$sujet = "Demande de devis — $nom — $totalPalettes palette(s)";
-if ($departVille) $sujet .= " — $departVille → $arriveVille";
+// Sujet interne (toujours en FR)
+$sujetPR = "Demande de devis — $nom — $totalPalettes palette(s)";
+if ($departVille) $sujetPR .= " — $departVille → $arriveVille";
 
-// 1) Confirmation au client — sans PDF
+// 1) Confirmation au client — sans PDF (langue du client)
 $r1 = sendBrevoEmail(
     BREVO_API_KEY,
     $clientEmail,
     $nom,
     PR_EMAIL,
     PR_NOM,
-    "Votre demande de devis PR Logistics ($ref)"
-    , $htmlClient
+    $subjectClient,
+    $htmlClient
 );
 
-// 2) Notification interne PR Logistics — avec PDF
+// 2) Notification interne PR Logistics — avec PDF (toujours en FR)
 $r2 = sendBrevoEmail(
     BREVO_API_KEY,
     PR_EMAIL,
     PR_NOM,
     PR_EMAIL,
     PR_NOM,
-    $sujet,
+    $sujetPR,
     $htmlPR,
     $pdfBase64
 );

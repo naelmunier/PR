@@ -201,24 +201,24 @@ const departementsJson = JSON.stringify(departements);
         <div class="form-bloc" data-for="transport traction" id="bloc-adresses">
           <div class="form-bloc__titre">
             <span class="form-step">1</span>
-            <h2 id="adresses-titre">Adresses de transport</h2>
+            <h2 id="adresses-titre" data-i18n="form.bloc.adresses.title">Adresses de transport</h2>
           </div>
 
           <div class="adresses-grid">
             <div class="adresse-card">
               <div class="adresse-card__header adresse-card__header--neutre">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
-                <span id="label-depart">Adresse de départ</span>
+                <span id="label-depart" data-i18n="form.label.depart">Adresse de départ</span>
               </div>
               <div class="form-group">
-                <label class="form-label" for="depart_ville">Ville <span class="req-star">*</span></label>
-                <input type="text" id="depart_ville" name="depart_ville" class="form-input" placeholder="Le Havre" required />
+                <label class="form-label" for="depart_ville"><span data-i18n="form.field.ville">Ville</span> <span class="req-star">*</span></label>
+                <input type="text" id="depart_ville" name="depart_ville" class="form-input" data-i18n-placeholder="form.ph.city" placeholder="Le Havre" required />
               </div>
               <div class="form-group">
-                <label class="form-label" for="depart_dept">Département <span class="req-star">*</span></label>
+                <label class="form-label" for="depart_dept"><span data-i18n="form.field.dept">Département</span> <span class="req-star">*</span></label>
                 <div class="select-wrapper">
                   <select id="depart_dept" name="depart_dept" class="form-select" required>
-                    <option value="" disabled selected>Sélectionnez</option>
+                    <option value="" disabled selected data-i18n="form.select.placeholder">Sélectionnez</option>
                     {departements.map(d => <option value={d.code}>{d.code} — {d.nom}</option>)}
                   </select>
                   <span class="select-arrow" aria-hidden="true">
@@ -227,7 +227,7 @@ const departementsJson = JSON.stringify(departements);
                 </div>
               </div>
               <div class="form-group">
-                <label class="form-label">Pays</label>
+                <label class="form-label" data-i18n="form.field.pays">Pays</label>
                 <input type="text" value="France" class="form-input input--disabled" disabled />
               </div>
             </div>
@@ -239,17 +239,17 @@ const departementsJson = JSON.stringify(departements);
             <div class="adresse-card adresse-card--livraison">
               <div class="adresse-card__header">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <span id="label-arrivee">Adresse de livraison</span>
+                <span id="label-arrivee" data-i18n="form.label.arrivee">Adresse de livraison</span>
               </div>
               <div class="form-group">
-                <label class="form-label" for="arrivee_ville">Ville <span class="req-star">*</span></label>
-                <input type="text" id="arrivee_ville" name="arrivee_ville" class="form-input" placeholder="Paris" required />
+                <label class="form-label" for="arrivee_ville"><span data-i18n="form.field.ville">Ville</span> <span class="req-star">*</span></label>
+                <input type="text" id="arrivee_ville" name="arrivee_ville" class="form-input" data-i18n-placeholder="form.ph.city2" placeholder="Paris" required />
               </div>
               <div class="form-group">
-                <label class="form-label" for="arrivee_dept">Département <span class="req-star">*</span></label>
+                <label class="form-label" for="arrivee_dept"><span data-i18n="form.field.dept">Département</span> <span class="req-star">*</span></label>
                 <div class="select-wrapper">
                   <select id="arrivee_dept" name="arrivee_dept" class="form-select" required>
-                    <option value="" disabled selected>Sélectionnez</option>
+                    <option value="" disabled selected data-i18n="form.select.placeholder">Sélectionnez</option>
                     {departements.map(d => <option value={d.code}>{d.code} — {d.nom}</option>)}
                   </select>
                   <span class="select-arrow" aria-hidden="true">
@@ -258,7 +258,7 @@ const departementsJson = JSON.stringify(departements);
                 </div>
               </div>
               <div class="form-group">
-                <label class="form-label">Pays</label>
+                <label class="form-label" data-i18n="form.field.pays">Pays</label>
                 <input type="text" value="France" class="form-input input--disabled" disabled />
               </div>
             </div>
@@ -271,22 +271,22 @@ const departementsJson = JSON.stringify(departements);
         <div class="form-bloc" data-for="stockage" id="bloc-stockage-site">
           <div class="form-bloc__titre">
             <span class="form-step">1</span>
-            <h2>Site de stockage</h2>
+            <h2 data-i18n="form.bloc.stockage.title">Site de stockage</h2>
           </div>
           <div class="info-banner">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            Par défaut, stockage dans notre entrepôt au <strong>Port du Havre — 76700 Rogerville</strong>. Précisez ci-dessous si vous souhaitez un site différent.
+            <span data-i18n-html="form.stock.banner">Par défaut, stockage dans notre entrepôt au <strong>Port du Havre — 76700 Rogerville</strong>. Précisez ci-dessous si vous souhaitez un site différent.</span>
           </div>
           <div class="form-row form-row--2" style="margin-top:1.2rem">
             <div class="form-group">
-              <label class="form-label" for="stock_ville">Autre ville souhaitée <span class="label-optional">Optionnel</span></label>
+              <label class="form-label" for="stock_ville"><span data-i18n="form.field.stock_ville">Autre ville souhaitée</span> <span class="label-optional" data-i18n="form.optional">Optionnel</span></label>
               <input type="text" id="stock_ville" name="stock_ville" class="form-input" placeholder="Le Havre" />
             </div>
             <div class="form-group">
-              <label class="form-label" for="stock_dept">Département</label>
+              <label class="form-label" for="stock_dept" data-i18n="form.field.dept">Département</label>
               <div class="select-wrapper">
                 <select id="stock_dept" name="stock_dept" class="form-select">
-                  <option value="" disabled selected>Sélectionnez</option>
+                  <option value="" disabled selected data-i18n="form.select.placeholder">Sélectionnez</option>
                   {departements.map(d => <option value={d.code}>{d.code} — {d.nom}</option>)}
                 </select>
                 <span class="select-arrow" aria-hidden="true">
@@ -303,27 +303,27 @@ const departementsJson = JSON.stringify(departements);
         <div class="form-bloc" data-for="depotage" id="bloc-depotage-op">
           <div class="form-bloc__titre">
             <span class="form-step">1</span>
-            <h2>Détails de l'opération</h2>
+            <h2 data-i18n="form.bloc.depotage.title">Détails de l'opération</h2>
           </div>
 
           <!-- Type d'opération — radio visuel -->
           <div class="form-group" style="margin-bottom:1.6rem">
-            <label class="form-label">Type d'opération <span class="req-star">*</span></label>
+            <label class="form-label"><span data-i18n="form.field.depot_op">Type d'opération</span> <span class="req-star">*</span></label>
             <div class="radio-group">
               <label class="radio-card">
                 <input type="radio" name="depot_operation" value="depotage" required>
                 <div class="radio-card__content">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="7.5 4.21 12 6.81 16.5 4.21"/><polyline points="7.5 19.79 7.5 14.6 3 12"/><polyline points="21 12 16.5 14.6 16.5 19.79"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-                  <strong>Dépotage</strong>
-                  <span>Conteneur → Entrepôt</span>
+                  <strong data-i18n="form.depot.depotage">Dépotage</strong>
+                  <span data-i18n="form.depot.depotage.sub">Conteneur → Entrepôt</span>
                 </div>
               </label>
               <label class="radio-card">
                 <input type="radio" name="depot_operation" value="empotage">
                 <div class="radio-card__content">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-                  <strong>Empotage</strong>
-                  <span>Entrepôt → Conteneur</span>
+                  <strong data-i18n="form.depot.empotage">Empotage</strong>
+                  <span data-i18n="form.depot.empotage.sub">Entrepôt → Conteneur</span>
                 </div>
               </label>
             </div>
@@ -331,20 +331,20 @@ const departementsJson = JSON.stringify(departements);
 
           <div class="form-row form-row--3">
             <div class="form-group">
-              <label class="form-label" for="depot_nb">Nombre de conteneurs <span class="req-star">*</span></label>
+              <label class="form-label" for="depot_nb"><span data-i18n="form.field.depot_nb">Nombre de conteneurs</span> <span class="req-star">*</span></label>
               <input type="number" id="depot_nb" name="depot_nb" class="form-input" min="1" max="999" placeholder="Ex : 2" required />
             </div>
             <div class="form-group">
-              <label class="form-label" for="depot_type_cont">Type de conteneur <span class="req-star">*</span></label>
+              <label class="form-label" for="depot_type_cont"><span data-i18n="form.field.depot_type">Type de conteneur</span> <span class="req-star">*</span></label>
               <div class="select-wrapper">
                 <select id="depot_type_cont" name="depot_type_cont" class="form-select" required>
-                  <option value="" disabled selected>Sélectionnez</option>
+                  <option value="" disabled selected data-i18n="form.select.placeholder">Sélectionnez</option>
                   <option value="20">20' — standard</option>
                   <option value="40">40' — standard</option>
                   <option value="40hc">40' High Cube</option>
                   <option value="45hc">45' High Cube</option>
-                  <option value="reefer">Réfrigéré (Reefer)</option>
-                  <option value="autre">Autre</option>
+                  <option value="reefer" data-i18n="form.cont.reefer">Réfrigéré (Reefer)</option>
+                  <option value="autre" data-i18n="form.cont.autre">Autre</option>
                 </select>
                 <span class="select-arrow" aria-hidden="true">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
@@ -352,18 +352,18 @@ const departementsJson = JSON.stringify(departements);
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label" for="depot_date">Date souhaitée <span class="req-star">*</span></label>
+              <label class="form-label" for="depot_date"><span data-i18n="form.field.date_souhaitee">Date souhaitée</span> <span class="req-star">*</span></label>
               <input type="date" id="depot_date" name="depot_date" class="form-input" required />
             </div>
           </div>
 
           <div class="form-row form-row--2" style="margin-top:1.2rem">
             <div class="form-group">
-              <label class="form-label" for="depot_port">Port / Terminal <span class="req-star">*</span></label>
+              <label class="form-label" for="depot_port"><span data-i18n="form.field.port">Port / Terminal</span> <span class="req-star">*</span></label>
               <input type="text" id="depot_port" name="depot_port" class="form-input" placeholder="Port du Havre" value="Port du Havre" required />
             </div>
             <div class="form-group">
-              <label class="form-label" for="depot_poids">Poids total estimé <span class="label-optional">Optionnel</span></label>
+              <label class="form-label" for="depot_poids"><span data-i18n="form.field.poids_estime">Poids total estimé</span> <span class="label-optional" data-i18n="form.optional">Optionnel</span></label>
               <div class="input-with-unit">
                 <input type="number" id="depot_poids" name="depot_poids" class="form-input" placeholder="Ex : 15 000" />
                 <div class="select-wrapper input-unit">
@@ -386,20 +386,20 @@ const departementsJson = JSON.stringify(departements);
         <div class="form-bloc" data-for="traction" id="bloc-traction">
           <div class="form-bloc__titre">
             <span class="form-step">2</span>
-            <h2>Détails de la traction</h2>
+            <h2 data-i18n="form.bloc.traction.title">Détails de la traction</h2>
           </div>
           <div class="form-row form-row--3">
             <div class="form-group">
-              <label class="form-label" for="trac_vehicule">Type de véhicule <span class="req-star">*</span></label>
+              <label class="form-label" for="trac_vehicule"><span data-i18n="form.field.vehicule">Type de véhicule</span> <span class="req-star">*</span></label>
               <div class="select-wrapper">
                 <select id="trac_vehicule" name="trac_vehicule" class="form-select" required>
-                  <option value="" disabled selected>Sélectionnez</option>
-                  <option value="bache">Semi bâchée</option>
-                  <option value="frigo">Semi frigorifique</option>
-                  <option value="plateau">Plateau</option>
-                  <option value="citerne">Citerne</option>
-                  <option value="conteneur">Porte-conteneur</option>
-                  <option value="autre">Autre</option>
+                  <option value="" disabled selected data-i18n="form.select.placeholder">Sélectionnez</option>
+                  <option value="bache" data-i18n="form.veh.bache">Semi bâchée</option>
+                  <option value="frigo" data-i18n="form.veh.frigo">Semi frigorifique</option>
+                  <option value="plateau" data-i18n="form.veh.plateau">Plateau</option>
+                  <option value="citerne" data-i18n="form.veh.citerne">Citerne</option>
+                  <option value="conteneur" data-i18n="form.veh.conteneur">Porte-conteneur</option>
+                  <option value="autre" data-i18n="form.veh.autre">Autre</option>
                 </select>
                 <span class="select-arrow" aria-hidden="true">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
@@ -407,7 +407,7 @@ const departementsJson = JSON.stringify(departements);
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label" for="trac_poids">Poids total <span class="label-optional">Optionnel</span></label>
+              <label class="form-label" for="trac_poids"><span data-i18n="form.field.poids_total">Poids total</span> <span class="label-optional" data-i18n="form.optional">Optionnel</span></label>
               <div class="input-with-unit">
                 <input type="number" id="trac_poids" name="trac_poids" class="form-input" placeholder="Ex : 22 000" />
                 <div class="select-wrapper input-unit">
@@ -422,7 +422,7 @@ const departementsJson = JSON.stringify(departements);
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label" for="trac_date">Date souhaitée <span class="req-star">*</span></label>
+              <label class="form-label" for="trac_date"><span data-i18n="form.field.date_souhaitee">Date souhaitée</span> <span class="req-star">*</span></label>
               <input type="date" id="trac_date" name="trac_date" class="form-input" required />
             </div>
           </div>
@@ -434,12 +434,12 @@ const departementsJson = JSON.stringify(departements);
         <div class="form-bloc" data-for="transport stockage depotage traction" id="bloc-marchandise">
           <div class="form-bloc__titre">
             <span class="form-step">2</span>
-            <h2>Détails de la marchandise</h2>
+            <h2 data-i18n="form.bloc.marchandise.title">Détails de la marchandise</h2>
           </div>
           <div id="lotsContainer"></div>
           <button type="button" id="addLotBtn" class="btn-add-lot">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Ajouter un lot
+            <span data-i18n="form.lot.add">Ajouter un lot</span>
           </button>
         </div>
 
@@ -449,12 +449,12 @@ const departementsJson = JSON.stringify(departements);
         <div class="form-bloc" data-for="stockage" id="bloc-stockage-details">
           <div class="form-bloc__titre">
             <span class="form-step">3</span>
-            <h2>Conditions de stockage</h2>
+            <h2 data-i18n="form.bloc.stock.conds.title">Conditions de stockage</h2>
           </div>
 
           <div class="form-row form-row--2" style="margin-bottom:1.2rem">
             <div class="form-group">
-              <label class="form-label" for="stock_poids">Poids total estimé <span class="label-optional">Optionnel</span></label>
+              <label class="form-label" for="stock_poids"><span data-i18n="form.field.poids_estime">Poids total estimé</span> <span class="label-optional" data-i18n="form.optional">Optionnel</span></label>
               <div class="input-with-unit">
                 <input type="number" id="stock_poids" name="stock_poids" class="form-input" placeholder="Ex : 5 000" />
                 <div class="select-wrapper input-unit">
@@ -469,16 +469,16 @@ const departementsJson = JSON.stringify(departements);
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label" for="stock_duree">Durée souhaitée <span class="req-star">*</span></label>
+              <label class="form-label" for="stock_duree"><span data-i18n="form.field.duree">Durée souhaitée</span> <span class="req-star">*</span></label>
               <div class="select-wrapper">
                 <select id="stock_duree" name="stock_duree" class="form-select" required>
-                  <option value="" disabled selected>Sélectionnez</option>
-                  <option value="<1sem">Moins d'une semaine</option>
-                  <option value="1mois">Environ 1 mois</option>
-                  <option value="1-3mois">1 à 3 mois</option>
-                  <option value="3-6mois">3 à 6 mois</option>
-                  <option value=">6mois">Plus de 6 mois</option>
-                  <option value="indetermine">Durée indéterminée</option>
+                  <option value="" disabled selected data-i18n="form.select.placeholder">Sélectionnez</option>
+                  <option value="<1sem" data-i18n="form.duree.1sem">Moins d'une semaine</option>
+                  <option value="1mois" data-i18n="form.duree.1mois">Environ 1 mois</option>
+                  <option value="1-3mois" data-i18n="form.duree.1-3mois">1 à 3 mois</option>
+                  <option value="3-6mois" data-i18n="form.duree.3-6mois">3 à 6 mois</option>
+                  <option value=">6mois" data-i18n="form.duree.6mois">Plus de 6 mois</option>
+                  <option value="indetermine" data-i18n="form.duree.indetermine">Durée indéterminée</option>
                 </select>
                 <span class="select-arrow" aria-hidden="true">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
@@ -489,41 +489,41 @@ const departementsJson = JSON.stringify(departements);
 
           <div class="form-row form-row--2" style="margin-bottom:1.4rem">
             <div class="form-group">
-              <label class="form-label" for="stock_date_entree">Date d'entrée souhaitée <span class="req-star">*</span></label>
+              <label class="form-label" for="stock_date_entree"><span data-i18n="form.field.date_entree">Date d'entrée souhaitée</span> <span class="req-star">*</span></label>
               <input type="date" id="stock_date_entree" name="stock_date_entree" class="form-input" required />
             </div>
             <div class="form-group">
-              <label class="form-label" for="stock_date_sortie">Date de sortie estimée <span class="label-optional">Optionnel</span></label>
+              <label class="form-label" for="stock_date_sortie"><span data-i18n="form.field.date_sortie">Date de sortie estimée</span> <span class="label-optional" data-i18n="form.optional">Optionnel</span></label>
               <input type="date" id="stock_date_sortie" name="stock_date_sortie" class="form-input" />
             </div>
           </div>
 
           <div class="form-group">
-            <label class="form-label">Conditions particulières <span class="label-optional">Optionnel</span></label>
+            <label class="form-label"><span data-i18n="form.field.conds">Conditions particulières</span> <span class="label-optional" data-i18n="form.optional">Optionnel</span></label>
             <div class="checkboxes-grid">
               <label class="checkbox-item">
                 <input type="checkbox" name="cond_froid" value="1">
-                <span>Température dirigée</span>
+                <span data-i18n="form.cond.froid">Température dirigée</span>
               </label>
               <label class="checkbox-item">
                 <input type="checkbox" name="cond_dangereux" value="1">
-                <span>Matières dangereuses</span>
+                <span data-i18n="form.cond.dangereux">Matières dangereuses</span>
               </label>
               <label class="checkbox-item">
                 <input type="checkbox" name="cond_alcool" value="1">
-                <span>Alcool / produits réglementés</span>
+                <span data-i18n="form.cond.alcool">Alcool / produits réglementés</span>
               </label>
               <label class="checkbox-item">
                 <input type="checkbox" name="cond_bio" value="1">
-                <span>Produits biologiques</span>
+                <span data-i18n="form.cond.bio">Produits biologiques</span>
               </label>
               <label class="checkbox-item">
                 <input type="checkbox" name="cond_racks" value="1">
-                <span>Stockage en racks</span>
+                <span data-i18n="form.cond.racks">Stockage en racks</span>
               </label>
               <label class="checkbox-item">
                 <input type="checkbox" name="cond_securite" value="1">
-                <span>Sécurité renforcée</span>
+                <span data-i18n="form.cond.securite">Sécurité renforcée</span>
               </label>
             </div>
           </div>
@@ -535,40 +535,40 @@ const departementsJson = JSON.stringify(departements);
         <div class="form-bloc" data-for="transport stockage depotage traction" id="bloc-coordonnees">
           <div class="form-bloc__titre">
             <span class="form-step">3</span>
-            <h2>Vos coordonnées</h2>
+            <h2 data-i18n="form.bloc.coordonnees.title">Vos coordonnées</h2>
           </div>
 
           <div class="form-row form-row--3">
             <div class="form-group">
               <label class="form-label" for="nom">
                 <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                Nom / Société <span class="req-star">*</span>
+                <span data-i18n="form.field.nom">Nom / Société</span> <span class="req-star">*</span>
               </label>
-              <input type="text" id="nom" name="nom" class="form-input" placeholder="PR Logistics" required />
+              <input type="text" id="nom" name="nom" class="form-input" data-i18n-placeholder="form.ph.nom" placeholder="PR Logistics" required />
             </div>
             <div class="form-group">
               <label class="form-label" for="email">
                 <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                Adresse e-mail <span class="req-star">*</span>
+                <span data-i18n="form.field.email">Adresse e-mail</span> <span class="req-star">*</span>
               </label>
-              <input type="email" id="email" name="email" class="form-input" placeholder="contact@exemple.fr" required />
+              <input type="email" id="email" name="email" class="form-input" data-i18n-placeholder="form.ph.email" placeholder="contact@exemple.fr" required />
             </div>
             <div class="form-group">
               <label class="form-label" for="telephone">
                 <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-                Téléphone <span class="label-optional">Optionnel</span>
+                <span data-i18n="form.field.tel">Téléphone</span> <span class="label-optional" data-i18n="form.optional">Optionnel</span>
               </label>
-              <input type="tel" id="telephone" name="telephone" class="form-input" placeholder="06 00 00 00 00" />
+              <input type="tel" id="telephone" name="telephone" class="form-input" data-i18n-placeholder="form.ph.tel" placeholder="06 00 00 00 00" />
             </div>
           </div>
 
           <div class="form-group" style="margin-top:1.2rem">
             <label class="form-label" for="message">
               <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-              Informations complémentaires <span class="label-optional">Optionnel</span>
+              <span data-i18n="form.field.message">Informations complémentaires</span> <span class="label-optional" data-i18n="form.optional">Optionnel</span>
             </label>
             <textarea id="message" name="message" class="form-input form-textarea" rows="3"
-              placeholder="Délais particuliers, accès spécifique, contraintes techniques…"></textarea>
+              data-i18n-placeholder="form.ph.message" placeholder="Délais particuliers, accès spécifique, contraintes techniques…"></textarea>
           </div>
         </div>
 
@@ -576,10 +576,10 @@ const departementsJson = JSON.stringify(departements);
         <div class="form-footer">
           <p class="form-footer__mention">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Vos données sont utilisées uniquement pour traiter votre demande.
+            <span data-i18n="form.privacy">Vos données sont utilisées uniquement pour traiter votre demande.</span>
           </p>
           <button type="submit" class="btn btn--rouge btn--lg" id="submitBtn">
-            <span id="submitLabel">Envoyer ma demande</span>
+            <span id="submitLabel" data-i18n="form.submit.label">Envoyer ma demande</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
           </button>
         </div>
@@ -591,9 +591,9 @@ const departementsJson = JSON.stringify(departements);
         <div class="form-success__icon">
           <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         </div>
-        <h3>Demande envoyée !</h3>
-        <p>Un email de confirmation récapitulant votre demande a été envoyé à votre adresse.<br />Notre équipe vous contactera sous 24h avec votre devis.</p>
-        <a href="/" class="btn btn--outline" style="margin-top:1.5rem;">Retour à l'accueil</a>
+        <h3 data-i18n="form.success.title">Demande envoyée !</h3>
+        <p data-i18n="form.success.desc">Un email de confirmation récapitulant votre demande a été envoyé à votre adresse.<br />Notre équipe vous contactera sous 24h avec votre devis.</p>
+        <a href="/" class="btn btn--outline" style="margin-top:1.5rem;" data-i18n="form.success.back">Retour à l'accueil</a>
       </div>
 
     </div>
@@ -608,7 +608,17 @@ const departementsJson = JSON.stringify(departements);
   const PR_EMAIL   = 'lehavre@pr-logistics.fr';
   const DEPARTEMENTS = JSON.parse(departementsJson);
 
-  // ── Infos par service ────────────────────────────────────────
+  // ── Infos par service (labels traduits dynamiquement) ───────────
+  function getServiceInfo() {
+    const t = window.I18N?.t ?? (k => k);
+    return {
+      depotage:  { label: t('devis.card.depotage.title'),  icon: '/assets/services/depotage.png' },
+      stockage:  { label: t('devis.card.stockage.title'),  icon: '/assets/services/Storage.png' },
+      traction:  { label: t('devis.card.traction.title'),  icon: '/assets/services/traction.png' },
+      transport: { label: t('devis.card.transport.title'), icon: '/assets/services/livraison.png' },
+    };
+  }
+  // Alias pour la compatibilité avec le reste du code (PDF etc.)
   const SERVICE_INFO = {
     depotage:  { label: 'Dépotage / Empotage',   icon: '/assets/services/depotage.png' },
     stockage:  { label: 'Stockage',               icon: '/assets/services/Storage.png' },
@@ -621,7 +631,7 @@ const departementsJson = JSON.stringify(departements);
   // ── Sélection du service ─────────────────────────────────────
   function selectService(name) {
     currentService = name;
-    const info = SERVICE_INFO[name];
+    const info = getServiceInfo()[name] || SERVICE_INFO[name];
 
     // Mise à jour visuelle des cartes + état de la grille
     const grid = document.querySelector('.services-grid');
@@ -636,18 +646,19 @@ const departementsJson = JSON.stringify(departements);
     if (icon)  { icon.src = info.icon; icon.alt = info.label; }
     if (label) { label.textContent = info.label; }
 
-    // Labels adresses selon service
+    // Labels adresses selon service (traduits)
+    const t = window.I18N?.t ?? (k => k);
     const labelDepart  = document.getElementById('label-depart');
     const labelArrivee = document.getElementById('label-arrivee');
     const adressesTitre = document.getElementById('adresses-titre');
     if (name === 'traction') {
-      if (labelDepart)  labelDepart.textContent  = "Point d'enlèvement";
-      if (labelArrivee) labelArrivee.textContent = 'Point de livraison';
-      if (adressesTitre) adressesTitre.textContent = 'Itinéraire de traction';
+      if (labelDepart)  labelDepart.textContent  = t('form.label.pickup');
+      if (labelArrivee) labelArrivee.textContent = t('form.label.delivery');
+      if (adressesTitre) adressesTitre.textContent = t('form.bloc.traction.title');
     } else {
-      if (labelDepart)  labelDepart.textContent  = 'Adresse de départ';
-      if (labelArrivee) labelArrivee.textContent = 'Adresse de livraison';
-      if (adressesTitre) adressesTitre.textContent = 'Adresses de transport';
+      if (labelDepart)  labelDepart.textContent  = t('form.label.depart');
+      if (labelArrivee) labelArrivee.textContent = t('form.label.arrivee');
+      if (adressesTitre) adressesTitre.textContent = t('form.bloc.adresses.title');
     }
 
     // Afficher / masquer les blocs + activer/désactiver les inputs
@@ -726,6 +737,30 @@ const departementsJson = JSON.stringify(departements);
   let lots   = [];
   let nextId = 1;
 
+  function getFormats() {
+    const t = window.I18N?.t ?? (k => k);
+    return [
+      { val: '',        label: t('form.format.placeholder') },
+      { val: '80x100',  label: '80 × 100 cm' },
+      { val: '80x120',  label: '80 × 120 cm (Euro)' },
+      { val: '100x120', label: '100 × 120 cm' },
+    ];
+  }
+
+  function getTypesMarchandise() {
+    const t = window.I18N?.t ?? (k => k);
+    return [
+      { val: '',          label: t('form.type.placeholder') },
+      { val: 'standard',  label: t('form.type.standard') },
+      { val: 'froid',     label: t('form.type.froid') },
+      { val: 'dangereux', label: t('form.type.dangereux') },
+      { val: 'alcool',    label: t('form.type.alcool') },
+      { val: 'bio',       label: t('form.type.bio') },
+      { val: 'autre',     label: t('form.type.autre') },
+    ];
+  }
+
+  // Garde les anciens pour le PDF (valeurs fixes FR)
   const FORMATS = [
     { val: '',        label: 'Format…' },
     { val: '80x100',  label: '80 × 100 cm' },
@@ -744,49 +779,50 @@ const departementsJson = JSON.stringify(departements);
   ];
 
   function selectHTML(name, id) {
-    const opts = FORMATS.map(f =>
+    const opts = getFormats().map(f =>
       `<option value="${f.val}"${f.val === '' ? ' disabled selected' : ''}>${f.label}</option>`
     ).join('');
     return `<div class="select-wrapper"><select name="${name}" id="${id}" class="form-select" required>${opts}</select><span class="select-arrow" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span></div>`;
   }
 
   function typeSelectHTML(name, id) {
-    const opts = TYPES_MARCHANDISE.map(t =>
+    const opts = getTypesMarchandise().map(t =>
       `<option value="${t.val}"${t.val === '' ? ' disabled selected' : ''}>${t.label}</option>`
     ).join('');
     return `<div class="select-wrapper"><select name="${name}" id="${id}" class="form-select" required>${opts}</select><span class="select-arrow" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span></div>`;
   }
 
   function createLotRow(id, num) {
+    const t = window.I18N?.t ?? (k => k);
     const div = document.createElement('div');
     div.className = 'lot-card';
     div.dataset.lotId = id;
     div.innerHTML = `
       <div class="lot-card__header">
-        <div class="lot-badge">Lot ${num}</div>
-        <button type="button" class="btn-remove-lot" title="Supprimer ce lot">
+        <div class="lot-badge">${t('form.lot.label')} ${num}</div>
+        <button type="button" class="btn-remove-lot" title="${t('form.lot.remove')}">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-          Supprimer
+          ${t('form.lot.remove')}
         </button>
       </div>
       <div class="lot-card__fields lot-card__fields--row1">
         <div class="form-group">
-          <label class="form-label" for="pal_${id}">Nombre de palettes <span class="req-star">*</span></label>
+          <label class="form-label" for="pal_${id}">${t('form.lot.palettes')} <span class="req-star">*</span></label>
           <input type="number" name="pal_${id}" id="pal_${id}" min="1" max="9999" class="form-input" placeholder="Ex : 5" required />
         </div>
         <div class="form-group">
-          <label class="form-label" for="tai_${id}">Taille des palettes <span class="req-star">*</span></label>
+          <label class="form-label" for="tai_${id}">${t('form.lot.taille')} <span class="req-star">*</span></label>
           ${selectHTML(`tai_${id}`, `tai_${id}`)}
         </div>
       </div>
       <div class="lot-card__fields lot-card__fields--row2">
         <div class="form-group">
-          <label class="form-label" for="typ_${id}">Type de marchandise <span class="req-star">*</span></label>
+          <label class="form-label" for="typ_${id}">${t('form.lot.type')} <span class="req-star">*</span></label>
           ${typeSelectHTML(`typ_${id}`, `typ_${id}`)}
         </div>
         <div class="form-group">
-          <label class="form-label" for="con_${id}">Contenu de la marchandise <span class="label-optional">Optionnel</span></label>
-          <input type="text" name="con_${id}" id="con_${id}" class="form-input" placeholder="Ex : Électronique, textile…" />
+          <label class="form-label" for="con_${id}">${t('form.lot.contenu')} <span class="label-optional">${t('form.optional')}</span></label>
+          <input type="text" name="con_${id}" id="con_${id}" class="form-input" placeholder="${t('form.lot.contenu.ph')}" />
         </div>
       </div>`;
     div.querySelector('.btn-remove-lot').addEventListener('click', () => removeLot(id, div));
@@ -809,8 +845,9 @@ const departementsJson = JSON.stringify(departements);
   }
 
   function updateLotNumbers() {
+    const t = window.I18N?.t ?? (k => k);
     document.querySelectorAll('.lot-card .lot-badge').forEach((el, i) => {
-      el.textContent = `Lot ${i + 1}`;
+      el.textContent = `${t('form.lot.label')} ${i + 1}`;
     });
   }
 
@@ -1084,6 +1121,58 @@ const departementsJson = JSON.stringify(departements);
     addLot();
     document.getElementById('addLotBtn')?.addEventListener('click', addLot);
 
+    // Rafraîchir les textes dynamiques quand la langue change
+    document.addEventListener('i18n:changed', () => {
+      // Régénérer tous les lots avec les nouveaux labels
+      const container = document.getElementById('lotsContainer');
+      if (!container) return;
+      const savedValues = lots.map(id => ({
+        id,
+        pal:     document.getElementById(`pal_${id}`)?.value || '',
+        tai:     document.querySelector(`[name="tai_${id}"]`)?.value || '',
+        typ:     document.querySelector(`[name="typ_${id}"]`)?.value || '',
+        con:     document.getElementById(`con_${id}`)?.value || '',
+      }));
+      container.innerHTML = '';
+      const savedLots = [...lots];
+      lots = [];
+      nextId = 1;
+      savedValues.forEach((s, i) => {
+        const newId = nextId++;
+        lots.push(newId);
+        const row = createLotRow(newId, i + 1);
+        container.appendChild(row);
+        if (s.pal) document.getElementById(`pal_${newId}`).value = s.pal;
+        const taiEl = document.querySelector(`[name="tai_${newId}"]`);
+        if (taiEl && s.tai) taiEl.value = s.tai;
+        const typEl = document.querySelector(`[name="typ_${newId}"]`);
+        if (typEl && s.typ) typEl.value = s.typ;
+        const conEl = document.getElementById(`con_${newId}`);
+        if (conEl && s.con) conEl.value = s.con;
+      });
+      updateRemoveBtns();
+      // Re-appliquer les labels d'adresses si un service est sélectionné
+      if (currentService) {
+        const t2 = window.I18N?.t ?? (k => k);
+        const labelDepart   = document.getElementById('label-depart');
+        const labelArrivee  = document.getElementById('label-arrivee');
+        const adressesTitre = document.getElementById('adresses-titre');
+        if (currentService === 'traction') {
+          if (labelDepart)   labelDepart.textContent   = t2('form.label.pickup');
+          if (labelArrivee)  labelArrivee.textContent  = t2('form.label.delivery');
+          if (adressesTitre) adressesTitre.textContent = t2('form.bloc.traction.title');
+        } else {
+          if (labelDepart)   labelDepart.textContent   = t2('form.label.depart');
+          if (labelArrivee)  labelArrivee.textContent  = t2('form.label.arrivee');
+          if (adressesTitre) adressesTitre.textContent = t2('form.bloc.adresses.title');
+        }
+        // Mettre à jour le badge service
+        const info2 = getServiceInfo()[currentService];
+        const badgeLabel = document.getElementById('formServiceLabel');
+        if (badgeLabel && info2) badgeLabel.textContent = info2.label;
+      }
+    });
+
     // Soumission du formulaire
     const form    = document.getElementById('devisForm');
     const success = document.getElementById('formSuccess');
@@ -1099,8 +1188,9 @@ const departementsJson = JSON.stringify(departements);
         return;
       }
 
+      const tBtn = window.I18N?.t ?? (k => k);
       btn.disabled = true;
-      label.textContent = 'Génération du PDF…';
+      label.textContent = tBtn('form.submit.generating');
 
       const fd = new FormData(form);
       const data = {
@@ -1138,6 +1228,8 @@ const departementsJson = JSON.stringify(departements);
         depot_port:         fd.get('depot_port')         || '',
         depot_poids:        fd.get('depot_poids')        || '',
         depot_poids_unite:  fd.get('depot_poids_unite')  || 't',
+        // Langue du client
+        lang: window.__lang || 'fr',
       };
 
       // Attendre jsPDF
@@ -1150,12 +1242,12 @@ const departementsJson = JSON.stringify(departements);
       if (pdf) pdfBase64 = pdf.output('datauristring').split(',')[1];
 
       // Envoyer au serveur
-      label.textContent = 'Envoi des emails…';
+      label.textContent = tBtn('form.submit.sending');
       const result = await sendToServer(data, pdfBase64);
 
       if (!result.success) {
         btn.disabled = false;
-        label.textContent = 'Envoyer ma demande';
+        label.textContent = tBtn('form.submit.label');
         const errMsg = document.getElementById('sendError');
         if (errMsg) {
           errMsg.hidden = false;

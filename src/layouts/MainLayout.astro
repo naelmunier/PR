@@ -141,6 +141,77 @@ const jsonLd = {
             'devis.card.transport.title':'Transport & Livraison','devis.card.transport.desc':"Prise en charge et livraison de vos palettes jusqu'à votre client final partout en France.",
             'devis.card.cta':'Demander un devis','devis.card.selected':'Sélectionné','devis.back':'Changer de prestation',
             'carousel.title':'Ils nous ont fait <span class="i18n-accent">confiance</span>',
+            // Formulaire de devis
+            'form.bloc.adresses.title':'Adresses de transport',
+            'form.bloc.stockage.title':'Site de stockage',
+            'form.bloc.depotage.title':"Détails de l'opération",
+            'form.bloc.traction.title':'Détails de la traction',
+            'form.bloc.marchandise.title':'Détails de la marchandise',
+            'form.bloc.stock.conds.title':'Conditions de stockage',
+            'form.bloc.coordonnees.title':'Vos coordonnées',
+            'form.label.depart':'Adresse de départ',
+            'form.label.arrivee':'Adresse de livraison',
+            'form.label.pickup':"Point d'enlèvement",
+            'form.label.delivery':'Point de livraison',
+            'form.optional':'Optionnel',
+            'form.lot.label':'Lot',
+            'form.lot.add':'Ajouter un lot',
+            'form.lot.remove':'Supprimer',
+            'form.lot.palettes':'Nombre de palettes',
+            'form.lot.taille':'Taille des palettes',
+            'form.lot.type':'Type de marchandise',
+            'form.lot.contenu':'Contenu de la marchandise',
+            'form.lot.contenu.ph':'Ex : Électronique, textile…',
+            'form.format.placeholder':'Format…',
+            'form.type.placeholder':'Type de marchandise…',
+            'form.type.standard':'Marchandise standard',
+            'form.type.froid':'Température dirigée (froid)',
+            'form.type.dangereux':'Marchandise dangereuse',
+            'form.type.alcool':'Alcool',
+            'form.type.bio':'Produits biologiques',
+            'form.type.autre':'Autre',
+            'form.submit.label':'Envoyer ma demande',
+            'form.submit.generating':'Génération du PDF…',
+            'form.submit.sending':'Envoi des emails…',
+            'form.privacy':'Vos données sont utilisées uniquement pour traiter votre demande.',
+            'form.success.title':'Demande envoyée !',
+            'form.success.desc':"Un email de confirmation récapitulant votre demande a été envoyé à votre adresse.<br />Notre équipe vous contactera sous 24h avec votre devis.",
+            'form.success.back':"Retour à l'accueil",
+            'form.stock.banner':"Par défaut, stockage dans notre entrepôt au <strong>Port du Havre — 76700 Rogerville</strong>. Précisez ci-dessous si vous souhaitez un site différent.",
+            // Champs & labels
+            'form.field.ville':'Ville','form.field.dept':'Département','form.field.pays':'Pays',
+            'form.field.stock_ville':'Autre ville souhaitée',
+            'form.field.depot_op':"Type d'opération",
+            'form.field.depot_nb':'Nombre de conteneurs','form.field.depot_type':'Type de conteneur',
+            'form.field.date_souhaitee':'Date souhaitée','form.field.port':'Port / Terminal',
+            'form.field.poids_estime':'Poids total estimé','form.field.poids_total':'Poids total',
+            'form.field.vehicule':'Type de véhicule',
+            'form.field.duree':'Durée souhaitée',
+            'form.field.date_entree':"Date d'entrée souhaitée",'form.field.date_sortie':'Date de sortie estimée',
+            'form.field.conds':'Conditions particulières',
+            'form.field.nom':'Nom / Société','form.field.email':'Adresse e-mail','form.field.tel':'Téléphone','form.field.message':'Informations complémentaires',
+            // Placeholders
+            'form.ph.city':'Le Havre','form.ph.city2':'Paris',
+            'form.ph.nom':'Ex : Dupont SAS','form.ph.email':'contact@exemple.fr','form.ph.tel':'06 00 00 00 00',
+            'form.ph.message':'Délais particuliers, accès spécifique, contraintes techniques…',
+            // Select
+            'form.select.placeholder':'Sélectionnez',
+            // Dépotage radios
+            'form.depot.depotage':'Dépotage','form.depot.depotage.sub':'Conteneur → Entrepôt',
+            'form.depot.empotage':'Empotage','form.depot.empotage.sub':'Entrepôt → Conteneur',
+            // Conteneurs
+            'form.cont.reefer':'Réfrigéré (Reefer)','form.cont.autre':'Autre',
+            // Véhicules
+            'form.veh.bache':'Semi bâchée','form.veh.frigo':'Semi frigorifique','form.veh.plateau':'Plateau',
+            'form.veh.citerne':'Citerne','form.veh.conteneur':'Porte-conteneur','form.veh.autre':'Autre',
+            // Durées stockage
+            'form.duree.1sem':"Moins d'une semaine",'form.duree.1mois':'Environ 1 mois',
+            'form.duree.1-3mois':'1 à 3 mois','form.duree.3-6mois':'3 à 6 mois',
+            'form.duree.6mois':'Plus de 6 mois','form.duree.indetermine':'Durée indéterminée',
+            // Conditions stockage
+            'form.cond.froid':'Température dirigée','form.cond.dangereux':'Matières dangereuses',
+            'form.cond.alcool':'Alcool / produits réglementés','form.cond.bio':'Produits biologiques',
+            'form.cond.racks':'Stockage en racks','form.cond.securite':'Sécurité renforcée',
           },
           en: {
             'nav.home':'Home','nav.devis':'Get a Quote','nav.about':'About Us','nav.contact':'Contact Us',
@@ -187,6 +258,77 @@ const jsonLd = {
             'devis.card.transport.title':'Transport & Delivery','devis.card.transport.desc':'Handling and delivery of your pallets to your final customer anywhere in France.',
             'devis.card.cta':'Request a quote','devis.card.selected':'Selected','devis.back':'Change service',
             'carousel.title':'They <span class="i18n-accent">trusted</span> us',
+            // Quote form
+            'form.bloc.adresses.title':'Transport addresses',
+            'form.bloc.stockage.title':'Storage site',
+            'form.bloc.depotage.title':'Operation details',
+            'form.bloc.traction.title':'Traction details',
+            'form.bloc.marchandise.title':'Cargo details',
+            'form.bloc.stock.conds.title':'Storage conditions',
+            'form.bloc.coordonnees.title':'Your details',
+            'form.label.depart':'Pickup address',
+            'form.label.arrivee':'Delivery address',
+            'form.label.pickup':'Pickup point',
+            'form.label.delivery':'Delivery point',
+            'form.optional':'Optional',
+            'form.lot.label':'Lot',
+            'form.lot.add':'Add a lot',
+            'form.lot.remove':'Remove',
+            'form.lot.palettes':'Number of pallets',
+            'form.lot.taille':'Pallet size',
+            'form.lot.type':'Goods type',
+            'form.lot.contenu':'Cargo contents',
+            'form.lot.contenu.ph':'e.g. Electronics, textiles…',
+            'form.format.placeholder':'Format…',
+            'form.type.placeholder':'Goods type…',
+            'form.type.standard':'Standard goods',
+            'form.type.froid':'Temperature-controlled (cold)',
+            'form.type.dangereux':'Hazardous goods',
+            'form.type.alcool':'Alcohol',
+            'form.type.bio':'Organic products',
+            'form.type.autre':'Other',
+            'form.submit.label':'Send my request',
+            'form.submit.generating':'Generating PDF…',
+            'form.submit.sending':'Sending emails…',
+            'form.privacy':'Your data is used solely to process your request.',
+            'form.success.title':'Request sent!',
+            'form.success.desc':'A confirmation email summarising your request has been sent to your address.<br />Our team will contact you within 24 hours with your quote.',
+            'form.success.back':'Back to home',
+            'form.stock.banner':'By default, storage in our warehouse at <strong>Le Havre Port — 76700 Rogerville</strong>. Specify below if you need a different site.',
+            // Fields & labels
+            'form.field.ville':'City','form.field.dept':'Department','form.field.pays':'Country',
+            'form.field.stock_ville':'Other preferred city',
+            'form.field.depot_op':'Operation type',
+            'form.field.depot_nb':'Number of containers','form.field.depot_type':'Container type',
+            'form.field.date_souhaitee':'Requested date','form.field.port':'Port / Terminal',
+            'form.field.poids_estime':'Estimated total weight','form.field.poids_total':'Total weight',
+            'form.field.vehicule':'Vehicle type',
+            'form.field.duree':'Desired duration',
+            'form.field.date_entree':'Desired entry date','form.field.date_sortie':'Estimated exit date',
+            'form.field.conds':'Special conditions',
+            'form.field.nom':'Name / Company','form.field.email':'Email address','form.field.tel':'Phone','form.field.message':'Additional information',
+            // Placeholders
+            'form.ph.city':'Le Havre','form.ph.city2':'London',
+            'form.ph.nom':'e.g. Smith Ltd','form.ph.email':'contact@example.com','form.ph.tel':'+44 7700 000000',
+            'form.ph.message':'Specific deadlines, site access, technical constraints…',
+            // Select
+            'form.select.placeholder':'Select…',
+            // Devanning radios
+            'form.depot.depotage':'Devanning','form.depot.depotage.sub':'Container → Warehouse',
+            'form.depot.empotage':'Stuffing','form.depot.empotage.sub':'Warehouse → Container',
+            // Containers
+            'form.cont.reefer':'Refrigerated (Reefer)','form.cont.autre':'Other',
+            // Vehicles
+            'form.veh.bache':'Curtainsider','form.veh.frigo':'Refrigerated trailer','form.veh.plateau':'Flatbed',
+            'form.veh.citerne':'Tanker','form.veh.conteneur':'Container truck','form.veh.autre':'Other',
+            // Storage durations
+            'form.duree.1sem':'Less than a week','form.duree.1mois':'About 1 month',
+            'form.duree.1-3mois':'1 to 3 months','form.duree.3-6mois':'3 to 6 months',
+            'form.duree.6mois':'More than 6 months','form.duree.indetermine':'Open-ended',
+            // Storage conditions
+            'form.cond.froid':'Temperature-controlled','form.cond.dangereux':'Hazardous goods',
+            'form.cond.alcool':'Alcohol / regulated goods','form.cond.bio':'Organic products',
+            'form.cond.racks':'Rack storage','form.cond.securite':'Enhanced security',
           }
         };
 
@@ -211,7 +353,7 @@ const jsonLd = {
           // Mettre à jour l'affichage du sélecteur (drapeau + code)
           var flagEl = document.getElementById('langFlag');
           var codeEl = document.getElementById('langCode');
-          if (flagEl) flagEl.textContent = lang === 'fr' ? '🇫🇷' : '🇬🇧';
+          if (flagEl) { flagEl.src = lang === 'fr' ? '/assets/home/france.png' : '/assets/home/english.png'; flagEl.alt = lang === 'fr' ? 'FR' : 'EN'; }
           if (codeEl) codeEl.textContent = lang === 'fr' ? 'FR' : 'EN';
           // Fermer la dropdown si ouverte
           var dd = document.getElementById('langDropdown');
@@ -219,6 +361,8 @@ const jsonLd = {
           if (dd) dd.classList.remove('open');
           if (tr) tr.setAttribute('aria-expanded', 'false');
           window.__lang = lang;
+          // Notifier les composants qui ont des textes dynamiques
+          document.dispatchEvent(new CustomEvent('i18n:changed', { detail: { lang: lang } }));
         }
 
         function detectLanguage() {
