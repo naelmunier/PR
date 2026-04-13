@@ -19,8 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // ── Configuration ────────────────────────────────────────────────
-define('BREVO_API_KEY', 'VOTRE_CLE_API_BREVO_ICI');
-define('PR_EMAIL',      'lehavre@pr-logistics.fr');
+define('BREVO_API_KEY', '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');
+define('PR_EMAIL',      'naelmunier22@gmail.com');
 define('PR_NOM',        'PR Logistics');
 
 // ── Lecture du corps JSON ────────────────────────────────────────
@@ -289,7 +289,8 @@ function sendBrevoEmail(
 }
 
 // ── Envoi des deux emails ─────────────────────────────────────────
-$sujet = "Demande de devis — $nom — $totalPalettes palette(s) — $departVille → $arriveVille";
+$sujet = "Demande de devis — $nom — $totalPalettes palette(s)";
+if ($departVille) $sujet .= " — $departVille → $arriveVille";
 
 // 1) Confirmation au client
 $r1 = sendBrevoEmail(
@@ -308,8 +309,8 @@ $r2 = sendBrevoEmail(
     BREVO_API_KEY,
     PR_EMAIL,
     PR_NOM,
-    $clientEmail,
-    $nom,
+    PR_EMAIL,
+    PR_NOM,
     $sujet,
     $htmlPR,
     $pdfBase64
