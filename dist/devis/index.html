@@ -744,8 +744,10 @@ PLPN 1 – Port 4935<br data-astro-cid-sz7xmlte>76700 Rogerville
         const errMsg = document.getElementById('sendError');
         if (errMsg) {
           errMsg.hidden = false;
-          errMsg.textContent = "L'envoi automatique a échoué. Veuillez réessayer ou nous contacter directement.";
+          const detail = result.details1 || result.details2 || result.error || 'Erreur inconnue';
+          errMsg.textContent = "Erreur : " + detail;
         }
+        console.error('[Devis] Erreur serveur :', result);
         return;
       }
 
