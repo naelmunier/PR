@@ -257,7 +257,8 @@ $htmlClient = "
             </div>
 
             <p style='font-size:13px; color:#666; line-height:1.6;'>
-              Le devis complet en PDF est joint à cet email. Pour toute question, contactez-nous à
+              Notre équipe va étudier votre demande et vous enverra un devis personnalisé sous 24h.<br>
+              Pour toute question, contactez-nous à
               <a href='mailto:lehavre@pr-logistics.fr' style='color:#e30613;'>lehavre@pr-logistics.fr</a>
               ou au <strong>02.32.72.48.03</strong>.
             </p>
@@ -346,18 +347,20 @@ function sendBrevoEmail(
     string $fromName,
     string $subject,
     string $htmlContent,
-    string $pdfBase64
+    ?string $pdfBase64 = null
 ): array {
     $payload = [
         'sender'      => ['email' => $fromEmail, 'name' => $fromName],
         'to'          => [['email' => $toEmail, 'name' => $toName]],
         'subject'     => $subject,
         'htmlContent' => $htmlContent,
-        'attachment'  => [[
+    ];
+    if ($pdfBase64) {
+        $payload['attachment'] = [[
             'content' => $pdfBase64,
             'name'    => 'Devis_PR_Logistics.pdf',
-        ]],
-    ];
+        ]];
+    }
 
     $ch = curl_init('https://api.brevo.com/v3/smtp/email');
     curl_setopt_array($ch, [
@@ -384,19 +387,18 @@ function sendBrevoEmail(
 $sujet = "Demande de devis — $nom — $totalPalettes palette(s)";
 if ($departVille) $sujet .= " — $departVille → $arriveVille";
 
-// 1) Confirmation au client
+// 1) Confirmation au client — sans PDF
 $r1 = sendBrevoEmail(
     BREVO_API_KEY,
     $clientEmail,
     $nom,
     PR_EMAIL,
     PR_NOM,
-    "Votre demande de devis PR Logistics ($ref)",
-    $htmlClient,
-    $pdfBase64
+    "Votre demande de devis PR Logistics ($ref)"
+    , $htmlClient
 );
 
-// 2) Notification à PR Logistics
+// 2) Notification interne PR Logistics — avec PDF
 $r2 = sendBrevoEmail(
     BREVO_API_KEY,
     PR_EMAIL,

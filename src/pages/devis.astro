@@ -211,11 +211,11 @@ const departementsJson = JSON.stringify(departements);
                 <span id="label-depart">Adresse de départ</span>
               </div>
               <div class="form-group">
-                <label class="form-label" for="depart_ville">Ville</label>
+                <label class="form-label" for="depart_ville">Ville <span class="req-star">*</span></label>
                 <input type="text" id="depart_ville" name="depart_ville" class="form-input" placeholder="Le Havre" required />
               </div>
               <div class="form-group">
-                <label class="form-label" for="depart_dept">Département</label>
+                <label class="form-label" for="depart_dept">Département <span class="req-star">*</span></label>
                 <div class="select-wrapper">
                   <select id="depart_dept" name="depart_dept" class="form-select" required>
                     <option value="" disabled selected>Sélectionnez</option>
@@ -242,11 +242,11 @@ const departementsJson = JSON.stringify(departements);
                 <span id="label-arrivee">Adresse de livraison</span>
               </div>
               <div class="form-group">
-                <label class="form-label" for="arrivee_ville">Ville</label>
+                <label class="form-label" for="arrivee_ville">Ville <span class="req-star">*</span></label>
                 <input type="text" id="arrivee_ville" name="arrivee_ville" class="form-input" placeholder="Paris" required />
               </div>
               <div class="form-group">
-                <label class="form-label" for="arrivee_dept">Département</label>
+                <label class="form-label" for="arrivee_dept">Département <span class="req-star">*</span></label>
                 <div class="select-wrapper">
                   <select id="arrivee_dept" name="arrivee_dept" class="form-select" required>
                     <option value="" disabled selected>Sélectionnez</option>
@@ -308,7 +308,7 @@ const departementsJson = JSON.stringify(departements);
 
           <!-- Type d'opération — radio visuel -->
           <div class="form-group" style="margin-bottom:1.6rem">
-            <label class="form-label">Type d'opération</label>
+            <label class="form-label">Type d'opération <span class="req-star">*</span></label>
             <div class="radio-group">
               <label class="radio-card">
                 <input type="radio" name="depot_operation" value="depotage" required>
@@ -331,11 +331,11 @@ const departementsJson = JSON.stringify(departements);
 
           <div class="form-row form-row--3">
             <div class="form-group">
-              <label class="form-label" for="depot_nb">Nombre de conteneurs</label>
+              <label class="form-label" for="depot_nb">Nombre de conteneurs <span class="req-star">*</span></label>
               <input type="number" id="depot_nb" name="depot_nb" class="form-input" min="1" max="999" placeholder="Ex : 2" required />
             </div>
             <div class="form-group">
-              <label class="form-label" for="depot_type_cont">Type de conteneur</label>
+              <label class="form-label" for="depot_type_cont">Type de conteneur <span class="req-star">*</span></label>
               <div class="select-wrapper">
                 <select id="depot_type_cont" name="depot_type_cont" class="form-select" required>
                   <option value="" disabled selected>Sélectionnez</option>
@@ -352,15 +352,15 @@ const departementsJson = JSON.stringify(departements);
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label" for="depot_date">Date souhaitée</label>
+              <label class="form-label" for="depot_date">Date souhaitée <span class="req-star">*</span></label>
               <input type="date" id="depot_date" name="depot_date" class="form-input" required />
             </div>
           </div>
 
           <div class="form-row form-row--2" style="margin-top:1.2rem">
             <div class="form-group">
-              <label class="form-label" for="depot_port">Port / Terminal</label>
-              <input type="text" id="depot_port" name="depot_port" class="form-input" placeholder="Port du Havre" value="Port du Havre" />
+              <label class="form-label" for="depot_port">Port / Terminal <span class="req-star">*</span></label>
+              <input type="text" id="depot_port" name="depot_port" class="form-input" placeholder="Port du Havre" value="Port du Havre" required />
             </div>
             <div class="form-group">
               <label class="form-label" for="depot_poids">Poids total estimé <span class="label-optional">Optionnel</span></label>
@@ -390,7 +390,7 @@ const departementsJson = JSON.stringify(departements);
           </div>
           <div class="form-row form-row--3">
             <div class="form-group">
-              <label class="form-label" for="trac_vehicule">Type de véhicule</label>
+              <label class="form-label" for="trac_vehicule">Type de véhicule <span class="req-star">*</span></label>
               <div class="select-wrapper">
                 <select id="trac_vehicule" name="trac_vehicule" class="form-select" required>
                   <option value="" disabled selected>Sélectionnez</option>
@@ -422,7 +422,7 @@ const departementsJson = JSON.stringify(departements);
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label" for="trac_date">Date souhaitée</label>
+              <label class="form-label" for="trac_date">Date souhaitée <span class="req-star">*</span></label>
               <input type="date" id="trac_date" name="trac_date" class="form-input" required />
             </div>
           </div>
@@ -469,7 +469,7 @@ const departementsJson = JSON.stringify(departements);
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label" for="stock_duree">Durée souhaitée</label>
+              <label class="form-label" for="stock_duree">Durée souhaitée <span class="req-star">*</span></label>
               <div class="select-wrapper">
                 <select id="stock_duree" name="stock_duree" class="form-select" required>
                   <option value="" disabled selected>Sélectionnez</option>
@@ -489,7 +489,7 @@ const departementsJson = JSON.stringify(departements);
 
           <div class="form-row form-row--2" style="margin-bottom:1.4rem">
             <div class="form-group">
-              <label class="form-label" for="stock_date_entree">Date d'entrée souhaitée</label>
+              <label class="form-label" for="stock_date_entree">Date d'entrée souhaitée <span class="req-star">*</span></label>
               <input type="date" id="stock_date_entree" name="stock_date_entree" class="form-input" required />
             </div>
             <div class="form-group">
@@ -542,14 +542,14 @@ const departementsJson = JSON.stringify(departements);
             <div class="form-group">
               <label class="form-label" for="nom">
                 <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                Nom / Société
+                Nom / Société <span class="req-star">*</span>
               </label>
               <input type="text" id="nom" name="nom" class="form-input" placeholder="PR Logistics" required />
             </div>
             <div class="form-group">
               <label class="form-label" for="email">
                 <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                Adresse e-mail
+                Adresse e-mail <span class="req-star">*</span>
               </label>
               <input type="email" id="email" name="email" class="form-input" placeholder="contact@exemple.fr" required />
             </div>
@@ -592,7 +592,7 @@ const departementsJson = JSON.stringify(departements);
           <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         </div>
         <h3>Demande envoyée !</h3>
-        <p>Un email de confirmation avec votre devis en PDF a été envoyé à votre adresse.<br />Notre équipe vous contactera sous 24h.</p>
+        <p>Un email de confirmation récapitulant votre demande a été envoyé à votre adresse.<br />Notre équipe vous contactera sous 24h avec votre devis.</p>
         <a href="/" class="btn btn--outline" style="margin-top:1.5rem;">Retour à l'accueil</a>
       </div>
 
