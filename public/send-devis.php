@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // ── Configuration ────────────────────────────────────────────────
-define('BREVO_API_KEY', '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');
+define('BREVO_API_KEY', getenv('BREVO_API_KEY') ?: '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');
 define('PR_EMAIL',      'naelmunier22@gmail.com');
 define('PR_NOM',        'PR Logistics');
 
