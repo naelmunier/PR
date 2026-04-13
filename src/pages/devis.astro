@@ -1168,10 +1168,18 @@ const departementsJson = JSON.stringify(departements);
 
       // PDF envoyé par mail uniquement — pas de téléchargement direct
 
-      // Afficher la confirmation
-      form.style.transition = 'opacity 0.4s';
+      // Afficher la confirmation en remplaçant le formulaire sans scroll
+      const devisSection = document.getElementById('devisSection');
+      form.style.transition = 'opacity 0.35s ease';
       form.style.opacity = '0';
-      setTimeout(() => { form.hidden = true; success.hidden = false; }, 380);
+      setTimeout(() => {
+        form.hidden = true;
+        success.hidden = false;
+        // Fond de la section devient blanc pour éviter le gris
+        devisSection.style.background = 'white';
+        // Scroll doux vers le message de confirmation
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 350);
     });
 
     form?.addEventListener('input', e => {
@@ -1682,9 +1690,15 @@ const departementsJson = JSON.stringify(departements);
   /* ── SUCCÈS ──────────────────────────────────────────────── */
   .form-success {
     background: white; border-radius: var(--rayon-lg);
-    padding: 4rem 2rem; text-align: center;
+    padding: 5rem 2rem; text-align: center;
     box-shadow: 0 2px 24px rgba(0,0,0,0.06);
     max-width: 900px; margin: 0 auto;
+    animation: fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
   .form-success__icon {
     width:72px; height:72px; background:#dcfce7;
