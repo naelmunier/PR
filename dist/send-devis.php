@@ -504,7 +504,7 @@ function sendBrevoEmail(
 
 // ── Envoi des deux emails ─────────────────────────────────────────
 // Sujet interne (toujours en FR)
-$sujetPR = "Demande de devis — $nom — $totalPalettes palette(s)";
+$sujetPR = "Demande de devis — $nom — $serviceLabel_FR";
 if ($departVille) $sujetPR .= " — $departVille → $arriveVille";
 
 // 1) Confirmation au client — sans PDF (langue du client)

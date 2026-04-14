@@ -82,13 +82,16 @@ const currentPath = Astro.url.pathname;
     justify-content: space-between;
     height: 84px;
     gap: 2rem;
+    padding-left: 0 !important;
   }
 
   .header__logo {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     align-self: stretch;
-    margin-left: -2rem;
+    margin-left: 0;
+    padding-left: 0;
+    flex-shrink: 0;
   }
 
   .header__logo img {
