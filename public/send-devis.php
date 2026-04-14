@@ -518,7 +518,7 @@ $r1 = sendBrevoEmail(
     $htmlClient
 );
 
-// 2) Notification interne PR Logistics — avec PDF (toujours en FR)
+// 2) Notification interne PR Logistics — sans PDF (toujours en FR)
 $r2 = sendBrevoEmail(
     BREVO_API_KEY,
     PR_EMAIL,
@@ -526,8 +526,7 @@ $r2 = sendBrevoEmail(
     PR_EMAIL,
     PR_NOM,
     $sujetPR,
-    $htmlPR,
-    $pdfBase64
+    $htmlPR
 );
 
 // ── Réponse ───────────────────────────────────────────────────────
