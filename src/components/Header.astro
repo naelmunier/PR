@@ -12,7 +12,7 @@ const currentPath = Astro.url.pathname;
 <header class="header" id="header">
   <div class="container header__inner">
     <a href="/" class="header__logo" aria-label="PR Logistics — Accueil">
-      <img src="/assets/logo.jpeg" alt="PR Logistics" width="160" height="50" />
+      <img src="/assets/home/logo-navbar.jpg" alt="PR Logistics" />
     </a>
 
     <nav class="header__nav" id="nav" aria-label="Navigation principale">
@@ -84,10 +84,18 @@ const currentPath = Astro.url.pathname;
     gap: 2rem;
   }
 
+  .header__logo {
+    display: flex;
+    align-items: stretch;
+    align-self: stretch;
+    margin-left: -2rem;
+  }
+
   .header__logo img {
-    height: 64px;
+    height: 84px;
     width: auto;
-    border-radius: 0.4rem;
+    border-radius: 0;
+    display: block;
     object-fit: contain;
   }
 
