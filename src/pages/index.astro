@@ -91,6 +91,46 @@ const equipements = [
         </p>
       </div>
 
+      <!-- Cartes entrepôts -->
+      <div class="entrepots-grid reveal" style="margin-bottom:3rem;">
+        <div class="entrepot-carte entrepot-carte--sandouville">
+          <div class="entrepot-carte__inner">
+            <div class="entrepot-carte__badge entrepot-carte__badge--soon" data-i18n="entrepot.soon">À venir — Septembre 2025</div>
+            <h3 class="entrepot-carte__nom">Sandouville</h3>
+            <div class="entrepot-carte__stats">
+              <div class="entrepot-carte__stat">
+                <span class="entrepot-carte__stat-val">24 000</span>
+                <span class="entrepot-carte__stat-unit">m²</span>
+              </div>
+              <div class="entrepot-carte__sep">·</div>
+              <div class="entrepot-carte__stat">
+                <span class="entrepot-carte__stat-val">45</span>
+                <span class="entrepot-carte__stat-unit" data-i18n="entrepot.quais">quais</span>
+              </div>
+            </div>
+            <p class="entrepot-carte__desc" data-i18n="entrepot.sandouville.desc">Nouveau site logistique d'envergure nationale, à deux pas du port du Havre.</p>
+          </div>
+        </div>
+        <div class="entrepot-carte entrepot-carte--rogerville">
+          <div class="entrepot-carte__inner">
+            <div class="entrepot-carte__badge entrepot-carte__badge--actif" data-i18n="entrepot.actif">Site actuel</div>
+            <h3 class="entrepot-carte__nom">Rogerville</h3>
+            <div class="entrepot-carte__stats">
+              <div class="entrepot-carte__stat">
+                <span class="entrepot-carte__stat-val">8 000</span>
+                <span class="entrepot-carte__stat-unit">m²</span>
+              </div>
+              <div class="entrepot-carte__sep">·</div>
+              <div class="entrepot-carte__stat">
+                <span class="entrepot-carte__stat-val">6</span>
+                <span class="entrepot-carte__stat-unit" data-i18n="entrepot.quais">quais</span>
+              </div>
+            </div>
+            <p class="entrepot-carte__desc" data-i18n="entrepot.rogerville.desc">Notre entrepôt actuel, entièrement clos et télésurveillé 24h/7j par la sécurité portuaire.</p>
+          </div>
+        </div>
+      </div>
+
       <div class="c3d-wrapper reveal">
         <div class="c3d-scene">
           <div class="c3d-ring" id="c3dRing">
@@ -541,6 +581,137 @@ const equipements = [
 
   .prestation-carte:hover .prestation-carte__accent {
     width: 100%;
+  }
+
+  /* ENTREPÔTS */
+  .entrepots-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .entrepot-carte {
+    border-radius: 1.5rem;
+    overflow: hidden;
+    position: relative;
+    min-height: 240px;
+    display: flex;
+    align-items: stretch;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .entrepot-carte:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.18);
+  }
+
+  .entrepot-carte--sandouville {
+    background: linear-gradient(135deg, #1b2a4a 0%, #2d4278 100%);
+    box-shadow: 0 8px 40px rgba(27,42,74,0.25);
+  }
+
+  .entrepot-carte--rogerville {
+    background: linear-gradient(135deg, #e30613 0%, #b8000e 100%);
+    box-shadow: 0 8px 40px rgba(227,6,19,0.22);
+  }
+
+  .entrepot-carte__inner {
+    padding: 2rem 2.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Motif décoratif en fond */
+  .entrepot-carte::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .entrepot-carte__badge {
+    display: inline-flex;
+    align-self: flex-start;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+  }
+
+  .entrepot-carte__badge--soon {
+    background: rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.9);
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+
+  .entrepot-carte__badge--actif {
+    background: rgba(255,255,255,0.22);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  .entrepot-carte__nom {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .entrepot-carte__stats {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .entrepot-carte__stat {
+    display: flex;
+    align-items: baseline;
+    gap: 0.2rem;
+  }
+
+  .entrepot-carte__stat-val {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.03em;
+  }
+
+  .entrepot-carte__stat-unit {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.72);
+  }
+
+  .entrepot-carte__sep {
+    font-size: 1.4rem;
+    color: rgba(255,255,255,0.35);
+    line-height: 1;
+  }
+
+  .entrepot-carte__desc {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.55;
+    margin-top: auto;
+  }
+
+  @media (max-width: 640px) {
+    .entrepots-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .entrepot-carte__nom {
+      font-size: 1.6rem;
+    }
   }
 
   /* MOYENS — CARROUSEL 3D ELLIPTIQUE */

@@ -110,6 +110,36 @@ import MainLayout from '../layouts/MainLayout.astro';
           <p class="certif-carte__desc" data-i18n="about.icpe.desc">
             Installation Classée pour la Protection de l'Environnement. Nos activités sont soumises à déclaration préfectorale et contrôlées régulièrement, garantissant la sécurité industrielle et la protection de l'environnement.
           </p>
+          <ul class="icpe-rubriques">
+            <li class="icpe-rubrique">
+              <span class="icpe-rubrique__code">1510</span>
+              <span class="icpe-rubrique__desc">Entrepôts couverts</span>
+            </li>
+            <li class="icpe-rubrique">
+              <span class="icpe-rubrique__code">1530</span>
+              <span class="icpe-rubrique__desc">Papier, carton ou matériaux combustibles analogues</span>
+            </li>
+            <li class="icpe-rubrique">
+              <span class="icpe-rubrique__code">1532</span>
+              <span class="icpe-rubrique__desc">Bois sec et matériaux à base de bois</span>
+            </li>
+            <li class="icpe-rubrique">
+              <span class="icpe-rubrique__code">2662</span>
+              <span class="icpe-rubrique__desc">Polymères (matières plastiques, caoutchoucs, etc.)</span>
+            </li>
+            <li class="icpe-rubrique">
+              <span class="icpe-rubrique__code">2663</span>
+              <span class="icpe-rubrique__desc">Stockage de pneumatiques et produits de caoutchouc</span>
+            </li>
+            <li class="icpe-rubrique">
+              <span class="icpe-rubrique__code">2925</span>
+              <span class="icpe-rubrique__desc">Ateliers de charge d'accumulateurs</span>
+            </li>
+            <li class="icpe-rubrique">
+              <span class="icpe-rubrique__code">4755</span>
+              <span class="icpe-rubrique__desc">Matières et objets explosibles</span>
+            </li>
+          </ul>
         </div>
 
         <!-- BREEAM -->
@@ -142,13 +172,18 @@ import MainLayout from '../layouts/MainLayout.astro';
         </div>
         <div class="agrements-liste">
           <div class="agrement">
+            <img src="/assets/certifications/dangereux.png" alt="Entrepôt de type A" class="agrement__logo" />
+            <span class="agrement__nom" data-i18n="about.agr.typeA">Entrepôt de type A (agrément import/export)</span>
+            <span class="agrement__statut agrement__statut--ok" data-i18n="about.agr.agree">Agréé</span>
+          </div>
+          <div class="agrement">
             <img src="/assets/certifications/dangereux.png" alt="Marchandises dangereuses" class="agrement__logo" />
             <span class="agrement__nom" data-i18n="about.agr.dangereux">Marchandises dangereuses</span>
             <span class="agrement__statut agrement__statut--ok" data-i18n="about.agr.agree">Agréé</span>
           </div>
           <div class="agrement">
-            <img src="/assets/certifications/froid.png" alt="Froid" class="agrement__logo" />
-            <span class="agrement__nom" data-i18n="about.agr.froid">Froid</span>
+            <img src="/assets/certifications/froid.png" alt="Prises Reefer" class="agrement__logo" />
+            <span class="agrement__nom" data-i18n="about.agr.reefer">Prises Reefer</span>
             <span class="agrement__statut agrement__statut--ok" data-i18n="about.agr.agree">Agréé</span>
           </div>
           <div class="agrement">
@@ -184,10 +219,10 @@ import MainLayout from '../layouts/MainLayout.astro';
         <div class="graphique-carte reveal">
           <div class="graphique-carte__header">
             <h3 data-i18n="about.chart.ca">Chiffre d'affaires</h3>
-            <span class="badge-hausse" data-i18n="about.chart.ca.badge">+65% en 2 ans</span>
+            <span class="badge-hausse" data-i18n="about.chart.ca.badge">+74% en 4 ans</span>
           </div>
           <div class="graphique-carte__canvas-wrapper">
-            <canvas id="chartCA" aria-label="Évolution du chiffre d'affaires 2021-2023"></canvas>
+            <canvas id="chartCA" aria-label="Évolution du chiffre d'affaires 2021-2025"></canvas>
           </div>
         </div>
 
@@ -195,10 +230,10 @@ import MainLayout from '../layouts/MainLayout.astro';
         <div class="graphique-carte reveal" style="transition-delay:0.15s;">
           <div class="graphique-carte__header">
             <h3 data-i18n="about.chart.cont">Volume de conteneurs traités</h3>
-            <span class="badge-hausse" data-i18n="about.chart.cont.badge">+40% en 2 ans</span>
+            <span class="badge-hausse" data-i18n="about.chart.cont.badge">+113% en 4 ans</span>
           </div>
           <div class="graphique-carte__canvas-wrapper">
-            <canvas id="chartConteneurs" aria-label="Évolution du volume de conteneurs 2021-2023"></canvas>
+            <canvas id="chartConteneurs" aria-label="Évolution du volume de conteneurs 2021-2025"></canvas>
           </div>
         </div>
       </div>
@@ -278,12 +313,12 @@ import MainLayout from '../layouts/MainLayout.astro';
         type: 'bar',
         plugins: [labelAuDessus],
         data: {
-          labels: ['2021', '2022', '2023'],
+          labels: ['2021', '2023', '2025'],
           datasets: [{
-            data: [1322000, 1698000, 2177000],
-            labels: ['1,3M€', '1,7M€', '2,2M€'],
+            data: [1322000, 2177000, 2300000],
+            labels: ['1,3M€', '2,2M€', '2,3M€'],
             backgroundColor: [
-              'rgba(227,6,19,0.55)',
+              'rgba(227,6,19,0.45)',
               'rgba(227,6,19,0.75)',
               'rgba(227,6,19,1)',
             ],
@@ -304,7 +339,7 @@ import MainLayout from '../layouts/MainLayout.astro';
           },
           scales: {
             ...optionsCommun.scales,
-            y: { ...optionsCommun.scales.y, max: 2600000 },
+            y: { ...optionsCommun.scales.y, max: 2800000 },
           },
         },
       });
@@ -317,12 +352,12 @@ import MainLayout from '../layouts/MainLayout.astro';
         type: 'bar',
         plugins: [labelAuDessus],
         data: {
-          labels: ['2021', '2022', '2023'],
+          labels: ['2021', '2023', '2025'],
           datasets: [{
-            data: [1500, 1700, 2100],
-            labels: ['1 500', '1 700', '2 100'],
+            data: [1500, 2100, 3200],
+            labels: ['1 500', '2 100', '3 200'],
             backgroundColor: [
-              'rgba(27,42,74,0.45)',
+              'rgba(27,42,74,0.35)',
               'rgba(27,42,74,0.65)',
               'rgba(27,42,74,1)',
             ],
@@ -344,8 +379,8 @@ import MainLayout from '../layouts/MainLayout.astro';
           scales: {
             ...optionsCommun.scales,
             y: { ...optionsCommun.scales.y,
-              min: 1200,
-              max: 2400,
+              min: 1000,
+              max: 3800,
             },
           },
         },
@@ -560,6 +595,42 @@ import MainLayout from '../layouts/MainLayout.astro';
     font-size: 0.92rem;
     color: var(--gris-moyen);
     line-height: 1.65;
+  }
+
+  /* ICPE rubriques */
+  .icpe-rubriques {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .icpe-rubrique {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+
+  .icpe-rubrique__code {
+    flex-shrink: 0;
+    background: rgba(227,6,19,0.09);
+    color: var(--rouge);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    padding: 0.18rem 0.5rem;
+    border-radius: 0.4rem;
+    min-width: 3rem;
+    text-align: center;
+  }
+
+  .icpe-rubrique__desc {
+    color: var(--gris-moyen);
+    padding-top: 0.1rem;
   }
 
   /* AGRÉMENTS */
