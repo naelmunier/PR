@@ -171,38 +171,61 @@ import MainLayout from '../layouts/MainLayout.astro';
 
       <!-- Rubriques ICPE -->
       <div class="icpe-section reveal" style="transition-delay:0.2s;">
-        <div class="icpe-section__header">
+        <div class="icpe-section__intro">
           <span class="certif-badge certif-badge--bleu" data-i18n="about.icpe.badge">Rubriques ICPE</span>
-          <p class="icpe-section__subtitle" data-i18n="about.icpe.rubrique.subtitle">Nos activités sont classées sous les rubriques suivantes :</p>
+          <p class="icpe-section__desc" data-i18n="about.icpe.rubrique.desc">
+            En tant qu'Installation Classée pour la Protection de l'Environnement, PR Logistics est autorisée à réceptionner, stocker et manipuler les catégories de marchandises suivantes dans ses entrepôts. Ces autorisations sont délivrées par arrêté préfectoral et font l'objet de contrôles réguliers.
+          </p>
         </div>
-        <ul class="icpe-rubriques">
+        <ul class="icpe-rubriques icpe-rubriques--centree">
           <li class="icpe-rubrique">
             <span class="icpe-rubrique__code">1510</span>
-            <span class="icpe-rubrique__desc">Entrepôts couverts</span>
+            <div class="icpe-rubrique__content">
+              <span class="icpe-rubrique__nom">Entrepôts couverts</span>
+              <span class="icpe-rubrique__detail">Stockage général de marchandises en entrepôt</span>
+            </div>
           </li>
           <li class="icpe-rubrique">
             <span class="icpe-rubrique__code">1530</span>
-            <span class="icpe-rubrique__desc">Papier, carton ou matériaux combustibles analogues</span>
+            <div class="icpe-rubrique__content">
+              <span class="icpe-rubrique__nom">Papier &amp; carton</span>
+              <span class="icpe-rubrique__detail">Matériaux combustibles analogues (papier, carton, emballages)</span>
+            </div>
           </li>
           <li class="icpe-rubrique">
             <span class="icpe-rubrique__code">1532</span>
-            <span class="icpe-rubrique__desc">Bois sec et matériaux à base de bois</span>
+            <div class="icpe-rubrique__content">
+              <span class="icpe-rubrique__nom">Bois &amp; matériaux dérivés</span>
+              <span class="icpe-rubrique__detail">Bois sec, panneaux, produits à base de bois</span>
+            </div>
           </li>
           <li class="icpe-rubrique">
             <span class="icpe-rubrique__code">2662</span>
-            <span class="icpe-rubrique__desc">Polymères (matières plastiques, caoutchoucs, etc.)</span>
+            <div class="icpe-rubrique__content">
+              <span class="icpe-rubrique__nom">Polymères &amp; plastiques</span>
+              <span class="icpe-rubrique__detail">Matières plastiques, caoutchoucs, élastomères</span>
+            </div>
           </li>
           <li class="icpe-rubrique">
             <span class="icpe-rubrique__code">2663</span>
-            <span class="icpe-rubrique__desc">Stockage de pneumatiques et produits de caoutchouc</span>
+            <div class="icpe-rubrique__content">
+              <span class="icpe-rubrique__nom">Pneumatiques &amp; caoutchouc</span>
+              <span class="icpe-rubrique__detail">Stockage de pneus et produits en caoutchouc</span>
+            </div>
           </li>
           <li class="icpe-rubrique">
             <span class="icpe-rubrique__code">2925</span>
-            <span class="icpe-rubrique__desc">Ateliers de charge d'accumulateurs</span>
+            <div class="icpe-rubrique__content">
+              <span class="icpe-rubrique__nom">Charge d'accumulateurs</span>
+              <span class="icpe-rubrique__detail">Ateliers de charge de batteries et accumulateurs</span>
+            </div>
           </li>
           <li class="icpe-rubrique">
             <span class="icpe-rubrique__code">4755</span>
-            <span class="icpe-rubrique__desc">Matières et objets explosibles</span>
+            <div class="icpe-rubrique__content">
+              <span class="icpe-rubrique__nom">Matières explosibles</span>
+              <span class="icpe-rubrique__detail">Objets et matières soumis à réglementation pyrotechnique</span>
+            </div>
           </li>
         </ul>
       </div>
@@ -606,41 +629,6 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   /* ICPE rubriques */
-  .icpe-rubriques {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-  }
-
-  .icpe-rubrique {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.6rem;
-    font-size: 0.82rem;
-    line-height: 1.45;
-  }
-
-  .icpe-rubrique__code {
-    flex-shrink: 0;
-    background: rgba(227,6,19,0.09);
-    color: var(--rouge);
-    font-weight: 700;
-    font-size: 0.75rem;
-    letter-spacing: 0.04em;
-    padding: 0.18rem 0.5rem;
-    border-radius: 0.4rem;
-    min-width: 3rem;
-    text-align: center;
-  }
-
-  .icpe-rubrique__desc {
-    color: var(--gris-moyen);
-    padding-top: 0.1rem;
-  }
-
   /* ICPE SECTION (dans agréments) */
   .icpe-section {
     margin-top: 2.5rem;
@@ -648,23 +636,89 @@ import MainLayout from '../layouts/MainLayout.astro';
     border-top: 1px solid rgba(0,0,0,0.07);
   }
 
-  .icpe-section__header {
+  .icpe-section__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .icpe-section__desc {
+    font-size: 1rem;
+    color: var(--gris-moyen);
+    line-height: 1.7;
+    max-width: 780px;
+  }
+
+  /* Liste verticale centrée */
+  .icpe-rubriques {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .icpe-rubriques--centree {
+    /* hérite de .icpe-rubriques */
+  }
+
+  .icpe-rubrique {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.2rem;
-    flex-wrap: wrap;
+    gap: 1.2rem;
+    padding: 0.95rem 1.4rem;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    transition: background 0.2s;
   }
 
-  .icpe-section__subtitle {
+  .icpe-rubrique:last-child {
+    border-bottom: none;
+  }
+
+  .icpe-rubrique:hover {
+    background: rgba(227,6,19,0.025);
+  }
+
+  .icpe-rubrique__code {
+    flex-shrink: 0;
+    background: rgba(227,6,19,0.08);
+    color: var(--rouge);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    padding: 0.3rem 0.65rem;
+    border-radius: 0.5rem;
+    min-width: 3.2rem;
+    text-align: center;
+  }
+
+  .icpe-rubrique__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .icpe-rubrique__nom {
     font-size: 0.9rem;
-    color: var(--gris-moyen);
+    font-weight: 600;
+    color: #1d1d1f;
   }
 
-  .icpe-rubriques--grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 0.55rem;
+  .icpe-rubrique__detail {
+    font-size: 0.78rem;
+    color: #8e8e93;
+    line-height: 1.4;
+  }
+
+  /* Compatibilité ancienne structure (desc seul) */
+  .icpe-rubrique__desc {
+    font-size: 0.85rem;
+    color: var(--gris-moyen);
   }
 
   /* AGRÉMENTS */
