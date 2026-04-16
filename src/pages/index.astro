@@ -85,10 +85,6 @@ const equipements = [
       <div class="reveal" style="text-align:center; margin-bottom:3.5rem;">
         <p class="eyebrow-rouge" data-i18n="moyens.eyebrow">Nos équipements</p>
         <h2 class="titre-section" data-i18n-html="moyens.title">Des moyens à la <span>hauteur</span></h2>
-        <p class="sous-titre" style="margin:1rem auto 0;" data-i18n="moyens.subtitle">
-          PR Logistics dispose d'un entrepôt de 8 000 m² sur un terrain de 18 500 m² entièrement clos,
-          télésurveillé 24h/7j par la sécurité portuaire.
-        </p>
       </div>
 
       <!-- Cartes entrepôts Apple-style -->
@@ -96,25 +92,25 @@ const equipements = [
 
         <!-- ── Site de Sandouville ── -->
         <div class="entrepot-carte entrepot-carte--sandouville reveal" style="transition-delay:0s;">
-          <div class="entrepot-carte__body">
+          <!-- Zone photo en haut -->
+          <div class="entrepot-photo entrepot-photo--sandouville">
+            <div class="entrepot-photo__shimmer"></div>
             <div class="entrepot-carte__badge entrepot-carte__badge--soon" data-i18n="entrepot.soon">À venir — Septembre 2025</div>
-
-            <div class="entrepot-carte__title-row">
-              <img src="/assets/entrepot/location.gif" class="entrepot-gif" alt="" aria-hidden="true" width="48" height="48" />
-              <h3 class="entrepot-carte__nom">Site de <span class="entrepot-rouge">Sandouville</span></h3>
-            </div>
+            <span class="entrepot-photo__hint" data-i18n="entrepot.photo.hint">Photo à venir</span>
+          </div>
+          <!-- Détails en bas -->
+          <div class="entrepot-carte__body">
+            <h3 class="entrepot-carte__nom">Site de <span class="entrepot-rouge">Sandouville</span></h3>
 
             <a href="https://www.google.com/maps/place/Port+5053+-+Mediaco+Logistique/@49.4711012,0.2499007,14z/data=!4m10!1m2!2m1!1sVoie+des+Tardornes,+76430+Sandouville,+Port+5053!3m6!1s0x47e036c16860b89f:0x46782ab08c3cd483!8m2!3d49.471102!4d0.280425!15sCi9Wb2llIGRlcyBUYWRvcm5lcywgNzY0MzAgU2FuZG91dmlsbGUsIFBvcnQgNTA1M5IBCGJ1c19zdG9w4AEA!16s%2Fg%2F11y55w6fkp?entry=ttu&g_ep=EgoyMDI2MDQxMy4wIKXMDSoASAFQAw%3D%3D"
                class="entrepot-adresse" target="_blank" rel="noopener noreferrer">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
-              </svg>
+              <img src="/assets/entrepot/location.gif" class="entrepot-gif" alt="" aria-hidden="true" width="24" height="24" />
               5053 Voie des Tardornes, 76430 Sandouville
             </a>
 
             <div class="entrepot-stats">
               <div class="entrepot-stat">
-                <img src="/assets/entrepot/surface.png" class="entrepot-stat__ico" alt="" aria-hidden="true" width="32" height="32" />
+                <img src="/assets/entrepot/surface.png" class="entrepot-stat__ico" alt="" aria-hidden="true" width="28" height="28" />
                 <div class="entrepot-stat__text">
                   <span class="entrepot-stat__val">24 000 m²</span>
                   <span class="entrepot-stat__lbl" data-i18n="entrepot.surface.label">de surface</span>
@@ -122,7 +118,7 @@ const equipements = [
               </div>
               <div class="entrepot-stat__div"></div>
               <div class="entrepot-stat">
-                <img src="/assets/entrepot/quai.png" class="entrepot-stat__ico" alt="" aria-hidden="true" width="32" height="32" />
+                <img src="/assets/entrepot/quai.png" class="entrepot-stat__ico" alt="" aria-hidden="true" width="28" height="28" />
                 <div class="entrepot-stat__text">
                   <span class="entrepot-stat__val">45 quais</span>
                   <span class="entrepot-stat__lbl" data-i18n="entrepot.quais.label">de chargement</span>
@@ -132,34 +128,29 @@ const equipements = [
 
             <p class="entrepot-carte__desc" data-i18n="entrepot.sandouville.desc">Nouveau site logistique d'envergure nationale, à deux pas du port du Havre.</p>
           </div>
-          <!-- Zone photo -->
-          <div class="entrepot-photo entrepot-photo--sandouville">
-            <div class="entrepot-photo__shimmer"></div>
-            <span class="entrepot-photo__hint" data-i18n="entrepot.photo.hint">Photo à venir</span>
-          </div>
         </div>
 
         <!-- ── Site de Rogerville ── -->
         <div class="entrepot-carte entrepot-carte--rogerville reveal" style="transition-delay:0.2s;">
-          <div class="entrepot-carte__body">
+          <!-- Zone photo en haut -->
+          <div class="entrepot-photo entrepot-photo--rogerville">
+            <div class="entrepot-photo__shimmer"></div>
             <div class="entrepot-carte__badge entrepot-carte__badge--actif" data-i18n="entrepot.actif">Site actuel</div>
-
-            <div class="entrepot-carte__title-row">
-              <img src="/assets/entrepot/location.gif" class="entrepot-gif" alt="" aria-hidden="true" width="48" height="48" />
-              <h3 class="entrepot-carte__nom">Site de <span class="entrepot-rouge">Rogerville</span></h3>
-            </div>
+            <span class="entrepot-photo__hint" data-i18n="entrepot.photo.hint">Photo à venir</span>
+          </div>
+          <!-- Détails en bas -->
+          <div class="entrepot-carte__body">
+            <h3 class="entrepot-carte__nom">Site de <span class="entrepot-rouge">Rogerville</span></h3>
 
             <a href="https://maps.google.com/?q=PLPN+1+Port+4935+76700+Rogerville"
                class="entrepot-adresse" target="_blank" rel="noopener noreferrer">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
-              </svg>
+              <img src="/assets/entrepot/location.gif" class="entrepot-gif" alt="" aria-hidden="true" width="24" height="24" />
               PLPN 1 – Port 4935, 76700 Rogerville
             </a>
 
             <div class="entrepot-stats">
               <div class="entrepot-stat">
-                <img src="/assets/entrepot/surface.png" class="entrepot-stat__ico" alt="" aria-hidden="true" width="32" height="32" />
+                <img src="/assets/entrepot/surface.png" class="entrepot-stat__ico" alt="" aria-hidden="true" width="28" height="28" />
                 <div class="entrepot-stat__text">
                   <span class="entrepot-stat__val">8 000 m²</span>
                   <span class="entrepot-stat__lbl" data-i18n="entrepot.surface.label">de surface</span>
@@ -167,7 +158,7 @@ const equipements = [
               </div>
               <div class="entrepot-stat__div"></div>
               <div class="entrepot-stat">
-                <img src="/assets/entrepot/quai.png" class="entrepot-stat__ico" alt="" aria-hidden="true" width="32" height="32" />
+                <img src="/assets/entrepot/quai.png" class="entrepot-stat__ico" alt="" aria-hidden="true" width="28" height="28" />
                 <div class="entrepot-stat__text">
                   <span class="entrepot-stat__val">6 quais</span>
                   <span class="entrepot-stat__lbl" data-i18n="entrepot.quais.label">de chargement</span>
@@ -176,11 +167,6 @@ const equipements = [
             </div>
 
             <p class="entrepot-carte__desc" data-i18n="entrepot.rogerville.desc">Notre entrepôt actuel, entièrement clos et télésurveillé 24h/7j par la sécurité portuaire.</p>
-          </div>
-          <!-- Zone photo -->
-          <div class="entrepot-photo entrepot-photo--rogerville">
-            <div class="entrepot-photo__shimmer"></div>
-            <span class="entrepot-photo__hint" data-i18n="entrepot.photo.hint">Photo à venir</span>
           </div>
         </div>
 
@@ -193,20 +179,15 @@ const equipements = [
           Des sites pensés pour la <span class="bridge-grad">performance</span><br class="bridge-br">
           et la <span class="bridge-grad">fiabilité</span> à chaque flux.
         </h3>
-        <div class="bridge-rule"></div>
         <div class="bridge-stats-row">
           <div class="bridge-kpi">
-            <span class="bridge-kpi__val" data-count="32000" data-suffix=" m²">0 m²</span>
-            <span class="bridge-kpi__lbl" data-i18n="entrepot.kpi.surface">de surface totale</span>
-          </div>
-          <div class="bridge-kpi__sep">·</div>
-          <div class="bridge-kpi">
-            <span class="bridge-kpi__val" data-count="51" data-suffix=" quais">0 quais</span>
+            <span class="bridge-kpi__val" data-count="51" data-suffix="">51</span>
+            <span class="bridge-kpi__unit" data-i18n="entrepot.kpi.quais.unit">quais</span>
             <span class="bridge-kpi__lbl" data-i18n="entrepot.kpi.quais">de chargement</span>
           </div>
-          <div class="bridge-kpi__sep">·</div>
           <div class="bridge-kpi">
-            <span class="bridge-kpi__val" data-count="2" data-suffix=" sites">0 sites</span>
+            <span class="bridge-kpi__val" data-count="2" data-suffix="">2</span>
+            <span class="bridge-kpi__unit" data-i18n="entrepot.kpi.sites.unit">sites</span>
             <span class="bridge-kpi__lbl" data-i18n="entrepot.kpi.sites">logistiques stratégiques</span>
           </div>
         </div>
@@ -260,7 +241,7 @@ const equipements = [
   function animateCount(el: HTMLElement) {
     const target = parseInt(el.dataset.count || '0', 10);
     const suffix = el.dataset.suffix || '';
-    const duration = 1400;
+    const duration = 2800;
     const start = performance.now();
     const ease = (t: number) => t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
     function step(now: number) {
@@ -725,61 +706,52 @@ const equipements = [
   .entrepot-carte--sandouville { background: #f5f5f7; }
   .entrepot-carte--rogerville  { background: #ffffff; }
 
-  /* Zone texte */
+  /* Zone texte (EN BAS de la carte) */
   .entrepot-carte__body {
-    padding: 2.4rem 2.4rem 2rem;
+    padding: 1.8rem 2rem 2rem;
     display: flex;
     flex-direction: column;
-    gap: 1.1rem;
+    gap: 1rem;
     position: relative;
     z-index: 2;
+    background: inherit;
   }
 
-  /* Badge */
+  /* Badge — positionné en absolu dans la photo */
   .entrepot-carte__badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 3;
     display: inline-flex;
-    align-self: flex-start;
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 0.22rem 0.85rem;
+    padding: 0.25rem 0.85rem;
     border-radius: 2rem;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
   .entrepot-carte__badge--soon {
-    background: rgba(0,0,0,0.06);
-    color: #555;
-    border: 1px solid rgba(0,0,0,0.12);
+    background: rgba(255,255,255,0.85);
+    color: #444;
+    border: 1px solid rgba(0,0,0,0.1);
     animation: badge-blink 3s ease-in-out infinite;
   }
   .entrepot-carte__badge--actif {
-    background: rgba(227,6,19,0.07);
+    background: rgba(255,255,255,0.85);
     color: #e30613;
-    border: 1px solid rgba(227,6,19,0.18);
+    border: 1px solid rgba(227,6,19,0.2);
   }
   @keyframes badge-blink {
     0%,100% { opacity: 1; }
-    50%      { opacity: 0.6; }
+    50%      { opacity: 0.65; }
   }
 
-  /* Titre row : GIF + nom */
-  .entrepot-carte__title-row {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-  .entrepot-gif {
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
-    flex-shrink: 0;
-    transition: transform 0.5s cubic-bezier(0.34, 1.6, 0.64, 1);
-  }
-  .entrepot-carte:hover .entrepot-gif {
-    transform: scale(1.2) rotate(-5deg);
-  }
+  /* Titre du site */
   .entrepot-carte__nom {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     letter-spacing: -0.035em;
     line-height: 1.05;
@@ -787,23 +759,30 @@ const equipements = [
   }
   .entrepot-rouge { color: var(--rouge); }
 
-  /* Adresse cliquable */
+  /* Adresse cliquable avec GIF */
   .entrepot-adresse {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.5rem;
     font-size: 0.82rem;
     color: #6e6e73;
     text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: color 0.2s, border-color 0.2s;
+    transition: color 0.2s;
     width: fit-content;
   }
-  .entrepot-adresse:hover {
-    color: var(--rouge);
-    border-color: var(--rouge);
+  .entrepot-adresse:hover { color: var(--rouge); }
+
+  /* GIF localisation dans l'adresse */
+  .entrepot-gif {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    flex-shrink: 0;
+    transition: transform 0.4s ease;
   }
-  .entrepot-adresse svg { flex-shrink: 0; }
+  .entrepot-adresse:hover .entrepot-gif {
+    transform: scale(1.2);
+  }
 
   /* Stats */
   .entrepot-stats {
@@ -860,16 +839,16 @@ const equipements = [
     margin-top: auto;
   }
 
-  /* Zone photo */
+  /* Zone photo (EN HAUT de la carte) */
   .entrepot-photo {
-    flex: 1;
-    min-height: 220px;
+    height: 260px;
+    flex-shrink: 0;
     position: relative;
     overflow: hidden;
-    transition: transform 0.6s ease;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
   .entrepot-carte:hover .entrepot-photo {
-    transform: scale(1.03);
+    transform: scale(1.04);
   }
   .entrepot-photo--sandouville {
     background: linear-gradient(160deg, #dde0e8 0%, #c8cdd8 50%, #b8bfce 100%);
@@ -969,25 +948,14 @@ const equipements = [
     display: inline;
   }
 
-  /* Ligne décorative */
-  .bridge-rule {
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--rouge), transparent);
-    margin: 2.2rem auto;
-    transition: width 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.35s;
-  }
-  .entrepots-bridge.visible .bridge-rule {
-    width: 180px;
-  }
-
   /* KPIs */
   .bridge-stats-row {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    gap: 2.5rem;
+    gap: 5rem;
     flex-wrap: wrap;
+    margin-top: 2.5rem;
     opacity: 0;
     transform: translateY(16px);
     transition: opacity 0.7s ease 0.45s, transform 0.7s ease 0.45s;
@@ -1000,27 +968,30 @@ const equipements = [
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.3rem;
+    gap: 0.15rem;
   }
   .bridge-kpi__val {
-    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-size: clamp(3rem, 6vw, 5rem);
     font-weight: 700;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.05em;
     color: var(--gris-fonce);
     line-height: 1;
   }
+  .bridge-kpi__unit {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gris-fonce);
+    text-transform: lowercase;
+    letter-spacing: -0.01em;
+    margin-top: 0.1rem;
+  }
   .bridge-kpi__lbl {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: #8e8e93;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.07em;
     font-weight: 600;
-  }
-  .bridge-kpi__sep {
-    font-size: 2rem;
-    color: rgba(0,0,0,0.12);
-    line-height: 1;
-    align-self: center;
+    margin-top: 0.2rem;
   }
 
   @media (max-width: 768px) {
