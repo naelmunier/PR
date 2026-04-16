@@ -102,6 +102,42 @@ const contacts = [
     </div>
   </section>
 
+  <!-- HORAIRES -->
+  <section class="section">
+    <div class="container">
+      <div class="horaires-bloc reveal">
+        <div class="horaires-header">
+          <p class="eyebrow-rouge">Horaires d'ouverture</p>
+          <h2 class="titre-section" style="font-size:2rem; margin:0.3rem 0 0;">Nos <span>horaires</span></h2>
+        </div>
+        <div class="horaires-grid">
+          <div class="horaire-col">
+            <div class="horaire-row">
+              <span class="horaire-jour">Lundi – Vendredi</span>
+              <div class="horaire-plages">
+                <span class="horaire-badge">8h30 – 12h30</span>
+                <span class="horaire-sep">puis</span>
+                <span class="horaire-badge">13h00 – 16h30</span>
+              </div>
+            </div>
+            <div class="horaire-row horaire-row--closed">
+              <span class="horaire-jour">Samedi – Dimanche</span>
+              <span class="horaire-ferme">Fermé</span>
+            </div>
+          </div>
+          <div class="horaire-note">
+            <div class="horaire-note__icone">⚠️</div>
+            <div class="horaire-note__text">
+              <strong>Dernier chargement accepté</strong><br />
+              à <span class="horaire-heure">12h00</span> le matin et à <span class="horaire-heure">16h00</span> l'après-midi<br />
+              <span style="color:var(--gris-moyen); font-size:0.88rem;">(30 min avant la fermeture, pour permettre le chargement)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ADRESSE + FORMULAIRE -->
   <section class="section section--gris">
     <div class="container contact-bas">
@@ -370,8 +406,102 @@ const contacts = [
     min-height: 120px;
   }
 
+  /* ══ HORAIRES ══ */
+  .horaires-bloc {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .horaires-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  .horaires-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .horaire-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .horaire-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 1.2rem;
+    padding: 1rem 1.4rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .horaire-row--closed {
+    opacity: 0.5;
+  }
+  .horaire-jour {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gris-fonce);
+  }
+  .horaire-plages {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .horaire-badge {
+    background: rgba(227,6,19,0.07);
+    border: 1px solid rgba(227,6,19,0.15);
+    border-radius: 2rem;
+    padding: 0.2rem 0.8rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--rouge);
+  }
+  .horaire-sep {
+    font-size: 0.75rem;
+    color: #aaa;
+  }
+  .horaire-ferme {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #aaa;
+    background: rgba(0,0,0,0.05);
+    border-radius: 2rem;
+    padding: 0.2rem 0.8rem;
+  }
+  .horaire-note {
+    background: linear-gradient(135deg, #fff8f8 0%, #fff 100%);
+    border: 1px solid rgba(227,6,19,0.12);
+    border-left: 3px solid var(--rouge);
+    border-radius: 1.2rem;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    box-shadow: 0 2px 16px rgba(227,6,19,0.06);
+  }
+  .horaire-note__icone {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+  .horaire-note__text {
+    font-size: 0.9rem;
+    color: var(--gris-fonce);
+    line-height: 1.7;
+  }
+  .horaire-heure {
+    font-weight: 700;
+    color: var(--rouge);
+  }
+  @media (max-width: 700px) {
+    .horaires-grid { grid-template-columns: 1fr; }
+    .horaire-row { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+  }
+
   /* Responsive */
-  @media (max-width: 900px) {
+  @media (max-width: 768px) {
     .contacts-grid {
       grid-template-columns: 1fr;
     }
