@@ -870,16 +870,56 @@ const equipements = [
     font-style: italic;
   }
 
+  /* Propriété CSS animable pour la bordure lumineuse */
+  @property --border-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
   /* Zone photo (EN HAUT de la carte) */
   .entrepot-photo {
-    height: 260px;
+    height: 340px;
     flex-shrink: 0;
     position: relative;
     overflow: hidden;
     transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --border-angle: 0deg;
+    animation: photo-border-spin 5s linear infinite;
   }
   .entrepot-wrapper:hover .entrepot-photo {
     transform: scale(1.04);
+  }
+
+  /* Faisceau lumineux tournant sur la bordure */
+  .entrepot-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 0; /* clipé par la carte parente */
+    background: conic-gradient(
+      from var(--border-angle),
+      transparent 0%,
+      transparent 72%,
+      rgba(255,255,255,0.55) 83%,
+      rgba(255,230,230,0.35) 88%,
+      transparent 94%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 2px;
+    pointer-events: none;
+    z-index: 8;
+  }
+
+  @keyframes photo-border-spin {
+    to { --border-angle: 360deg; }
   }
   .entrepot-photo--sandouville {
     background: linear-gradient(160deg, #dde0e8 0%, #c8cdd8 50%, #b8bfce 100%);
@@ -970,9 +1010,9 @@ const equipements = [
     transform: none;
   }
 
-  /* Dégradé rouge vif → clair sur les mots clés */
+  /* Dégradé noir → rouge sur les mots clés */
   .bridge-grad {
-    background: linear-gradient(90deg, #e30613 0%, #ff7070 100%);
+    background: linear-gradient(90deg, #1d1d1f 0%, #e30613 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
