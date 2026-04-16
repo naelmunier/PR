@@ -87,50 +87,44 @@ const equipements = [
         <h2 class="titre-section" data-i18n-html="moyens.title">Des moyens à la <span>hauteur</span></h2>
       </div>
 
-      <!-- Cartes entrepôts Apple-style -->
+      <!-- Cartes entrepôts Apple-style — grille 3 rangées : titres / cartes / descriptions -->
       <div class="entrepots-grid">
 
-        <!-- ── Site de Sandouville ── -->
-        <div class="entrepot-wrapper reveal" style="transition-delay:0s;">
-          <h3 class="entrepot-titre">Site de <span class="entrepot-rouge">Sandouville</span></h3>
-          <div class="entrepot-carte entrepot-carte--sandouville">
-          <!-- Cadre photo animé (inset dans la carte) -->
+        <!-- ── Titres (rangée 1) ── -->
+        <h3 class="entrepot-titre reveal" style="transition-delay:0s;">Site de <span class="entrepot-rouge">Sandouville</span></h3>
+        <h3 class="entrepot-titre reveal" style="transition-delay:0.08s;">Site de <span class="entrepot-rouge">Rogerville</span></h3>
+
+        <!-- ── Cartes (rangée 2) — même hauteur garantie par la rangée de grille ── -->
+        <div class="entrepot-carte entrepot-carte--sandouville reveal" style="transition-delay:0.1s;">
           <div class="entrepot-photo-frame">
             <div class="entrepot-photo entrepot-photo--sandouville">
               <img class="entrepot-photo__img" src="/assets/entrepot/nouvel-entrepot2.jpg" alt="Futur entrepôt de Sandouville" />
               <div class="entrepot-photo__shimmer"></div>
-              <div class="entrepot-carte__badge entrepot-carte__badge--soon" data-i18n="entrepot.soon">À venir — Septembre 2025</div>
+              <div class="entrepot-carte__badge entrepot-carte__badge--soon" data-i18n="entrepot.soon">À venir — Fin 2026</div>
             </div>
           </div>
-          <!-- Détails en bas -->
           <div class="entrepot-carte__body">
             <div class="entrepot-caract">
               <span class="entrepot-caract__label">Caractéristiques</span>
               <div class="entrepot-caract__liste">
                 <a href="https://www.google.com/maps/place/Port+5053+-+Mediaco+Logistique/@49.4711012,0.2499007,14z" class="entrepot-caract__item entrepot-caract__item--lien" target="_blank" rel="noopener noreferrer">
-                  <span class="entrepot-ico-rose"><img src="/assets/entrepot/adresse.png" alt="" aria-hidden="true" width="18" height="18" /></span>
+                  <img src="/assets/entrepot/adresse.png" alt="" aria-hidden="true" width="18" height="18" class="entrepot-ico" />
                   5053 Voie des Tardornes, 76430 Sandouville
                 </a>
                 <span class="entrepot-caract__item">
-                  <span class="entrepot-ico-rose"><img src="/assets/entrepot/surface.png" alt="" aria-hidden="true" width="18" height="18" /></span>
+                  <img src="/assets/entrepot/surface.png" alt="" aria-hidden="true" width="18" height="18" class="entrepot-ico" />
                   24 000 m² de surface
                 </span>
                 <span class="entrepot-caract__item">
-                  <span class="entrepot-ico-rose"><img src="/assets/entrepot/quai.png" alt="" aria-hidden="true" width="18" height="18" /></span>
+                  <img src="/assets/entrepot/quai.png" alt="" aria-hidden="true" width="18" height="18" class="entrepot-ico" />
                   45 quais de chargement
                 </span>
               </div>
             </div>
           </div>
-          </div>
-          <p class="entrepot-carte__desc" data-i18n="entrepot.sandouville.desc">Nouveau site logistique d'envergure nationale, à deux pas du port du Havre.</p>
         </div>
 
-        <!-- ── Site de Rogerville ── -->
-        <div class="entrepot-wrapper reveal" style="transition-delay:0.2s;">
-          <h3 class="entrepot-titre">Site de <span class="entrepot-rouge">Rogerville</span></h3>
-          <div class="entrepot-carte entrepot-carte--rogerville">
-          <!-- Cadre photo animé (inset dans la carte) -->
+        <div class="entrepot-carte entrepot-carte--rogerville reveal" style="transition-delay:0.18s;">
           <div class="entrepot-photo-frame">
             <div class="entrepot-photo entrepot-photo--rogerville">
               <img class="entrepot-photo__img" src="/assets/entrepot/ancien-entrepot.jpg" alt="Entrepôt de Rogerville" />
@@ -138,29 +132,30 @@ const equipements = [
               <div class="entrepot-carte__badge entrepot-carte__badge--actif" data-i18n="entrepot.actif">Site actuel</div>
             </div>
           </div>
-          <!-- Détails en bas -->
           <div class="entrepot-carte__body">
             <div class="entrepot-caract">
               <span class="entrepot-caract__label">Caractéristiques</span>
               <div class="entrepot-caract__liste">
                 <a href="https://maps.google.com/?q=PLPN+1+Port+4935+76700+Rogerville" class="entrepot-caract__item entrepot-caract__item--lien" target="_blank" rel="noopener noreferrer">
-                  <span class="entrepot-ico-rose"><img src="/assets/entrepot/adresse.png" alt="" aria-hidden="true" width="18" height="18" /></span>
+                  <img src="/assets/entrepot/adresse.png" alt="" aria-hidden="true" width="18" height="18" class="entrepot-ico" />
                   PLPN 1 – Port 4935, 76700 Rogerville
                 </a>
                 <span class="entrepot-caract__item">
-                  <span class="entrepot-ico-rose"><img src="/assets/entrepot/surface.png" alt="" aria-hidden="true" width="18" height="18" /></span>
+                  <img src="/assets/entrepot/surface.png" alt="" aria-hidden="true" width="18" height="18" class="entrepot-ico" />
                   8 000 m² de surface
                 </span>
                 <span class="entrepot-caract__item">
-                  <span class="entrepot-ico-rose"><img src="/assets/entrepot/quai.png" alt="" aria-hidden="true" width="18" height="18" /></span>
+                  <img src="/assets/entrepot/quai.png" alt="" aria-hidden="true" width="18" height="18" class="entrepot-ico" />
                   6 quais de chargement
                 </span>
               </div>
             </div>
           </div>
-          </div>
-          <p class="entrepot-carte__desc" data-i18n="entrepot.rogerville.desc">Notre entrepôt actuel, entièrement clos et télésurveillé 24h/7j par la sécurité portuaire.</p>
         </div>
+
+        <!-- ── Descriptions (rangée 3) ── -->
+        <p class="entrepot-carte__desc reveal" style="transition-delay:0.2s;" data-i18n="entrepot.sandouville.desc">Nouveau site logistique d'envergure nationale, à deux pas du port du Havre.</p>
+        <p class="entrepot-carte__desc reveal" style="transition-delay:0.28s;" data-i18n="entrepot.rogerville.desc">Notre entrepôt actuel, entièrement clos et télésurveillé 24h/7j par la sécurité portuaire.</p>
 
       </div>
 
@@ -719,20 +714,16 @@ const equipements = [
   /* ══════════════════════════════════════════════════════
      ENTREPÔTS — Apple-style feature cards
   ══════════════════════════════════════════════════════ */
+  /* Grille 2 colonnes, 3 rangées auto — titres / cartes / descriptions
+     Les deux cartes étant dans la même rangée de grille, elles ont
+     automatiquement la même hauteur. */
   .entrepots-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    column-gap: 1.5rem;
+    row-gap: 0;
     margin-bottom: 0;
-    align-items: stretch;
-  }
-
-  /* Wrapper : titre au-dessus + carte en dessous */
-  .entrepot-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 1.4rem;
-    height: 100%;
+    align-items: start;
   }
 
   .entrepot-titre {
@@ -742,10 +733,7 @@ const equipements = [
     color: #1d1d1f;
     line-height: 1;
     padding-left: 0.25rem;
-    /* Le titre ne scale/translate pas avec la carte */
-    position: relative;
-    z-index: 10;
-    pointer-events: none;
+    margin-bottom: 1.2rem;
   }
 
   /* Carte de base */
@@ -755,7 +743,6 @@ const equipements = [
     position: relative;
     display: flex;
     flex-direction: column;
-    flex: 1; /* remplit toute la hauteur du wrapper → même taille */
     border: 1px solid rgba(0,0,0,0.07);
     box-shadow: 0 4px 32px rgba(0,0,0,0.07);
     cursor: default;
@@ -764,7 +751,7 @@ const equipements = [
       box-shadow 0.5s ease;
   }
 
-  .entrepot-wrapper:hover .entrepot-carte {
+  .entrepot-carte:hover {
     transform: translateY(-10px) scale(1.012);
     box-shadow: 0 36px 80px rgba(0,0,0,0.14);
   }
@@ -846,25 +833,25 @@ const equipements = [
     border-radius: 1.2rem;
   }
   .entrepot-caract__label {
-    font-size: 0.7rem;
+    font-size: 0.82rem;
     font-weight: 800;
-    letter-spacing: 0.13em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--rouge);
     line-height: 1;
-    padding-bottom: 0.55rem;
+    padding-bottom: 0.6rem;
     border-bottom: 1px solid rgba(227,6,19,0.12);
   }
   .entrepot-caract__liste {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.5rem;
   }
   .entrepot-caract__item {
     display: flex;
     align-items: center;
-    gap: 0.55rem;
-    font-size: 0.84rem;
+    gap: 0.6rem;
+    font-size: 0.92rem;
     font-weight: 500;
     color: #1d1d1f;
     transition: color 0.2s;
@@ -876,32 +863,26 @@ const equipements = [
   .entrepot-caract__item--lien:hover {
     color: var(--rouge);
   }
-  /* Petite boîte rose pâle pour les icônes */
-  .entrepot-ico-rose {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(227,6,19,0.08);
-    border-radius: 0.45rem;
-    padding: 4px;
-    flex-shrink: 0;
-  }
-  .entrepot-ico-rose img {
+  /* Icônes directes — sans fond rose */
+  .entrepot-ico {
     display: block;
     object-fit: contain;
+    flex-shrink: 0;
+    opacity: 0.7;
   }
 
-  /* Description — en dessous de la carte */
+  /* Description — rangée 3 de la grille, en dessous de chaque carte */
   .entrepot-carte__desc {
     font-size: 1rem;
     color: #1d1d1f;
     line-height: 1.6;
-    padding: 0.7rem 0.2rem 0;
-    margin: 0;
+    padding: 0;
+    margin: 0.8rem 0 0;
     font-style: normal;
     font-weight: 500;
     text-align: center;
     letter-spacing: -0.01em;
+    align-self: start;
   }
 
   /* ══════════════════════════════════════════════════════
@@ -944,7 +925,7 @@ const equipements = [
     transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     background: #1a1a1a;
   }
-  .entrepot-wrapper:hover .entrepot-photo {
+  .entrepot-carte:hover .entrepot-photo {
     transform: scale(1.04);
   }
 
@@ -1210,9 +1191,17 @@ const equipements = [
   }
 
   @media (max-width: 768px) {
-    .entrepots-grid { grid-template-columns: 1fr; }
+    .entrepots-grid {
+      grid-template-columns: 1fr;
+    }
+    /* Réordonne en mobile : titre1, carte1, desc1, titre2, carte2, desc2 */
+    .entrepots-grid > *:nth-child(1) { order: 1; }  /* h3 Sandouville */
+    .entrepots-grid > *:nth-child(3) { order: 2; }  /* carte Sandouville */
+    .entrepots-grid > *:nth-child(5) { order: 3; }  /* desc Sandouville */
+    .entrepots-grid > *:nth-child(2) { order: 4; }  /* h3 Rogerville */
+    .entrepots-grid > *:nth-child(4) { order: 5; }  /* carte Rogerville */
+    .entrepots-grid > *:nth-child(6) { order: 6; }  /* desc Rogerville */
     .entrepot-titre { font-size: 1.3rem; }
-    .entrepot-gif { width: 20px; height: 20px; }
     .bridge-kpi__sep { display: none; }
     .bridge-stats-row { gap: 1.8rem; }
     .bridge-br { display: none; }
