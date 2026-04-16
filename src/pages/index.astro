@@ -884,19 +884,17 @@ const equipements = [
     position: relative;
     overflow: hidden;
     transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --border-angle: 0deg;
-    animation: photo-border-spin 5s linear infinite;
   }
   .entrepot-wrapper:hover .entrepot-photo {
     transform: scale(1.04);
   }
 
-  /* Faisceau lumineux tournant sur la bordure */
+  /* Faisceau lumineux tournant sur la bordure — animation sur ::after lui-même */
   .entrepot-photo::after {
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: 0; /* clipé par la carte parente */
+    --border-angle: 0deg;
     background: conic-gradient(
       from var(--border-angle),
       transparent 0%,
@@ -916,6 +914,7 @@ const equipements = [
     padding: 2px;
     pointer-events: none;
     z-index: 8;
+    animation: photo-border-spin 5s linear infinite;
   }
 
   @keyframes photo-border-spin {
