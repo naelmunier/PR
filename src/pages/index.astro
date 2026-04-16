@@ -868,19 +868,22 @@ const equipements = [
 
   .entrepot-photo-frame {
     --frame-angle: 0deg;
-    padding: 2px 2px 0 2px;
+    padding: 3px 3px 0 3px; /* épaisseur visible du cadre */
     background: conic-gradient(
       from var(--frame-angle),
-      rgba(160,160,160,0.2)  0deg,
-      rgba(255,255,255,0.9)  50deg,
-      rgba(227,6,19,0.65)    78deg,
-      rgba(255,255,255,0.9)  106deg,
-      rgba(160,160,160,0.1)  160deg,
-      rgba(255,255,255,0.55) 260deg,
-      rgba(160,160,160,0.2)  360deg
+      rgba(180,180,180,0.3)  0deg,
+      rgba(255,255,255,1.0)  45deg,
+      rgba(227,6,19,0.85)    72deg,
+      rgba(255,255,255,1.0)  99deg,
+      rgba(180,180,180,0.2)  150deg,
+      rgba(255,255,255,0.65) 255deg,
+      rgba(180,180,180,0.3)  360deg
     );
-    animation: frame-border-spin 4s linear infinite;
+    animation: frame-border-spin 3.5s linear infinite;
     flex-shrink: 0;
+    /* Fallback statique si @property non supporté */
+    outline: 3px solid rgba(227,6,19,0.25);
+    outline-offset: -3px;
   }
   @keyframes frame-border-spin {
     to { --frame-angle: 360deg; }
@@ -965,22 +968,25 @@ const equipements = [
   /* ══════════════════════════════════════════════════════
      SECTION SÉCURITÉ
   ══════════════════════════════════════════════════════ */
+  /* ══════════════════════════════════════════════════════
+     SECTION SÉCURITÉ — fond clair dans le thème du site
+  ══════════════════════════════════════════════════════ */
   .securite-bloc {
     margin-top: 4rem;
-    background: linear-gradient(135deg, #0d0f14 0%, #1a0a0c 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #fdf5f5 100%);
     border-radius: 2.4rem;
     padding: 3.5rem 3rem;
-    color: #fff;
+    border: 1px solid rgba(227,6,19,0.08);
+    box-shadow: 0 4px 40px rgba(227,6,19,0.06), 0 1px 8px rgba(0,0,0,0.04);
     overflow: hidden;
     position: relative;
   }
   .securite-bloc::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 60% 40% at 10% 50%, rgba(227,6,19,0.12) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at 90% 30%, rgba(255,255,255,0.04) 0%, transparent 70%);
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(227,6,19,0.06) 0%, transparent 70%);
     pointer-events: none;
   }
   .securite-header {
@@ -995,9 +1001,9 @@ const equipements = [
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(227,6,19,0.9);
-    background: rgba(227,6,19,0.12);
-    border: 1px solid rgba(227,6,19,0.25);
+    color: var(--rouge);
+    background: rgba(227,6,19,0.07);
+    border: 1px solid rgba(227,6,19,0.18);
     border-radius: 2rem;
     padding: 0.25rem 0.9rem;
     margin-bottom: 1rem;
@@ -1007,12 +1013,12 @@ const equipements = [
     font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1.18;
-    color: #fff;
+    color: var(--gris-fonce);
     margin: 0 0 0.9rem;
   }
   .securite-sous-titre {
     font-size: 1rem;
-    color: rgba(255,255,255,0.55);
+    color: var(--gris-moyen);
     line-height: 1.7;
     margin: 0;
   }
@@ -1023,25 +1029,26 @@ const equipements = [
     position: relative;
   }
   .securite-item {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.09);
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.07);
     border-radius: 1.4rem;
     padding: 1.8rem 1.4rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
-    transition: background 0.3s, border-color 0.3s, transform 0.35s cubic-bezier(0.34,1.4,0.64,1);
+    box-shadow: 0 2px 14px rgba(0,0,0,0.04);
+    transition: box-shadow 0.3s, border-color 0.3s, transform 0.35s cubic-bezier(0.34,1.4,0.64,1);
   }
   .securite-item:hover {
-    background: rgba(255,255,255,0.09);
-    border-color: rgba(227,6,19,0.35);
+    box-shadow: 0 12px 40px rgba(227,6,19,0.1);
+    border-color: rgba(227,6,19,0.25);
     transform: translateY(-6px);
   }
   .securite-item__ico-wrap {
     width: 52px;
     height: 52px;
-    background: rgba(227,6,19,0.12);
+    background: rgba(227,6,19,0.07);
     border-radius: 1rem;
     display: flex;
     align-items: center;
@@ -1061,12 +1068,12 @@ const equipements = [
   .securite-item__val {
     font-size: 0.95rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--gris-fonce);
     line-height: 1.2;
   }
   .securite-item__desc {
     font-size: 0.8rem;
-    color: rgba(255,255,255,0.5);
+    color: var(--gris-moyen);
     line-height: 1.5;
   }
   @media (max-width: 900px) {
@@ -1118,12 +1125,13 @@ const equipements = [
     transform: none;
   }
 
-  /* Dégradé noir → rouge sur les mots clés */
+  /* Dégradé gris foncé → rouge vif sur les mots clés */
   .bridge-grad {
-    background: linear-gradient(90deg, #1d1d1f 0%, #e30613 100%);
+    background: linear-gradient(90deg, #4a4a4f 0%, #e30613 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    color: transparent; /* fallback */
     display: inline;
   }
 
