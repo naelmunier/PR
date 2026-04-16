@@ -91,7 +91,9 @@ const equipements = [
       <div class="entrepots-grid">
 
         <!-- ── Site de Sandouville ── -->
-        <div class="entrepot-carte entrepot-carte--sandouville reveal" style="transition-delay:0s;">
+        <div class="entrepot-wrapper reveal" style="transition-delay:0s;">
+          <h3 class="entrepot-titre">Site de <span class="entrepot-rouge">Sandouville</span></h3>
+          <div class="entrepot-carte entrepot-carte--sandouville">
           <!-- Zone photo en haut -->
           <div class="entrepot-photo entrepot-photo--sandouville">
             <div class="entrepot-photo__shimmer"></div>
@@ -100,7 +102,6 @@ const equipements = [
           </div>
           <!-- Détails en bas -->
           <div class="entrepot-carte__body">
-            <h3 class="entrepot-carte__nom">Site de <span class="entrepot-rouge">Sandouville</span></h3>
 
             <a href="https://www.google.com/maps/place/Port+5053+-+Mediaco+Logistique/@49.4711012,0.2499007,14z/data=!4m10!1m2!2m1!1sVoie+des+Tardornes,+76430+Sandouville,+Port+5053!3m6!1s0x47e036c16860b89f:0x46782ab08c3cd483!8m2!3d49.471102!4d0.280425!15sCi9Wb2llIGRlcyBUYWRvcm5lcywgNzY0MzAgU2FuZG91dmlsbGUsIFBvcnQgNTA1M5IBCGJ1c19zdG9w4AEA!16s%2Fg%2F11y55w6fkp?entry=ttu&g_ep=EgoyMDI2MDQxMy4wIKXMDSoASAFQAw%3D%3D"
                class="entrepot-adresse" target="_blank" rel="noopener noreferrer">
@@ -128,10 +129,13 @@ const equipements = [
 
             <p class="entrepot-carte__desc" data-i18n="entrepot.sandouville.desc">Nouveau site logistique d'envergure nationale, à deux pas du port du Havre.</p>
           </div>
+          </div>
         </div>
 
         <!-- ── Site de Rogerville ── -->
-        <div class="entrepot-carte entrepot-carte--rogerville reveal" style="transition-delay:0.2s;">
+        <div class="entrepot-wrapper reveal" style="transition-delay:0.2s;">
+          <h3 class="entrepot-titre">Site de <span class="entrepot-rouge">Rogerville</span></h3>
+          <div class="entrepot-carte entrepot-carte--rogerville">
           <!-- Zone photo en haut -->
           <div class="entrepot-photo entrepot-photo--rogerville">
             <div class="entrepot-photo__shimmer"></div>
@@ -140,7 +144,6 @@ const equipements = [
           </div>
           <!-- Détails en bas -->
           <div class="entrepot-carte__body">
-            <h3 class="entrepot-carte__nom">Site de <span class="entrepot-rouge">Rogerville</span></h3>
 
             <a href="https://maps.google.com/?q=PLPN+1+Port+4935+76700+Rogerville"
                class="entrepot-adresse" target="_blank" rel="noopener noreferrer">
@@ -168,6 +171,7 @@ const equipements = [
 
             <p class="entrepot-carte__desc" data-i18n="entrepot.rogerville.desc">Notre entrepôt actuel, entièrement clos et télésurveillé 24h/7j par la sécurité portuaire.</p>
           </div>
+          </div>
         </div>
 
       </div>
@@ -180,6 +184,11 @@ const equipements = [
           et la <span class="bridge-grad">fiabilité</span> à chaque flux.
         </h3>
         <div class="bridge-stats-row">
+          <div class="bridge-kpi">
+            <span class="bridge-kpi__val" data-count="32000" data-suffix="">32 000</span>
+            <span class="bridge-kpi__unit">m²</span>
+            <span class="bridge-kpi__lbl" data-i18n="entrepot.kpi.surface">de surface totale</span>
+          </div>
           <div class="bridge-kpi">
             <span class="bridge-kpi__val" data-count="51" data-suffix="">51</span>
             <span class="bridge-kpi__unit" data-i18n="entrepot.kpi.quais.unit">quais</span>
@@ -682,6 +691,22 @@ const equipements = [
     margin-bottom: 0;
   }
 
+  /* Wrapper : titre au-dessus + carte en dessous */
+  .entrepot-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .entrepot-titre {
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: #1d1d1f;
+    line-height: 1;
+    padding-left: 0.2rem;
+  }
+
   /* Carte de base */
   .entrepot-carte {
     border-radius: 2rem;
@@ -749,14 +774,6 @@ const equipements = [
     50%      { opacity: 0.65; }
   }
 
-  /* Titre du site */
-  .entrepot-carte__nom {
-    font-size: 1.8rem;
-    font-weight: 700;
-    letter-spacing: -0.035em;
-    line-height: 1.05;
-    color: #1d1d1f;
-  }
   .entrepot-rouge { color: var(--rouge); }
 
   /* Adresse cliquable avec GIF */
@@ -996,8 +1013,8 @@ const equipements = [
 
   @media (max-width: 768px) {
     .entrepots-grid { grid-template-columns: 1fr; }
-    .entrepot-carte__nom { font-size: 1.6rem; }
-    .entrepot-gif { width: 38px; height: 38px; }
+    .entrepot-titre { font-size: 1.3rem; }
+    .entrepot-gif { width: 20px; height: 20px; }
     .bridge-kpi__sep { display: none; }
     .bridge-stats-row { gap: 1.8rem; }
     .bridge-br { display: none; }
