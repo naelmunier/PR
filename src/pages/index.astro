@@ -92,43 +92,60 @@ const equipements = [
       </div>
 
       <!-- Cartes entrepôts -->
-      <div class="entrepots-grid reveal" style="margin-bottom:3rem;">
-        <div class="entrepot-carte entrepot-carte--sandouville">
+      <div class="entrepots-grid">
+        <!-- Site de Sandouville -->
+        <div class="entrepot-carte entrepot-carte--sandouville reveal" style="transition-delay:0s;">
+          <div class="entrepot-carte__accent-bar"></div>
           <div class="entrepot-carte__inner">
             <div class="entrepot-carte__badge entrepot-carte__badge--soon" data-i18n="entrepot.soon">À venir — Septembre 2025</div>
-            <h3 class="entrepot-carte__nom">Sandouville</h3>
-            <div class="entrepot-carte__stats">
-              <div class="entrepot-carte__stat">
-                <span class="entrepot-carte__stat-val">24 000</span>
-                <span class="entrepot-carte__stat-unit">m²</span>
-              </div>
-              <div class="entrepot-carte__sep">·</div>
-              <div class="entrepot-carte__stat">
-                <span class="entrepot-carte__stat-val">45</span>
-                <span class="entrepot-carte__stat-unit" data-i18n="entrepot.quais">quais</span>
-              </div>
-            </div>
+            <h3 class="entrepot-carte__nom" data-i18n="entrepot.sandouville.nom">Site de Sandouville</h3>
+            <ul class="entrepot-carte__info-list">
+              <li class="entrepot-info-row">
+                <img src="/assets/entrepot/location.gif" alt="" class="entrepot-info-ico" aria-hidden="true" width="22" height="22" />
+                <span class="entrepot-info-text" data-i18n="entrepot.sandouville.location">Sandouville · Zone Industrielle Portuaire</span>
+              </li>
+              <li class="entrepot-info-row">
+                <img src="/assets/entrepot/surface.png" alt="" class="entrepot-info-ico" aria-hidden="true" width="22" height="22" />
+                <span class="entrepot-info-text"><strong>24 000 m²</strong> <span data-i18n="entrepot.surface.label">de surface</span></span>
+              </li>
+              <li class="entrepot-info-row">
+                <img src="/assets/entrepot/quai.png" alt="" class="entrepot-info-ico" aria-hidden="true" width="22" height="22" />
+                <span class="entrepot-info-text"><strong>45</strong> <span data-i18n="entrepot.quais.label">quais de chargement</span></span>
+              </li>
+            </ul>
             <p class="entrepot-carte__desc" data-i18n="entrepot.sandouville.desc">Nouveau site logistique d'envergure nationale, à deux pas du port du Havre.</p>
           </div>
         </div>
-        <div class="entrepot-carte entrepot-carte--rogerville">
+        <!-- Site de Rogerville -->
+        <div class="entrepot-carte entrepot-carte--rogerville reveal" style="transition-delay:0.18s;">
+          <div class="entrepot-carte__accent-bar"></div>
           <div class="entrepot-carte__inner">
             <div class="entrepot-carte__badge entrepot-carte__badge--actif" data-i18n="entrepot.actif">Site actuel</div>
-            <h3 class="entrepot-carte__nom">Rogerville</h3>
-            <div class="entrepot-carte__stats">
-              <div class="entrepot-carte__stat">
-                <span class="entrepot-carte__stat-val">8 000</span>
-                <span class="entrepot-carte__stat-unit">m²</span>
-              </div>
-              <div class="entrepot-carte__sep">·</div>
-              <div class="entrepot-carte__stat">
-                <span class="entrepot-carte__stat-val">6</span>
-                <span class="entrepot-carte__stat-unit" data-i18n="entrepot.quais">quais</span>
-              </div>
-            </div>
+            <h3 class="entrepot-carte__nom" data-i18n="entrepot.rogerville.nom">Site de Rogerville</h3>
+            <ul class="entrepot-carte__info-list">
+              <li class="entrepot-info-row">
+                <img src="/assets/entrepot/location.gif" alt="" class="entrepot-info-ico" aria-hidden="true" width="22" height="22" />
+                <span class="entrepot-info-text" data-i18n="entrepot.rogerville.location">Rogerville · Route de l'Estuaire, Le Havre</span>
+              </li>
+              <li class="entrepot-info-row">
+                <img src="/assets/entrepot/surface.png" alt="" class="entrepot-info-ico" aria-hidden="true" width="22" height="22" />
+                <span class="entrepot-info-text"><strong>8 000 m²</strong> <span data-i18n="entrepot.surface.label">de surface</span></span>
+              </li>
+              <li class="entrepot-info-row">
+                <img src="/assets/entrepot/quai.png" alt="" class="entrepot-info-ico" aria-hidden="true" width="22" height="22" />
+                <span class="entrepot-info-text"><strong>6</strong> <span data-i18n="entrepot.quais.label">quais de chargement</span></span>
+              </li>
+            </ul>
             <p class="entrepot-carte__desc" data-i18n="entrepot.rogerville.desc">Notre entrepôt actuel, entièrement clos et télésurveillé 24h/7j par la sécurité portuaire.</p>
           </div>
         </div>
+      </div>
+
+      <!-- Transition vers les équipements -->
+      <div class="entrepots-bridge reveal">
+        <div class="entrepots-bridge__line"></div>
+        <p class="entrepots-bridge__text" data-i18n="entrepot.bridge">Des infrastructures solides, soutenues par une flotte d'équipements haute performance.</p>
+        <div class="entrepots-bridge__line"></div>
       </div>
 
       <div class="c3d-wrapper reveal">
@@ -583,134 +600,214 @@ const equipements = [
     width: 100%;
   }
 
-  /* ENTREPÔTS */
+  /* ── ENTREPÔTS ──────────────────────────────────────── */
   .entrepots-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 0;
   }
 
+  /* Carte de base */
   .entrepot-carte {
     border-radius: 1.5rem;
     overflow: hidden;
     position: relative;
-    min-height: 240px;
-    display: flex;
-    align-items: stretch;
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-  }
-
-  .entrepot-carte:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 24px 60px rgba(0,0,0,0.18);
-  }
-
-  .entrepot-carte--sandouville {
-    background: linear-gradient(135deg, #1b2a4a 0%, #2d4278 100%);
-    box-shadow: 0 8px 40px rgba(27,42,74,0.25);
-  }
-
-  .entrepot-carte--rogerville {
-    background: linear-gradient(135deg, #e30613 0%, #b8000e 100%);
-    box-shadow: 0 8px 40px rgba(227,6,19,0.22);
-  }
-
-  .entrepot-carte__inner {
-    padding: 2rem 2.2rem;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.07);
+    box-shadow: 0 4px 28px rgba(0,0,0,0.06);
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
+    /* Animation d'entrée via .reveal/.visible */
+    transition:
+      transform 0.45s cubic-bezier(0.34, 1.46, 0.64, 1),
+      box-shadow 0.45s ease,
+      opacity 0.55s ease;
+  }
+
+  /* Surbrillance au hover */
+  .entrepot-carte:hover {
+    transform: translateY(-10px) scale(1.015);
+    box-shadow: 0 28px 64px rgba(0,0,0,0.13);
+  }
+
+  /* Barre colorée en haut */
+  .entrepot-carte__accent-bar {
+    height: 4px;
     width: 100%;
+    flex-shrink: 0;
+    transition: height 0.35s ease;
+  }
+
+  .entrepot-carte:hover .entrepot-carte__accent-bar {
+    height: 6px;
+  }
+
+  .entrepot-carte--sandouville .entrepot-carte__accent-bar {
+    background: linear-gradient(90deg, #1b2a4a 0%, #4a6fa5 100%);
+  }
+
+  .entrepot-carte--rogerville .entrepot-carte__accent-bar {
+    background: linear-gradient(90deg, #e30613 0%, #ff5a62 100%);
+  }
+
+  /* Lueur subtile en fond de carte */
+  .entrepot-carte--sandouville::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 90% 10%, rgba(27,42,74,0.04) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  .entrepot-carte--rogerville::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 90% 10%, rgba(227,6,19,0.04) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  /* Contenu intérieur */
+  .entrepot-carte__inner {
+    padding: 1.8rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
     position: relative;
     z-index: 1;
   }
 
-  /* Motif décoratif en fond */
-  .entrepot-carte::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 60%);
-    pointer-events: none;
-  }
-
+  /* Badge */
   .entrepot-carte__badge {
     display: inline-flex;
     align-self: flex-start;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 700;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
-    padding: 0.25rem 0.75rem;
+    padding: 0.22rem 0.8rem;
     border-radius: 2rem;
   }
 
   .entrepot-carte__badge--soon {
-    background: rgba(255,255,255,0.18);
-    color: rgba(255,255,255,0.9);
-    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(27,42,74,0.07);
+    color: #1b2a4a;
+    border: 1px solid rgba(27,42,74,0.14);
+    animation: badge-pulse 2.8s ease-in-out infinite;
   }
 
   .entrepot-carte__badge--actif {
-    background: rgba(255,255,255,0.22);
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(227,6,19,0.07);
+    color: #e30613;
+    border: 1px solid rgba(227,6,19,0.16);
   }
 
+  @keyframes badge-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(27,42,74,0); }
+    50%       { box-shadow: 0 0 0 5px rgba(27,42,74,0.07); }
+  }
+
+  /* Nom du site */
   .entrepot-carte__nom {
-    font-size: 2rem;
+    font-size: 1.65rem;
     font-weight: 700;
-    color: #fff;
-    letter-spacing: -0.02em;
-    line-height: 1;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    transition: color 0.2s;
   }
 
-  .entrepot-carte__stats {
+  .entrepot-carte--sandouville .entrepot-carte__nom { color: #1b2a4a; }
+  .entrepot-carte--rogerville .entrepot-carte__nom  { color: #1d1d1f; }
+
+  .entrepot-carte:hover.entrepot-carte--rogerville .entrepot-carte__nom {
+    color: #e30613;
+  }
+
+  /* Liste d'infos */
+  .entrepot-carte__info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .entrepot-info-row {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.65rem;
   }
 
-  .entrepot-carte__stat {
-    display: flex;
-    align-items: baseline;
-    gap: 0.2rem;
+  .entrepot-info-ico {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 0;
+    transition: transform 0.3s ease;
   }
 
-  .entrepot-carte__stat-val {
-    font-size: 1.7rem;
+  .entrepot-carte:hover .entrepot-info-ico {
+    transform: scale(1.12);
+  }
+
+  .entrepot-info-text {
+    font-size: 0.875rem;
+    color: #6e6e73;
+    line-height: 1.4;
+  }
+
+  .entrepot-info-text strong {
+    color: #1d1d1f;
     font-weight: 700;
-    color: #fff;
-    letter-spacing: -0.03em;
   }
 
-  .entrepot-carte__stat-unit {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: rgba(255,255,255,0.72);
-  }
-
-  .entrepot-carte__sep {
-    font-size: 1.4rem;
-    color: rgba(255,255,255,0.35);
-    line-height: 1;
-  }
-
+  /* Description en bas */
   .entrepot-carte__desc {
-    font-size: 0.88rem;
-    color: rgba(255,255,255,0.72);
+    font-size: 0.82rem;
+    color: #8e8e93;
     line-height: 1.55;
     margin-top: auto;
+    padding-top: 0.85rem;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+
+  /* ── Texte de transition ─────── */
+  .entrepots-bridge {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 2.5rem 0 3rem;
+    padding: 0 0.5rem;
+  }
+
+  .entrepots-bridge__line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+  }
+
+  .entrepots-bridge__text {
+    font-size: 0.92rem;
+    color: #8e8e93;
+    text-align: center;
+    white-space: nowrap;
+    font-style: italic;
+    letter-spacing: 0.01em;
   }
 
   @media (max-width: 640px) {
     .entrepots-grid {
       grid-template-columns: 1fr;
     }
-
     .entrepot-carte__nom {
-      font-size: 1.6rem;
+      font-size: 1.4rem;
+    }
+    .entrepots-bridge__text {
+      white-space: normal;
     }
   }
 
