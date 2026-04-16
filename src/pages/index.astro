@@ -105,7 +105,7 @@ const equipements = [
           </div>
           <div class="entrepot-carte__body">
             <div class="entrepot-caract">
-              <span class="entrepot-caract__label">Caractéristiques</span>
+              <span class="entrepot-caract__label" data-i18n="caract.label">Caractéristiques</span>
               <div class="entrepot-caract__liste">
                 <a href="https://www.google.com/maps/place/Port+5053+-+Mediaco+Logistique/@49.4711012,0.2499007,14z" class="entrepot-caract__item entrepot-caract__item--lien" target="_blank" rel="noopener noreferrer">
                   <img src="/assets/entrepot/adresse.png" alt="" aria-hidden="true" width="18" height="18" class="entrepot-ico" />
@@ -134,7 +134,7 @@ const equipements = [
           </div>
           <div class="entrepot-carte__body">
             <div class="entrepot-caract">
-              <span class="entrepot-caract__label">Caractéristiques</span>
+              <span class="entrepot-caract__label" data-i18n="caract.label">Caractéristiques</span>
               <div class="entrepot-caract__liste">
                 <a href="https://maps.google.com/?q=PLPN+1+Port+4935+76700+Rogerville" class="entrepot-caract__item entrepot-caract__item--lien" target="_blank" rel="noopener noreferrer">
                   <img src="/assets/entrepot/adresse.png" alt="" aria-hidden="true" width="18" height="18" class="entrepot-ico" />
@@ -162,9 +162,9 @@ const equipements = [
       <!-- ── Sécurité ── -->
       <div class="securite-bloc reveal">
         <div class="securite-header">
-          <span class="securite-eyebrow">Sécurité</span>
-          <h3 class="securite-titre">Votre marchandise, sous <span class="securite-accent">haute surveillance</span></h3>
-          <p class="securite-sous-titre">La sécurité n'est pas une option — c'est notre engagement premier. Chaque site est conçu pour protéger vos flux, nuit et jour, 365 jours par an.</p>
+          <span class="securite-eyebrow" data-i18n="securite.eyebrow">Sécurité</span>
+          <h3 class="securite-titre" data-i18n-html="securite.title">Votre marchandise, sous <span class="securite-accent">haute surveillance</span></h3>
+          <p class="securite-sous-titre" data-i18n="securite.subtitle">La sécurité n'est pas une option — c'est notre engagement premier. Chaque site est conçu pour protéger vos flux, nuit et jour, 365 jours par an.</p>
         </div>
         <div class="securite-grid">
           <div class="securite-item reveal" style="transition-delay:0.05s;">
@@ -172,8 +172,8 @@ const equipements = [
               <img src="/assets/security/camera.gif" alt="" aria-hidden="true" width="48" height="48" />
             </div>
             <div class="securite-item__text">
-              <span class="securite-item__val">22 caméras HD</span>
-              <span class="securite-item__desc">Couverture intégrale de l'ensemble du site</span>
+              <span class="securite-item__val" data-i18n="securite.item1.val">22 caméras HD</span>
+              <span class="securite-item__desc" data-i18n="securite.item1.desc">Couverture intégrale de l'ensemble du site</span>
             </div>
           </div>
           <div class="securite-item reveal" style="transition-delay:0.1s;">
@@ -181,8 +181,8 @@ const equipements = [
               <img src="/assets/security/video.gif" alt="" aria-hidden="true" width="48" height="48" />
             </div>
             <div class="securite-item__text">
-              <span class="securite-item__val">Surveillance 24h/24, 7j/7</span>
-              <span class="securite-item__desc">Monitoring permanent avec reporting à domicile</span>
+              <span class="securite-item__val" data-i18n="securite.item2.val">Surveillance 24h/24, 7j/7</span>
+              <span class="securite-item__desc" data-i18n="securite.item2.desc">Monitoring permanent avec reporting à domicile</span>
             </div>
           </div>
           <div class="securite-item reveal" style="transition-delay:0.15s;">
@@ -190,8 +190,8 @@ const equipements = [
               <img src="/assets/security/stockage.gif" alt="" aria-hidden="true" width="48" height="48" />
             </div>
             <div class="securite-item__text">
-              <span class="securite-item__val">Stockage vidéo 30 jours</span>
-              <span class="securite-item__desc">Conservation conforme aux exigences de la CNIL</span>
+              <span class="securite-item__val" data-i18n="securite.item3.val">Stockage vidéo 30 jours</span>
+              <span class="securite-item__desc" data-i18n="securite.item3.desc">Conservation conforme aux exigences de la CNIL</span>
             </div>
           </div>
           <div class="securite-item reveal" style="transition-delay:0.2s;">
@@ -199,8 +199,8 @@ const equipements = [
               <img src="/assets/security/police.gif" alt="" aria-hidden="true" width="48" height="48" />
             </div>
             <div class="securite-item__text">
-              <span class="securite-item__val">Police portuaire</span>
-              <span class="securite-item__desc">Sécurité renforcée par les forces de l'ordre du port</span>
+              <span class="securite-item__val" data-i18n="securite.item4.val">Police portuaire</span>
+              <span class="securite-item__desc" data-i18n="securite.item4.desc">Sécurité renforcée par les forces de l'ordre du port</span>
             </div>
           </div>
         </div>
@@ -1170,7 +1170,7 @@ const equipements = [
     font-size: clamp(3rem, 6vw, 5rem);
     font-weight: 700;
     letter-spacing: -0.05em;
-    color: var(--gris-fonce);
+    color: var(--rouge);
     line-height: 1;
   }
   .bridge-kpi__unit {

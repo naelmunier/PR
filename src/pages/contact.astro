@@ -108,34 +108,34 @@ const contacts = [
       <div class="horaires-card reveal">
 
         <div class="horaires-card__header">
-          <h2 class="titre-section" style="margin:0 0 0.5rem;">Horaires</h2>
-          <p class="horaires-card__tagline">Du lundi au vendredi — fermé le week-end.</p>
+          <h2 class="titre-section" style="margin:0 0 0.5rem;" data-i18n="horaires.title">Horaires</h2>
+          <p class="horaires-card__tagline" data-i18n="horaires.tagline">Du lundi au vendredi — fermé le week-end.</p>
         </div>
 
         <div class="horaires-jours">
           <!-- Lundi–Vendredi -->
           <div class="horaires-creneau horaires-creneau--open">
             <div class="horaires-creneau__top">
-              <span class="horaires-creneau__jour">Lundi – Vendredi</span>
-              <span class="horaires-creneau__statut horaires-creneau__statut--ouvert">Ouvert</span>
+              <span class="horaires-creneau__jour" data-i18n="horaires.lv">Lundi – Vendredi</span>
+              <span class="horaires-creneau__statut horaires-creneau__statut--ouvert" data-i18n="horaires.ouvert">Ouvert</span>
             </div>
             <div class="horaires-creneau__times">
               <div class="horaires-time-bloc">
-                <span class="horaires-time-label">Matin</span>
-                <span class="horaires-time">8h30 – 12h30</span>
+                <span class="horaires-time-label" data-i18n="horaires.matin">Matin</span>
+                <span class="horaires-time" data-i18n="horaires.matin.time">8:30 – 12:30</span>
               </div>
               <div class="horaires-time-divider"></div>
               <div class="horaires-time-bloc">
-                <span class="horaires-time-label">Après-midi</span>
-                <span class="horaires-time">13h00 – 16h30</span>
+                <span class="horaires-time-label" data-i18n="horaires.apm">Après-midi</span>
+                <span class="horaires-time" data-i18n="horaires.apm.time">13:00 – 16:30</span>
               </div>
             </div>
           </div>
           <!-- Week-end -->
           <div class="horaires-creneau horaires-creneau--closed">
             <div class="horaires-creneau__top">
-              <span class="horaires-creneau__jour">Samedi – Dimanche</span>
-              <span class="horaires-creneau__statut horaires-creneau__statut--ferme">Fermé</span>
+              <span class="horaires-creneau__jour" data-i18n="horaires.we">Samedi – Dimanche</span>
+              <span class="horaires-creneau__statut horaires-creneau__statut--ferme" data-i18n="horaires.ferme">Fermé</span>
             </div>
           </div>
         </div>
@@ -144,19 +144,19 @@ const contacts = [
         <div class="horaires-chargement">
           <div class="horaires-chargement__badge">
             <span aria-hidden="true">⚠️</span>
-            <span>Dernier chargement accepté</span>
+            <span data-i18n="horaires.charg.badge">Dernier chargement accepté</span>
           </div>
-          <p class="horaires-chargement__intro">
-            Le dernier chargement est accepté <strong>30 minutes avant la fermeture</strong> afin de permettre son traitement complet dans les meilleures conditions.
+          <p class="horaires-chargement__intro" data-i18n="horaires.charg.intro">
+            Dernier chargement 30 min avant fermeture.
           </p>
           <div class="horaires-chargement__heures">
             <div class="horaires-chargement__heure">
-              <span class="horaires-chargement__heure-label">Matin</span>
-              <span class="horaires-chargement__heure-time">avant 12h00</span>
+              <span class="horaires-chargement__heure-label" data-i18n="horaires.charg.matin">Matin</span>
+              <span class="horaires-chargement__heure-time" data-i18n="horaires.charg.matin.time">avant 12:00</span>
             </div>
             <div class="horaires-chargement__heure">
-              <span class="horaires-chargement__heure-label">Après-midi</span>
-              <span class="horaires-chargement__heure-time">avant 16h00</span>
+              <span class="horaires-chargement__heure-label" data-i18n="horaires.charg.apm">Après-midi</span>
+              <span class="horaires-chargement__heure-time" data-i18n="horaires.charg.apm.time">avant 16:00</span>
             </div>
           </div>
         </div>
@@ -481,8 +481,9 @@ const contacts = [
   .horaires-creneau__top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1.2rem;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-bottom: 1rem;
   }
   .horaires-creneau--closed .horaires-creneau__top {
     margin-bottom: 0;
@@ -514,6 +515,7 @@ const contacts = [
   .horaires-creneau__times {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1.5rem;
   }
   .horaires-time-bloc {
@@ -529,10 +531,10 @@ const contacts = [
     color: #aaa;
   }
   .horaires-time {
-    font-size: 1.55rem;
+    font-size: 1.25rem;
     font-weight: 800;
     color: var(--rouge);
-    letter-spacing: -0.04em;
+    letter-spacing: -0.03em;
     line-height: 1;
   }
   .horaires-time-divider {
