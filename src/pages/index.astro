@@ -181,8 +181,9 @@ const equipements = [
               <img src="/assets/security/video.gif" alt="" aria-hidden="true" width="48" height="48" />
             </div>
             <div class="securite-item__text">
-              <span class="securite-item__val" data-i18n="securite.item2.val">Surveillance 24h/24, 7j/7</span>
-              <span class="securite-item__desc" data-i18n="securite.item2.desc">Monitoring permanent avec reporting à domicile</span>
+              <span class="securite-item__val" data-i18n="securite.item2.val">Surveillance 24/7</span>
+              <span class="securite-item__val" data-i18n="securite.item2.sub">Intérieur et Extérieur</span>
+              <span class="securite-item__desc securite-item__desc--copy" data-i18n="securite.item2.copy">Monitoring permanent avec reporting à domicile</span>
             </div>
           </div>
           <div class="securite-item reveal" style="transition-delay:0.15s;">
@@ -1045,14 +1046,13 @@ const equipements = [
     background: #ffffff;
     border: 1px solid rgba(0,0,0,0.07);
     border-radius: 1.4rem;
-    padding: 1.6rem 1rem;
+    padding: 1.8rem 1rem 1.6rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 0.9rem;
-    min-height: 200px;
-    justify-content: center;
+    justify-content: flex-start;
     box-shadow: 0 2px 14px rgba(0,0,0,0.04);
     transition: box-shadow 0.3s, border-color 0.3s, transform 0.35s cubic-bezier(0.34,1.4,0.64,1);
   }
@@ -1098,6 +1098,11 @@ const equipements = [
     font-size: 0.78rem;
     color: var(--gris-moyen);
     line-height: 1.55;
+  }
+  .securite-item__desc--copy {
+    margin-top: 0.2rem;
+    font-size: 0.72rem;
+    color: #aaa;
   }
   @media (max-width: 1100px) {
     .securite-grid { grid-template-columns: repeat(3, 1fr); }
