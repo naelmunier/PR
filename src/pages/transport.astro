@@ -458,40 +458,51 @@ import MainLayout from '../layouts/MainLayout.astro';
           tooltip.style.opacity = '0';
         });
 
-      // ── Faisceau lumineux unique (Le Havre → Marseille) ──
+      // ── Faisceau lumineux — périmètre de la France ──
       // Filtre de lueur rouge
       var glowFilt = defs.append('filter')
         .attr('id', 'beam-glow')
-        .attr('x', '-60%').attr('y', '-60%')
-        .attr('width', '220%').attr('height', '220%');
+        .attr('x', '-80%').attr('y', '-80%')
+        .attr('width', '260%').attr('height', '260%');
       glowFilt.append('feGaussianBlur')
         .attr('in', 'SourceGraphic')
-        .attr('stdDeviation', '3')
+        .attr('stdDeviation', '4')
         .attr('result', 'blur');
       var feMerge = glowFilt.append('feMerge');
       feMerge.append('feMergeNode').attr('in', 'blur');
       feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
 
-      var beamRoute = ['76','27','28','45','18','03','63','69','26','13'];
-      var beamD = beamRoute.map(function(code) {
+      // Périmètre de la France dans le sens horaire (départements de bordure)
+      var perimRoute = [
+        '76','80','62','59','02','08','55','57','67','68',
+        '25','39','01','74','73','38','05','04','06','83',
+        '13','30','34','11','66','09','31','64','40','33',
+        '17','85','44','56','29','22','50','14'
+      ];
+      var perimD = perimRoute.map(function(code) {
         var feat = features.find(function(f) { return f.properties.code === code; });
         return feat ? path(feat) : null;
       }).filter(Boolean).join(' ');
 
-      if (beamD) {
+      if (perimD) {
         var beamEl = gBeams.append('path')
-          .attr('d', beamD)
+          .attr('d', perimD)
           .attr('fill', 'none')
           .attr('filter', 'url(#beam-glow)')
           .attr('pointer-events', 'none')
           .node();
-        var beamLen = beamEl.getTotalLength ? beamEl.getTotalLength() : 2500;
-        beamEl.style.stroke           = 'rgba(255,35,50,0.95)';
-        beamEl.style.strokeWidth      = '2.2';
+        var beamLen = beamEl.getTotalLength ? beamEl.getTotalLength() : 6000;
+        var dashLen = 600; // longueur de la comète
+        beamEl.style.stroke           = 'rgba(255,30,50,0.98)';
+        beamEl.style.strokeWidth      = '2.5';
         beamEl.style.strokeLinecap    = 'round';
-        beamEl.style.strokeDasharray  = '18 ' + (beamLen + 30);
-        beamEl.style.strokeDashoffset = '18';
-        beamEl.style.animation        = 'beam-cross 8s -1.5s linear infinite';
+        beamEl.style.strokeDasharray  = dashLen + ' ' + (beamLen - dashLen);
+        beamEl.style.strokeDashoffset = '0';
+        // Injection dynamique de @keyframes avec la longueur exacte
+        var kfStyle = document.createElement('style');
+        kfStyle.textContent = '@keyframes beam-perim { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -' + beamLen + '; } }';
+        document.head.appendChild(kfStyle);
+        beamEl.style.animation = 'beam-perim 22s linear infinite';
       }
 
       // ── Numéros de département ──
@@ -850,11 +861,6 @@ import MainLayout from '../layouts/MainLayout.astro';
     gap: 1.2rem;
   }
 
-  /* Animation faisceaux traversants */
-  @keyframes beam-cross {
-    from { stroke-dashoffset: 28; }
-    to   { stroke-dashoffset: -1500; }
-  }
 
   .carte-transport__legende { display: flex; flex-direction: column; gap: 0.7rem; }
 
