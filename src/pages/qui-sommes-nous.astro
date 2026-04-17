@@ -142,7 +142,6 @@ import MainLayout from '../layouts/MainLayout.astro';
         </div>
         <div class="agrements-liste">
           <div class="agrement reveal" style="transition-delay:0.05s;">
-            <img src="/assets/certifications/dangereux.png" alt="Entrepôt de type A" class="agrement__logo" />
             <span class="agrement__nom" data-i18n="about.agr.typeA">Entrepôt de type A (agrément import/export)</span>
             <span class="agrement__statut agrement__statut--ok" data-i18n="about.agr.agree">Agréé</span>
           </div>
@@ -152,19 +151,19 @@ import MainLayout from '../layouts/MainLayout.astro';
             <span class="agrement__statut agrement__statut--ok" data-i18n="about.agr.agree">Agréé</span>
           </div>
           <div class="agrement reveal" style="transition-delay:0.15s;">
-            <img src="/assets/certifications/froid.png" alt="Prises Reefer" class="agrement__logo" />
-            <span class="agrement__nom" data-i18n="about.agr.reefer">Prises Reefer</span>
-            <span class="agrement__statut agrement__statut--ok" data-i18n="about.agr.agree">Agréé</span>
-          </div>
-          <div class="agrement reveal" style="transition-delay:0.2s;">
             <img src="/assets/certifications/bio.png" alt="Bio" class="agrement__logo" />
             <span class="agrement__nom" data-i18n="about.agr.bio">Bio</span>
             <span class="agrement__statut agrement__statut--soon" data-i18n="about.agr.soon">À venir</span>
           </div>
-          <div class="agrement reveal" style="transition-delay:0.25s;">
+          <div class="agrement reveal" style="transition-delay:0.2s;">
             <img src="/assets/certifications/alcool.png" alt="Alcool" class="agrement__logo" />
             <span class="agrement__nom" data-i18n="about.agr.alcool">Alcool</span>
             <span class="agrement__statut agrement__statut--soon" data-i18n="about.agr.soon">À venir</span>
+          </div>
+          <div class="agrement reveal" style="transition-delay:0.25s;">
+            <img src="/assets/certifications/froid.png" alt="Prises Reefer" class="agrement__logo" />
+            <span class="agrement__nom" data-i18n="about.agr.reefer">Prises Reefer</span>
+            <span class="agrement__statut agrement__statut--equip" data-i18n="about.agr.equip">Équipement</span>
           </div>
         </div>
       </div>
@@ -817,8 +816,9 @@ import MainLayout from '../layouts/MainLayout.astro';
     border-radius: 2rem;
   }
 
-  .agrement__statut--ok   { background: #dcfce7; color: #15803d; }
-  .agrement__statut--soon { background: #fef9c3; color: #a16207; }
+  .agrement__statut--ok    { background: #dcfce7; color: #15803d; }
+  .agrement__statut--soon  { background: #fef9c3; color: #a16207; }
+  .agrement__statut--equip { background: rgba(27,42,74,0.08); color: var(--bleu-marine); }
 
   @media (max-width: 900px) {
     .histoire__grid,
