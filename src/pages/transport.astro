@@ -481,16 +481,16 @@ import MainLayout from '../layouts/MainLayout.astro';
           var delai = parseInt(item.getAttribute('data-delai'));
           if (activeDelai === delai) {
             activeDelai = null;
-            gPaths.selectAll('path').transition().duration(350)
+            gPaths.selectAll('path')
               .style('opacity', '1').style('filter', null);
             legendItems.forEach(function(li) { li.classList.remove('legende-item--active'); });
           } else {
             activeDelai = delai;
-            gPaths.selectAll('path').transition().duration(350)
+            gPaths.selectAll('path')
               .style('opacity', function(d) {
                 var code = d.properties.code;
                 var dv = bicolore[code] ? bicolore[code].c1 : (delais[code] || 2);
-                return (dv === delai) ? '1' : '0.1';
+                return (dv === delai) ? '1' : '0.12';
               })
               .style('filter', function(d) {
                 var code = d.properties.code;
