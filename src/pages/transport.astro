@@ -86,28 +86,53 @@ import MainLayout from '../layouts/MainLayout.astro';
 
         <!-- Donut SVG -->
         <div class="modes-donut-wrap">
-          <svg class="modes-donut" viewBox="0 0 160 160" aria-hidden="true">
-            <circle cx="80" cy="80" r="60" fill="none" stroke="#f0f0f5" stroke-width="22"/>
-            <circle class="donut-seg donut-seg--routier" cx="80" cy="80" r="60"
-              fill="none" stroke="#e30613" stroke-width="22" stroke-linecap="butt"
-              style="transform:rotate(-90deg); transform-origin:80px 80px;"/>
-            <circle class="donut-seg donut-seg--maritime" cx="80" cy="80" r="60"
-              fill="none" stroke="#7f1d1d" stroke-width="22" stroke-linecap="butt"
-              style="transform:rotate(216deg); transform-origin:80px 80px;"/>
-            <circle class="donut-seg donut-seg--aerien" cx="80" cy="80" r="60"
-              fill="none" stroke="#ef4444" stroke-width="22" stroke-linecap="butt"
-              style="transform:rotate(244.8deg); transform-origin:80px 80px;"/>
-            <circle class="donut-seg donut-seg--rail" cx="80" cy="80" r="60"
-              fill="none" stroke="#b91c1c" stroke-width="22" stroke-linecap="butt"
-              style="transform:rotate(259.2deg); transform-origin:80px 80px;"/>
-            <!-- Trou central -->
-            <circle cx="80" cy="80" r="44" fill="white"/>
-            <!-- Label central (mis à jour au survol) -->
-            <text id="donut-center-label" x="80" y="80"
-              text-anchor="middle" dominant-baseline="middle"
-              font-size="9.5" font-weight="700" fill="#1d1d1f"
-              font-family="-apple-system, BlinkMacSystemFont, Inter, sans-serif"></text>
-          </svg>
+          <p class="donut-eyebrow">Répartition</p>
+          <div class="donut-ring-wrap">
+            <svg class="modes-donut" viewBox="0 0 160 160" aria-hidden="true">
+              <!-- Piste de fond -->
+              <circle cx="80" cy="80" r="60" fill="none" stroke="#f0f0f5" stroke-width="26"/>
+              <!-- Segments -->
+              <circle class="donut-seg donut-seg--routier" cx="80" cy="80" r="60"
+                fill="none" stroke="#e30613" stroke-width="26" stroke-linecap="butt"
+                style="transform:rotate(-90deg); transform-origin:80px 80px;"/>
+              <circle class="donut-seg donut-seg--maritime" cx="80" cy="80" r="60"
+                fill="none" stroke="#7f1d1d" stroke-width="24" stroke-linecap="butt"
+                style="transform:rotate(216deg); transform-origin:80px 80px;"/>
+              <circle class="donut-seg donut-seg--aerien" cx="80" cy="80" r="60"
+                fill="none" stroke="#ef4444" stroke-width="24" stroke-linecap="butt"
+                style="transform:rotate(244.8deg); transform-origin:80px 80px;"/>
+              <circle class="donut-seg donut-seg--rail" cx="80" cy="80" r="60"
+                fill="none" stroke="#b91c1c" stroke-width="24" stroke-linecap="butt"
+                style="transform:rotate(259.2deg); transform-origin:80px 80px;"/>
+              <!-- Trou central -->
+              <circle cx="80" cy="80" r="42" fill="white"/>
+              <!-- Center — mis à jour au survol -->
+              <text id="donut-pct" x="80" y="69"
+                text-anchor="middle" font-size="22" font-weight="800" fill="#1d1d1f"
+                font-family="-apple-system, BlinkMacSystemFont, Inter, sans-serif">85%</text>
+              <text id="donut-center-label" x="80" y="83"
+                text-anchor="middle" font-size="9" font-weight="700" fill="#e30613"
+                font-family="-apple-system, BlinkMacSystemFont, Inter, sans-serif">Routier</text>
+              <text id="donut-sub-label" x="80" y="95"
+                text-anchor="middle" font-size="7" fill="#8e8e93"
+                font-family="-apple-system, BlinkMacSystemFont, Inter, sans-serif">FTL · LTL · Groupage</text>
+            </svg>
+          </div>
+          <!-- KPIs sous le donut -->
+          <div class="donut-kpis">
+            <div class="donut-kpi">
+              <span class="donut-kpi__val">4</span>
+              <span class="donut-kpi__label" data-i18n="transport.kpi.modes">Modes</span>
+            </div>
+            <div class="donut-kpi">
+              <span class="donut-kpi__val">24h</span>
+              <span class="donut-kpi__label">Min</span>
+            </div>
+            <div class="donut-kpi">
+              <span class="donut-kpi__val">🇫🇷</span>
+              <span class="donut-kpi__label" data-i18n="transport.kpi.france">France</span>
+            </div>
+          </div>
         </div>
 
         <!-- Cartes 2×2 -->
@@ -180,42 +205,47 @@ import MainLayout from '../layouts/MainLayout.astro';
       <div class="carte-transport__inner reveal">
         <div class="carte-transport__map">
           <svg id="map-transport" viewBox="0 0 500 520"></svg>
+        </div>
+
+        <div class="carte-sidebar">
+          <!-- Encadré IDF -->
           <div class="idf-inset">
             <div class="idf-inset__header">
               <span class="idf-inset__title">Île-de-France</span>
               <span class="idf-inset__badge">24h</span>
             </div>
-            <svg id="map-idf" viewBox="0 0 180 165"></svg>
-          </div>
-        </div>
-
-        <div class="carte-transport__legende">
-          <span class="legende-titre" data-i18n="transport.map.legend">Délais estimés</span>
-
-          <div class="legende-item">
-            <div class="legende-couleur" style="background:#4ade80;"></div>
-            <div class="legende-delai">24h</div>
-          </div>
-          <div class="legende-item">
-            <div class="legende-couleur" style="background:#fbbf24;"></div>
-            <div class="legende-delai">48h</div>
-          </div>
-          <div class="legende-item">
-            <div class="legende-couleur" style="background:#f97316;"></div>
-            <div class="legende-delai">72h</div>
-          </div>
-          <div class="legende-item">
-            <div class="legende-couleur" style="background:#e30613;"></div>
-            <div class="legende-delai">96h</div>
+            <svg id="map-idf" viewBox="0 0 220 200"></svg>
           </div>
 
-          <div class="legende-plateforme">
-            <img src="/assets/lhaffretement/palteforme.gif" alt="Plateforme" width="16" height="16" class="plateforme-gif" />
-            <span data-i18n="transport.map.plateforme">Présence d'une plateforme logistique</span>
-          </div>
+          <!-- Légende -->
+          <div class="carte-transport__legende">
+            <span class="legende-titre" data-i18n="transport.map.legend">Délais estimés</span>
 
-          <p class="carte-note" data-i18n="transport.map.note">Délais indicatifs pour livraisons en palettes, sur route.</p>
-          <a href="/devis" class="btn-carte-devis" data-i18n="transport.map.cta">Demander un devis transport</a>
+            <div class="legende-item">
+              <div class="legende-couleur" style="background:#4ade80;"></div>
+              <div class="legende-delai">24h</div>
+            </div>
+            <div class="legende-item">
+              <div class="legende-couleur" style="background:#fbbf24;"></div>
+              <div class="legende-delai">48h</div>
+            </div>
+            <div class="legende-item">
+              <div class="legende-couleur" style="background:#f97316;"></div>
+              <div class="legende-delai">72h</div>
+            </div>
+            <div class="legende-item">
+              <div class="legende-couleur" style="background:#e30613;"></div>
+              <div class="legende-delai">96h</div>
+            </div>
+
+            <div class="legende-plateforme">
+              <img src="/assets/lhaffretement/palteforme.gif" alt="Plateforme" width="16" height="16" class="plateforme-gif" />
+              <span data-i18n="transport.map.plateforme">Présence d'une plateforme logistique</span>
+            </div>
+
+            <p class="carte-note" data-i18n="transport.map.note">Délais indicatifs pour livraisons en palettes, sur route.</p>
+            <a href="/devis" class="btn-carte-devis" data-i18n="transport.map.cta">Demander un devis transport</a>
+          </div>
         </div>
       </div>
     </div>
@@ -276,32 +306,46 @@ import MainLayout from '../layouts/MainLayout.astro';
   // Interaction cartes ↔ donut
   var allSegs    = document.querySelectorAll('.donut-seg');
   var modeCards  = document.querySelectorAll('.mode-card');
-  var centerLabel = document.getElementById('donut-center-label');
+  var centerLabel  = document.getElementById('donut-center-label');
+  var donutPct     = document.getElementById('donut-pct');
+  var donutSubLabel = document.getElementById('donut-sub-label');
+
   var segMap = {
     routier:  '.donut-seg--routier',
     maritime: '.donut-seg--maritime',
     aerien:   '.donut-seg--aerien',
     rail:     '.donut-seg--rail'
   };
-  var labelMap2 = {
-    routier:  'Routier',
-    maritime: 'Maritime',
-    aerien:   'Aérien',
-    rail:     'Ferroviaire'
+  var labelMap2 = { routier:'Routier', maritime:'Maritime', aerien:'Aérien', rail:'Ferroviaire' };
+  var pctMap    = { routier:'85%', maritime:'8%', aerien:'4%', rail:'3%' };
+  var tagMap    = {
+    routier:  'FTL · LTL · Groupage',
+    maritime: 'Import · Export · FCL/LCL',
+    aerien:   'Express · International',
+    rail:     'Intermodal · Massifié'
   };
+
+  function setDonutDefault() {
+    allSegs.forEach(function(s) { s.style.opacity = '1'; });
+    if (donutPct)      donutPct.textContent      = '85%';
+    if (centerLabel)   centerLabel.textContent   = 'Routier';
+    if (donutSubLabel) donutSubLabel.textContent = 'FTL · LTL · Groupage';
+  }
+  setDonutDefault();
 
   modeCards.forEach(function (card) {
     card.addEventListener('mouseenter', function () {
       var mode = card.getAttribute('data-mode');
-      allSegs.forEach(function (s) { s.style.opacity = '0.18'; });
+      allSegs.forEach(function (s) { s.style.opacity = '0.15'; });
       var active = document.querySelector(segMap[mode]);
       if (active) active.style.opacity = '1';
-      if (centerLabel) centerLabel.textContent = labelMap2[mode] || '';
+      if (donutPct)      donutPct.textContent      = pctMap[mode]  || '';
+      if (centerLabel)   centerLabel.textContent   = labelMap2[mode] || '';
+      if (donutSubLabel) donutSubLabel.textContent = tagMap[mode]  || '';
       modeCards.forEach(function (c) { c.classList.toggle('mode-card--active', c === card); });
     });
     card.addEventListener('mouseleave', function () {
-      allSegs.forEach(function (s) { s.style.opacity = '1'; });
-      if (centerLabel) centerLabel.textContent = '';
+      setDonutDefault();
       card.classList.remove('mode-card--active');
     });
   });
@@ -442,28 +486,38 @@ import MainLayout from '../layouts/MainLayout.astro';
           tooltip.style.opacity = '0';
         });
 
-      // ── Faisceaux — 5 chemins traversant la France ──
-      var beamRoutes = [
-        { geo: [[0.107,49.494],[2.0,47.8],[4.5,45.5],[5.369,43.296]], dur: 4.2, delay: 0 },
-        { geo: [[0.107,49.494],[-0.2,47.8],[-1.0,45.8],[-0.573,44.837]], dur: 3.8, delay: -1.5 },
-        { geo: [[0.107,49.494],[2.5,49.1],[5.0,48.9],[7.748,48.574]], dur: 3.5, delay: -2.8 },
-        { geo: [[0.107,49.494],[1.5,48.0],[2.8,46.5],[4.835,45.748]], dur: 5.0, delay: -1.0 },
-        { geo: [[-4.494,48.390],[-1.0,46.8],[3.0,44.5],[7.261,43.710]], dur: 6.0, delay: -3.2 },
+      // ── Centroïdes par département ──
+      var centroids = {};
+      features.forEach(function(f) {
+        centroids[f.properties.code] = path.centroid(f);
+      });
+
+      // ── Faisceaux — 5 routes via centroïdes de départements ──
+      var beamSeqs = [
+        { codes: ['76','27','28','45','18','03','63','69','26','13'], dur: 5.0, delay: 0 },
+        { codes: ['76','14','61','35','44','85','17','33'],            dur: 4.2, delay: -1.8 },
+        { codes: ['76','80','02','51','54','57','67'],                 dur: 3.6, delay: -3.0 },
+        { codes: ['76','60','75','77','89','21','71','42','31'],       dur: 5.5, delay: -1.2 },
+        { codes: ['29','22','56','44','49','37','86','87','63','43','12','34','06'], dur: 7.0, delay: -4.5 },
       ];
 
-      beamRoutes.forEach(function(route) {
-        var pp = route.geo.map(function(p) { return projection(p); });
-        var d = 'M ' + pp[0][0].toFixed(1) + ',' + pp[0][1].toFixed(1) +
-          ' C ' + pp[1][0].toFixed(1) + ',' + pp[1][1].toFixed(1) +
-          ' ' + pp[2][0].toFixed(1) + ',' + pp[2][1].toFixed(1) +
-          ' ' + pp[3][0].toFixed(1) + ',' + pp[3][1].toFixed(1);
+      var lineGen = d3.line()
+        .x(function(p) { return p[0]; })
+        .y(function(p) { return p[1]; })
+        .curve(d3.curveCatmullRom.alpha(0.5));
+
+      beamSeqs.forEach(function(route) {
+        var pts = route.codes.map(function(c) { return centroids[c]; }).filter(Boolean);
+        if (pts.length < 2) return;
         var el = gBeams.append('path')
-          .attr('d', d).attr('fill', 'none').attr('pointer-events', 'none').node();
-        el.style.stroke           = 'rgba(227,6,19,0.7)';
-        el.style.strokeWidth      = '1.1';
+          .attr('d', lineGen(pts))
+          .attr('fill', 'none').attr('pointer-events', 'none').node();
+        var len = el.getTotalLength ? el.getTotalLength() : 1200;
+        el.style.stroke           = 'rgba(227,6,19,0.72)';
+        el.style.strokeWidth      = '1.2';
         el.style.strokeLinecap    = 'round';
-        el.style.strokeDasharray  = '28 1500';
-        el.style.strokeDashoffset = '28';
+        el.style.strokeDasharray  = '22 ' + (len + 40);
+        el.style.strokeDashoffset = '22';
         el.style.animation = 'beam-cross ' + route.dur.toFixed(1) + 's ' + route.delay.toFixed(1) + 's linear infinite';
       });
 
@@ -512,7 +566,7 @@ import MainLayout from '../layouts/MainLayout.astro';
       if (svgIdf.node() && idfFeats.length) {
         var projIdf = d3.geoConicConformal().center([2.454071, 46.279229]).parallels([44, 49]);
         var pathIdf = d3.geoPath().projection(projIdf);
-        projIdf.fitSize([180, 165], { type: 'FeatureCollection', features: idfFeats });
+        projIdf.fitSize([220, 200], { type: 'FeatureCollection', features: idfFeats });
 
         svgIdf.selectAll('path')
           .data(idfFeats)
@@ -687,11 +741,69 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   .modes-donut-wrap {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    gap: 0;
+  }
+
+  .donut-eyebrow {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 0.6rem;
+    text-align: center;
+  }
+
+  .donut-ring-wrap {
+    position: relative;
   }
 
   .modes-donut { width: 210px; height: 210px; overflow: visible; }
+
+  /* KPI badges sous le donut */
+  .donut-kpis {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1.4rem;
+    width: 100%;
+  }
+
+  .donut-kpi {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    background: white;
+    border-radius: 0.9rem;
+    padding: 0.65rem 0.9rem;
+    border: 1px solid rgba(0,0,0,0.07);
+    flex: 1;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .donut-kpi:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.09);
+  }
+
+  .donut-kpi__val {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #1d1d1f;
+    line-height: 1;
+  }
+
+  .donut-kpi__label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: #8e8e93;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
 
   .donut-seg {
     stroke-dasharray: 0 376.99;
@@ -802,13 +914,20 @@ import MainLayout from '../layouts/MainLayout.astro';
     border-radius: 2rem;
     padding: 2.5rem 3rem;
     display: grid;
-    grid-template-columns: 1fr 250px;
+    grid-template-columns: 1fr 290px;
     gap: 2.5rem;
-    align-items: center;
+    align-items: start;
     box-shadow: 0 4px 40px rgba(0,0,0,0.06);
   }
 
   #map-transport { width: 100%; height: auto; display: block; overflow: visible; }
+
+  /* Sidebar droite : IDF + légende */
+  .carte-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
 
   /* Animation faisceaux traversants */
   @keyframes beam-cross {
@@ -909,20 +1028,14 @@ import MainLayout from '../layouts/MainLayout.astro';
     color: var(--rouge);
   }
 
-  /* IDF inset */
-  .carte-transport__map { position: relative; }
-
+  /* IDF inset — dans la sidebar, non superposé */
   .idf-inset {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    width: 200px;
+    width: 100%;
     background: white;
     border-radius: 1rem;
     border: 1.5px solid rgba(0,0,0,0.09);
-    box-shadow: 0 6px 24px rgba(0,0,0,0.11);
-    padding: 8px 8px 6px;
-    z-index: 10;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    padding: 10px 10px 8px;
   }
 
   .idf-inset__header {
@@ -996,8 +1109,11 @@ import MainLayout from '../layouts/MainLayout.astro';
   /* ── RESPONSIVE ─────────────────────────────────────────── */
   @media (max-width: 1050px) {
     .modes-merge-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-    .modes-donut-wrap   { justify-content: center; }
+    .modes-donut-wrap   { align-items: center; }
     .carte-transport__inner { grid-template-columns: 1fr; }
+    .carte-sidebar { flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
+    .idf-inset { flex: 1; min-width: 220px; }
+    .carte-transport__legende { flex: 1; min-width: 200px; }
   }
 
   @media (max-width: 900px) {
@@ -1011,6 +1127,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     .modes-merge-layout { padding: 2rem; }
     .carte-transport__inner { padding: 1.5rem; }
     .hero-lh-grande     { height: 110px; }
+    .carte-sidebar      { flex-direction: column; }
     .idf-inset          { display: none; }
   }
 
