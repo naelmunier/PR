@@ -36,7 +36,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 
           <div class="atout-card reveal" style="transition-delay:0.05s;">
             <div class="atout-card__icon">
-              <img src="/assets/lhaffretement/réactivité.png" alt="Réactivité" />
+              <img src="/assets/lhaffretement/reactivite.png" alt="Réactivité" />
             </div>
             <h3 class="atout-card__title" data-i18n="transport.eng.reactivite">Réactivité maximale</h3>
             <p class="atout-card__desc" data-i18n="transport.atout.reactivite.desc">Disponibilité et rapidité de réponse dans toutes les situations — même les plus urgentes.</p>
@@ -489,13 +489,15 @@ import MainLayout from '../layouts/MainLayout.astro';
             gPaths.selectAll('path')
               .style('opacity', function(d) {
                 var code = d.properties.code;
-                var dv = bicolore[code] ? bicolore[code].c1 : (delais[code] || 2);
-                return (dv === delai) ? '1' : '0.12';
+                var dv1 = bicolore[code] ? bicolore[code].c1 : (delais[code] || 2);
+                var dv2 = bicolore[code] ? bicolore[code].c2 : null;
+                return (dv1 === delai || dv2 === delai) ? '1' : '0.12';
               })
               .style('filter', function(d) {
                 var code = d.properties.code;
-                var dv = bicolore[code] ? bicolore[code].c1 : (delais[code] || 2);
-                return (dv === delai) ? 'brightness(1.12) saturate(1.2)' : null;
+                var dv1 = bicolore[code] ? bicolore[code].c1 : (delais[code] || 2);
+                var dv2 = bicolore[code] ? bicolore[code].c2 : null;
+                return (dv1 === delai || dv2 === delai) ? 'brightness(1.12) saturate(1.2)' : null;
               });
             legendItems.forEach(function(li) {
               li.classList.toggle('legende-item--active', li === item);
@@ -727,28 +729,24 @@ import MainLayout from '../layouts/MainLayout.astro';
     gap: 48px;
   }
 
-  /* Coins intérieurs arrondis + bordure visible + marge sécurité vers le centre */
+  /* Coins intérieurs arrondis — marge sécurité vers le centre */
   .mode-card.corner-br {
     border-bottom-right-radius: 86px !important;
-    border: 1.5px solid rgba(0,0,0,0.11) !important;
     padding-right:  3.8rem;
     padding-bottom: 3.8rem;
   }
   .mode-card.corner-bl {
     border-bottom-left-radius: 86px !important;
-    border: 1.5px solid rgba(0,0,0,0.11) !important;
     padding-left:   3.8rem;
     padding-bottom: 3.8rem;
   }
   .mode-card.corner-tr {
     border-top-right-radius: 86px !important;
-    border: 1.5px solid rgba(0,0,0,0.11) !important;
     padding-right: 3.8rem;
     padding-top:   3.8rem;
   }
   .mode-card.corner-tl {
     border-top-left-radius: 86px !important;
-    border: 1.5px solid rgba(0,0,0,0.11) !important;
     padding-left: 3.8rem;
     padding-top:  3.8rem;
   }
@@ -766,7 +764,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     justify-content: center;
     pointer-events: none;
     z-index: 4;
-    border: 1.5px solid rgba(0,0,0,0.11);
+    box-shadow: 0 0 0 1.5px rgba(0,0,0,0.10), 0 4px 20px rgba(0,0,0,0.07);
   }
 
   .modes-donut { width: 162px; height: 162px; overflow: visible; }
@@ -788,7 +786,8 @@ import MainLayout from '../layouts/MainLayout.astro';
     padding: 1.8rem 1.8rem 1.6rem;
     background: white;
     border-radius: 1.4rem;
-    border: 1.5px solid rgba(0,0,0,0.06);
+    border: none;
+    box-shadow: 0 0 0 1.5px rgba(0,0,0,0.10), 0 4px 24px rgba(0,0,0,0.05);
     cursor: pointer;
     position: relative;
     overflow: hidden;
@@ -801,23 +800,23 @@ import MainLayout from '../layouts/MainLayout.astro';
   /* Hover : chaque carte pousse vers son coin extérieur */
   .mode-card--routier:hover,  .mode-card--routier.mode-card--active  {
     transform: translate(-4px, -4px);
-    box-shadow: 0 12px 40px rgba(227,6,19,0.14);
-    border-color: rgba(227,6,19,0.22); background: rgba(227,6,19,0.025);
+    box-shadow: 0 0 0 1.5px rgba(227,6,19,0.40), 0 12px 40px rgba(227,6,19,0.14);
+    background: rgba(227,6,19,0.025);
   }
   .mode-card--maritime:hover, .mode-card--maritime.mode-card--active {
     transform: translate(4px, -4px);
-    box-shadow: 0 12px 40px rgba(127,29,29,0.14);
-    border-color: rgba(127,29,29,0.22); background: rgba(127,29,29,0.025);
+    box-shadow: 0 0 0 1.5px rgba(127,29,29,0.40), 0 12px 40px rgba(127,29,29,0.14);
+    background: rgba(127,29,29,0.025);
   }
   .mode-card--aerien:hover,   .mode-card--aerien.mode-card--active   {
     transform: translate(-4px, 4px);
-    box-shadow: 0 12px 40px rgba(239,68,68,0.14);
-    border-color: rgba(239,68,68,0.22); background: rgba(239,68,68,0.025);
+    box-shadow: 0 0 0 1.5px rgba(239,68,68,0.40), 0 12px 40px rgba(239,68,68,0.14);
+    background: rgba(239,68,68,0.025);
   }
   .mode-card--rail:hover,     .mode-card--rail.mode-card--active     {
     transform: translate(4px, 4px);
-    box-shadow: 0 12px 40px rgba(185,28,28,0.14);
-    border-color: rgba(185,28,28,0.22); background: rgba(185,28,28,0.025);
+    box-shadow: 0 0 0 1.5px rgba(185,28,28,0.40), 0 12px 40px rgba(185,28,28,0.14);
+    background: rgba(185,28,28,0.025);
   }
 
   .mode-card__icon-wrap {
