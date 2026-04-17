@@ -190,7 +190,7 @@ import MainLayout from '../layouts/MainLayout.astro';
               <span class="idf-inset__title">Île-de-France</span>
               <span class="idf-inset__badge">24h</span>
             </div>
-            <svg id="map-idf" viewBox="0 0 220 200"></svg>
+            <svg id="map-idf" viewBox="0 0 242 220"></svg>
           </div>
 
           <!-- Légende -->
@@ -458,37 +458,41 @@ import MainLayout from '../layouts/MainLayout.astro';
           tooltip.style.opacity = '0';
         });
 
-      // ── Faisceaux — paths réels des bordures géo ──
-      // Chaque route est une suite de codes de depts contigus.
-      // On concatène les paths SVG réels de chaque dept pour que
-      // le faisceau se déplace sur leurs bordures géographiques.
-      var beamSeqs = [
-        { codes: ['76','27','28','45','18','03','63','69','26','13'], dur: 6.0, delay: 0 },
-        { codes: ['76','14','61','35','44','85','17','33'],           dur: 5.0, delay: -2.0 },
-        { codes: ['76','80','02','51','54','57','67'],                dur: 4.5, delay: -3.5 },
-        { codes: ['76','60','77','89','21','71','42','31'],           dur: 6.5, delay: -1.5 },
-        { codes: ['29','22','56','44','49','37','86','63','43','12','34','06'], dur: 8.0, delay: -5.0 },
-      ];
+      // ── Faisceau lumineux unique (Le Havre → Marseille) ──
+      // Filtre de lueur rouge
+      var glowFilt = defs.append('filter')
+        .attr('id', 'beam-glow')
+        .attr('x', '-60%').attr('y', '-60%')
+        .attr('width', '220%').attr('height', '220%');
+      glowFilt.append('feGaussianBlur')
+        .attr('in', 'SourceGraphic')
+        .attr('stdDeviation', '3')
+        .attr('result', 'blur');
+      var feMerge = glowFilt.append('feMerge');
+      feMerge.append('feMergeNode').attr('in', 'blur');
+      feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
 
-      beamSeqs.forEach(function(route) {
-        // Concaténation des paths SVG réels de chaque département
-        var d = route.codes.map(function(code) {
-          var feat = features.find(function(f) { return f.properties.code === code; });
-          return feat ? path(feat) : null;
-        }).filter(Boolean).join(' ');
+      var beamRoute = ['76','27','28','45','18','03','63','69','26','13'];
+      var beamD = beamRoute.map(function(code) {
+        var feat = features.find(function(f) { return f.properties.code === code; });
+        return feat ? path(feat) : null;
+      }).filter(Boolean).join(' ');
 
-        if (!d) return;
-        var el = gBeams.append('path')
-          .attr('d', d)
-          .attr('fill', 'none').attr('pointer-events', 'none').node();
-        var len = el.getTotalLength ? el.getTotalLength() : 2000;
-        el.style.stroke           = 'rgba(227,6,19,0.75)';
-        el.style.strokeWidth      = '1.2';
-        el.style.strokeLinecap    = 'round';
-        el.style.strokeDasharray  = '20 ' + (len + 30);
-        el.style.strokeDashoffset = '20';
-        el.style.animation = 'beam-cross ' + route.dur.toFixed(1) + 's ' + route.delay.toFixed(1) + 's linear infinite';
-      });
+      if (beamD) {
+        var beamEl = gBeams.append('path')
+          .attr('d', beamD)
+          .attr('fill', 'none')
+          .attr('filter', 'url(#beam-glow)')
+          .attr('pointer-events', 'none')
+          .node();
+        var beamLen = beamEl.getTotalLength ? beamEl.getTotalLength() : 2500;
+        beamEl.style.stroke           = 'rgba(255,35,50,0.95)';
+        beamEl.style.strokeWidth      = '2.2';
+        beamEl.style.strokeLinecap    = 'round';
+        beamEl.style.strokeDasharray  = '18 ' + (beamLen + 30);
+        beamEl.style.strokeDashoffset = '18';
+        beamEl.style.animation        = 'beam-cross 8s -1.5s linear infinite';
+      }
 
       // ── Numéros de département ──
       gLabels.selectAll('text.dept-num')
@@ -535,7 +539,7 @@ import MainLayout from '../layouts/MainLayout.astro';
       if (svgIdf.node() && idfFeats.length) {
         var projIdf = d3.geoConicConformal().center([2.454071, 46.279229]).parallels([44, 49]);
         var pathIdf = d3.geoPath().projection(projIdf);
-        projIdf.fitSize([220, 200], { type: 'FeatureCollection', features: idfFeats });
+        projIdf.fitSize([242, 220], { type: 'FeatureCollection', features: idfFeats });
 
         svgIdf.selectAll('path')
           .data(idfFeats)
@@ -706,25 +710,26 @@ import MainLayout from '../layouts/MainLayout.astro';
     box-shadow: 0 4px 40px rgba(0,0,0,0.05);
   }
 
-  /* Grille 2×2 — gap = 0 pour que les coins se rejoignent au centre */
+  /* Grille 2×2 — grand gap central pour le donut */
   .mode-cards-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3px;
+    column-gap: 200px;
+    row-gap: 200px;
   }
 
-  /* Coins intérieurs arrondis vers le donut central */
-  .mode-card.corner-br { border-bottom-right-radius: 5rem !important; }
-  .mode-card.corner-bl { border-bottom-left-radius:  5rem !important; }
-  .mode-card.corner-tr { border-top-right-radius:    5rem !important; }
-  .mode-card.corner-tl { border-top-left-radius:     5rem !important; }
+  /* Coins intérieurs légèrement arrondis vers le donut */
+  .mode-card.corner-br { border-bottom-right-radius: 2.5rem !important; }
+  .mode-card.corner-bl { border-bottom-left-radius:  2.5rem !important; }
+  .mode-card.corner-tr { border-top-right-radius:    2.5rem !important; }
+  .mode-card.corner-tl { border-top-left-radius:     2.5rem !important; }
 
   /* Donut flottant au centre des 4 cartes */
   .modes-donut-center {
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    width: 168px; height: 168px;
+    width: 185px; height: 185px;
     background: var(--gris-clair);
     border-radius: 50%;
     display: flex;
@@ -734,7 +739,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     z-index: 4;
   }
 
-  .modes-donut { width: 158px; height: 158px; overflow: visible; }
+  .modes-donut { width: 174px; height: 174px; overflow: visible; }
 
   .donut-seg {
     stroke-dasharray: 0 376.99;
@@ -830,7 +835,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     border-radius: 2rem;
     padding: 2.5rem 3rem;
     display: grid;
-    grid-template-columns: 1fr 290px;
+    grid-template-columns: 1fr 320px;
     gap: 2.5rem;
     align-items: start;
     box-shadow: 0 4px 40px rgba(0,0,0,0.06);
