@@ -114,50 +114,46 @@ import MainLayout from '../layouts/MainLayout.astro';
         <div class="mode-cards-grid">
 
           <div class="mode-card mode-card--routier" data-mode="routier">
-            <div class="mode-card__icon-wrap" style="background:rgba(227,6,19,0.1);color:#e30613;">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
-              </svg>
+            <div class="mode-card__icon-wrap" style="background:rgba(227,6,19,0.08);">
+              <img src="/assets/lhaffretement/camion.gif" alt="Transport Routier" class="mode-card__gif" />
             </div>
             <div class="mode-card__content">
               <h3 class="mode-card__title" data-i18n="transport.svc.routier.title">Transport Routier</h3>
-              <p class="mode-card__desc" data-i18n="transport.mode.routier.detail">FTL · LTL · Groupage · National</p>
+              <p class="mode-card__tag" data-i18n="transport.mode.routier.detail">FTL · LTL · Groupage</p>
+              <p class="mode-card__text" data-i18n="transport.svc.routier.desc">Fret conventionnel, camion complet (FTL) ou groupage (LTL) — notre réseau couvre toute la France depuis Le Havre.</p>
             </div>
           </div>
 
           <div class="mode-card mode-card--maritime" data-mode="maritime">
-            <div class="mode-card__icon-wrap" style="background:rgba(127,29,29,0.1);color:#7f1d1d;">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 17h18M12 3 4 9v8h16V9z"/><path d="M12 3v6M8 9h8"/>
-              </svg>
+            <div class="mode-card__icon-wrap" style="background:rgba(127,29,29,0.08);">
+              <img src="/assets/lhaffretement/maritime.gif" alt="Transport Maritime" class="mode-card__gif" />
             </div>
             <div class="mode-card__content">
               <h3 class="mode-card__title" data-i18n="transport.svc.maritime.title">Transport Maritime</h3>
-              <p class="mode-card__desc" data-i18n="transport.mode.maritime.detail">Import · Export · Transbordement</p>
+              <p class="mode-card__tag" data-i18n="transport.mode.maritime.detail">Import · Export · FCL/LCL</p>
+              <p class="mode-card__text" data-i18n="transport.svc.maritime.desc">Coordination du fret maritime en partenariat avec les armateurs — import, export et transbordement depuis le port du Havre.</p>
             </div>
           </div>
 
           <div class="mode-card mode-card--aerien" data-mode="aerien">
-            <div class="mode-card__icon-wrap" style="background:rgba(239,68,68,0.1);color:#ef4444;">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 19 4s-2 1-3.5 2.5L9 4 4.8 6.2l7 3.5-2.6 2.6L7.5 12 5 11.5l-2 2 6 3.5 3.5 2 2-2-1.5-3 2.6-2.6 3.5 7Z"/>
-              </svg>
+            <div class="mode-card__icon-wrap" style="background:rgba(239,68,68,0.08);">
+              <img src="/assets/lhaffretement/aerien.gif" alt="Transport Aérien" class="mode-card__gif" />
             </div>
             <div class="mode-card__content">
               <h3 class="mode-card__title" data-i18n="transport.svc.aerien.title">Transport Aérien</h3>
-              <p class="mode-card__desc" data-i18n="transport.mode.aerien.detail">Express · Haute valeur · International</p>
+              <p class="mode-card__tag" data-i18n="transport.mode.aerien.detail">Express · International</p>
+              <p class="mode-card__text" data-i18n="transport.svc.aerien.desc">Solutions express prioritaires pour vos envois urgents ou à haute valeur ajoutée, vers toutes les destinations internationales.</p>
             </div>
           </div>
 
           <div class="mode-card mode-card--rail" data-mode="rail">
-            <div class="mode-card__icon-wrap" style="background:rgba(185,28,28,0.1);color:#b91c1c;">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="4" y="3" width="16" height="14" rx="2"/><path d="M4 11h16M12 3v8M8 19l-2 2m10-2 2 2"/><circle cx="8" cy="18" r="1" fill="currentColor"/><circle cx="16" cy="18" r="1" fill="currentColor"/>
-              </svg>
+            <div class="mode-card__icon-wrap" style="background:rgba(185,28,28,0.08);">
+              <img src="/assets/lhaffretement/train.gif" alt="Ferroviaire" class="mode-card__gif" />
             </div>
             <div class="mode-card__content">
               <h3 class="mode-card__title" data-i18n="transport.svc.ferroviaire.title">Ferroviaire & Fluvial</h3>
-              <p class="mode-card__desc" data-i18n="transport.mode.rail.detail">Intermodal · Massifié · Durable</p>
+              <p class="mode-card__tag" data-i18n="transport.mode.rail.detail">Intermodal · Massifié</p>
+              <p class="mode-card__text" data-i18n="transport.svc.ferroviaire.desc">Solutions intermodales combinant rail et voie d'eau pour une logistique durable, économique et adaptée aux grands volumes.</p>
             </div>
           </div>
 
@@ -169,12 +165,13 @@ import MainLayout from '../layouts/MainLayout.astro';
   <!-- ═══ 4. CARTE FRANCE ═══════════════════════════════════════ -->
   <section class="section carte-transport">
     <div class="tooltip-map" id="tooltip-map">
-      <span id="tt-map-nom"></span><span id="tt-map-j"></span>
+      <div class="tt-nom" id="tt-map-nom"></div>
+      <div class="tt-delai" id="tt-map-j"></div>
     </div>
     <div class="container">
       <div class="reveal" style="text-align:center; margin-bottom:2.8rem;">
         <p class="eyebrow-rouge" data-i18n="transport.map.eyebrow">Couverture nationale</p>
-        <h2 class="titre-section" data-i18n-html="transport.map.title">Délais de livraison <span>depuis Le Havre</span></h2>
+        <h2 class="titre-section" data-i18n-html="transport.map.title">Délais de livraison <span>en France</span></h2>
         <p class="sous-titre" style="margin:1rem auto 0;" data-i18n="transport.map.subtitle">
           Estimations indicatives · Hors week-ends et jours fériés
         </p>
@@ -183,6 +180,13 @@ import MainLayout from '../layouts/MainLayout.astro';
       <div class="carte-transport__inner reveal">
         <div class="carte-transport__map">
           <svg id="map-transport" viewBox="0 0 500 520"></svg>
+          <div class="idf-inset">
+            <div class="idf-inset__header">
+              <span class="idf-inset__title">Île-de-France</span>
+              <span class="idf-inset__badge">24h</span>
+            </div>
+            <svg id="map-idf" viewBox="0 0 140 130"></svg>
+          </div>
         </div>
 
         <div class="carte-transport__legende">
@@ -416,12 +420,14 @@ import MainLayout from '../layouts/MainLayout.astro';
           var jVal = bicolore[code]
             ? bicolore[code].tooltip
             : (labelMap[delais[code]] || '48h');
+          var lvl  = bicolore[code] ? bicolore[code].c1 : (delais[code] || 2);
 
-          tooltip.style.opacity = '1';
-          tooltip.style.left    = (event.clientX + 14) + 'px';
-          tooltip.style.top     = (event.clientY - 10) + 'px';
+          tooltip.style.opacity     = '1';
+          tooltip.style.left        = (event.clientX + 16) + 'px';
+          tooltip.style.top         = (event.clientY - 14) + 'px';
+          tooltip.style.borderLeftColor = colorMap[lvl] || '#fbbf24';
           ttNom.textContent = d.properties.nom + ' (' + code + ')';
-          ttJ.textContent   = ' · ' + jVal;
+          ttJ.textContent   = jVal;
         })
         .on('mousemove', function (event) {
           tooltip.style.left = (event.clientX + 14) + 'px';
@@ -436,7 +442,7 @@ import MainLayout from '../layouts/MainLayout.astro';
           tooltip.style.opacity = '0';
         });
 
-      // ── Faisceaux lumineux colorés sur les bordures ──
+      // ── Faisceaux lumineux rouge vif fins sur les bordures ──
       gBeams.selectAll('path')
         .data(features)
         .enter().append('path')
@@ -444,16 +450,14 @@ import MainLayout from '../layouts/MainLayout.astro';
         .attr('fill', 'none')
         .attr('pointer-events', 'none')
         .each(function (d, i) {
-          var el   = this;
-          var code = d.properties.code;
-          var lvl  = bicolore[code] ? bicolore[code].c1 : (delais[code] || 2);
-          el.style.stroke          = beamColorMap[lvl] || 'rgba(253,224,71,0.9)';
-          el.style.strokeWidth     = '1.8';
-          el.style.strokeDasharray = '14 190';
+          var el = this;
+          el.style.stroke          = 'rgba(227,6,19,0.6)';
+          el.style.strokeWidth     = '0.9';
+          el.style.strokeDasharray = '10 200';
           el.style.strokeLinecap   = 'round';
-          el.style.strokeDashoffset = String(-(i * 43) % 204);
-          var dur   = (1.5 + (i % 7) * 0.5).toFixed(2);
-          var delay = (-(i * 0.62 % 4.2)).toFixed(2);
+          el.style.strokeDashoffset = String(-(i * 43) % 210);
+          var dur   = (1.8 + (i % 7) * 0.55).toFixed(2);
+          var delay = (-(i * 0.65 % 4.5)).toFixed(2);
           el.style.animation = 'beam-travel ' + dur + 's ' + delay + 's linear infinite';
         });
 
@@ -492,6 +496,63 @@ import MainLayout from '../layouts/MainLayout.astro';
       svg.append('text').attr('x', lh[0] + 9).attr('y', lh[1] + 4)
         .attr('font-size', '10').attr('font-weight', '700')
         .attr('fill', '#1d1d1f').attr('font-family', 'sans-serif').text('Le Havre');
+
+      // ── Mini-carte Île-de-France ──
+      var idfCodes = ['75','77','78','91','92','93','94','95'];
+      var idfFeats = features.filter(function (f) {
+        return idfCodes.indexOf(f.properties.code) !== -1;
+      });
+      var svgIdf = d3.select('#map-idf');
+      if (svgIdf.node() && idfFeats.length) {
+        var projIdf = d3.geoConicConformal().center([2.454071, 46.279229]).parallels([44, 49]);
+        var pathIdf = d3.geoPath().projection(projIdf);
+        projIdf.fitSize([140, 130], { type: 'FeatureCollection', features: idfFeats });
+
+        svgIdf.selectAll('path')
+          .data(idfFeats)
+          .enter().append('path')
+          .attr('d', pathIdf)
+          .attr('stroke', 'rgba(255,255,255,0.85)')
+          .attr('stroke-width', 1.2)
+          .style('fill', function (d) { return colorMap[delais[d.properties.code] || 1]; })
+          .style('cursor', 'pointer')
+          .on('mouseover', function (event, d) {
+            d3.select(this).transition().duration(120)
+              .attr('stroke', '#fff').attr('stroke-width', 2)
+              .style('filter', 'brightness(1.12)');
+            var code = d.properties.code;
+            var jVal = labelMap[delais[code]] || '24h';
+            tooltip.style.opacity     = '1';
+            tooltip.style.left        = (event.clientX + 16) + 'px';
+            tooltip.style.top         = (event.clientY - 14) + 'px';
+            tooltip.style.borderLeftColor = colorMap[delais[code] || 1];
+            ttNom.textContent = d.properties.nom + ' (' + code + ')';
+            ttJ.textContent   = jVal;
+          })
+          .on('mousemove', function (event) {
+            tooltip.style.left = (event.clientX + 16) + 'px';
+            tooltip.style.top  = (event.clientY - 14) + 'px';
+          })
+          .on('mouseleave', function () {
+            d3.select(this).transition().duration(150)
+              .attr('stroke', 'rgba(255,255,255,0.85)').attr('stroke-width', 1.2)
+              .style('filter', null);
+            tooltip.style.opacity = '0';
+          });
+
+        // Numéros + noms dans la mini-carte
+        svgIdf.selectAll('text')
+          .data(idfFeats)
+          .enter().append('text')
+          .attr('x', function (d) { return pathIdf.centroid(d)[0]; })
+          .attr('y', function (d) { return pathIdf.centroid(d)[1]; })
+          .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
+          .attr('font-size', '8').attr('font-weight', '700')
+          .attr('fill', 'rgba(255,255,255,0.95)')
+          .attr('pointer-events', 'none')
+          .attr('font-family', '-apple-system, BlinkMacSystemFont, Inter, sans-serif')
+          .text(function (d) { return d.properties.code; });
+      }
     });
 
 })();
@@ -645,32 +706,63 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   .mode-card {
     display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    padding: 1.8rem 2rem;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.8rem 1.8rem 1.6rem;
     background: white;
     border-radius: 1.4rem;
-    border: 1.5px solid transparent;
+    border: 1.5px solid rgba(0,0,0,0.06);
     cursor: pointer;
-    transition: transform 0.28s cubic-bezier(0.34,1.4,0.64,1), box-shadow 0.25s, border-color 0.25s, background 0.25s;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.32s cubic-bezier(0.34,1.4,0.64,1),
+                box-shadow 0.28s ease,
+                border-color 0.25s ease,
+                background 0.25s ease;
   }
+
+  /* Barre colorée en bas au survol */
+  .mode-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 0 0 1.4rem 1.4rem;
+    transform: scaleX(0);
+    transition: transform 0.3s cubic-bezier(0.34,1.2,0.64,1);
+    transform-origin: left;
+  }
+  .mode-card--routier::after  { background: #e30613; }
+  .mode-card--maritime::after { background: #7f1d1d; }
+  .mode-card--aerien::after   { background: #ef4444; }
+  .mode-card--rail::after     { background: #b91c1c; }
+
+  .mode-card:hover::after,
+  .mode-card--active::after { transform: scaleX(1); }
 
   .mode-card:hover,
   .mode-card--active {
-    transform: scale(1.05);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.12);
   }
 
-  .mode-card--routier:hover,  .mode-card--routier.mode-card--active  { border-color: rgba(227,6,19,0.30);  background: rgba(227,6,19,0.04); }
-  .mode-card--maritime:hover, .mode-card--maritime.mode-card--active { border-color: rgba(127,29,29,0.30); background: rgba(127,29,29,0.04); }
-  .mode-card--aerien:hover,   .mode-card--aerien.mode-card--active   { border-color: rgba(239,68,68,0.30); background: rgba(239,68,68,0.04); }
-  .mode-card--rail:hover,     .mode-card--rail.mode-card--active     { border-color: rgba(185,28,28,0.30); background: rgba(185,28,28,0.04); }
+  .mode-card--routier:hover,  .mode-card--routier.mode-card--active  { border-color: rgba(227,6,19,0.22);  background: rgba(227,6,19,0.025); }
+  .mode-card--maritime:hover, .mode-card--maritime.mode-card--active { border-color: rgba(127,29,29,0.22); background: rgba(127,29,29,0.025); }
+  .mode-card--aerien:hover,   .mode-card--aerien.mode-card--active   { border-color: rgba(239,68,68,0.22); background: rgba(239,68,68,0.025); }
+  .mode-card--rail:hover,     .mode-card--rail.mode-card--active     { border-color: rgba(185,28,28,0.22); background: rgba(185,28,28,0.025); }
 
   .mode-card__icon-wrap {
-    width: 52px; height: 52px;
-    border-radius: 1rem;
+    width: 60px; height: 60px;
+    border-radius: 1.1rem;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
+  }
+
+  .mode-card__gif {
+    width: 46px; height: 46px;
+    object-fit: contain;
+    border-radius: 0 !important;
+    mix-blend-mode: multiply;
   }
 
   .mode-card__title {
@@ -678,13 +770,22 @@ import MainLayout from '../layouts/MainLayout.astro';
     font-weight: 700;
     color: var(--gris-fonce);
     letter-spacing: -0.02em;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.1rem;
   }
 
-  .mode-card__desc {
-    font-size: 0.8rem;
+  .mode-card__tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--rouge);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .mode-card__text {
+    font-size: 0.82rem;
     color: var(--gris-moyen);
-    line-height: 1.4;
+    line-height: 1.55;
   }
 
   /* ── CARTE FRANCE ──────────────────────────────────────── */
@@ -706,7 +807,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   /* Animation faisceaux lumineux */
   @keyframes beam-travel {
     from { stroke-dashoffset: 0; }
-    to   { stroke-dashoffset: -204; }
+    to   { stroke-dashoffset: -210; }
   }
 
   .carte-transport__legende { display: flex; flex-direction: column; gap: 0.7rem; }
@@ -773,25 +874,76 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   .btn-carte-devis:hover { opacity: 0.88; transform: translateY(-2px); }
 
-  /* Tooltip */
+  /* Tooltip carte */
   .tooltip-map {
     position: fixed;
-    background: rgba(10,10,10,0.9);
-    color: white;
-    padding: 0.5rem 0.9rem;
-    border-radius: 0.6rem;
-    font-size: 0.8rem;
-    font-weight: 600;
+    background: white;
+    padding: 0.65rem 0.9rem 0.65rem 1rem;
+    border-radius: 0.85rem;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.1s;
+    transition: opacity 0.12s ease;
     z-index: 200;
-    white-space: nowrap;
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.1);
+    min-width: 130px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.07);
+    border: 1px solid rgba(0,0,0,0.07);
+    border-left: 4px solid #fbbf24;
   }
 
-  #tt-map-j { color: #fca5a5; }
+  .tt-nom {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #1d1d1f;
+    margin-bottom: 0.2rem;
+  }
+
+  .tt-delai {
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: var(--rouge);
+  }
+
+  /* IDF inset */
+  .carte-transport__map { position: relative; }
+
+  .idf-inset {
+    position: absolute;
+    bottom: 14px;
+    left: 10px;
+    width: 150px;
+    background: white;
+    border-radius: 1rem;
+    border: 1.5px solid rgba(0,0,0,0.09);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.11);
+    padding: 8px 8px 6px;
+    z-index: 10;
+  }
+
+  .idf-inset__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+
+  .idf-inset__title {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8e8e93;
+  }
+
+  .idf-inset__badge {
+    font-size: 0.6rem;
+    font-weight: 800;
+    background: #4ade80;
+    color: white;
+    padding: 1px 6px;
+    border-radius: 1rem;
+  }
+
+  #map-idf { width: 100%; height: auto; display: block; overflow: visible; }
 
   /* ── CTA ────────────────────────────────────────────────── */
   .cta-section-transport { padding: 5rem 0; }
