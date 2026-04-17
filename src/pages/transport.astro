@@ -197,19 +197,19 @@ import MainLayout from '../layouts/MainLayout.astro';
           <div class="carte-transport__legende">
             <span class="legende-titre" data-i18n="transport.map.legend">Délais estimés</span>
 
-            <div class="legende-item">
+            <div class="legende-item" data-delai="1">
               <div class="legende-couleur" style="background:#4ade80;"></div>
               <div class="legende-delai">24h</div>
             </div>
-            <div class="legende-item">
+            <div class="legende-item" data-delai="2">
               <div class="legende-couleur" style="background:#fbbf24;"></div>
               <div class="legende-delai">48h</div>
             </div>
-            <div class="legende-item">
+            <div class="legende-item" data-delai="3">
               <div class="legende-couleur" style="background:#f97316;"></div>
               <div class="legende-delai">72h</div>
             </div>
-            <div class="legende-item">
+            <div class="legende-item" data-delai="4">
               <div class="legende-couleur" style="background:#e30613;"></div>
               <div class="legende-delai">96h</div>
             </div>
@@ -364,12 +364,9 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   if (!svg.node()) return;
 
-  Promise.all([
-    fetch('/assets/departements.geojson').then(function(r) { return r.json(); }),
-    fetch('/assets/france-contour.geojson').then(function(r) { return r.json(); })
-  ]).then(function(results) {
-    var geo = results[0];
-    var franceContour = results[1];
+  fetch('/assets/departements.geojson')
+    .then(function(r) { return r.json(); })
+    .then(function(geo) {
       var projection = d3.geoConicConformal()
         .center([2.454071, 46.279229])
         .parallels([44, 49]);
@@ -400,8 +397,8 @@ import MainLayout from '../layouts/MainLayout.astro';
       projection.fitSize([w, h], { type: 'FeatureCollection', features: features });
 
       var gPaths  = svg.append('g').attr('class', 'g-paths');
-      var gBeams  = svg.append('g').attr('class', 'g-beams');
       var gLabels = svg.append('g').attr('class', 'g-labels');
+      var gShimmer = svg.append('g').attr('class', 'g-shimmer').attr('pointer-events', 'none');
 
       // ── Chemins des départements ──
       gPaths.selectAll('path')
@@ -461,47 +458,51 @@ import MainLayout from '../layouts/MainLayout.astro';
           tooltip.style.opacity = '0';
         });
 
-      // ── Faisceau lumineux — périmètre de la France ──
-      // Filtre de lueur rouge
-      var glowFilt = defs.append('filter')
-        .attr('id', 'beam-glow')
-        .attr('x', '-80%').attr('y', '-80%')
-        .attr('width', '260%').attr('height', '260%');
-      glowFilt.append('feGaussianBlur')
-        .attr('in', 'SourceGraphic')
-        .attr('stdDeviation', '4')
-        .attr('result', 'blur');
-      var feMerge = glowFilt.append('feMerge');
-      feMerge.append('feMergeNode').attr('in', 'blur');
-      feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
+      // ── Shimmer diagonal balayant la carte ──
+      var shimGrad = defs.append('linearGradient')
+        .attr('id', 'shimmer-grad')
+        .attr('gradientUnits', 'userSpaceOnUse')
+        .attr('x1', 0).attr('y1', 0)
+        .attr('x2', 180).attr('y2', 0);
+      shimGrad.append('stop').attr('offset', '0%').attr('stop-color', 'white').attr('stop-opacity', '0');
+      shimGrad.append('stop').attr('offset', '50%').attr('stop-color', 'white').attr('stop-opacity', '0.32');
+      shimGrad.append('stop').attr('offset', '100%').attr('stop-color', 'white').attr('stop-opacity', '0');
+      gShimmer.append('rect')
+        .attr('x', -180).attr('y', -20)
+        .attr('width', 180).attr('height', h + 40)
+        .attr('fill', 'url(#shimmer-grad)')
+        .attr('transform', 'skewX(-12)');
 
-      // Chemin SVG de la frontière — projection directe point par point (sans resampling D3)
-      var contourCoords = franceContour.features[0].geometry.coordinates[0];
-      var contourPts = contourCoords.map(function(c) { return projection(c); });
-      var contourD = 'M' + contourPts.map(function(p) {
-        return p[0].toFixed(1) + ',' + p[1].toFixed(1);
-      }).join('L') + 'Z';
-
-      if (contourD) {
-        var beamEl = gBeams.append('path')
-          .attr('d', contourD)
-          .attr('fill', 'none')
-          .attr('filter', 'url(#beam-glow)')
-          .attr('pointer-events', 'none')
-          .node();
-        var beamLen = beamEl.getTotalLength ? beamEl.getTotalLength() : 2000;
-        var dotLen = 4; // petit point lumineux
-        beamEl.style.stroke           = 'rgba(255,30,50,1)';
-        beamEl.style.strokeWidth      = '1';
-        beamEl.style.strokeLinecap    = 'round';
-        beamEl.style.strokeDasharray  = dotLen + ' ' + (beamLen - dotLen);
-        beamEl.style.strokeDashoffset = '0';
-        // @keyframes dynamique pour boucle parfaite
-        var kfStyle = document.createElement('style');
-        kfStyle.textContent = '@keyframes beam-perim { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -' + beamLen + '; } }';
-        document.head.appendChild(kfStyle);
-        beamEl.style.animation = 'beam-perim 20s linear infinite';
-      }
+      // ── Filtrage par légende ──
+      var activeDelai = null;
+      var legendItems = document.querySelectorAll('.legende-item[data-delai]');
+      legendItems.forEach(function(item) {
+        item.addEventListener('click', function() {
+          var delai = parseInt(item.getAttribute('data-delai'));
+          if (activeDelai === delai) {
+            activeDelai = null;
+            gPaths.selectAll('path').transition().duration(350)
+              .style('opacity', '1').style('filter', null);
+            legendItems.forEach(function(li) { li.classList.remove('legende-item--active'); });
+          } else {
+            activeDelai = delai;
+            gPaths.selectAll('path').transition().duration(350)
+              .style('opacity', function(d) {
+                var code = d.properties.code;
+                var dv = bicolore[code] ? bicolore[code].c1 : (delais[code] || 2);
+                return (dv === delai) ? '1' : '0.1';
+              })
+              .style('filter', function(d) {
+                var code = d.properties.code;
+                var dv = bicolore[code] ? bicolore[code].c1 : (delais[code] || 2);
+                return (dv === delai) ? 'brightness(1.12) saturate(1.2)' : null;
+              });
+            legendItems.forEach(function(li) {
+              li.classList.toggle('legende-item--active', li === item);
+            });
+          }
+        });
+      });
 
       // ── Numéros de département ──
       gLabels.selectAll('text.dept-num')
@@ -765,7 +766,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     justify-content: center;
     pointer-events: none;
     z-index: 4;
-    box-shadow: 0 0 0 4px var(--gris-clair);
+    border: 1.5px solid rgba(0,0,0,0.11);
   }
 
   .modes-donut { width: 162px; height: 162px; overflow: visible; }
@@ -902,7 +903,24 @@ import MainLayout from '../layouts/MainLayout.astro';
     transition: transform 0.2s, box-shadow 0.2s;
   }
 
+  .legende-item { cursor: pointer; }
   .legende-item:hover { transform: translateX(4px); box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+  .legende-item--active {
+    transform: translateX(6px);
+    background: rgba(0,0,0,0.05);
+    border-radius: 0.6rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  }
+  .legende-item--active .legende-couleur {
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.15);
+  }
+
+  /* Shimmer balayant la carte France */
+  @keyframes shimmer-france {
+    0%   { transform: translateX(-220px); }
+    100% { transform: translateX(720px);  }
+  }
+  :global(.g-shimmer) { animation: shimmer-france 6s ease-in-out infinite; }
 
   .legende-couleur { width: 28px; height: 28px; border-radius: 0.5rem; flex-shrink: 0; }
 
