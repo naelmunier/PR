@@ -364,9 +364,12 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   if (!svg.node()) return;
 
-  fetch('/assets/departements.geojson')
-    .then(function (r) { return r.json(); })
-    .then(function (geo) {
+  Promise.all([
+    fetch('/assets/departements.geojson').then(function(r) { return r.json(); }),
+    fetch('/assets/france-contour.geojson').then(function(r) { return r.json(); })
+  ]).then(function(results) {
+    var geo = results[0];
+    var franceContour = results[1];
       var projection = d3.geoConicConformal()
         .center([2.454071, 46.279229])
         .parallels([44, 49]);
@@ -472,37 +475,32 @@ import MainLayout from '../layouts/MainLayout.astro';
       feMerge.append('feMergeNode').attr('in', 'blur');
       feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
 
-      // Périmètre de la France dans le sens horaire (départements de bordure)
-      var perimRoute = [
-        '76','80','62','59','02','08','55','57','67','68',
-        '25','39','01','74','73','38','05','04','06','83',
-        '13','30','34','11','66','09','31','64','40','33',
-        '17','85','44','56','29','22','50','14'
-      ];
-      var perimD = perimRoute.map(function(code) {
-        var feat = features.find(function(f) { return f.properties.code === code; });
-        return feat ? path(feat) : null;
-      }).filter(Boolean).join(' ');
+      // Chemin SVG de la frontière de France — projection directe sans resampling
+      var contourCoords = franceContour.features[0].geometry.coordinates[0];
+      var contourPts = contourCoords.map(function(c) { return projection(c); });
+      var contourD = 'M' + contourPts.map(function(p) {
+        return p[0].toFixed(1) + ',' + p[1].toFixed(1);
+      }).join('L') + 'Z';
 
-      if (perimD) {
+      if (contourD) {
         var beamEl = gBeams.append('path')
-          .attr('d', perimD)
+          .attr('d', contourD)
           .attr('fill', 'none')
           .attr('filter', 'url(#beam-glow)')
           .attr('pointer-events', 'none')
           .node();
-        var beamLen = beamEl.getTotalLength ? beamEl.getTotalLength() : 6000;
-        var dashLen = 600; // longueur de la comète
+        var beamLen = beamEl.getTotalLength ? beamEl.getTotalLength() : 2000;
+        var dashLen = Math.round(beamLen * 0.12); // comète ≈ 12% du périmètre
         beamEl.style.stroke           = 'rgba(255,30,50,0.98)';
         beamEl.style.strokeWidth      = '2.5';
         beamEl.style.strokeLinecap    = 'round';
         beamEl.style.strokeDasharray  = dashLen + ' ' + (beamLen - dashLen);
         beamEl.style.strokeDashoffset = '0';
-        // Injection dynamique de @keyframes avec la longueur exacte
+        // @keyframes dynamique pour une boucle parfaite
         var kfStyle = document.createElement('style');
         kfStyle.textContent = '@keyframes beam-perim { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -' + beamLen + '; } }';
         document.head.appendChild(kfStyle);
-        beamEl.style.animation = 'beam-perim 22s linear infinite';
+        beamEl.style.animation = 'beam-perim 18s linear infinite';
       }
 
       // ── Numéros de département ──
@@ -721,33 +719,32 @@ import MainLayout from '../layouts/MainLayout.astro';
     box-shadow: 0 4px 40px rgba(0,0,0,0.05);
   }
 
-  /* Grille 2×2 — petit gap, coins intérieurs arrondis vers le donut */
+  /* Grille 2×2 — gap calibré pour loger le donut sans le recouvrir */
   .mode-cards-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    gap: 180px;
   }
 
-  /* Coins intérieurs arrondis vers le donut central */
-  .mode-card.corner-br { border-bottom-right-radius: 5rem !important; }
-  .mode-card.corner-bl { border-bottom-left-radius:  5rem !important; }
-  .mode-card.corner-tr { border-top-right-radius:    5rem !important; }
-  .mode-card.corner-tl { border-top-left-radius:     5rem !important; }
+  /* Coins intérieurs arrondis formant un cercle autour du donut */
+  .mode-card.corner-br { border-bottom-right-radius: 90px !important; }
+  .mode-card.corner-bl { border-bottom-left-radius:  90px !important; }
+  .mode-card.corner-tr { border-top-right-radius:    90px !important; }
+  .mode-card.corner-tl { border-top-left-radius:     90px !important; }
 
-  /* Donut flottant au centre des 4 cartes */
+  /* Donut flottant dans l'espace central entre les 4 cartes */
   .modes-donut-center {
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     width: 172px; height: 172px;
-    background: var(--gris-clair);
+    background: transparent;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     pointer-events: none;
     z-index: 4;
-    box-shadow: 0 0 0 3px var(--gris-clair);
   }
 
   .modes-donut { width: 162px; height: 162px; overflow: visible; }
