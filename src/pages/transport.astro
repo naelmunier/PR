@@ -475,7 +475,7 @@ import MainLayout from '../layouts/MainLayout.astro';
       feMerge.append('feMergeNode').attr('in', 'blur');
       feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
 
-      // Chemin SVG de la frontière de France — projection directe sans resampling
+      // Chemin SVG de la frontière — projection directe point par point (sans resampling D3)
       var contourCoords = franceContour.features[0].geometry.coordinates[0];
       var contourPts = contourCoords.map(function(c) { return projection(c); });
       var contourD = 'M' + contourPts.map(function(p) {
@@ -490,17 +490,17 @@ import MainLayout from '../layouts/MainLayout.astro';
           .attr('pointer-events', 'none')
           .node();
         var beamLen = beamEl.getTotalLength ? beamEl.getTotalLength() : 2000;
-        var dashLen = Math.round(beamLen * 0.12); // comète ≈ 12% du périmètre
-        beamEl.style.stroke           = 'rgba(255,30,50,0.98)';
-        beamEl.style.strokeWidth      = '2.5';
+        var dotLen = 6; // petit point lumineux
+        beamEl.style.stroke           = 'rgba(255,30,50,1)';
+        beamEl.style.strokeWidth      = '10';
         beamEl.style.strokeLinecap    = 'round';
-        beamEl.style.strokeDasharray  = dashLen + ' ' + (beamLen - dashLen);
+        beamEl.style.strokeDasharray  = dotLen + ' ' + (beamLen - dotLen);
         beamEl.style.strokeDashoffset = '0';
-        // @keyframes dynamique pour une boucle parfaite
+        // @keyframes dynamique pour boucle parfaite
         var kfStyle = document.createElement('style');
         kfStyle.textContent = '@keyframes beam-perim { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -' + beamLen + '; } }';
         document.head.appendChild(kfStyle);
-        beamEl.style.animation = 'beam-perim 18s linear infinite';
+        beamEl.style.animation = 'beam-perim 20s linear infinite';
       }
 
       // ── Numéros de département ──
@@ -723,28 +723,29 @@ import MainLayout from '../layouts/MainLayout.astro';
   .mode-cards-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 180px;
+    gap: 48px;
   }
 
-  /* Coins intérieurs arrondis formant un cercle autour du donut */
-  .mode-card.corner-br { border-bottom-right-radius: 90px !important; }
-  .mode-card.corner-bl { border-bottom-left-radius:  90px !important; }
-  .mode-card.corner-tr { border-top-right-radius:    90px !important; }
-  .mode-card.corner-tl { border-top-left-radius:     90px !important; }
+  /* Coins intérieurs arrondis épousant la forme circulaire du donut */
+  .mode-card.corner-br { border-bottom-right-radius: 86px !important; }
+  .mode-card.corner-bl { border-bottom-left-radius:  86px !important; }
+  .mode-card.corner-tr { border-top-right-radius:    86px !important; }
+  .mode-card.corner-tl { border-top-left-radius:     86px !important; }
 
-  /* Donut flottant dans l'espace central entre les 4 cartes */
+  /* Donut centré, fond masquant les coins chevauchés */
   .modes-donut-center {
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     width: 172px; height: 172px;
-    background: transparent;
+    background: var(--gris-clair);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     pointer-events: none;
     z-index: 4;
+    box-shadow: 0 0 0 4px var(--gris-clair);
   }
 
   .modes-donut { width: 162px; height: 162px; overflow: visible; }
