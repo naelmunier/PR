@@ -30,7 +30,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     <div class="container">
       <div class="atouts-bloc reveal">
         <div class="atouts-header">
-          <p class="eyebrow-rouge" data-i18n="transport.mots.eyebrow">En quelques mots…</p>
+          <h2 class="atouts-section-titre" data-i18n="transport.mots.eyebrow">En quelques mots…</h2>
         </div>
         <div class="atouts-grid">
 
@@ -75,8 +75,11 @@ import MainLayout from '../layouts/MainLayout.astro';
   <section class="section modes-section" id="modesSection">
     <div class="container">
       <div class="reveal" style="text-align:center; margin-bottom:2.8rem;">
-        <p class="eyebrow-rouge" data-i18n="transport.services.eyebrow">Des solutions pour chaque besoin</p>
-        <h2 class="titre-section" data-i18n-html="transport.modes.title">Le transport <span>routier</span> au cœur de notre activité</h2>
+        <p class="eyebrow-rouge" data-i18n="transport.services.eyebrow">Nos modes de transport</p>
+        <h2 class="titre-section" data-i18n-html="transport.modes.title">Solutions <span>transport</span></h2>
+        <p class="sous-titre" style="margin:0.8rem auto 0; max-width:540px;" data-i18n="transport.modes.subtitle">
+          Spécialisés en routier, nous assurons tous les modes selon vos besoins — de la livraison nationale à l'affrètement international.
+        </p>
       </div>
 
       <div class="modes-merge-layout reveal">
@@ -89,13 +92,13 @@ import MainLayout from '../layouts/MainLayout.astro';
               fill="none" stroke="#e30613" stroke-width="22" stroke-linecap="butt"
               style="transform:rotate(-90deg); transform-origin:80px 80px;"/>
             <circle class="donut-seg donut-seg--maritime" cx="80" cy="80" r="60"
-              fill="none" stroke="#3b82f6" stroke-width="22" stroke-linecap="butt"
+              fill="none" stroke="#7f1d1d" stroke-width="22" stroke-linecap="butt"
               style="transform:rotate(216deg); transform-origin:80px 80px;"/>
             <circle class="donut-seg donut-seg--aerien" cx="80" cy="80" r="60"
-              fill="none" stroke="#f97316" stroke-width="22" stroke-linecap="butt"
+              fill="none" stroke="#ef4444" stroke-width="22" stroke-linecap="butt"
               style="transform:rotate(244.8deg); transform-origin:80px 80px;"/>
             <circle class="donut-seg donut-seg--rail" cx="80" cy="80" r="60"
-              fill="none" stroke="#6b7280" stroke-width="22" stroke-linecap="butt"
+              fill="none" stroke="#b91c1c" stroke-width="22" stroke-linecap="butt"
               style="transform:rotate(259.2deg); transform-origin:80px 80px;"/>
             <!-- Trou central -->
             <circle cx="80" cy="80" r="44" fill="white"/>
@@ -111,8 +114,8 @@ import MainLayout from '../layouts/MainLayout.astro';
         <div class="mode-cards-grid">
 
           <div class="mode-card mode-card--routier" data-mode="routier">
-            <div class="mode-card__icon-wrap" style="background:rgba(227,6,19,0.08);color:#e30613;">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <div class="mode-card__icon-wrap" style="background:rgba(227,6,19,0.1);color:#e30613;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
               </svg>
             </div>
@@ -123,8 +126,8 @@ import MainLayout from '../layouts/MainLayout.astro';
           </div>
 
           <div class="mode-card mode-card--maritime" data-mode="maritime">
-            <div class="mode-card__icon-wrap" style="background:rgba(59,130,246,0.08);color:#3b82f6;">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <div class="mode-card__icon-wrap" style="background:rgba(127,29,29,0.1);color:#7f1d1d;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 17h18M12 3 4 9v8h16V9z"/><path d="M12 3v6M8 9h8"/>
               </svg>
             </div>
@@ -135,8 +138,8 @@ import MainLayout from '../layouts/MainLayout.astro';
           </div>
 
           <div class="mode-card mode-card--aerien" data-mode="aerien">
-            <div class="mode-card__icon-wrap" style="background:rgba(249,115,22,0.08);color:#f97316;">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <div class="mode-card__icon-wrap" style="background:rgba(239,68,68,0.1);color:#ef4444;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 19 4s-2 1-3.5 2.5L9 4 4.8 6.2l7 3.5-2.6 2.6L7.5 12 5 11.5l-2 2 6 3.5 3.5 2 2-2-1.5-3 2.6-2.6 3.5 7Z"/>
               </svg>
             </div>
@@ -147,8 +150,8 @@ import MainLayout from '../layouts/MainLayout.astro';
           </div>
 
           <div class="mode-card mode-card--rail" data-mode="rail">
-            <div class="mode-card__icon-wrap" style="background:rgba(107,114,128,0.08);color:#6b7280;">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <div class="mode-card__icon-wrap" style="background:rgba(185,28,28,0.1);color:#b91c1c;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="4" y="3" width="16" height="14" rx="2"/><path d="M4 11h16M12 3v8M8 19l-2 2m10-2 2 2"/><circle cx="8" cy="18" r="1" fill="currentColor"/><circle cx="16" cy="18" r="1" fill="currentColor"/>
               </svg>
             </div>
@@ -186,19 +189,19 @@ import MainLayout from '../layouts/MainLayout.astro';
           <span class="legende-titre" data-i18n="transport.map.legend">Délais estimés</span>
 
           <div class="legende-item">
-            <div class="legende-couleur" style="background:#ffb3b3;"></div>
+            <div class="legende-couleur" style="background:#4ade80;"></div>
             <div class="legende-delai">24h</div>
           </div>
           <div class="legende-item">
-            <div class="legende-couleur" style="background:#e87070;"></div>
+            <div class="legende-couleur" style="background:#fbbf24;"></div>
             <div class="legende-delai">48h</div>
           </div>
           <div class="legende-item">
-            <div class="legende-couleur" style="background:#e30613;"></div>
+            <div class="legende-couleur" style="background:#f97316;"></div>
             <div class="legende-delai">72h</div>
           </div>
           <div class="legende-item">
-            <div class="legende-couleur" style="background:#8b0000;"></div>
+            <div class="legende-couleur" style="background:#e30613;"></div>
             <div class="legende-delai">96h</div>
           </div>
 
@@ -311,12 +314,13 @@ import MainLayout from '../layouts/MainLayout.astro';
     '60':1,'61':1,'62':1,'63':1,'64':2,'65':2,'66':2,'67':2,'68':2,'69':2,
     '70':2,'71':1,'72':1,'73':2,'74':2,'75':1,'76':1,'77':1,'78':1,'79':1,
     '80':1,'81':2,'82':2,'83':2,'84':2,'85':1,'86':1,'87':1,'88':2,'89':1,
-    '90':2,'91':1,'92':1,'93':1,'94':1,'95':1,
-    '2A':4,'2B':4
+    '90':2,'91':1,'92':1,'93':1,'94':1,'95':1
   };
 
-  // Nouvelles couleurs dans les tons rouge/blanc du site
-  var colorMap = ['', '#ffb3b3', '#e87070', '#e30613', '#8b0000'];
+  // Couleurs distinctes : vert → jaune → orange → rouge (site)
+  var colorMap    = ['', '#4ade80', '#fbbf24', '#f97316', '#e30613'];
+  // Faisceaux : version plus lumineuse de la couleur du département
+  var beamColorMap = ['', 'rgba(134,239,172,0.9)', 'rgba(253,224,71,0.9)', 'rgba(251,146,60,0.9)', 'rgba(252,165,165,0.9)'];
   var labelMap = ['', '24h', '48h', '72h', '96h'];
 
   // Départements bicolores : c1 = début (0%), c2 = fin (100%)
@@ -347,7 +351,12 @@ import MainLayout from '../layouts/MainLayout.astro';
         .center([2.454071, 46.279229])
         .parallels([44, 49]);
       var path = d3.geoPath().projection(projection);
-      projection.fitSize([w, h], { type: 'FeatureCollection', features: geo.features });
+
+      // ── Filtrage : exclure la Corse ──
+      var features = geo.features.filter(function (f) {
+        var c = f.properties.code;
+        return c !== '2A' && c !== '2B';
+      });
 
       var defs = svg.append('defs');
 
@@ -364,13 +373,16 @@ import MainLayout from '../layouts/MainLayout.astro';
         g.append('stop').attr('offset', '100%').attr('stop-color', colorMap[b.c2]);
       });
 
+      // Projection ajustée sur la France métropolitaine uniquement
+      projection.fitSize([w, h], { type: 'FeatureCollection', features: features });
+
       var gPaths  = svg.append('g').attr('class', 'g-paths');
       var gBeams  = svg.append('g').attr('class', 'g-beams');
       var gLabels = svg.append('g').attr('class', 'g-labels');
 
       // ── Chemins des départements ──
       gPaths.selectAll('path')
-        .data(geo.features)
+        .data(features)
         .enter().append('path')
         .attr('d', path)
         .attr('stroke', 'rgba(255,255,255,0.7)')
@@ -424,28 +436,30 @@ import MainLayout from '../layouts/MainLayout.astro';
           tooltip.style.opacity = '0';
         });
 
-      // ── Faisceaux lumineux (beams) sur les bordures ──
+      // ── Faisceaux lumineux colorés sur les bordures ──
       gBeams.selectAll('path')
-        .data(geo.features)
+        .data(features)
         .enter().append('path')
         .attr('d', path)
         .attr('fill', 'none')
         .attr('pointer-events', 'none')
         .each(function (d, i) {
-          var el = this;
-          el.style.stroke         = 'rgba(255,220,220,0.55)';
-          el.style.strokeWidth    = '1.6';
-          el.style.strokeDasharray = '12 200';
-          el.style.strokeLinecap  = 'round';
-          el.style.strokeDashoffset = String(-(i * 41) % 212);
-          var dur   = (1.6 + (i % 7) * 0.55).toFixed(2);
-          var delay = (-(i * 0.65 % 4.5)).toFixed(2);
+          var el   = this;
+          var code = d.properties.code;
+          var lvl  = bicolore[code] ? bicolore[code].c1 : (delais[code] || 2);
+          el.style.stroke          = beamColorMap[lvl] || 'rgba(253,224,71,0.9)';
+          el.style.strokeWidth     = '1.8';
+          el.style.strokeDasharray = '14 190';
+          el.style.strokeLinecap   = 'round';
+          el.style.strokeDashoffset = String(-(i * 43) % 204);
+          var dur   = (1.5 + (i % 7) * 0.5).toFixed(2);
+          var delay = (-(i * 0.62 % 4.2)).toFixed(2);
           el.style.animation = 'beam-travel ' + dur + 's ' + delay + 's linear infinite';
         });
 
       // ── Numéros de département ──
       gLabels.selectAll('text.dept-num')
-        .data(geo.features)
+        .data(features)
         .enter().append('text')
         .attr('class', 'dept-num')
         .attr('x', function (d) { return path.centroid(d)[0]; })
@@ -458,7 +472,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 
       // ── Icônes Plateforme ──
       plateformes.forEach(function (code) {
-        var feat = geo.features.find(function (f) { return f.properties.code === code; });
+        var feat = features.find(function (f) { return f.properties.code === code; });
         if (!feat) return;
         var c = path.centroid(feat);
         svg.append('g')
@@ -526,6 +540,14 @@ import MainLayout from '../layouts/MainLayout.astro';
     text-align: center;
     margin-bottom: 2.5rem;
     position: relative;
+  }
+
+  .atouts-section-titre {
+    font-size: clamp(1.55rem, 2.8vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--gris-fonce);
   }
 
   .atouts-grid {
@@ -624,10 +646,10 @@ import MainLayout from '../layouts/MainLayout.astro';
   .mode-card {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 1.4rem 1.6rem;
+    gap: 1.2rem;
+    padding: 1.8rem 2rem;
     background: white;
-    border-radius: 1.2rem;
+    border-radius: 1.4rem;
     border: 1.5px solid transparent;
     cursor: pointer;
     transition: transform 0.28s cubic-bezier(0.34,1.4,0.64,1), box-shadow 0.25s, border-color 0.25s, background 0.25s;
@@ -636,31 +658,31 @@ import MainLayout from '../layouts/MainLayout.astro';
   .mode-card:hover,
   .mode-card--active {
     transform: scale(1.05);
-    box-shadow: 0 10px 36px rgba(0,0,0,0.10);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
   }
 
-  .mode-card--routier:hover,  .mode-card--routier.mode-card--active  { border-color: rgba(227,6,19,0.28);   background: rgba(227,6,19,0.03); }
-  .mode-card--maritime:hover, .mode-card--maritime.mode-card--active { border-color: rgba(59,130,246,0.28);  background: rgba(59,130,246,0.03); }
-  .mode-card--aerien:hover,   .mode-card--aerien.mode-card--active   { border-color: rgba(249,115,22,0.28);  background: rgba(249,115,22,0.03); }
-  .mode-card--rail:hover,     .mode-card--rail.mode-card--active     { border-color: rgba(107,114,128,0.28); background: rgba(107,114,128,0.03); }
+  .mode-card--routier:hover,  .mode-card--routier.mode-card--active  { border-color: rgba(227,6,19,0.30);  background: rgba(227,6,19,0.04); }
+  .mode-card--maritime:hover, .mode-card--maritime.mode-card--active { border-color: rgba(127,29,29,0.30); background: rgba(127,29,29,0.04); }
+  .mode-card--aerien:hover,   .mode-card--aerien.mode-card--active   { border-color: rgba(239,68,68,0.30); background: rgba(239,68,68,0.04); }
+  .mode-card--rail:hover,     .mode-card--rail.mode-card--active     { border-color: rgba(185,28,28,0.30); background: rgba(185,28,28,0.04); }
 
   .mode-card__icon-wrap {
-    width: 44px; height: 44px;
-    border-radius: 0.9rem;
+    width: 52px; height: 52px;
+    border-radius: 1rem;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
 
   .mode-card__title {
-    font-size: 0.92rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--gris-fonce);
     letter-spacing: -0.02em;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.25rem;
   }
 
   .mode-card__desc {
-    font-size: 0.73rem;
+    font-size: 0.8rem;
     color: var(--gris-moyen);
     line-height: 1.4;
   }
@@ -684,7 +706,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   /* Animation faisceaux lumineux */
   @keyframes beam-travel {
     from { stroke-dashoffset: 0; }
-    to   { stroke-dashoffset: -212; }
+    to   { stroke-dashoffset: -204; }
   }
 
   .carte-transport__legende { display: flex; flex-direction: column; gap: 0.7rem; }
