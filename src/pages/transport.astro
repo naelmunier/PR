@@ -16,245 +16,154 @@ import MainLayout from '../layouts/MainLayout.astro';
         alt="LH Affrètement"
         class="hero-lh-grande animate-in"
       />
-      <p class="eyebrow-rouge animate-in" style="animation-delay:0.1s;" data-i18n="transport.hero.eyebrow">Transport & Affrètement</p>
-      <h1 class="titre-section animate-in" style="animation-delay:0.18s;" data-i18n-html="transport.hero.title">
-        Transport <span>dédié</span> depuis Le Havre
+      <h1 class="titre-section animate-in" style="animation-delay:0.1s;" data-i18n-html="transport.hero.title">
+        LH <span>Affrètement</span>
       </h1>
-      <p class="sous-titre animate-in" style="animation-delay:0.28s; margin:1rem auto 0; max-width:640px;" data-i18n="transport.hero.subtitle">
-        Avec LH Affrètement, notre entreprise de transport dédiée, vos marchandises sont prises en charge de A à Z — réactivité, fiabilité et solutions sur-mesure, partout en France.
+      <p class="sous-titre animate-in" style="animation-delay:0.2s; margin:1rem auto 0; max-width:660px;" data-i18n="transport.partner.desc1">
+        LH Affrètement est notre entreprise de transport dédiée, spécialisée dans l'affrètement de marchandises. Elle agit comme interface opérationnelle entre vous et les transporteurs partenaires pour vous garantir le meilleur service au meilleur coût.
       </p>
     </div>
   </section>
 
-  <!-- ═══ 2. EN QUELQUES MOTS ═══════════════════════════════════ -->
+  <!-- ═══ 2. EN QUELQUES MOTS ════════════════════════════════════ -->
   <section class="section section--gris lh-mots-section">
     <div class="container">
-      <div class="reveal" style="text-align:center; margin-bottom:3rem;">
-        <p class="eyebrow-rouge" data-i18n="transport.mots.eyebrow">En quelques mots…</p>
-        <h2 class="titre-section" data-i18n-html="transport.partner.title">LH <span>Affrètement</span></h2>
-        <p class="sous-titre" style="margin:1rem auto 0; max-width:620px;" data-i18n="transport.partner.desc1">
-          LH Affrètement est notre entreprise de transport dédiée, spécialisée dans l'affrètement de marchandises. Elle agit comme interface opérationnelle entre vous et les transporteurs partenaires pour vous garantir le meilleur service au meilleur coût.
-        </p>
-      </div>
-
-      <div class="atouts-grid">
-        <div class="atout-card reveal" style="transition-delay:0.05s;">
-          <div class="atout-card__icon">
-            <img src="/assets/lhaffretement/réactivité.png" alt="Réactivité" />
-          </div>
-          <h3 class="atout-card__title" data-i18n="transport.eng.reactivite">Réactivité maximale</h3>
-          <p class="atout-card__desc" data-i18n="transport.atout.reactivite.desc">Disponibilité et rapidité de réponse dans toutes les situations — même les plus urgentes.</p>
+      <div class="atouts-bloc reveal">
+        <div class="atouts-header">
+          <p class="eyebrow-rouge" data-i18n="transport.mots.eyebrow">En quelques mots…</p>
         </div>
+        <div class="atouts-grid">
 
-        <div class="atout-card reveal" style="transition-delay:0.12s;">
-          <div class="atout-card__icon">
-            <img src="/assets/lhaffretement/sur-mesure.png" alt="Sur-mesure" />
-          </div>
-          <h3 class="atout-card__title" data-i18n="transport.eng.surmesure">Solutions sur-mesure</h3>
-          <p class="atout-card__desc" data-i18n="transport.atout.surmesure.desc">Chaque demande est unique. Nous adaptons la solution transport à votre besoin, pas l'inverse.</p>
-        </div>
-
-        <div class="atout-card reveal" style="transition-delay:0.19s;">
-          <div class="atout-card__icon">
-            <img src="/assets/lhaffretement/interlocuteur-unique.png" alt="Interlocuteur unique" />
-          </div>
-          <h3 class="atout-card__title" data-i18n="transport.eng.interlocuteur">Interlocuteur unique</h3>
-          <p class="atout-card__desc" data-i18n="transport.atout.interlocuteur.desc">Un seul contact pour l'ensemble de vos flux transport — suivi, coordination et reporting centralisés.</p>
-        </div>
-
-        <div class="atout-card reveal" style="transition-delay:0.26s;">
-          <div class="atout-card__icon">
-            <img src="/assets/lhaffretement/reseau.png" alt="Réseau" />
-          </div>
-          <h3 class="atout-card__title" data-i18n="transport.eng.reseau">Réseau solide & performant</h3>
-          <p class="atout-card__desc" data-i18n="transport.atout.reseau.desc">Un réseau dense de transporteurs partenaires, sélectionnés pour leur fiabilité et leur expertise terrain.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ 3. SERVICES CAROUSEL ══════════════════════════════════ -->
-  <section class="section transport-services-section">
-    <div class="container">
-      <div class="reveal" style="text-align:center; margin-bottom:2.8rem;">
-        <p class="eyebrow-rouge" data-i18n="transport.services.eyebrow">Nos services</p>
-        <h2 class="titre-section" data-i18n-html="transport.services.title">Des solutions pour <span>chaque besoin</span></h2>
-        <p class="sous-titre" style="margin:1rem auto 0;" data-i18n="transport.services.subtitle">
-          De l'affrètement routier à la gestion d'urgences, nous couvrons l'ensemble des modes de transport.
-        </p>
-      </div>
-
-      <div class="svc-carousel-outer reveal">
-        <div class="svc-carousel-track" id="svcTrack">
-
-          <div class="svc-card">
-            <div class="svc-card__icon-wrap">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
-              </svg>
+          <div class="atout-card reveal" style="transition-delay:0.05s;">
+            <div class="atout-card__icon">
+              <img src="/assets/lhaffretement/réactivité.png" alt="Réactivité" />
             </div>
-            <h3 class="svc-card__title" data-i18n="transport.svc.routier.title">Transport Routier</h3>
-            <p class="svc-card__desc" data-i18n="transport.svc.routier.desc">Fret conventionnel, camion complet (FTL) ou groupage (LTL) — notre réseau couvre toute la France depuis Le Havre.</p>
+            <h3 class="atout-card__title" data-i18n="transport.eng.reactivite">Réactivité maximale</h3>
+            <p class="atout-card__desc" data-i18n="transport.atout.reactivite.desc">Disponibilité et rapidité de réponse dans toutes les situations — même les plus urgentes.</p>
           </div>
 
-          <div class="svc-card">
-            <div class="svc-card__icon-wrap">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 17h18M12 3 4 9v8h16V9z"/><path d="M12 3v6M8 9h8"/>
-              </svg>
+          <div class="atout-card reveal" style="transition-delay:0.12s;">
+            <div class="atout-card__icon">
+              <img src="/assets/lhaffretement/sur-mesure.png" alt="Sur-mesure" />
             </div>
-            <h3 class="svc-card__title" data-i18n="transport.svc.maritime.title">Transport Maritime</h3>
-            <p class="svc-card__desc" data-i18n="transport.svc.maritime.desc">Coordination du fret maritime en partenariat avec les armateurs — import, export et transbordement depuis Le Havre.</p>
+            <h3 class="atout-card__title" data-i18n="transport.eng.surmesure">Solutions sur-mesure</h3>
+            <p class="atout-card__desc" data-i18n="transport.atout.surmesure.desc">Chaque demande est unique. Nous adaptons la solution transport à votre besoin, pas l'inverse.</p>
           </div>
 
-          <div class="svc-card">
-            <div class="svc-card__icon-wrap">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 19 4s-2 1-3.5 2.5L9 4 4.8 6.2l7 3.5-2.6 2.6L7.5 12 5 11.5l-2 2 6 3.5 3.5 2 2-2-1.5-3 2.6-2.6 3.5 7Z"/>
-              </svg>
+          <div class="atout-card reveal" style="transition-delay:0.19s;">
+            <div class="atout-card__icon">
+              <img src="/assets/lhaffretement/interlocuteur-unique.png" alt="Interlocuteur unique" />
             </div>
-            <h3 class="svc-card__title" data-i18n="transport.svc.aerien.title">Transport Aérien</h3>
-            <p class="svc-card__desc" data-i18n="transport.svc.aerien.desc">Solutions express prioritaires pour vos envois urgents ou à haute valeur ajoutée, vers toutes destinations.</p>
+            <h3 class="atout-card__title" data-i18n="transport.eng.interlocuteur">Interlocuteur unique</h3>
+            <p class="atout-card__desc" data-i18n="transport.atout.interlocuteur.desc">Un seul contact pour l'ensemble de vos flux transport — suivi, coordination et reporting centralisés.</p>
           </div>
 
-          <div class="svc-card">
-            <div class="svc-card__icon-wrap">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="4" y="3" width="16" height="14" rx="2"/><path d="M4 11h16M12 3v8M8 19l-2 2m10-2 2 2"/><circle cx="8" cy="18" r="1" fill="currentColor"/><circle cx="16" cy="18" r="1" fill="currentColor"/>
-              </svg>
+          <div class="atout-card reveal" style="transition-delay:0.26s;">
+            <div class="atout-card__icon">
+              <img src="/assets/lhaffretement/reseau.png" alt="Réseau" />
             </div>
-            <h3 class="svc-card__title" data-i18n="transport.svc.ferroviaire.title">Ferroviaire & Fluvial</h3>
-            <p class="svc-card__desc" data-i18n="transport.svc.ferroviaire.desc">Solutions intermodales combinant rail et voie d'eau pour une logistique durable et économique.</p>
+            <h3 class="atout-card__title" data-i18n="transport.eng.reseau">Réseau solide & performant</h3>
+            <p class="atout-card__desc" data-i18n="transport.atout.reseau.desc">Un réseau dense de transporteurs partenaires, sélectionnés pour leur fiabilité et leur expertise terrain.</p>
           </div>
 
-          <div class="svc-card">
-            <div class="svc-card__icon-wrap">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/>
-              </svg>
-            </div>
-            <h3 class="svc-card__title" data-i18n="transport.svc.affretement.title">Affrètement Sur-Mesure</h3>
-            <p class="svc-card__desc" data-i18n="transport.svc.affretement.desc">Véhicule entier dédié ou groupage optimisé — la solution la plus adaptée à chaque flux.</p>
-          </div>
-
-          <div class="svc-card">
-            <div class="svc-card__icon-wrap">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-              </svg>
-            </div>
-            <h3 class="svc-card__title" data-i18n="transport.svc.urgence.title">Gestion d'Urgences</h3>
-            <p class="svc-card__desc" data-i18n="transport.svc.urgence.desc">Réactivité maximale — organisation de chargements en dehors des plages habituelles si nécessaire.</p>
-          </div>
-
-        </div>
-        <div class="svc-dots" id="svcDots">
-          <button class="svc-dot svc-dot--active" data-idx="0" aria-label="Page 1"></button>
-          <button class="svc-dot" data-idx="1" aria-label="Page 2"></button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ 4. RÉPARTITION MODALE ════════════════════════════════ -->
-  <section class="section section--gris modes-section" id="modesSection">
+  <!-- ═══ 3. MODES DE TRANSPORT — donut interactif ══════════════ -->
+  <section class="section modes-section" id="modesSection">
     <div class="container">
       <div class="reveal" style="text-align:center; margin-bottom:2.8rem;">
-        <p class="eyebrow-rouge" data-i18n="transport.modes.eyebrow">Répartition des activités</p>
+        <p class="eyebrow-rouge" data-i18n="transport.services.eyebrow">Des solutions pour chaque besoin</p>
         <h2 class="titre-section" data-i18n-html="transport.modes.title">Le transport <span>routier</span> au cœur de notre activité</h2>
-        <p class="sous-titre" style="margin:1rem auto 0;" data-i18n="transport.modes.subtitle">
-          Principalement spécialisés en transport routier, nous proposons également des solutions sur tous les autres modes selon vos besoins.
-        </p>
       </div>
 
-      <div class="modes-layout reveal">
+      <div class="modes-merge-layout reveal">
+
         <!-- Donut SVG -->
         <div class="modes-donut-wrap">
           <svg class="modes-donut" viewBox="0 0 160 160" aria-hidden="true">
-            <!-- Background ring -->
-            <circle cx="80" cy="80" r="60" fill="none" stroke="#e8e8ed" stroke-width="22"/>
-            <!-- Routier 85% -->
+            <circle cx="80" cy="80" r="60" fill="none" stroke="#f0f0f5" stroke-width="22"/>
             <circle class="donut-seg donut-seg--routier" cx="80" cy="80" r="60"
-              fill="none" stroke="#e30613" stroke-width="22"
-              stroke-linecap="butt"
+              fill="none" stroke="#e30613" stroke-width="22" stroke-linecap="butt"
               style="transform:rotate(-90deg); transform-origin:80px 80px;"/>
-            <!-- Maritime 8% -->
             <circle class="donut-seg donut-seg--maritime" cx="80" cy="80" r="60"
-              fill="none" stroke="#3b82f6" stroke-width="22"
-              stroke-linecap="butt"
+              fill="none" stroke="#3b82f6" stroke-width="22" stroke-linecap="butt"
               style="transform:rotate(216deg); transform-origin:80px 80px;"/>
-            <!-- Aérien 4% -->
             <circle class="donut-seg donut-seg--aerien" cx="80" cy="80" r="60"
-              fill="none" stroke="#f97316" stroke-width="22"
-              stroke-linecap="butt"
+              fill="none" stroke="#f97316" stroke-width="22" stroke-linecap="butt"
               style="transform:rotate(244.8deg); transform-origin:80px 80px;"/>
-            <!-- Rail + Fluvial 3% -->
             <circle class="donut-seg donut-seg--rail" cx="80" cy="80" r="60"
-              fill="none" stroke="#8b8b8b" stroke-width="22"
-              stroke-linecap="butt"
+              fill="none" stroke="#6b7280" stroke-width="22" stroke-linecap="butt"
               style="transform:rotate(259.2deg); transform-origin:80px 80px;"/>
-            <!-- Centre -->
+            <!-- Trou central -->
             <circle cx="80" cy="80" r="44" fill="white"/>
-            <text x="80" y="75" text-anchor="middle" font-size="28" font-weight="800" fill="#e30613" font-family="-apple-system, BlinkMacSystemFont, Inter, sans-serif">85%</text>
-            <text x="80" y="92" text-anchor="middle" font-size="9" font-weight="600" fill="#6e6e73" font-family="-apple-system, BlinkMacSystemFont, Inter, sans-serif">Routier</text>
+            <!-- Label central (mis à jour au survol) -->
+            <text id="donut-center-label" x="80" y="80"
+              text-anchor="middle" dominant-baseline="middle"
+              font-size="9.5" font-weight="700" fill="#1d1d1f"
+              font-family="-apple-system, BlinkMacSystemFont, Inter, sans-serif"></text>
           </svg>
         </div>
 
-        <!-- Barres de détail -->
-        <div class="modes-bars">
-          <div class="mode-row">
-            <div class="mode-row__header">
-              <span class="mode-dot" style="background:#e30613;"></span>
-              <span class="mode-label" data-i18n="transport.mode.routier">Transport Routier</span>
-              <span class="mode-pct mode-pct--primary">85%</span>
+        <!-- Cartes 2×2 -->
+        <div class="mode-cards-grid">
+
+          <div class="mode-card mode-card--routier" data-mode="routier">
+            <div class="mode-card__icon-wrap" style="background:rgba(227,6,19,0.08);color:#e30613;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+              </svg>
             </div>
-            <div class="mode-bar-bg">
-              <div class="mode-bar mode-bar--routier" data-target="85"></div>
+            <div class="mode-card__content">
+              <h3 class="mode-card__title" data-i18n="transport.svc.routier.title">Transport Routier</h3>
+              <p class="mode-card__desc" data-i18n="transport.mode.routier.detail">FTL · LTL · Groupage · National</p>
             </div>
-            <p class="mode-detail" data-i18n="transport.mode.routier.detail">FTL · LTL · Groupage · National & régional</p>
           </div>
 
-          <div class="mode-row">
-            <div class="mode-row__header">
-              <span class="mode-dot" style="background:#3b82f6;"></span>
-              <span class="mode-label" data-i18n="transport.mode.maritime">Transport Maritime</span>
-              <span class="mode-pct">8%</span>
+          <div class="mode-card mode-card--maritime" data-mode="maritime">
+            <div class="mode-card__icon-wrap" style="background:rgba(59,130,246,0.08);color:#3b82f6;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 17h18M12 3 4 9v8h16V9z"/><path d="M12 3v6M8 9h8"/>
+              </svg>
             </div>
-            <div class="mode-bar-bg">
-              <div class="mode-bar mode-bar--maritime" data-target="8"></div>
+            <div class="mode-card__content">
+              <h3 class="mode-card__title" data-i18n="transport.svc.maritime.title">Transport Maritime</h3>
+              <p class="mode-card__desc" data-i18n="transport.mode.maritime.detail">Import · Export · Transbordement</p>
             </div>
-            <p class="mode-detail" data-i18n="transport.mode.maritime.detail">Import · Export · Transbordement</p>
           </div>
 
-          <div class="mode-row">
-            <div class="mode-row__header">
-              <span class="mode-dot" style="background:#f97316;"></span>
-              <span class="mode-label" data-i18n="transport.mode.aerien">Transport Aérien</span>
-              <span class="mode-pct">4%</span>
+          <div class="mode-card mode-card--aerien" data-mode="aerien">
+            <div class="mode-card__icon-wrap" style="background:rgba(249,115,22,0.08);color:#f97316;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 19 4s-2 1-3.5 2.5L9 4 4.8 6.2l7 3.5-2.6 2.6L7.5 12 5 11.5l-2 2 6 3.5 3.5 2 2-2-1.5-3 2.6-2.6 3.5 7Z"/>
+              </svg>
             </div>
-            <div class="mode-bar-bg">
-              <div class="mode-bar mode-bar--aerien" data-target="4"></div>
+            <div class="mode-card__content">
+              <h3 class="mode-card__title" data-i18n="transport.svc.aerien.title">Transport Aérien</h3>
+              <p class="mode-card__desc" data-i18n="transport.mode.aerien.detail">Express · Haute valeur · International</p>
             </div>
-            <p class="mode-detail" data-i18n="transport.mode.aerien.detail">Express · Haute valeur ajoutée · International</p>
           </div>
 
-          <div class="mode-row">
-            <div class="mode-row__header">
-              <span class="mode-dot" style="background:#8b8b8b;"></span>
-              <span class="mode-label" data-i18n="transport.mode.rail">Ferroviaire & Fluvial</span>
-              <span class="mode-pct">3%</span>
+          <div class="mode-card mode-card--rail" data-mode="rail">
+            <div class="mode-card__icon-wrap" style="background:rgba(107,114,128,0.08);color:#6b7280;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="3" width="16" height="14" rx="2"/><path d="M4 11h16M12 3v8M8 19l-2 2m10-2 2 2"/><circle cx="8" cy="18" r="1" fill="currentColor"/><circle cx="16" cy="18" r="1" fill="currentColor"/>
+              </svg>
             </div>
-            <div class="mode-bar-bg">
-              <div class="mode-bar mode-bar--rail" data-target="3"></div>
+            <div class="mode-card__content">
+              <h3 class="mode-card__title" data-i18n="transport.svc.ferroviaire.title">Ferroviaire & Fluvial</h3>
+              <p class="mode-card__desc" data-i18n="transport.mode.rail.detail">Intermodal · Massifié · Durable</p>
             </div>
-            <p class="mode-detail" data-i18n="transport.mode.rail.detail">Intermodal · Massifié · Durable</p>
           </div>
+
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ 5. CARTE FRANCE ═══════════════════════════════════════ -->
+  <!-- ═══ 4. CARTE FRANCE ═══════════════════════════════════════ -->
   <section class="section carte-transport">
     <div class="tooltip-map" id="tooltip-map">
       <span id="tt-map-nom"></span><span id="tt-map-j"></span>
@@ -277,36 +186,24 @@ import MainLayout from '../layouts/MainLayout.astro';
           <span class="legende-titre" data-i18n="transport.map.legend">Délais estimés</span>
 
           <div class="legende-item">
-            <div class="legende-couleur" style="background:#22c55e;"></div>
-            <div>
-              <div class="legende-delai">24h</div>
-              <div class="legende-zones">Normandie · Île-de-France · Hauts-de-France<br>Centre · Grand Ouest · Bourgogne</div>
-            </div>
+            <div class="legende-couleur" style="background:#ffb3b3;"></div>
+            <div class="legende-delai">24h</div>
           </div>
           <div class="legende-item">
-            <div class="legende-couleur" style="background:#eab308;"></div>
-            <div>
-              <div class="legende-delai">48h</div>
-              <div class="legende-zones">Bretagne · Grand Est · Pays de la Loire<br>Nouvelle-Aquitaine · Rhône-Alpes · PACA</div>
-            </div>
-          </div>
-          <div class="legende-item">
-            <div class="legende-couleur" style="background:#f97316;"></div>
-            <div>
-              <div class="legende-delai">72h</div>
-              <div class="legende-zones">Ardèche · Lot · Lot-et-Garonne<br>Roussillon</div>
-            </div>
+            <div class="legende-couleur" style="background:#e87070;"></div>
+            <div class="legende-delai">48h</div>
           </div>
           <div class="legende-item">
             <div class="legende-couleur" style="background:#e30613;"></div>
-            <div>
-              <div class="legende-delai">96h</div>
-              <div class="legende-zones">Lozère · Corse</div>
-            </div>
+            <div class="legende-delai">72h</div>
+          </div>
+          <div class="legende-item">
+            <div class="legende-couleur" style="background:#8b0000;"></div>
+            <div class="legende-delai">96h</div>
           </div>
 
           <div class="legende-plateforme">
-            <img src="/assets/lhaffretement/palteforme.gif" alt="Plateforme" width="16" height="16" />
+            <img src="/assets/lhaffretement/palteforme.gif" alt="Plateforme" width="16" height="16" class="plateforme-gif" />
             <span data-i18n="transport.map.plateforme">Présence d'une plateforme logistique</span>
           </div>
 
@@ -317,7 +214,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     </div>
   </section>
 
-  <!-- ═══ 6. CTA ════════════════════════════════════════════════ -->
+  <!-- ═══ 5. CTA ════════════════════════════════════════════════ -->
   <section class="section section--gris cta-section-transport">
     <div class="container" style="text-align:center;">
       <div class="reveal">
@@ -342,9 +239,8 @@ import MainLayout from '../layouts/MainLayout.astro';
 <script is:inline>
 (function () {
 
-  /* ── Donut Chart Animation ──────────────────────────────── */
-  // Circonférence pour r=60 : 2*π*60 ≈ 376.99
-  var C = 2 * Math.PI * 60;
+  /* ── Donut + Mode Cards interaction ────────────────────────── */
+  var C = 2 * Math.PI * 60; // ≈ 376.99
 
   function animateModes() {
     var targets = [
@@ -356,12 +252,6 @@ import MainLayout from '../layouts/MainLayout.astro';
     targets.forEach(function (t) {
       var el = document.querySelector(t.sel);
       if (el) el.style.strokeDasharray = t.len.toFixed(1) + ' ' + C.toFixed(1);
-    });
-
-    // Barres horizontales
-    document.querySelectorAll('.mode-bar').forEach(function (bar) {
-      var pct = bar.getAttribute('data-target');
-      bar.style.width = pct + '%';
     });
   }
 
@@ -376,24 +266,71 @@ import MainLayout from '../layouts/MainLayout.astro';
     modesObs.observe(modesSection);
   }
 
+  // Interaction cartes ↔ donut
+  var allSegs    = document.querySelectorAll('.donut-seg');
+  var modeCards  = document.querySelectorAll('.mode-card');
+  var centerLabel = document.getElementById('donut-center-label');
+  var segMap = {
+    routier:  '.donut-seg--routier',
+    maritime: '.donut-seg--maritime',
+    aerien:   '.donut-seg--aerien',
+    rail:     '.donut-seg--rail'
+  };
+  var labelMap2 = {
+    routier:  'Routier',
+    maritime: 'Maritime',
+    aerien:   'Aérien',
+    rail:     'Ferroviaire'
+  };
+
+  modeCards.forEach(function (card) {
+    card.addEventListener('mouseenter', function () {
+      var mode = card.getAttribute('data-mode');
+      allSegs.forEach(function (s) { s.style.opacity = '0.18'; });
+      var active = document.querySelector(segMap[mode]);
+      if (active) active.style.opacity = '1';
+      if (centerLabel) centerLabel.textContent = labelMap2[mode] || '';
+      modeCards.forEach(function (c) { c.classList.toggle('mode-card--active', c === card); });
+    });
+    card.addEventListener('mouseleave', function () {
+      allSegs.forEach(function (s) { s.style.opacity = '1'; });
+      if (centerLabel) centerLabel.textContent = '';
+      card.classList.remove('mode-card--active');
+    });
+  });
+
   /* ── Carte France ─────────────────────────────────────────── */
   var delais = {
-    '01':2,'02':1,'03':1,'04':2,'05':2,'06':2,'07':3,'08':1,'09':2,'10':1,
+    '01':2,'02':1,'03':1,'04':2,'05':2,'06':2,'07':2,'08':1,'09':2,'10':1,
     '11':2,'12':3,'13':2,'14':1,'15':2,'16':1,'17':1,'18':1,'19':1,
-    '21':1,'22':2, // bicolore : Est=1(24h) / Ouest=2(48h)
+    '21':1,'22':2,
     '23':1,'24':1,'25':2,'26':2,'27':1,'28':1,'29':2,
     '30':2,'31':2,'32':2,'33':2,'34':2,'35':1,'36':1,'37':1,'38':2,'39':2,
-    '40':2,'41':1,'42':2,'43':2,'44':1,'45':1,'46':3,'47':2,'48':4,'49':1,
+    '40':2,'41':1,'42':2,'43':2,'44':1,'45':1,'46':3,'47':2,'48':3,'49':1,
     '50':2,'51':1,'52':1,'53':1,'54':2,'55':2,'56':2,'57':2,'58':1,'59':1,
-    '60':1,'61':1,'62':1,'63':1,'64':2,'65':2,'66':3,'67':2,'68':2,'69':2,
+    '60':1,'61':1,'62':1,'63':1,'64':2,'65':2,'66':2,'67':2,'68':2,'69':2,
     '70':2,'71':1,'72':1,'73':2,'74':2,'75':1,'76':1,'77':1,'78':1,'79':1,
     '80':1,'81':2,'82':2,'83':2,'84':2,'85':1,'86':1,'87':1,'88':2,'89':1,
     '90':2,'91':1,'92':1,'93':1,'94':1,'95':1,
     '2A':4,'2B':4
   };
+
+  // Nouvelles couleurs dans les tons rouge/blanc du site
+  var colorMap = ['', '#ffb3b3', '#e87070', '#e30613', '#8b0000'];
+  var labelMap = ['', '24h', '48h', '72h', '96h'];
+
+  // Départements bicolores : c1 = début (0%), c2 = fin (100%)
+  // horiz:true = ouest→est, horiz:false = nord→sud
+  var bicolore = {
+    '22': { horiz: true,  c1: 2, c2: 1, tooltip: '48h (Ouest) / 24h (Est)' },
+    '48': { horiz: false, c1: 3, c2: 4, tooltip: '72h (Nord) / 96h (Sud)' },
+    '07': { horiz: false, c1: 2, c2: 3, tooltip: '48h (Nord) / 72h (Sud)' },
+    '66': { horiz: false, c1: 2, c2: 3, tooltip: '48h (Nord) / 72h (Sud)' },
+    '26': { horiz: false, c1: 2, c2: 3, tooltip: '48h (Nord) / 72h (Sud)' },
+    '46': { horiz: false, c1: 3, c2: 2, tooltip: '72h (Nord) / 48h (Sud)' }
+  };
+
   var plateformes = ['47', '69', '54'];
-  var colorMap    = ['', '#22c55e', '#eab308', '#f97316', '#e30613'];
-  var labelMap    = ['', '24h', '48h', '72h', '96h'];
   var w = 500, h = 520;
 
   var svg     = d3.select('#map-transport');
@@ -412,34 +349,42 @@ import MainLayout from '../layouts/MainLayout.astro';
       var path = d3.geoPath().projection(projection);
       projection.fitSize([w, h], { type: 'FeatureCollection', features: geo.features });
 
-      // ── Gradient bicolore pour le dép. 22 ──
       var defs = svg.append('defs');
-      var g22 = defs.append('linearGradient')
-        .attr('id', 'grad-22')
-        .attr('x1', '0%').attr('y1', '0%')
-        .attr('x2', '100%').attr('y2', '0%');
-      g22.append('stop').attr('offset', '0%').attr('stop-color', colorMap[2]);   // Ouest = 48h
-      g22.append('stop').attr('offset', '100%').attr('stop-color', colorMap[1]); // Est = 24h
+
+      // ── Gradients bicolores ──
+      Object.keys(bicolore).forEach(function (code) {
+        var b = bicolore[code];
+        var g = defs.append('linearGradient')
+          .attr('id', 'grad-' + code)
+          .attr('x1', b.horiz ? '0%' : '0%')
+          .attr('y1', b.horiz ? '0%' : '0%')
+          .attr('x2', b.horiz ? '100%' : '0%')
+          .attr('y2', b.horiz ? '0%' : '100%');
+        g.append('stop').attr('offset', '0%').attr('stop-color', colorMap[b.c1]);
+        g.append('stop').attr('offset', '100%').attr('stop-color', colorMap[b.c2]);
+      });
 
       var gPaths  = svg.append('g').attr('class', 'g-paths');
+      var gBeams  = svg.append('g').attr('class', 'g-beams');
       var gLabels = svg.append('g').attr('class', 'g-labels');
 
+      // ── Chemins des départements ──
       gPaths.selectAll('path')
         .data(geo.features)
         .enter().append('path')
         .attr('d', path)
-        .attr('stroke', 'white')
-        .attr('stroke-width', 0.9)
+        .attr('stroke', 'rgba(255,255,255,0.7)')
+        .attr('stroke-width', 1)
         .style('fill', function (d) {
-          if (d.properties.code === '22') return 'url(#grad-22)';
-          return colorMap[delais[d.properties.code] || 2];
+          var code = d.properties.code;
+          if (bicolore[code]) return 'url(#grad-' + code + ')';
+          return colorMap[delais[code] || 2];
         })
         .style('cursor', 'pointer')
         .on('mouseover', function (event, d) {
           var centroid = path.centroid(d);
           var cx = centroid[0], cy = centroid[1];
-          d3.select(this)
-            .raise()
+          d3.select(this).raise()
             .transition().duration(160).ease(d3.easeCubicOut)
             .attr('stroke', '#fff').attr('stroke-width', 2)
             .attr('transform', 'translate(' + cx + ',' + cy + ') scale(1.12) translate(' + (-cx) + ',' + (-cy) + ')');
@@ -456,7 +401,10 @@ import MainLayout from '../layouts/MainLayout.astro';
             .text(d.properties.nom);
 
           var code = d.properties.code;
-          var jVal = code === '22' ? '24h (Est) / 48h (Ouest)' : (labelMap[delais[code]] || '48h');
+          var jVal = bicolore[code]
+            ? bicolore[code].tooltip
+            : (labelMap[delais[code]] || '48h');
+
           tooltip.style.opacity = '1';
           tooltip.style.left    = (event.clientX + 14) + 'px';
           tooltip.style.top     = (event.clientY - 10) + 'px';
@@ -470,10 +418,29 @@ import MainLayout from '../layouts/MainLayout.astro';
         .on('mouseleave', function () {
           d3.select(this)
             .transition().duration(200).ease(d3.easeCubicOut)
-            .attr('stroke', 'white').attr('stroke-width', 0.9)
+            .attr('stroke', 'rgba(255,255,255,0.7)').attr('stroke-width', 1)
             .attr('transform', null);
           gLabels.select('.hover-label').transition().duration(120).style('opacity', 0).remove();
           tooltip.style.opacity = '0';
+        });
+
+      // ── Faisceaux lumineux (beams) sur les bordures ──
+      gBeams.selectAll('path')
+        .data(geo.features)
+        .enter().append('path')
+        .attr('d', path)
+        .attr('fill', 'none')
+        .attr('pointer-events', 'none')
+        .each(function (d, i) {
+          var el = this;
+          el.style.stroke         = 'rgba(255,220,220,0.55)';
+          el.style.strokeWidth    = '1.6';
+          el.style.strokeDasharray = '12 200';
+          el.style.strokeLinecap  = 'round';
+          el.style.strokeDashoffset = String(-(i * 41) % 212);
+          var dur   = (1.6 + (i % 7) * 0.55).toFixed(2);
+          var delay = (-(i * 0.65 % 4.5)).toFixed(2);
+          el.style.animation = 'beam-travel ' + dur + 's ' + delay + 's linear infinite';
         });
 
       // ── Numéros de département ──
@@ -485,7 +452,7 @@ import MainLayout from '../layouts/MainLayout.astro';
         .attr('y', function (d) { return path.centroid(d)[1] + 1; })
         .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
         .attr('font-size', '6.5').attr('font-weight', '700')
-        .attr('fill', 'rgba(255,255,255,0.9)').attr('pointer-events', 'none')
+        .attr('fill', 'rgba(255,255,255,0.92)').attr('pointer-events', 'none')
         .attr('font-family', '-apple-system, BlinkMacSystemFont, Inter, sans-serif')
         .text(function (d) { return d.properties.code; });
 
@@ -494,14 +461,14 @@ import MainLayout from '../layouts/MainLayout.astro';
         var feat = geo.features.find(function (f) { return f.properties.code === code; });
         if (!feat) return;
         var c = path.centroid(feat);
-        // Groupe plateforme
-        var g = svg.append('g')
+        svg.append('g')
           .attr('transform', 'translate(' + (c[0] - 8) + ',' + (c[1] + 6) + ')')
-          .attr('pointer-events', 'none');
-        g.append('image')
+          .attr('pointer-events', 'none')
+          .append('image')
           .attr('href', '/assets/lhaffretement/palteforme.gif')
           .attr('width', 16).attr('height', 16)
-          .attr('x', 0).attr('y', 0);
+          .attr('x', 0).attr('y', 0)
+          .style('mix-blend-mode', 'multiply');
       });
 
       // ── Marqueur Le Havre ──
@@ -513,30 +480,6 @@ import MainLayout from '../layouts/MainLayout.astro';
         .attr('fill', '#1d1d1f').attr('font-family', 'sans-serif').text('Le Havre');
     });
 
-  /* ── Carousel navigation ─────────────────────────────────── */
-  var track = document.getElementById('svcTrack');
-  var dots  = document.querySelectorAll('.svc-dot');
-  if (track && dots.length) {
-    var cards = track.querySelectorAll('.svc-card');
-    function scrollToPage(idx) {
-      if (!cards[0]) return;
-      var cardW = cards[0].getBoundingClientRect().width;
-      var gap   = parseInt(getComputedStyle(track).gap) || 24;
-      track.scrollTo({ left: idx * 3 * (cardW + gap), behavior: 'smooth' });
-      dots.forEach(function (d, i) { d.classList.toggle('svc-dot--active', i === idx); });
-    }
-    dots.forEach(function (dot) {
-      dot.addEventListener('click', function () { scrollToPage(parseInt(dot.getAttribute('data-idx'))); });
-    });
-    track.addEventListener('scroll', function () {
-      if (!cards[0]) return;
-      var cardW = cards[0].getBoundingClientRect().width;
-      var gap   = parseInt(getComputedStyle(track).gap) || 24;
-      var idx   = Math.round(track.scrollLeft / (3 * (cardW + gap)));
-      dots.forEach(function (d, i) { d.classList.toggle('svc-dot--active', i === idx); });
-    }, { passive: true });
-  }
-
 })();
 </script>
 
@@ -544,28 +487,52 @@ import MainLayout from '../layouts/MainLayout.astro';
   /* ── HERO ──────────────────────────────────────────────── */
   .transport-hero {
     background: linear-gradient(160deg, var(--gris-clair) 0%, #fff 60%);
-    padding: 4.5rem 0 4.5rem;
+    padding: 4.5rem 0;
     text-align: center;
   }
 
   .hero-lh-grande {
     display: block;
-    height: 80px;
+    height: 160px;
     width: auto;
     object-fit: contain;
     border-radius: 0 !important;
-    margin: 0 auto 1.6rem;
+    margin: 0 auto 1.8rem;
     mix-blend-mode: multiply;
     animation: fadeInUp 0.6s var(--transition) both;
   }
 
-  /* ── EN QUELQUES MOTS ──────────────────────────────────── */
-  .lh-mots-section {}
+  /* ── EN QUELQUES MOTS — style "sécurité" ──────────────── */
+  .atouts-bloc {
+    background: linear-gradient(135deg, #ffffff 0%, #fdf5f5 100%);
+    border-radius: 2.4rem;
+    padding: 3.5rem 3rem;
+    border: 1px solid rgba(227,6,19,0.08);
+    box-shadow: 0 4px 40px rgba(227,6,19,0.06), 0 1px 8px rgba(0,0,0,0.04);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .atouts-bloc::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(227,6,19,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .atouts-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
 
   .atouts-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
+    position: relative;
   }
 
   .atout-card {
@@ -578,12 +545,13 @@ import MainLayout from '../layouts/MainLayout.astro';
     gap: 0.9rem;
     border: 1px solid rgba(0,0,0,0.06);
     box-shadow: 0 2px 20px rgba(0,0,0,0.05);
-    transition: transform 0.25s, box-shadow 0.25s;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
   }
 
   .atout-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 14px 40px rgba(0,0,0,0.1);
+    box-shadow: 0 14px 40px rgba(227,6,19,0.10);
+    border-color: rgba(227,6,19,0.15);
   }
 
   .atout-card__icon {
@@ -614,93 +582,18 @@ import MainLayout from '../layouts/MainLayout.astro';
     line-height: 1.6;
   }
 
-  /* ── SERVICES CAROUSEL ─────────────────────────────────── */
-  .transport-services-section { overflow: hidden; }
+  /* ── MODES DE TRANSPORT (donut + cartes) ───────────────── */
+  .modes-section { background: white; }
 
-  .svc-carousel-outer { position: relative; }
-
-  .svc-carousel-track {
-    display: flex;
-    gap: 1.5rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding-bottom: 0.5rem;
-  }
-
-  .svc-carousel-track::-webkit-scrollbar { display: none; }
-
-  .svc-card {
-    flex: 0 0 calc(33.333% - 1rem);
-    scroll-snap-align: start;
-    background: var(--gris-clair);
-    border-radius: 1.5rem;
-    padding: 2rem 1.8rem 2.2rem;
-    border: 1px solid rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-    transition: transform 0.25s, box-shadow 0.25s;
-  }
-
-  .svc-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-  }
-
-  .svc-card__icon-wrap {
-    width: 52px; height: 52px;
-    border-radius: 1rem;
-    background: rgba(227,6,19,0.07);
-    color: var(--rouge);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .svc-card__title {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--gris-fonce);
-    letter-spacing: -0.02em;
-  }
-
-  .svc-card__desc {
-    font-size: 0.88rem;
-    color: var(--gris-moyen);
-    line-height: 1.6;
-    flex: 1;
-  }
-
-  .svc-dots {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1.8rem;
-  }
-
-  .svc-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: rgba(0,0,0,0.15);
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-    padding: 0;
-  }
-
-  .svc-dot--active { background: var(--rouge); transform: scale(1.25); }
-
-  /* ── RÉPARTITION MODALE ────────────────────────────────── */
-  .modes-layout {
+  .modes-merge-layout {
     display: grid;
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 260px 1fr;
     gap: 4rem;
     align-items: center;
-    background: white;
+    background: var(--gris-clair);
     border-radius: 2rem;
     padding: 3rem 3.5rem;
-    box-shadow: 0 4px 40px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 40px rgba(0,0,0,0.05);
   }
 
   .modes-donut-wrap {
@@ -709,78 +602,67 @@ import MainLayout from '../layouts/MainLayout.astro';
     align-items: center;
   }
 
-  .modes-donut { width: 200px; height: 200px; overflow: visible; }
+  .modes-donut { width: 210px; height: 210px; overflow: visible; }
 
-  /* Segments du donut — animés */
   .donut-seg {
     stroke-dasharray: 0 376.99;
-    transition: stroke-dasharray 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: stroke-dasharray 1.4s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.3s ease;
   }
 
-  .donut-seg--routier  { transition-delay: 0.1s; }
-  .donut-seg--maritime { transition-delay: 0.3s; }
-  .donut-seg--aerien   { transition-delay: 0.45s; }
-  .donut-seg--rail     { transition-delay: 0.6s; }
+  .donut-seg--routier  { transition-delay: 0.1s, 0s; }
+  .donut-seg--maritime { transition-delay: 0.3s, 0s; }
+  .donut-seg--aerien   { transition-delay: 0.45s, 0s; }
+  .donut-seg--rail     { transition-delay: 0.6s, 0s; }
 
-  /* Barres */
-  .modes-bars { display: flex; flex-direction: column; gap: 1.4rem; }
+  /* Cartes 2×2 */
+  .mode-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
 
-  .mode-row {}
-
-  .mode-row__header {
+  .mode-card {
     display: flex;
     align-items: center;
-    gap: 0.7rem;
-    margin-bottom: 0.45rem;
+    gap: 1rem;
+    padding: 1.4rem 1.6rem;
+    background: white;
+    border-radius: 1.2rem;
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    transition: transform 0.28s cubic-bezier(0.34,1.4,0.64,1), box-shadow 0.25s, border-color 0.25s, background 0.25s;
   }
 
-  .mode-dot {
-    width: 10px; height: 10px;
-    border-radius: 50%;
+  .mode-card:hover,
+  .mode-card--active {
+    transform: scale(1.05);
+    box-shadow: 0 10px 36px rgba(0,0,0,0.10);
+  }
+
+  .mode-card--routier:hover,  .mode-card--routier.mode-card--active  { border-color: rgba(227,6,19,0.28);   background: rgba(227,6,19,0.03); }
+  .mode-card--maritime:hover, .mode-card--maritime.mode-card--active { border-color: rgba(59,130,246,0.28);  background: rgba(59,130,246,0.03); }
+  .mode-card--aerien:hover,   .mode-card--aerien.mode-card--active   { border-color: rgba(249,115,22,0.28);  background: rgba(249,115,22,0.03); }
+  .mode-card--rail:hover,     .mode-card--rail.mode-card--active     { border-color: rgba(107,114,128,0.28); background: rgba(107,114,128,0.03); }
+
+  .mode-card__icon-wrap {
+    width: 44px; height: 44px;
+    border-radius: 0.9rem;
+    display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
 
-  .mode-label {
-    font-size: 0.9rem;
-    font-weight: 600;
+  .mode-card__title {
+    font-size: 0.92rem;
+    font-weight: 700;
     color: var(--gris-fonce);
-    flex: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.2rem;
   }
 
-  .mode-pct {
-    font-size: 0.95rem;
-    font-weight: 800;
+  .mode-card__desc {
+    font-size: 0.73rem;
     color: var(--gris-moyen);
-    min-width: 3rem;
-    text-align: right;
-  }
-
-  .mode-pct--primary { color: var(--rouge); font-size: 1.05rem; }
-
-  .mode-bar-bg {
-    height: 8px;
-    background: #f0f0f5;
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .mode-bar {
-    height: 100%;
-    border-radius: 4px;
-    width: 0;
-    transition: width 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .mode-bar--routier  { background: #e30613; transition-delay: 0.15s; }
-  .mode-bar--maritime { background: #3b82f6; transition-delay: 0.35s; }
-  .mode-bar--aerien   { background: #f97316; transition-delay: 0.5s; }
-  .mode-bar--rail     { background: #8b8b8b; transition-delay: 0.65s; }
-
-  .mode-detail {
-    font-size: 0.75rem;
-    color: #bbb;
-    margin-top: 0.3rem;
-    letter-spacing: 0.02em;
+    line-height: 1.4;
   }
 
   /* ── CARTE FRANCE ──────────────────────────────────────── */
@@ -791,7 +673,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     border-radius: 2rem;
     padding: 2.5rem 3rem;
     display: grid;
-    grid-template-columns: 1fr 270px;
+    grid-template-columns: 1fr 250px;
     gap: 2.5rem;
     align-items: center;
     box-shadow: 0 4px 40px rgba(0,0,0,0.06);
@@ -799,7 +681,13 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   #map-transport { width: 100%; height: auto; display: block; overflow: visible; }
 
-  .carte-transport__legende { display: flex; flex-direction: column; gap: 0.8rem; }
+  /* Animation faisceaux lumineux */
+  @keyframes beam-travel {
+    from { stroke-dashoffset: 0; }
+    to   { stroke-dashoffset: -212; }
+  }
+
+  .carte-transport__legende { display: flex; flex-direction: column; gap: 0.7rem; }
 
   .legende-titre {
     font-size: 0.68rem;
@@ -814,7 +702,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     display: flex;
     align-items: center;
     gap: 0.85rem;
-    padding: 0.8rem 1rem;
+    padding: 0.7rem 1rem;
     border-radius: 0.9rem;
     border: 1px solid rgba(0,0,0,0.07);
     background: white;
@@ -823,11 +711,9 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   .legende-item:hover { transform: translateX(4px); box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
 
-  .legende-couleur { width: 30px; height: 30px; border-radius: 0.5rem; flex-shrink: 0; }
+  .legende-couleur { width: 28px; height: 28px; border-radius: 0.5rem; flex-shrink: 0; }
 
   .legende-delai { font-size: 0.9rem; font-weight: 800; color: #1d1d1f; }
-
-  .legende-zones { font-size: 0.69rem; color: #8e8e93; line-height: 1.3; margin-top: 0.05rem; }
 
   .legende-plateforme {
     display: flex;
@@ -842,7 +728,11 @@ import MainLayout from '../layouts/MainLayout.astro';
     font-weight: 500;
   }
 
-  .legende-plateforme img { border-radius: 0 !important; flex-shrink: 0; }
+  .plateforme-gif {
+    border-radius: 0 !important;
+    flex-shrink: 0;
+    mix-blend-mode: multiply;
+  }
 
   .carte-note { font-size: 0.75rem; color: #aaa; line-height: 1.5; padding: 0 0.25rem; }
 
@@ -925,8 +815,8 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   /* ── RESPONSIVE ─────────────────────────────────────────── */
   @media (max-width: 1050px) {
-    .modes-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-    .modes-donut-wrap { justify-content: flex-start; }
+    .modes-merge-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+    .modes-donut-wrap   { justify-content: center; }
     .carte-transport__inner { grid-template-columns: 1fr; }
   }
 
@@ -935,9 +825,11 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   @media (max-width: 768px) {
-    .svc-card { flex: 0 0 calc(85% - 0.75rem); }
-    .atouts-grid { grid-template-columns: 1fr; }
-    .modes-layout { padding: 2rem; }
+    .atouts-grid        { grid-template-columns: 1fr; }
+    .mode-cards-grid    { grid-template-columns: 1fr; }
+    .atouts-bloc        { padding: 2.5rem 1.8rem; }
+    .modes-merge-layout { padding: 2rem; }
     .carte-transport__inner { padding: 1.5rem; }
+    .hero-lh-grande     { height: 110px; }
   }
 </style>
