@@ -710,26 +710,25 @@ import MainLayout from '../layouts/MainLayout.astro';
     box-shadow: 0 4px 40px rgba(0,0,0,0.05);
   }
 
-  /* Grille 2×2 — grand gap central pour le donut */
+  /* Grille 2×2 — petit gap, coins intérieurs arrondis vers le donut */
   .mode-cards-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    column-gap: 200px;
-    row-gap: 200px;
+    gap: 8px;
   }
 
-  /* Coins intérieurs légèrement arrondis vers le donut */
-  .mode-card.corner-br { border-bottom-right-radius: 2.5rem !important; }
-  .mode-card.corner-bl { border-bottom-left-radius:  2.5rem !important; }
-  .mode-card.corner-tr { border-top-right-radius:    2.5rem !important; }
-  .mode-card.corner-tl { border-top-left-radius:     2.5rem !important; }
+  /* Coins intérieurs arrondis vers le donut central */
+  .mode-card.corner-br { border-bottom-right-radius: 5rem !important; }
+  .mode-card.corner-bl { border-bottom-left-radius:  5rem !important; }
+  .mode-card.corner-tr { border-top-right-radius:    5rem !important; }
+  .mode-card.corner-tl { border-top-left-radius:     5rem !important; }
 
   /* Donut flottant au centre des 4 cartes */
   .modes-donut-center {
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    width: 185px; height: 185px;
+    width: 172px; height: 172px;
     background: var(--gris-clair);
     border-radius: 50%;
     display: flex;
@@ -737,9 +736,10 @@ import MainLayout from '../layouts/MainLayout.astro';
     justify-content: center;
     pointer-events: none;
     z-index: 4;
+    box-shadow: 0 0 0 3px var(--gris-clair);
   }
 
-  .modes-donut { width: 174px; height: 174px; overflow: visible; }
+  .modes-donut { width: 162px; height: 162px; overflow: visible; }
 
   .donut-seg {
     stroke-dasharray: 0 376.99;
