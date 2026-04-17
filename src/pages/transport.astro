@@ -8,105 +8,85 @@ import MainLayout from '../layouts/MainLayout.astro';
   canonicalPath="/transport"
 >
 
-  <!-- PAGE HERO -->
+  <!-- ═══ 1. HERO ═══════════════════════════════════════════════ -->
   <section class="page-hero transport-hero">
     <div class="container page-hero__inner">
-      <div class="hero-lh-badge animate-in">
-        <img src="/assets/lhaffretement/lh-affretement.jpeg" alt="LH Affrètement" class="hero-lh-logo" />
-      </div>
-      <p class="eyebrow-rouge animate-in" style="animation-delay:0.08s;" data-i18n="transport.hero.eyebrow">Transport & Affrètement</p>
-      <h1 class="titre-section animate-in" style="animation-delay:0.15s;" data-i18n-html="transport.hero.title">
+      <img
+        src="/assets/lhaffretement/lh-affretement.jpeg"
+        alt="LH Affrètement"
+        class="hero-lh-grande animate-in"
+      />
+      <p class="eyebrow-rouge animate-in" style="animation-delay:0.1s;" data-i18n="transport.hero.eyebrow">Transport & Affrètement</p>
+      <h1 class="titre-section animate-in" style="animation-delay:0.18s;" data-i18n-html="transport.hero.title">
         Transport <span>dédié</span> depuis Le Havre
       </h1>
-      <p class="sous-titre animate-in" style="animation-delay:0.25s; margin: 1rem auto 0; max-width: 640px;" data-i18n="transport.hero.subtitle">
+      <p class="sous-titre animate-in" style="animation-delay:0.28s; margin:1rem auto 0; max-width:640px;" data-i18n="transport.hero.subtitle">
         Avec LH Affrètement, notre entreprise de transport dédiée, vos marchandises sont prises en charge de A à Z — réactivité, fiabilité et solutions sur-mesure, partout en France.
       </p>
     </div>
   </section>
 
-  <!-- PRÉSENTATION LH AFFRÈTEMENT -->
-  <section class="section lh-section">
+  <!-- ═══ 2. EN QUELQUES MOTS ═══════════════════════════════════ -->
+  <section class="section section--gris lh-mots-section">
     <div class="container">
-      <div class="lh-grid">
+      <div class="reveal" style="text-align:center; margin-bottom:3rem;">
+        <p class="eyebrow-rouge" data-i18n="transport.mots.eyebrow">En quelques mots…</p>
+        <h2 class="titre-section" data-i18n-html="transport.partner.title">LH <span>Affrètement</span></h2>
+        <p class="sous-titre" style="margin:1rem auto 0; max-width:620px;" data-i18n="transport.partner.desc1">
+          LH Affrètement est notre entreprise de transport dédiée, spécialisée dans l'affrètement de marchandises. Elle agit comme interface opérationnelle entre vous et les transporteurs partenaires pour vous garantir le meilleur service au meilleur coût.
+        </p>
+      </div>
 
-        <!-- Texte gauche -->
-        <div class="lh-texte reveal">
-          <p class="eyebrow-rouge" data-i18n="transport.partner.eyebrow">Notre entreprise de transport</p>
-          <h2 class="titre-section" data-i18n-html="transport.partner.title">LH <span>Affrètement</span></h2>
-          <p class="lh-desc" data-i18n="transport.partner.desc1">
-            LH Affrètement est notre entreprise de transport dédiée, spécialisée dans l'affrètement de marchandises. Elle agit comme interface opérationnelle entre vous et les transporteurs partenaires pour vous garantir le meilleur service au meilleur coût.
-          </p>
-          <p class="lh-desc" data-i18n="transport.partner.desc2">
-            Que vous soyez chargeur ou partenaire logistique, LH Affrètement est votre levier pour optimiser vos flux, sécuriser vos opérations et accélérer vos performances — avec l'expertise terrain d'une équipe entièrement à votre service.
-          </p>
-          <div class="lh-kpis">
-            <div class="lh-kpi">
-              <span class="lh-kpi__val">24h</span>
-              <span class="lh-kpi__label" data-i18n="transport.kpi.reponse">Réponse garantie</span>
-            </div>
-            <div class="lh-kpi lh-kpi--mid">
-              <span class="lh-kpi__val">5</span>
-              <span class="lh-kpi__label" data-i18n="transport.kpi.modes">Modes de transport</span>
-            </div>
-            <div class="lh-kpi">
-              <span class="lh-kpi__val">100%</span>
-              <span class="lh-kpi__label" data-i18n="transport.kpi.france">Couverture France</span>
-            </div>
+      <div class="atouts-grid">
+        <div class="atout-card reveal" style="transition-delay:0.05s;">
+          <div class="atout-card__icon">
+            <img src="/assets/lhaffretement/réactivité.png" alt="Réactivité" />
           </div>
+          <h3 class="atout-card__title" data-i18n="transport.eng.reactivite">Réactivité maximale</h3>
+          <p class="atout-card__desc" data-i18n="transport.atout.reactivite.desc">Disponibilité et rapidité de réponse dans toutes les situations — même les plus urgentes.</p>
         </div>
 
-        <!-- Visuel droit -->
-        <div class="lh-visuel reveal" style="transition-delay:0.12s;">
-          <div class="lh-logo-card">
-            <img src="/assets/lhaffretement/lh-affretement.jpeg" alt="LH Affrètement" class="lh-logo-img" />
+        <div class="atout-card reveal" style="transition-delay:0.12s;">
+          <div class="atout-card__icon">
+            <img src="/assets/lhaffretement/sur-mesure.png" alt="Sur-mesure" />
           </div>
-          <div class="lh-engagements">
-            <div class="lh-eng">
-              <div class="lh-eng__icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-              </div>
-              <span data-i18n="transport.eng.reactivite">Réactivité maximale</span>
-            </div>
-            <div class="lh-eng">
-              <div class="lh-eng__icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 0 0 4.93 19.07M4.93 4.93a10 10 0 0 0 14.14 14.14"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></svg>
-              </div>
-              <span data-i18n="transport.eng.surmesure">Solutions sur-mesure</span>
-            </div>
-            <div class="lh-eng">
-              <div class="lh-eng__icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><circle cx="19" cy="19" r="3"/><circle cx="5" cy="19" r="3"/><path d="M12 8v3m-4.5 5.2L12 11m4.5 5.2L12 11"/></svg>
-              </div>
-              <span data-i18n="transport.eng.reseau">Réseau solide & performant</span>
-            </div>
-            <div class="lh-eng">
-              <div class="lh-eng__icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              </div>
-              <span data-i18n="transport.eng.interlocuteur">Interlocuteur unique</span>
-            </div>
+          <h3 class="atout-card__title" data-i18n="transport.eng.surmesure">Solutions sur-mesure</h3>
+          <p class="atout-card__desc" data-i18n="transport.atout.surmesure.desc">Chaque demande est unique. Nous adaptons la solution transport à votre besoin, pas l'inverse.</p>
+        </div>
+
+        <div class="atout-card reveal" style="transition-delay:0.19s;">
+          <div class="atout-card__icon">
+            <img src="/assets/lhaffretement/interlocuteur-unique.png" alt="Interlocuteur unique" />
           </div>
+          <h3 class="atout-card__title" data-i18n="transport.eng.interlocuteur">Interlocuteur unique</h3>
+          <p class="atout-card__desc" data-i18n="transport.atout.interlocuteur.desc">Un seul contact pour l'ensemble de vos flux transport — suivi, coordination et reporting centralisés.</p>
+        </div>
+
+        <div class="atout-card reveal" style="transition-delay:0.26s;">
+          <div class="atout-card__icon">
+            <img src="/assets/lhaffretement/reseau.png" alt="Réseau" />
+          </div>
+          <h3 class="atout-card__title" data-i18n="transport.eng.reseau">Réseau solide & performant</h3>
+          <p class="atout-card__desc" data-i18n="transport.atout.reseau.desc">Un réseau dense de transporteurs partenaires, sélectionnés pour leur fiabilité et leur expertise terrain.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES TRANSPORT — CAROUSEL -->
-  <section class="section section--gris transport-services-section">
+  <!-- ═══ 3. SERVICES CAROUSEL ══════════════════════════════════ -->
+  <section class="section transport-services-section">
     <div class="container">
       <div class="reveal" style="text-align:center; margin-bottom:2.8rem;">
         <p class="eyebrow-rouge" data-i18n="transport.services.eyebrow">Nos services</p>
         <h2 class="titre-section" data-i18n-html="transport.services.title">Des solutions pour <span>chaque besoin</span></h2>
         <p class="sous-titre" style="margin:1rem auto 0;" data-i18n="transport.services.subtitle">
-          De l'affrètement routier à la gestion d'urgences, nous couvrons l'ensemble des modes de transport pour répondre à vos exigences les plus pointues.
+          De l'affrètement routier à la gestion d'urgences, nous couvrons l'ensemble des modes de transport.
         </p>
       </div>
 
-      <!-- Carousel track -->
       <div class="svc-carousel-outer reveal">
         <div class="svc-carousel-track" id="svcTrack">
 
-          <!-- Transport Routier -->
           <div class="svc-card">
             <div class="svc-card__icon-wrap">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -117,7 +97,6 @@ import MainLayout from '../layouts/MainLayout.astro';
             <p class="svc-card__desc" data-i18n="transport.svc.routier.desc">Fret conventionnel, camion complet (FTL) ou groupage (LTL) — notre réseau couvre toute la France depuis Le Havre.</p>
           </div>
 
-          <!-- Transport Maritime -->
           <div class="svc-card">
             <div class="svc-card__icon-wrap">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -125,10 +104,9 @@ import MainLayout from '../layouts/MainLayout.astro';
               </svg>
             </div>
             <h3 class="svc-card__title" data-i18n="transport.svc.maritime.title">Transport Maritime</h3>
-            <p class="svc-card__desc" data-i18n="transport.svc.maritime.desc">Coordination du fret maritime en partenariat avec les armateurs — import, export et transbordement depuis le port du Havre.</p>
+            <p class="svc-card__desc" data-i18n="transport.svc.maritime.desc">Coordination du fret maritime en partenariat avec les armateurs — import, export et transbordement depuis Le Havre.</p>
           </div>
 
-          <!-- Transport Aérien -->
           <div class="svc-card">
             <div class="svc-card__icon-wrap">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -136,10 +114,9 @@ import MainLayout from '../layouts/MainLayout.astro';
               </svg>
             </div>
             <h3 class="svc-card__title" data-i18n="transport.svc.aerien.title">Transport Aérien</h3>
-            <p class="svc-card__desc" data-i18n="transport.svc.aerien.desc">Solutions express prioritaires pour vos envois urgents ou à haute valeur ajoutée, vers toutes les destinations internationales.</p>
+            <p class="svc-card__desc" data-i18n="transport.svc.aerien.desc">Solutions express prioritaires pour vos envois urgents ou à haute valeur ajoutée, vers toutes destinations.</p>
           </div>
 
-          <!-- Ferroviaire & Fluvial -->
           <div class="svc-card">
             <div class="svc-card__icon-wrap">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -147,10 +124,9 @@ import MainLayout from '../layouts/MainLayout.astro';
               </svg>
             </div>
             <h3 class="svc-card__title" data-i18n="transport.svc.ferroviaire.title">Ferroviaire & Fluvial</h3>
-            <p class="svc-card__desc" data-i18n="transport.svc.ferroviaire.desc">Solutions intermodales combinant rail et voie d'eau pour une logistique durable, économique et adaptée aux grands volumes.</p>
+            <p class="svc-card__desc" data-i18n="transport.svc.ferroviaire.desc">Solutions intermodales combinant rail et voie d'eau pour une logistique durable et économique.</p>
           </div>
 
-          <!-- Affrètement Dédié -->
           <div class="svc-card">
             <div class="svc-card__icon-wrap">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -158,10 +134,9 @@ import MainLayout from '../layouts/MainLayout.astro';
               </svg>
             </div>
             <h3 class="svc-card__title" data-i18n="transport.svc.affretement.title">Affrètement Sur-Mesure</h3>
-            <p class="svc-card__desc" data-i18n="transport.svc.affretement.desc">Véhicule entier dédié ou groupage optimisé — nous concevons la solution la plus adaptée à chaque flux et chaque contrainte.</p>
+            <p class="svc-card__desc" data-i18n="transport.svc.affretement.desc">Véhicule entier dédié ou groupage optimisé — la solution la plus adaptée à chaque flux.</p>
           </div>
 
-          <!-- Gestion d'Urgences -->
           <div class="svc-card">
             <div class="svc-card__icon-wrap">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -169,12 +144,10 @@ import MainLayout from '../layouts/MainLayout.astro';
               </svg>
             </div>
             <h3 class="svc-card__title" data-i18n="transport.svc.urgence.title">Gestion d'Urgences</h3>
-            <p class="svc-card__desc" data-i18n="transport.svc.urgence.desc">Capacité à répondre aux imprévus avec une réactivité maximale — organisation de chargements en dehors des plages habituelles.</p>
+            <p class="svc-card__desc" data-i18n="transport.svc.urgence.desc">Réactivité maximale — organisation de chargements en dehors des plages habituelles si nécessaire.</p>
           </div>
 
         </div>
-
-        <!-- Dots de navigation -->
         <div class="svc-dots" id="svcDots">
           <button class="svc-dot svc-dot--active" data-idx="0" aria-label="Page 1"></button>
           <button class="svc-dot" data-idx="1" aria-label="Page 2"></button>
@@ -183,7 +156,105 @@ import MainLayout from '../layouts/MainLayout.astro';
     </div>
   </section>
 
-  <!-- CARTE FRANCE — DÉLAIS DE LIVRAISON -->
+  <!-- ═══ 4. RÉPARTITION MODALE ════════════════════════════════ -->
+  <section class="section section--gris modes-section" id="modesSection">
+    <div class="container">
+      <div class="reveal" style="text-align:center; margin-bottom:2.8rem;">
+        <p class="eyebrow-rouge" data-i18n="transport.modes.eyebrow">Répartition des activités</p>
+        <h2 class="titre-section" data-i18n-html="transport.modes.title">Le transport <span>routier</span> au cœur de notre activité</h2>
+        <p class="sous-titre" style="margin:1rem auto 0;" data-i18n="transport.modes.subtitle">
+          Principalement spécialisés en transport routier, nous proposons également des solutions sur tous les autres modes selon vos besoins.
+        </p>
+      </div>
+
+      <div class="modes-layout reveal">
+        <!-- Donut SVG -->
+        <div class="modes-donut-wrap">
+          <svg class="modes-donut" viewBox="0 0 160 160" aria-hidden="true">
+            <!-- Background ring -->
+            <circle cx="80" cy="80" r="60" fill="none" stroke="#e8e8ed" stroke-width="22"/>
+            <!-- Routier 85% -->
+            <circle class="donut-seg donut-seg--routier" cx="80" cy="80" r="60"
+              fill="none" stroke="#e30613" stroke-width="22"
+              stroke-linecap="butt"
+              style="transform:rotate(-90deg); transform-origin:80px 80px;"/>
+            <!-- Maritime 8% -->
+            <circle class="donut-seg donut-seg--maritime" cx="80" cy="80" r="60"
+              fill="none" stroke="#3b82f6" stroke-width="22"
+              stroke-linecap="butt"
+              style="transform:rotate(216deg); transform-origin:80px 80px;"/>
+            <!-- Aérien 4% -->
+            <circle class="donut-seg donut-seg--aerien" cx="80" cy="80" r="60"
+              fill="none" stroke="#f97316" stroke-width="22"
+              stroke-linecap="butt"
+              style="transform:rotate(244.8deg); transform-origin:80px 80px;"/>
+            <!-- Rail + Fluvial 3% -->
+            <circle class="donut-seg donut-seg--rail" cx="80" cy="80" r="60"
+              fill="none" stroke="#8b8b8b" stroke-width="22"
+              stroke-linecap="butt"
+              style="transform:rotate(259.2deg); transform-origin:80px 80px;"/>
+            <!-- Centre -->
+            <circle cx="80" cy="80" r="44" fill="white"/>
+            <text x="80" y="75" text-anchor="middle" font-size="28" font-weight="800" fill="#e30613" font-family="-apple-system, BlinkMacSystemFont, Inter, sans-serif">85%</text>
+            <text x="80" y="92" text-anchor="middle" font-size="9" font-weight="600" fill="#6e6e73" font-family="-apple-system, BlinkMacSystemFont, Inter, sans-serif">Routier</text>
+          </svg>
+        </div>
+
+        <!-- Barres de détail -->
+        <div class="modes-bars">
+          <div class="mode-row">
+            <div class="mode-row__header">
+              <span class="mode-dot" style="background:#e30613;"></span>
+              <span class="mode-label" data-i18n="transport.mode.routier">Transport Routier</span>
+              <span class="mode-pct mode-pct--primary">85%</span>
+            </div>
+            <div class="mode-bar-bg">
+              <div class="mode-bar mode-bar--routier" data-target="85"></div>
+            </div>
+            <p class="mode-detail" data-i18n="transport.mode.routier.detail">FTL · LTL · Groupage · National & régional</p>
+          </div>
+
+          <div class="mode-row">
+            <div class="mode-row__header">
+              <span class="mode-dot" style="background:#3b82f6;"></span>
+              <span class="mode-label" data-i18n="transport.mode.maritime">Transport Maritime</span>
+              <span class="mode-pct">8%</span>
+            </div>
+            <div class="mode-bar-bg">
+              <div class="mode-bar mode-bar--maritime" data-target="8"></div>
+            </div>
+            <p class="mode-detail" data-i18n="transport.mode.maritime.detail">Import · Export · Transbordement</p>
+          </div>
+
+          <div class="mode-row">
+            <div class="mode-row__header">
+              <span class="mode-dot" style="background:#f97316;"></span>
+              <span class="mode-label" data-i18n="transport.mode.aerien">Transport Aérien</span>
+              <span class="mode-pct">4%</span>
+            </div>
+            <div class="mode-bar-bg">
+              <div class="mode-bar mode-bar--aerien" data-target="4"></div>
+            </div>
+            <p class="mode-detail" data-i18n="transport.mode.aerien.detail">Express · Haute valeur ajoutée · International</p>
+          </div>
+
+          <div class="mode-row">
+            <div class="mode-row__header">
+              <span class="mode-dot" style="background:#8b8b8b;"></span>
+              <span class="mode-label" data-i18n="transport.mode.rail">Ferroviaire & Fluvial</span>
+              <span class="mode-pct">3%</span>
+            </div>
+            <div class="mode-bar-bg">
+              <div class="mode-bar mode-bar--rail" data-target="3"></div>
+            </div>
+            <p class="mode-detail" data-i18n="transport.mode.rail.detail">Intermodal · Massifié · Durable</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 5. CARTE FRANCE ═══════════════════════════════════════ -->
   <section class="section carte-transport">
     <div class="tooltip-map" id="tooltip-map">
       <span id="tt-map-nom"></span><span id="tt-map-j"></span>
@@ -198,52 +269,55 @@ import MainLayout from '../layouts/MainLayout.astro';
       </div>
 
       <div class="carte-transport__inner reveal">
-        <!-- SVG Map -->
         <div class="carte-transport__map">
           <svg id="map-transport" viewBox="0 0 500 520"></svg>
         </div>
 
-        <!-- Légende -->
         <div class="carte-transport__legende">
           <span class="legende-titre" data-i18n="transport.map.legend">Délais estimés</span>
 
           <div class="legende-item">
             <div class="legende-couleur" style="background:#22c55e;"></div>
             <div>
-              <div class="legende-delai">J + 1</div>
-              <div class="legende-zones">Normandie · Île-de-France<br>Hauts-de-France</div>
+              <div class="legende-delai">24h</div>
+              <div class="legende-zones">Normandie · Île-de-France · Hauts-de-France<br>Centre · Grand Ouest · Bourgogne</div>
             </div>
           </div>
           <div class="legende-item">
             <div class="legende-couleur" style="background:#eab308;"></div>
             <div>
-              <div class="legende-delai">J + 2</div>
-              <div class="legende-zones">Bretagne · Centre · Grand Est<br>Pays de la Loire · Bourgogne</div>
+              <div class="legende-delai">48h</div>
+              <div class="legende-zones">Bretagne · Grand Est · Pays de la Loire<br>Nouvelle-Aquitaine · Rhône-Alpes · PACA</div>
             </div>
           </div>
           <div class="legende-item">
             <div class="legende-couleur" style="background:#f97316;"></div>
             <div>
-              <div class="legende-delai">J + 3</div>
-              <div class="legende-zones">Nouvelle-Aquitaine<br>Auvergne-Rhône-Alpes</div>
+              <div class="legende-delai">72h</div>
+              <div class="legende-zones">Ardèche · Lot · Lot-et-Garonne<br>Roussillon</div>
             </div>
           </div>
           <div class="legende-item">
             <div class="legende-couleur" style="background:#e30613;"></div>
             <div>
-              <div class="legende-delai">J + 4</div>
-              <div class="legende-zones">Occitanie · PACA · Corse</div>
+              <div class="legende-delai">96h</div>
+              <div class="legende-zones">Lozère · Corse</div>
             </div>
           </div>
 
-          <p class="carte-note" data-i18n="transport.map.note">Délais indicatifs pour livraisons en palettes depuis Le Havre, sur route.</p>
+          <div class="legende-plateforme">
+            <img src="/assets/lhaffretement/palteforme.gif" alt="Plateforme" width="16" height="16" />
+            <span data-i18n="transport.map.plateforme">Présence d'une plateforme logistique</span>
+          </div>
+
+          <p class="carte-note" data-i18n="transport.map.note">Délais indicatifs pour livraisons en palettes, sur route.</p>
           <a href="/devis" class="btn-carte-devis" data-i18n="transport.map.cta">Demander un devis transport</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- ═══ 6. CTA ════════════════════════════════════════════════ -->
   <section class="section section--gris cta-section-transport">
     <div class="container" style="text-align:center;">
       <div class="reveal">
@@ -265,20 +339,61 @@ import MainLayout from '../layouts/MainLayout.astro';
 <!-- D3.js local -->
 <script src="/assets/d3.min.js" is:inline></script>
 
-<!-- Carte interactive -->
 <script is:inline>
-(function() {
+(function () {
+
+  /* ── Donut Chart Animation ──────────────────────────────── */
+  // Circonférence pour r=60 : 2*π*60 ≈ 376.99
+  var C = 2 * Math.PI * 60;
+
+  function animateModes() {
+    var targets = [
+      { sel: '.donut-seg--routier',  len: C * 0.85 },
+      { sel: '.donut-seg--maritime', len: C * 0.08 },
+      { sel: '.donut-seg--aerien',   len: C * 0.04 },
+      { sel: '.donut-seg--rail',     len: C * 0.03 },
+    ];
+    targets.forEach(function (t) {
+      var el = document.querySelector(t.sel);
+      if (el) el.style.strokeDasharray = t.len.toFixed(1) + ' ' + C.toFixed(1);
+    });
+
+    // Barres horizontales
+    document.querySelectorAll('.mode-bar').forEach(function (bar) {
+      var pct = bar.getAttribute('data-target');
+      bar.style.width = pct + '%';
+    });
+  }
+
+  var modesSection = document.getElementById('modesSection');
+  if (modesSection) {
+    var modesObs = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) {
+        setTimeout(animateModes, 200);
+        modesObs.disconnect();
+      }
+    }, { threshold: 0.25 });
+    modesObs.observe(modesSection);
+  }
+
+  /* ── Carte France ─────────────────────────────────────────── */
   var delais = {
-    '76':1,'27':1,'14':1,'61':1,'50':1,'75':1,'77':1,'78':1,'91':1,'92':1,'93':1,'94':1,'95':1,'59':1,'62':1,'02':1,'60':1,'80':1,
-    '29':2,'35':2,'22':2,'56':2,'44':2,'49':2,'72':2,'53':2,'85':2,'28':2,'37':2,'41':2,'45':2,'18':2,'36':2,'23':2,
-    '57':2,'67':2,'68':2,'54':2,'55':2,'88':2,'08':2,'51':2,'10':2,'52':2,'70':2,'90':2,'25':2,'39':2,'21':2,'71':2,'58':2,'89':2,
-    '86':3,'87':3,'19':3,'79':3,'16':3,'17':3,'24':3,'33':3,'40':3,'47':3,'64':3,
-    '03':3,'63':3,'43':3,'42':3,'69':3,'01':3,'38':3,'26':3,'07':3,'74':3,'73':3,
-    '09':4,'11':4,'12':4,'30':4,'31':4,'32':4,'34':4,'46':4,'48':4,'65':4,'66':4,'81':4,'82':4,
-    '04':4,'05':4,'06':4,'13':4,'83':4,'84':4,'2A':4,'2B':4
+    '01':2,'02':1,'03':1,'04':2,'05':2,'06':2,'07':3,'08':1,'09':2,'10':1,
+    '11':2,'12':3,'13':2,'14':1,'15':2,'16':1,'17':1,'18':1,'19':1,
+    '21':1,'22':2, // bicolore : Est=1(24h) / Ouest=2(48h)
+    '23':1,'24':1,'25':2,'26':2,'27':1,'28':1,'29':2,
+    '30':2,'31':2,'32':2,'33':2,'34':2,'35':1,'36':1,'37':1,'38':2,'39':2,
+    '40':2,'41':1,'42':2,'43':2,'44':1,'45':1,'46':3,'47':2,'48':4,'49':1,
+    '50':2,'51':1,'52':1,'53':1,'54':2,'55':2,'56':2,'57':2,'58':1,'59':1,
+    '60':1,'61':1,'62':1,'63':1,'64':2,'65':2,'66':3,'67':2,'68':2,'69':2,
+    '70':2,'71':1,'72':1,'73':2,'74':2,'75':1,'76':1,'77':1,'78':1,'79':1,
+    '80':1,'81':2,'82':2,'83':2,'84':2,'85':1,'86':1,'87':1,'88':2,'89':1,
+    '90':2,'91':1,'92':1,'93':1,'94':1,'95':1,
+    '2A':4,'2B':4
   };
-  var colorMap = ['','#22c55e','#eab308','#f97316','#e30613'];
-  var labels   = ['','J+1','J+2','J+3','J+4'];
+  var plateformes = ['47', '69', '54'];
+  var colorMap    = ['', '#22c55e', '#eab308', '#f97316', '#e30613'];
+  var labelMap    = ['', '24h', '48h', '72h', '96h'];
   var w = 500, h = 520;
 
   var svg     = d3.select('#map-transport');
@@ -289,15 +404,23 @@ import MainLayout from '../layouts/MainLayout.astro';
   if (!svg.node()) return;
 
   fetch('/assets/departements.geojson')
-    .then(function(r){ return r.json(); })
-    .then(function(geo) {
+    .then(function (r) { return r.json(); })
+    .then(function (geo) {
       var projection = d3.geoConicConformal()
         .center([2.454071, 46.279229])
         .parallels([44, 49]);
       var path = d3.geoPath().projection(projection);
       projection.fitSize([w, h], { type: 'FeatureCollection', features: geo.features });
 
-      // Groupes (chemins en dessous des labels)
+      // ── Gradient bicolore pour le dép. 22 ──
+      var defs = svg.append('defs');
+      var g22 = defs.append('linearGradient')
+        .attr('id', 'grad-22')
+        .attr('x1', '0%').attr('y1', '0%')
+        .attr('x2', '100%').attr('y2', '0%');
+      g22.append('stop').attr('offset', '0%').attr('stop-color', colorMap[2]);   // Ouest = 48h
+      g22.append('stop').attr('offset', '100%').attr('stop-color', colorMap[1]); // Est = 24h
+
       var gPaths  = svg.append('g').attr('class', 'g-paths');
       var gLabels = svg.append('g').attr('class', 'g-labels');
 
@@ -307,44 +430,44 @@ import MainLayout from '../layouts/MainLayout.astro';
         .attr('d', path)
         .attr('stroke', 'white')
         .attr('stroke-width', 0.9)
-        .style('fill', function(d){ return colorMap[delais[d.properties.code] || 2]; })
+        .style('fill', function (d) {
+          if (d.properties.code === '22') return 'url(#grad-22)';
+          return colorMap[delais[d.properties.code] || 2];
+        })
         .style('cursor', 'pointer')
-        .on('mouseover', function(event, d) {
+        .on('mouseover', function (event, d) {
           var centroid = path.centroid(d);
           var cx = centroid[0], cy = centroid[1];
           d3.select(this)
             .raise()
             .transition().duration(160).ease(d3.easeCubicOut)
-            .attr('stroke', '#fff')
-            .attr('stroke-width', 2)
-            .attr('transform', 'translate('+cx+','+cy+') scale(1.13) translate('+(-cx)+','+(-cy)+')');
+            .attr('stroke', '#fff').attr('stroke-width', 2)
+            .attr('transform', 'translate(' + cx + ',' + cy + ') scale(1.12) translate(' + (-cx) + ',' + (-cy) + ')');
 
-          // Label nom sur la carte
           gLabels.select('.hover-label').remove();
           gLabels.append('text')
             .attr('class', 'hover-label')
             .attr('x', cx).attr('y', cy - 14)
-            .attr('text-anchor', 'middle')
-            .attr('font-size', '11').attr('font-weight', '700')
+            .attr('text-anchor', 'middle').attr('font-size', '11').attr('font-weight', '700')
             .attr('fill', '#1d1d1f')
             .attr('font-family', '-apple-system, BlinkMacSystemFont, Inter, sans-serif')
             .attr('pointer-events', 'none')
             .style('filter', 'drop-shadow(0 1px 3px rgba(255,255,255,0.95))')
             .text(d.properties.nom);
 
-          // Tooltip
-          var j = delais[d.properties.code] || 2;
+          var code = d.properties.code;
+          var jVal = code === '22' ? '24h (Est) / 48h (Ouest)' : (labelMap[delais[code]] || '48h');
           tooltip.style.opacity = '1';
           tooltip.style.left    = (event.clientX + 14) + 'px';
           tooltip.style.top     = (event.clientY - 10) + 'px';
-          ttNom.textContent = d.properties.nom + ' (' + d.properties.code + ')';
-          ttJ.textContent   = ' · ' + labels[j];
+          ttNom.textContent = d.properties.nom + ' (' + code + ')';
+          ttJ.textContent   = ' · ' + jVal;
         })
-        .on('mousemove', function(event) {
+        .on('mousemove', function (event) {
           tooltip.style.left = (event.clientX + 14) + 'px';
           tooltip.style.top  = (event.clientY - 10) + 'px';
         })
-        .on('mouseleave', function() {
+        .on('mouseleave', function () {
           d3.select(this)
             .transition().duration(200).ease(d3.easeCubicOut)
             .attr('stroke', 'white').attr('stroke-width', 0.9)
@@ -353,202 +476,145 @@ import MainLayout from '../layouts/MainLayout.astro';
           tooltip.style.opacity = '0';
         });
 
-      // Numéros de département
+      // ── Numéros de département ──
       gLabels.selectAll('text.dept-num')
         .data(geo.features)
         .enter().append('text')
         .attr('class', 'dept-num')
-        .attr('x', function(d){ return path.centroid(d)[0]; })
-        .attr('y', function(d){ return path.centroid(d)[1] + 1; })
+        .attr('x', function (d) { return path.centroid(d)[0]; })
+        .attr('y', function (d) { return path.centroid(d)[1] + 1; })
         .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
         .attr('font-size', '6.5').attr('font-weight', '700')
-        .attr('fill', 'rgba(255,255,255,0.9)')
-        .attr('pointer-events', 'none')
+        .attr('fill', 'rgba(255,255,255,0.9)').attr('pointer-events', 'none')
         .attr('font-family', '-apple-system, BlinkMacSystemFont, Inter, sans-serif')
-        .text(function(d){ return d.properties.code; });
+        .text(function (d) { return d.properties.code; });
 
-      // Marqueur Le Havre
-      var lhCoords = projection([0.1074, 49.4944]);
-      var lx = lhCoords[0], ly = lhCoords[1];
-      svg.append('circle').attr('cx', lx).attr('cy', ly).attr('r', 6)
-        .attr('fill', '#e30613').attr('stroke', 'white').attr('stroke-width', 1.5);
-      svg.append('text').attr('x', lx+9).attr('y', ly+4)
-        .attr('font-size','10').attr('font-weight','700')
-        .attr('fill','#1d1d1f').attr('font-family','sans-serif').text('Le Havre');
-    });
-
-  // ── Carousel navigation ──────────────────────────────
-  var track  = document.getElementById('svcTrack');
-  var dots   = document.querySelectorAll('.svc-dot');
-  if (track && dots.length) {
-    var cards  = track.querySelectorAll('.svc-card');
-    var perView = 3;
-
-    function scrollToPage(idx) {
-      var cardW = cards[0].getBoundingClientRect().width;
-      var gap   = parseInt(getComputedStyle(track).gap) || 24;
-      track.scrollTo({ left: idx * perView * (cardW + gap), behavior: 'smooth' });
-      dots.forEach(function(d, i){ d.classList.toggle('svc-dot--active', i === idx); });
-    }
-
-    dots.forEach(function(dot) {
-      dot.addEventListener('click', function() {
-        scrollToPage(parseInt(dot.getAttribute('data-idx')));
+      // ── Icônes Plateforme ──
+      plateformes.forEach(function (code) {
+        var feat = geo.features.find(function (f) { return f.properties.code === code; });
+        if (!feat) return;
+        var c = path.centroid(feat);
+        // Groupe plateforme
+        var g = svg.append('g')
+          .attr('transform', 'translate(' + (c[0] - 8) + ',' + (c[1] + 6) + ')')
+          .attr('pointer-events', 'none');
+        g.append('image')
+          .attr('href', '/assets/lhaffretement/palteforme.gif')
+          .attr('width', 16).attr('height', 16)
+          .attr('x', 0).attr('y', 0);
       });
+
+      // ── Marqueur Le Havre ──
+      var lh = projection([0.1074, 49.4944]);
+      svg.append('circle').attr('cx', lh[0]).attr('cy', lh[1]).attr('r', 6)
+        .attr('fill', '#e30613').attr('stroke', 'white').attr('stroke-width', 1.5);
+      svg.append('text').attr('x', lh[0] + 9).attr('y', lh[1] + 4)
+        .attr('font-size', '10').attr('font-weight', '700')
+        .attr('fill', '#1d1d1f').attr('font-family', 'sans-serif').text('Le Havre');
     });
 
-    // Sync dots on scroll
-    track.addEventListener('scroll', function() {
+  /* ── Carousel navigation ─────────────────────────────────── */
+  var track = document.getElementById('svcTrack');
+  var dots  = document.querySelectorAll('.svc-dot');
+  if (track && dots.length) {
+    var cards = track.querySelectorAll('.svc-card');
+    function scrollToPage(idx) {
       if (!cards[0]) return;
       var cardW = cards[0].getBoundingClientRect().width;
       var gap   = parseInt(getComputedStyle(track).gap) || 24;
-      var idx   = Math.round(track.scrollLeft / (perView * (cardW + gap)));
-      dots.forEach(function(d, i){ d.classList.toggle('svc-dot--active', i === idx); });
+      track.scrollTo({ left: idx * 3 * (cardW + gap), behavior: 'smooth' });
+      dots.forEach(function (d, i) { d.classList.toggle('svc-dot--active', i === idx); });
+    }
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () { scrollToPage(parseInt(dot.getAttribute('data-idx'))); });
+    });
+    track.addEventListener('scroll', function () {
+      if (!cards[0]) return;
+      var cardW = cards[0].getBoundingClientRect().width;
+      var gap   = parseInt(getComputedStyle(track).gap) || 24;
+      var idx   = Math.round(track.scrollLeft / (3 * (cardW + gap)));
+      dots.forEach(function (d, i) { d.classList.toggle('svc-dot--active', i === idx); });
     }, { passive: true });
   }
+
 })();
 </script>
 
 <style>
-  /* ── HERO ─────────────────────────────────────────── */
+  /* ── HERO ──────────────────────────────────────────────── */
   .transport-hero {
     background: linear-gradient(160deg, var(--gris-clair) 0%, #fff 60%);
-    padding: 5rem 0 4.5rem;
+    padding: 4.5rem 0 4.5rem;
     text-align: center;
   }
 
-  .hero-lh-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.4rem;
-    padding: 0.5rem 1.2rem;
-    background: white;
-    border: 1px solid rgba(0,0,0,0.09);
-    border-radius: 2rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-  }
-
-  .hero-lh-logo {
-    height: 36px;
+  .hero-lh-grande {
+    display: block;
+    height: 80px;
     width: auto;
     object-fit: contain;
     border-radius: 0 !important;
+    margin: 0 auto 1.6rem;
     mix-blend-mode: multiply;
+    animation: fadeInUp 0.6s var(--transition) both;
   }
 
-  /* ── LH PRÉSENTATION ─────────────────────────────── */
-  .lh-section { background: white; }
+  /* ── EN QUELQUES MOTS ──────────────────────────────────── */
+  .lh-mots-section {}
 
-  .lh-grid {
+  .atouts-grid {
     display: grid;
-    grid-template-columns: 1fr 420px;
-    gap: 5rem;
-    align-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
   }
 
-  .lh-desc {
-    font-size: 1.08rem;
-    color: var(--gris-moyen);
-    line-height: 1.75;
-    margin-top: 1rem;
-  }
-
-  .lh-kpis {
-    display: flex;
-    gap: 0;
-    margin-top: 2.2rem;
-    border: 1px solid rgba(0,0,0,0.07);
-    border-radius: 1.2rem;
-    overflow: hidden;
-  }
-
-  .lh-kpi {
-    flex: 1;
+  .atout-card {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2rem 1.6rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 1.2rem 1rem;
-    gap: 0.3rem;
-    background: #fafafa;
-    transition: background 0.2s;
+    align-items: flex-start;
+    gap: 0.9rem;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+    transition: transform 0.25s, box-shadow 0.25s;
   }
 
-  .lh-kpi--mid {
-    border-left: 1px solid rgba(0,0,0,0.07);
-    border-right: 1px solid rgba(0,0,0,0.07);
+  .atout-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.1);
   }
 
-  .lh-kpi:hover { background: #f0f0f5; }
-
-  .lh-kpi__val {
-    font-size: 1.9rem;
-    font-weight: 800;
-    color: var(--rouge);
-    letter-spacing: -0.04em;
-    line-height: 1;
-  }
-
-  .lh-kpi__label {
-    font-size: 0.75rem;
-    color: var(--gris-moyen);
-    text-align: center;
-    line-height: 1.3;
-  }
-
-  /* Visuel droit */
-  .lh-visuel { display: flex; flex-direction: column; gap: 1.6rem; }
-
-  .lh-logo-card {
-    background: white;
-    border: 1px solid rgba(0,0,0,0.08);
-    border-radius: 1.5rem;
-    padding: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 6px 30px rgba(0,0,0,0.07);
-  }
-
-  .lh-logo-img {
-    max-height: 90px;
-    width: auto;
-    object-fit: contain;
-    border-radius: 0 !important;
-    mix-blend-mode: multiply;
-  }
-
-  .lh-engagements {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-  }
-
-  .lh-eng {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    padding: 0.75rem 1rem;
-    background: var(--gris-clair);
-    border-radius: 0.8rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--gris-fonce);
-    transition: background 0.2s, transform 0.2s;
-  }
-
-  .lh-eng:hover { background: #e8e8f0; transform: translateX(3px); }
-
-  .lh-eng__icon {
-    width: 32px; height: 32px;
-    border-radius: 0.5rem;
-    background: rgba(227,6,19,0.08);
-    color: var(--rouge);
+  .atout-card__icon {
+    width: 56px; height: 56px;
     display: flex; align-items: center; justify-content: center;
+    background: rgba(227,6,19,0.06);
+    border-radius: 1rem;
     flex-shrink: 0;
   }
 
-  /* ── SERVICES CAROUSEL ──────────────────────────── */
+  .atout-card__icon img {
+    width: 36px; height: 36px;
+    object-fit: contain;
+    border-radius: 0 !important;
+  }
+
+  .atout-card__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gris-fonce);
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+
+  .atout-card__desc {
+    font-size: 0.86rem;
+    color: var(--gris-moyen);
+    line-height: 1.6;
+  }
+
+  /* ── SERVICES CAROUSEL ─────────────────────────────────── */
   .transport-services-section { overflow: hidden; }
 
   .svc-carousel-outer { position: relative; }
@@ -568,10 +634,9 @@ import MainLayout from '../layouts/MainLayout.astro';
   .svc-card {
     flex: 0 0 calc(33.333% - 1rem);
     scroll-snap-align: start;
-    background: white;
+    background: var(--gris-clair);
     border-radius: 1.5rem;
     padding: 2rem 1.8rem 2.2rem;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
     border: 1px solid rgba(0,0,0,0.05);
     display: flex;
     flex-direction: column;
@@ -581,7 +646,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   .svc-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
   }
 
   .svc-card__icon-wrap {
@@ -607,7 +672,6 @@ import MainLayout from '../layouts/MainLayout.astro';
     flex: 1;
   }
 
-  /* Dots navigation */
   .svc-dots {
     display: flex;
     justify-content: center;
@@ -625,12 +689,101 @@ import MainLayout from '../layouts/MainLayout.astro';
     padding: 0;
   }
 
-  .svc-dot--active {
-    background: var(--rouge);
-    transform: scale(1.25);
+  .svc-dot--active { background: var(--rouge); transform: scale(1.25); }
+
+  /* ── RÉPARTITION MODALE ────────────────────────────────── */
+  .modes-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 4rem;
+    align-items: center;
+    background: white;
+    border-radius: 2rem;
+    padding: 3rem 3.5rem;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.06);
   }
 
-  /* ── CARTE FRANCE ───────────────────────────────── */
+  .modes-donut-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modes-donut { width: 200px; height: 200px; overflow: visible; }
+
+  /* Segments du donut — animés */
+  .donut-seg {
+    stroke-dasharray: 0 376.99;
+    transition: stroke-dasharray 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .donut-seg--routier  { transition-delay: 0.1s; }
+  .donut-seg--maritime { transition-delay: 0.3s; }
+  .donut-seg--aerien   { transition-delay: 0.45s; }
+  .donut-seg--rail     { transition-delay: 0.6s; }
+
+  /* Barres */
+  .modes-bars { display: flex; flex-direction: column; gap: 1.4rem; }
+
+  .mode-row {}
+
+  .mode-row__header {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .mode-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .mode-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gris-fonce);
+    flex: 1;
+  }
+
+  .mode-pct {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--gris-moyen);
+    min-width: 3rem;
+    text-align: right;
+  }
+
+  .mode-pct--primary { color: var(--rouge); font-size: 1.05rem; }
+
+  .mode-bar-bg {
+    height: 8px;
+    background: #f0f0f5;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .mode-bar {
+    height: 100%;
+    border-radius: 4px;
+    width: 0;
+    transition: width 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .mode-bar--routier  { background: #e30613; transition-delay: 0.15s; }
+  .mode-bar--maritime { background: #3b82f6; transition-delay: 0.35s; }
+  .mode-bar--aerien   { background: #f97316; transition-delay: 0.5s; }
+  .mode-bar--rail     { background: #8b8b8b; transition-delay: 0.65s; }
+
+  .mode-detail {
+    font-size: 0.75rem;
+    color: #bbb;
+    margin-top: 0.3rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── CARTE FRANCE ──────────────────────────────────────── */
   .carte-transport { background: white; }
 
   .carte-transport__inner {
@@ -638,21 +791,15 @@ import MainLayout from '../layouts/MainLayout.astro';
     border-radius: 2rem;
     padding: 2.5rem 3rem;
     display: grid;
-    grid-template-columns: 1fr 260px;
+    grid-template-columns: 1fr 270px;
     gap: 2.5rem;
     align-items: center;
     box-shadow: 0 4px 40px rgba(0,0,0,0.06);
   }
 
-  .carte-transport__map { overflow: visible; }
   #map-transport { width: 100%; height: auto; display: block; overflow: visible; }
 
-  /* Légende */
-  .carte-transport__legende {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-  }
+  .carte-transport__legende { display: flex; flex-direction: column; gap: 0.8rem; }
 
   .legende-titre {
     font-size: 0.68rem;
@@ -676,31 +823,28 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   .legende-item:hover { transform: translateX(4px); box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
 
-  .legende-couleur {
-    width: 30px; height: 30px;
-    border-radius: 0.5rem;
-    flex-shrink: 0;
-  }
+  .legende-couleur { width: 30px; height: 30px; border-radius: 0.5rem; flex-shrink: 0; }
 
-  .legende-delai {
-    font-size: 0.9rem;
-    font-weight: 800;
-    color: #1d1d1f;
-  }
+  .legende-delai { font-size: 0.9rem; font-weight: 800; color: #1d1d1f; }
 
-  .legende-zones {
-    font-size: 0.7rem;
-    color: #8e8e93;
-    line-height: 1.3;
-    margin-top: 0.05rem;
-  }
+  .legende-zones { font-size: 0.69rem; color: #8e8e93; line-height: 1.3; margin-top: 0.05rem; }
 
-  .carte-note {
+  .legende-plateforme {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 0.8rem;
+    border-radius: 0.7rem;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.07);
     font-size: 0.75rem;
-    color: #aaa;
-    line-height: 1.5;
-    padding: 0 0.25rem;
+    color: var(--gris-moyen);
+    font-weight: 500;
   }
+
+  .legende-plateforme img { border-radius: 0 !important; flex-shrink: 0; }
+
+  .carte-note { font-size: 0.75rem; color: #aaa; line-height: 1.5; padding: 0 0.25rem; }
 
   .btn-carte-devis {
     display: block;
@@ -713,12 +857,11 @@ import MainLayout from '../layouts/MainLayout.astro';
     border-radius: 0.9rem;
     text-decoration: none;
     transition: opacity 0.2s, transform 0.2s;
-    letter-spacing: -0.01em;
   }
 
   .btn-carte-devis:hover { opacity: 0.88; transform: translateY(-2px); }
 
-  /* Tooltip carte */
+  /* Tooltip */
   .tooltip-map {
     position: fixed;
     background: rgba(10,10,10,0.9);
@@ -738,7 +881,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   #tt-map-j { color: #fca5a5; }
 
-  /* ── CTA ────────────────────────────────────────── */
+  /* ── CTA ────────────────────────────────────────────────── */
   .cta-section-transport { padding: 5rem 0; }
 
   .cta-btns {
@@ -760,7 +903,6 @@ import MainLayout from '../layouts/MainLayout.astro';
     border-radius: 3rem;
     text-decoration: none;
     transition: opacity 0.2s, transform 0.2s;
-    letter-spacing: -0.01em;
   }
 
   .btn-cta-rouge:hover { opacity: 0.88; transform: translateY(-2px); }
@@ -777,24 +919,25 @@ import MainLayout from '../layouts/MainLayout.astro';
     border: 1.5px solid rgba(0,0,0,0.15);
     text-decoration: none;
     transition: border-color 0.2s, transform 0.2s;
-    letter-spacing: -0.01em;
   }
 
   .btn-cta-outline:hover { border-color: rgba(0,0,0,0.35); transform: translateY(-2px); }
 
-  /* ── RESPONSIVE ────────────────────────────────── */
+  /* ── RESPONSIVE ─────────────────────────────────────────── */
   @media (max-width: 1050px) {
-    .lh-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .lh-visuel { max-width: 480px; }
+    .modes-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+    .modes-donut-wrap { justify-content: flex-start; }
     .carte-transport__inner { grid-template-columns: 1fr; }
-    .carte-transport__legende { max-width: 480px; margin: 0 auto; }
+  }
+
+  @media (max-width: 900px) {
+    .atouts-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
   }
 
   @media (max-width: 768px) {
     .svc-card { flex: 0 0 calc(85% - 0.75rem); }
-    .lh-engagements { grid-template-columns: 1fr; }
-    .lh-kpis { flex-direction: column; }
-    .lh-kpi--mid { border-left: none; border-right: none; border-top: 1px solid rgba(0,0,0,0.07); border-bottom: 1px solid rgba(0,0,0,0.07); }
+    .atouts-grid { grid-template-columns: 1fr; }
+    .modes-layout { padding: 2rem; }
     .carte-transport__inner { padding: 1.5rem; }
   }
 </style>

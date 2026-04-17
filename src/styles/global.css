@@ -171,3 +171,16 @@ a {
 .hero__titre span   { color: #ff4d57; }
 .titre-section span { color: var(--rouge); }
 .i18n-accent        { color: var(--rouge); }
+.entrepot-rouge     { color: var(--rouge); }
+.securite-accent {
+  background: linear-gradient(90deg, #e30613 0%, #ff2b2b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.bridge-grad {
+  background: linear-gradient(90deg, var(--rouge) 0%, #ff4d57 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
