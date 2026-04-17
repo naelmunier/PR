@@ -185,7 +185,7 @@ import MainLayout from '../layouts/MainLayout.astro';
               <span class="idf-inset__title">Île-de-France</span>
               <span class="idf-inset__badge">24h</span>
             </div>
-            <svg id="map-idf" viewBox="0 0 140 130"></svg>
+            <svg id="map-idf" viewBox="0 0 180 165"></svg>
           </div>
         </div>
 
@@ -442,24 +442,30 @@ import MainLayout from '../layouts/MainLayout.astro';
           tooltip.style.opacity = '0';
         });
 
-      // ── Faisceaux lumineux rouge vif fins sur les bordures ──
-      gBeams.selectAll('path')
-        .data(features)
-        .enter().append('path')
-        .attr('d', path)
-        .attr('fill', 'none')
-        .attr('pointer-events', 'none')
-        .each(function (d, i) {
-          var el = this;
-          el.style.stroke          = 'rgba(227,6,19,0.6)';
-          el.style.strokeWidth     = '0.9';
-          el.style.strokeDasharray = '10 200';
-          el.style.strokeLinecap   = 'round';
-          el.style.strokeDashoffset = String(-(i * 43) % 210);
-          var dur   = (1.8 + (i % 7) * 0.55).toFixed(2);
-          var delay = (-(i * 0.65 % 4.5)).toFixed(2);
-          el.style.animation = 'beam-travel ' + dur + 's ' + delay + 's linear infinite';
-        });
+      // ── Faisceaux — 5 chemins traversant la France ──
+      var beamRoutes = [
+        { geo: [[0.107,49.494],[2.0,47.8],[4.5,45.5],[5.369,43.296]], dur: 4.2, delay: 0 },
+        { geo: [[0.107,49.494],[-0.2,47.8],[-1.0,45.8],[-0.573,44.837]], dur: 3.8, delay: -1.5 },
+        { geo: [[0.107,49.494],[2.5,49.1],[5.0,48.9],[7.748,48.574]], dur: 3.5, delay: -2.8 },
+        { geo: [[0.107,49.494],[1.5,48.0],[2.8,46.5],[4.835,45.748]], dur: 5.0, delay: -1.0 },
+        { geo: [[-4.494,48.390],[-1.0,46.8],[3.0,44.5],[7.261,43.710]], dur: 6.0, delay: -3.2 },
+      ];
+
+      beamRoutes.forEach(function(route) {
+        var pp = route.geo.map(function(p) { return projection(p); });
+        var d = 'M ' + pp[0][0].toFixed(1) + ',' + pp[0][1].toFixed(1) +
+          ' C ' + pp[1][0].toFixed(1) + ',' + pp[1][1].toFixed(1) +
+          ' ' + pp[2][0].toFixed(1) + ',' + pp[2][1].toFixed(1) +
+          ' ' + pp[3][0].toFixed(1) + ',' + pp[3][1].toFixed(1);
+        var el = gBeams.append('path')
+          .attr('d', d).attr('fill', 'none').attr('pointer-events', 'none').node();
+        el.style.stroke           = 'rgba(227,6,19,0.7)';
+        el.style.strokeWidth      = '1.1';
+        el.style.strokeLinecap    = 'round';
+        el.style.strokeDasharray  = '28 1500';
+        el.style.strokeDashoffset = '28';
+        el.style.animation = 'beam-cross ' + route.dur.toFixed(1) + 's ' + route.delay.toFixed(1) + 's linear infinite';
+      });
 
       // ── Numéros de département ──
       gLabels.selectAll('text.dept-num')
@@ -506,7 +512,7 @@ import MainLayout from '../layouts/MainLayout.astro';
       if (svgIdf.node() && idfFeats.length) {
         var projIdf = d3.geoConicConformal().center([2.454071, 46.279229]).parallels([44, 49]);
         var pathIdf = d3.geoPath().projection(projIdf);
-        projIdf.fitSize([140, 130], { type: 'FeatureCollection', features: idfFeats });
+        projIdf.fitSize([180, 165], { type: 'FeatureCollection', features: idfFeats });
 
         svgIdf.selectAll('path')
           .data(idfFeats)
@@ -804,10 +810,10 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   #map-transport { width: 100%; height: auto; display: block; overflow: visible; }
 
-  /* Animation faisceaux lumineux */
-  @keyframes beam-travel {
-    from { stroke-dashoffset: 0; }
-    to   { stroke-dashoffset: -210; }
+  /* Animation faisceaux traversants */
+  @keyframes beam-cross {
+    from { stroke-dashoffset: 28; }
+    to   { stroke-dashoffset: -1500; }
   }
 
   .carte-transport__legende { display: flex; flex-direction: column; gap: 0.7rem; }
@@ -908,9 +914,9 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   .idf-inset {
     position: absolute;
-    bottom: 14px;
-    left: 10px;
-    width: 150px;
+    top: 14px;
+    right: 14px;
+    width: 200px;
     background: white;
     border-radius: 1rem;
     border: 1.5px solid rgba(0,0,0,0.09);
@@ -1005,5 +1011,14 @@ import MainLayout from '../layouts/MainLayout.astro';
     .modes-merge-layout { padding: 2rem; }
     .carte-transport__inner { padding: 1.5rem; }
     .hero-lh-grande     { height: 110px; }
+    .idf-inset          { display: none; }
+  }
+
+  @media (max-width: 480px) {
+    .modes-merge-layout { padding: 1.5rem; gap: 2rem; }
+    .mode-card { padding: 1.4rem; }
+    .atouts-grid { gap: 0.8rem; }
+    .hero-lh-grande { height: 90px; }
+    .carte-transport__inner { gap: 1.5rem; padding: 1.2rem; }
   }
 </style>
