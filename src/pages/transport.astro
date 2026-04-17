@@ -490,9 +490,9 @@ import MainLayout from '../layouts/MainLayout.astro';
           .attr('pointer-events', 'none')
           .node();
         var beamLen = beamEl.getTotalLength ? beamEl.getTotalLength() : 2000;
-        var dotLen = 6; // petit point lumineux
+        var dotLen = 4; // petit point lumineux
         beamEl.style.stroke           = 'rgba(255,30,50,1)';
-        beamEl.style.strokeWidth      = '10';
+        beamEl.style.strokeWidth      = '1';
         beamEl.style.strokeLinecap    = 'round';
         beamEl.style.strokeDasharray  = dotLen + ' ' + (beamLen - dotLen);
         beamEl.style.strokeDashoffset = '0';
@@ -726,11 +726,31 @@ import MainLayout from '../layouts/MainLayout.astro';
     gap: 48px;
   }
 
-  /* Coins intérieurs arrondis épousant la forme circulaire du donut */
-  .mode-card.corner-br { border-bottom-right-radius: 86px !important; }
-  .mode-card.corner-bl { border-bottom-left-radius:  86px !important; }
-  .mode-card.corner-tr { border-top-right-radius:    86px !important; }
-  .mode-card.corner-tl { border-top-left-radius:     86px !important; }
+  /* Coins intérieurs arrondis + bordure visible + marge sécurité vers le centre */
+  .mode-card.corner-br {
+    border-bottom-right-radius: 86px !important;
+    border: 1.5px solid rgba(0,0,0,0.11) !important;
+    padding-right:  3.8rem;
+    padding-bottom: 3.8rem;
+  }
+  .mode-card.corner-bl {
+    border-bottom-left-radius: 86px !important;
+    border: 1.5px solid rgba(0,0,0,0.11) !important;
+    padding-left:   3.8rem;
+    padding-bottom: 3.8rem;
+  }
+  .mode-card.corner-tr {
+    border-top-right-radius: 86px !important;
+    border: 1.5px solid rgba(0,0,0,0.11) !important;
+    padding-right: 3.8rem;
+    padding-top:   3.8rem;
+  }
+  .mode-card.corner-tl {
+    border-top-left-radius: 86px !important;
+    border: 1.5px solid rgba(0,0,0,0.11) !important;
+    padding-left: 3.8rem;
+    padding-top:  3.8rem;
+  }
 
   /* Donut centré, fond masquant les coins chevauchés */
   .modes-donut-center {
