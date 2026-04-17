@@ -181,6 +181,7 @@ import MainLayout from '../layouts/MainLayout.astro';
       <div class="carte-transport__inner reveal">
         <div class="carte-transport__map">
           <svg id="map-transport" viewBox="0 0 500 520"></svg>
+          <div class="carte-map-shimmer"></div>
         </div>
 
         <div class="carte-sidebar">
@@ -412,7 +413,6 @@ import MainLayout from '../layouts/MainLayout.astro';
 
       var gPaths  = svg.append('g').attr('class', 'g-paths');
       var gLabels = svg.append('g').attr('class', 'g-labels');
-      var gShimmer = svg.append('g').attr('class', 'g-shimmer').attr('pointer-events', 'none');
 
       // ── Chemins des départements ──
       gPaths.selectAll('path')
@@ -471,21 +471,6 @@ import MainLayout from '../layouts/MainLayout.astro';
           gLabels.select('.hover-label').transition().duration(120).style('opacity', 0).remove();
           tooltip.style.opacity = '0';
         });
-
-      // ── Shimmer diagonal balayant la carte ──
-      var shimGrad = defs.append('linearGradient')
-        .attr('id', 'shimmer-grad')
-        .attr('gradientUnits', 'userSpaceOnUse')
-        .attr('x1', 0).attr('y1', 0)
-        .attr('x2', 180).attr('y2', 0);
-      shimGrad.append('stop').attr('offset', '0%').attr('stop-color', 'white').attr('stop-opacity', '0');
-      shimGrad.append('stop').attr('offset', '50%').attr('stop-color', 'white').attr('stop-opacity', '0.32');
-      shimGrad.append('stop').attr('offset', '100%').attr('stop-color', 'white').attr('stop-opacity', '0');
-      gShimmer.append('rect')
-        .attr('x', -180).attr('y', -20)
-        .attr('width', 180).attr('height', h + 40)
-        .attr('fill', 'url(#shimmer-grad)')
-        .attr('transform', 'skewX(-12)');
 
       // ── Filtrage par légende ──
       var activeDelai = null;
@@ -926,6 +911,24 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   #map-transport { width: 100%; height: auto; display: block; overflow: visible; }
 
+  .carte-transport__map { position: relative; }
+
+  .carte-map-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 25%,
+      rgba(255,255,255,0.22) 50%,
+      transparent 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer-slide 3s ease-in-out infinite;
+    pointer-events: none;
+    border-radius: 1rem;
+    z-index: 2;
+  }
+
   /* Sidebar droite : IDF + légende */
   .carte-sidebar {
     display: flex;
@@ -968,12 +971,10 @@ import MainLayout from '../layouts/MainLayout.astro';
     box-shadow: 0 0 0 3px rgba(0,0,0,0.15);
   }
 
-  /* Shimmer balayant la carte France */
-  @keyframes shimmer-france {
-    0%   { transform: translateX(-220px); }
-    100% { transform: translateX(720px);  }
+  @keyframes shimmer-slide {
+    0%   { background-position: -100% 0; }
+    100% { background-position: 200% 0; }
   }
-  :global(.g-shimmer) { animation: shimmer-france 6s ease-in-out infinite; }
 
   .legende-couleur { width: 28px; height: 28px; border-radius: 0.5rem; flex-shrink: 0; }
 
