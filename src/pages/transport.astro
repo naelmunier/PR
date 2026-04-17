@@ -99,7 +99,7 @@ import MainLayout from '../layouts/MainLayout.astro';
           </div>
 
           <div class="mode-card mode-card--maritime corner-bl" data-mode="maritime">
-            <div class="mode-card__icon-wrap" style="background:rgba(127,29,29,0.08);">
+            <div class="mode-card__icon-wrap" style="background:rgba(2,132,199,0.08);">
               <img src="/assets/lhaffretement/maritime.gif" alt="Transport Maritime" class="mode-card__gif" />
             </div>
             <div class="mode-card__content">
@@ -110,7 +110,7 @@ import MainLayout from '../layouts/MainLayout.astro';
           </div>
 
           <div class="mode-card mode-card--aerien corner-tr" data-mode="aerien">
-            <div class="mode-card__icon-wrap" style="background:rgba(239,68,68,0.08);">
+            <div class="mode-card__icon-wrap" style="background:rgba(124,58,237,0.08);">
               <img src="/assets/lhaffretement/aerien.gif" alt="Transport Aérien" class="mode-card__gif" />
             </div>
             <div class="mode-card__content">
@@ -121,7 +121,7 @@ import MainLayout from '../layouts/MainLayout.astro';
           </div>
 
           <div class="mode-card mode-card--rail corner-tl" data-mode="rail">
-            <div class="mode-card__icon-wrap" style="background:rgba(185,28,28,0.08);">
+            <div class="mode-card__icon-wrap" style="background:rgba(22,163,74,0.08);">
               <img src="/assets/lhaffretement/train.gif" alt="Ferroviaire" class="mode-card__gif" />
             </div>
             <div class="mode-card__content">
@@ -141,15 +141,15 @@ import MainLayout from '../layouts/MainLayout.astro';
               fill="none" stroke="#e30613" stroke-width="26" stroke-linecap="butt"
               style="transform:rotate(-90deg); transform-origin:80px 80px;"/>
             <circle class="donut-seg donut-seg--maritime" cx="80" cy="80" r="60"
-              fill="none" stroke="#7f1d1d" stroke-width="24" stroke-linecap="butt"
+              fill="none" stroke="#0284c7" stroke-width="24" stroke-linecap="butt"
               style="transform:rotate(216deg); transform-origin:80px 80px;"/>
             <circle class="donut-seg donut-seg--aerien" cx="80" cy="80" r="60"
-              fill="none" stroke="#ef4444" stroke-width="24" stroke-linecap="butt"
+              fill="none" stroke="#7c3aed" stroke-width="24" stroke-linecap="butt"
               style="transform:rotate(244.8deg); transform-origin:80px 80px;"/>
             <circle class="donut-seg donut-seg--rail" cx="80" cy="80" r="60"
-              fill="none" stroke="#b91c1c" stroke-width="24" stroke-linecap="butt"
+              fill="none" stroke="#16a34a" stroke-width="24" stroke-linecap="butt"
               style="transform:rotate(259.2deg); transform-origin:80px 80px;"/>
-            <circle cx="80" cy="80" r="41" fill="white"/>
+            <circle id="donut-center-fill" cx="80" cy="80" r="41" fill="white" style="transition:fill 0.35s ease;"/>
             <text id="donut-center-label" x="80" y="77"
               text-anchor="middle" font-size="9.5" font-weight="700" fill="#e30613"
               font-family="-apple-system, BlinkMacSystemFont, Inter, sans-serif"></text>
@@ -272,6 +272,8 @@ import MainLayout from '../layouts/MainLayout.astro';
   if (modesSection) {
     var modesObs = new IntersectionObserver(function (entries) {
       if (entries[0].isIntersecting) {
+        var modesOuter = modesSection.querySelector('.modes-outer');
+        if (modesOuter) modesOuter.classList.add('is-visible');
         setTimeout(animateModes, 200);
         modesObs.disconnect();
       }
@@ -280,16 +282,23 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
 
   // Interaction cartes ↔ donut
-  var allSegs   = document.querySelectorAll('.donut-seg');
-  var modeCards = document.querySelectorAll('.mode-card');
-  var centerLabel  = document.getElementById('donut-center-label');
+  var allSegs       = document.querySelectorAll('.donut-seg');
+  var modeCards     = document.querySelectorAll('.mode-card');
+  var centerLabel   = document.getElementById('donut-center-label');
   var donutSubLabel = document.getElementById('donut-sub-label');
+  var donutCenterFill = document.getElementById('donut-center-fill');
 
   var segMap = {
     routier:  '.donut-seg--routier',
     maritime: '.donut-seg--maritime',
     aerien:   '.donut-seg--aerien',
     rail:     '.donut-seg--rail'
+  };
+  var colorModeMap = {
+    routier: '#e30613', maritime: '#0284c7', aerien: '#7c3aed', rail: '#16a34a'
+  };
+  var colorModeRGB = {
+    routier: '227,6,19', maritime: '2,132,199', aerien: '124,58,237', rail: '22,163,74'
   };
   var labelMap2 = { routier:'Routier', maritime:'Maritime', aerien:'Aérien', rail:'Ferroviaire' };
   var tagMap    = {
@@ -301,8 +310,9 @@ import MainLayout from '../layouts/MainLayout.astro';
 
   function setDonutDefault() {
     allSegs.forEach(function(s) { s.style.opacity = '1'; });
-    if (centerLabel)   centerLabel.textContent   = '';
+    if (centerLabel)   { centerLabel.textContent = ''; centerLabel.setAttribute('fill', '#e30613'); }
     if (donutSubLabel) donutSubLabel.textContent = '';
+    if (donutCenterFill) donutCenterFill.style.fill = 'white';
   }
   setDonutDefault();
 
@@ -312,8 +322,12 @@ import MainLayout from '../layouts/MainLayout.astro';
       allSegs.forEach(function (s) { s.style.opacity = '0.15'; });
       var active = document.querySelector(segMap[mode]);
       if (active) active.style.opacity = '1';
-      if (centerLabel)   centerLabel.textContent   = labelMap2[mode] || '';
+      if (centerLabel) {
+        centerLabel.textContent = labelMap2[mode] || '';
+        centerLabel.setAttribute('fill', colorModeMap[mode] || '#e30613');
+      }
       if (donutSubLabel) donutSubLabel.textContent = tagMap[mode] || '';
+      if (donutCenterFill) donutCenterFill.style.fill = 'rgba(' + (colorModeRGB[mode] || '227,6,19') + ',0.07)';
       modeCards.forEach(function (c) { c.classList.toggle('mode-card--active', c === card); });
     });
     card.addEventListener('mouseleave', function () {
@@ -797,6 +811,28 @@ import MainLayout from '../layouts/MainLayout.astro';
                 background 0.25s ease;
   }
 
+  /* Couleurs distinctes par mode */
+  .mode-card--routier  { --mode-color: #e30613; }
+  .mode-card--maritime { --mode-color: #0284c7; }
+  .mode-card--aerien   { --mode-color: #7c3aed; }
+  .mode-card--rail     { --mode-color: #16a34a; }
+
+  /* Barre accent en haut de chaque carte */
+  .mode-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--mode-color, var(--rouge));
+    border-radius: 3px 3px 0 0;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.38s cubic-bezier(0.34,1.2,0.64,1);
+    z-index: 1;
+  }
+  .mode-card:hover::before,
+  .mode-card.mode-card--active::before { transform: scaleX(1); }
+
   /* Hover : chaque carte pousse vers son coin extérieur */
   .mode-card--routier:hover,  .mode-card--routier.mode-card--active  {
     transform: translate(-4px, -4px);
@@ -805,18 +841,18 @@ import MainLayout from '../layouts/MainLayout.astro';
   }
   .mode-card--maritime:hover, .mode-card--maritime.mode-card--active {
     transform: translate(4px, -4px);
-    box-shadow: 0 0 0 1.5px rgba(127,29,29,0.40), 0 12px 40px rgba(127,29,29,0.14);
-    background: rgba(127,29,29,0.025);
+    box-shadow: 0 0 0 1.5px rgba(2,132,199,0.40), 0 12px 40px rgba(2,132,199,0.14);
+    background: rgba(2,132,199,0.025);
   }
   .mode-card--aerien:hover,   .mode-card--aerien.mode-card--active   {
     transform: translate(-4px, 4px);
-    box-shadow: 0 0 0 1.5px rgba(239,68,68,0.40), 0 12px 40px rgba(239,68,68,0.14);
-    background: rgba(239,68,68,0.025);
+    box-shadow: 0 0 0 1.5px rgba(124,58,237,0.40), 0 12px 40px rgba(124,58,237,0.14);
+    background: rgba(124,58,237,0.025);
   }
   .mode-card--rail:hover,     .mode-card--rail.mode-card--active     {
     transform: translate(4px, 4px);
-    box-shadow: 0 0 0 1.5px rgba(185,28,28,0.40), 0 12px 40px rgba(185,28,28,0.14);
-    background: rgba(185,28,28,0.025);
+    box-shadow: 0 0 0 1.5px rgba(22,163,74,0.40), 0 12px 40px rgba(22,163,74,0.14);
+    background: rgba(22,163,74,0.025);
   }
 
   .mode-card__icon-wrap {
@@ -844,7 +880,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   .mode-card__tag {
     font-size: 0.72rem;
     font-weight: 600;
-    color: var(--rouge);
+    color: var(--mode-color, var(--rouge));
     letter-spacing: 0.04em;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
@@ -854,6 +890,24 @@ import MainLayout from '../layouts/MainLayout.astro';
     font-size: 0.82rem;
     color: var(--gris-moyen);
     line-height: 1.55;
+  }
+
+  /* ── Entrée des cartes modes (stagger) ────────────────── */
+  @keyframes card-entrance {
+    from { opacity: 0; transform: translateY(24px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0)    scale(1); }
+  }
+  .modes-outer.is-visible .mode-cards-grid .mode-card:nth-child(1) {
+    animation: card-entrance 0.6s cubic-bezier(0.34,1.2,0.64,1) 0.08s both;
+  }
+  .modes-outer.is-visible .mode-cards-grid .mode-card:nth-child(2) {
+    animation: card-entrance 0.6s cubic-bezier(0.34,1.2,0.64,1) 0.20s both;
+  }
+  .modes-outer.is-visible .mode-cards-grid .mode-card:nth-child(3) {
+    animation: card-entrance 0.6s cubic-bezier(0.34,1.2,0.64,1) 0.32s both;
+  }
+  .modes-outer.is-visible .mode-cards-grid .mode-card:nth-child(4) {
+    animation: card-entrance 0.6s cubic-bezier(0.34,1.2,0.64,1) 0.44s both;
   }
 
   /* ── CARTE FRANCE ──────────────────────────────────────── */
