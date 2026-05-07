@@ -1,7 +1,6 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 
-// Offres d'emploi — décommenter pour ajouter des offres
 const offres: {
   poste: string;
   type: string;
@@ -26,34 +25,43 @@ const offres: {
 >
 
   <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
-  <section class="recrutement-hero">
-    <div class="container recrutement-hero__inner">
-      <p class="eyebrow-rouge animate-in" data-i18n="recrutement.eyebrow">Carrières</p>
-      <h1 class="recrutement-hero__titre animate-in" style="animation-delay:0.08s;">
-        <span class="wr-word" style="--wi:0" data-i18n-wr="recrutement.hero.w1">Rejoignez</span>
-        <span class="wr-word wr-word--shim" style="--wi:1" data-i18n-wr="recrutement.hero.w2">l'équipe</span>
+  <section class="rec-hero">
+    <div class="rec-blob rec-blob--1" aria-hidden="true"></div>
+    <div class="rec-blob rec-blob--2" aria-hidden="true"></div>
+    <div class="container rec-hero__inner animate-in">
+      <p class="eyebrow-rouge" data-i18n="recrutement.eyebrow">Carrières</p>
+      <h1 class="rec-hero__titre" data-i18n-html="recrutement.title">
+        Rejoignez <span>l'équipe</span>
       </h1>
-      <p class="recrutement-hero__sub animate-in" style="animation-delay:0.3s;" data-i18n="recrutement.subtitle">
+      <p class="rec-hero__sub" data-i18n="recrutement.subtitle">
         Une équipe à taille humaine, au cœur du port du Havre.
       </p>
     </div>
   </section>
 
   <!-- ═══ CHOIX ════════════════════════════════════════════════ -->
-  <section class="choix-section">
+  <section class="section modes-select" id="modesSelect">
     <div class="container">
-      <div class="choix-grid">
+      <div class="modes-intro reveal">
+        <p class="eyebrow-rouge" data-i18n="recrutement.choix.eyebrow">Par où commencer ?</p>
+        <h2 class="titre-section" style="margin:0.4rem 0 0.8rem;" data-i18n-html="recrutement.choix.title">
+          Que souhaitez-vous <span>faire ?</span>
+        </h2>
+      </div>
+
+      <div class="modes-grid reveal">
 
         <!-- Offres d'emploi -->
-        <a href="#offres" class="service-card choix-carte reveal" aria-label="Consulter les offres d'emploi">
+        <div class="service-card" data-mode="offres" role="button" tabindex="0"
+             aria-label="Consulter les offres d'emploi">
           <div class="service-card__icon-wrap">
-            <svg class="choix-svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+            <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
               <rect x="2" y="7" width="20" height="14" rx="2"/>
               <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
             </svg>
           </div>
           <div class="service-card__body">
-            <h2 class="service-card__title" data-i18n="recrutement.choix.offres.title">Offres d'emploi</h2>
+            <h3 class="service-card__title" data-i18n="recrutement.choix.offres.title">Offres d'emploi</h3>
             <p class="service-card__desc" data-i18n="recrutement.choix.offres.desc">Consultez nos postes actuellement ouverts chez PR Logistics.</p>
           </div>
           <div class="service-card__footer">
@@ -62,12 +70,17 @@ const offres: {
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </span>
           </div>
-        </a>
+          <div class="service-card__selected-badge" aria-hidden="true">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-i18n="recrutement.choix.selected">Sélectionné</span>
+          </div>
+        </div>
 
         <!-- Candidature spontanée -->
-        <a href="#candidature" class="service-card choix-carte reveal" style="animation-delay:0.08s;" aria-label="Déposer une candidature spontanée">
+        <div class="service-card" data-mode="candidature" role="button" tabindex="0"
+             aria-label="Déposer une candidature spontanée">
           <div class="service-card__icon-wrap">
-            <svg class="choix-svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+            <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
               <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
               <circle cx="9" cy="7" r="4"/>
               <line x1="19" y1="8" x2="19" y2="14"/>
@@ -75,7 +88,7 @@ const offres: {
             </svg>
           </div>
           <div class="service-card__body">
-            <h2 class="service-card__title" data-i18n="recrutement.choix.cand.title">Candidature spontanée</h2>
+            <h3 class="service-card__title" data-i18n="recrutement.choix.cand.title">Candidature spontanée</h3>
             <p class="service-card__desc" data-i18n="recrutement.choix.cand.desc">Votre profil nous intéresse, avec ou sans offre en cours.</p>
           </div>
           <div class="service-card__footer">
@@ -84,24 +97,37 @@ const offres: {
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </span>
           </div>
-        </a>
+          <div class="service-card__selected-badge" aria-hidden="true">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-i18n="recrutement.choix.selected">Sélectionné</span>
+          </div>
+        </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ═══ OFFRES D'EMPLOI ════════════════════════════════════════ -->
-  <section class="section offres-section" id="offres">
+  <!-- ═══ OFFRES D'EMPLOI (hidden until card selected) ══════════ -->
+  <section class="content-section" id="offresSection" style="display:none;">
     <div class="container">
-      <div class="reveal" style="text-align:center; margin-bottom:2.8rem;">
-        <p class="eyebrow-rouge" data-i18n="recrutement.offres.eyebrow">Postes ouverts</p>
-        <h2 class="titre-section" data-i18n-html="recrutement.offres.title">Nos <span>offres d'emploi</span></h2>
+
+      <!-- Topbar retour -->
+      <div class="form-topbar">
+        <button type="button" class="btn-retour" id="btnRetourOffres">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          <span data-i18n="recrutement.choix.retour">Changer de rubrique</span>
+        </button>
+        <div class="form-mode-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+          <span data-i18n="recrutement.choix.offres.title">Offres d'emploi</span>
+        </div>
       </div>
 
+      <!-- Contenu offres -->
       {offres.length > 0 ? (
-        <div class="offres-grid">
+        <div class="offres-grid" id="offresGrid">
           {offres.map((offre, i) => (
-            <div class="offre-carte reveal" style={`transition-delay:${i * 0.08}s`}>
+            <div class="offre-carte" style={`animation-delay:${i * 0.08}s`}>
               <div class="offre-carte__top">
                 <h3 class="offre-carte__poste">{offre.poste}</h3>
                 <div class="offre-carte__tags">
@@ -118,7 +144,7 @@ const offres: {
           ))}
         </div>
       ) : (
-        <div class="offres-vide reveal">
+        <div class="offres-vide" id="offresVide">
           <div class="offres-vide__icone">
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
               <rect x="2" y="7" width="20" height="14" rx="2"/>
@@ -131,25 +157,32 @@ const offres: {
           <p class="offres-vide__desc" data-i18n="recrutement.offres.empty.desc">
             Nos prochaines opportunités seront publiées ici. N'hésitez pas à nous envoyer une candidature spontanée.
           </p>
+          <button type="button" class="btn-switch-cand" id="btnSwitchCand" data-i18n="recrutement.choix.cand.cta">
+            Déposer ma candidature
+          </button>
         </div>
       )}
     </div>
   </section>
 
-  <!-- ═══ FORMULAIRE CANDIDATURE ════════════════════════════════ -->
-  <section class="section section--gris candidature-section" id="candidature">
-    <div class="container" id="candContainer">
+  <!-- ═══ FORMULAIRE CANDIDATURE (hidden until card selected) ═══ -->
+  <section class="content-section" id="formSection" style="display:none;">
+    <div class="container">
 
-      <div class="reveal" style="text-align:center; margin-bottom:2.8rem;" id="formHeader">
-        <p class="eyebrow-rouge" data-i18n="recrutement.form.eyebrow">Candidature spontanée</p>
-        <h2 class="titre-section" data-i18n-html="recrutement.form.title">Rejoignez <span>notre équipe</span></h2>
-        <p class="sous-titre" style="margin:0.8rem auto 0; max-width:440px;" data-i18n="recrutement.form.subtitle">
-          Envoyez-nous votre candidature. Nous la conservons et vous recontactons dès qu'une opportunité se présente.
-        </p>
+      <!-- Topbar retour -->
+      <div class="form-topbar">
+        <button type="button" class="btn-retour" id="btnRetourForm">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          <span data-i18n="recrutement.choix.retour">Changer de rubrique</span>
+        </button>
+        <div class="form-mode-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          <span data-i18n="recrutement.choix.cand.title">Candidature spontanée</span>
+        </div>
       </div>
 
       <!-- Formulaire -->
-      <div class="candidature-wrapper reveal" id="formWrapper">
+      <div class="candidature-wrapper" id="formWrapper">
         <form id="formCandidature" class="candidature-form" novalidate enctype="multipart/form-data">
 
           <div class="cand-row">
@@ -193,7 +226,6 @@ const offres: {
             <textarea id="message" name="message" class="cand-textarea" rows="4" placeholder="Votre parcours, vos motivations, vos disponibilités"></textarea>
           </div>
 
-          <!-- Upload CV -->
           <div class="cand-group cand-group--full">
             <label class="cand-label" for="cv" data-i18n="recrutement.field.cv">CV *</label>
             <label class="cand-upload" for="cv" id="cvLabel">
@@ -210,7 +242,6 @@ const offres: {
             </label>
           </div>
 
-          <!-- Upload Lettre -->
           <div class="cand-group cand-group--full">
             <label class="cand-label" for="lettre">
               <span data-i18n="recrutement.field.lettre">Lettre de motivation</span>
@@ -232,7 +263,6 @@ const offres: {
             </label>
           </div>
 
-          <!-- RGPD pré-coché -->
           <div class="cand-rgpd" id="rgpdWrap">
             <input type="checkbox" id="rgpd" name="rgpd" required checked />
             <label for="rgpd" class="cand-rgpd__label" data-i18n="recrutement.rgpd">
@@ -255,19 +285,17 @@ const offres: {
         <div class="cand-error" id="candError" hidden>
           <p data-i18n="recrutement.error">Une erreur est survenue. Veuillez réessayer ou nous contacter à <a href="mailto:lehavre@pr-logistics.fr">lehavre@pr-logistics.fr</a>.</p>
         </div>
+
+        <!-- Succès -->
+        <div class="cand-success" id="candSuccess" hidden>
+          <p class="eyebrow-rouge" style="margin-bottom:0.8rem;">Merci</p>
+          <div class="success-words" id="successWords"></div>
+          <p class="success-sub" id="successSub" data-i18n="recrutement.success.sub">
+            Notre équipe étudie chaque profil avec soin.<br>Vous recevrez un email de confirmation dans quelques instants.
+          </p>
+        </div>
+
       </div>
-
-    </div>
-  </section>
-
-  <!-- ═══ SUCCÈS ═══════════════════════════════════════════════ -->
-  <section class="success-section" id="successSection" hidden aria-live="polite">
-    <div class="container success-inner">
-      <p class="eyebrow-rouge success-eyebrow animate-in">Merci</p>
-      <div class="success-words" id="successWords"></div>
-      <p class="success-sub" id="successSub" data-i18n="recrutement.success.sub">
-        Notre équipe étudie chaque profil avec soin.<br>Vous recevrez un email de confirmation dans quelques instants.
-      </p>
     </div>
   </section>
 
@@ -276,7 +304,112 @@ const offres: {
 <script is:inline>
 (function () {
 
-  // ── Fichier upload : prévisualisation ─────────────────────────
+  // ── Sélection mode ────────────────────────────────────────────
+  var grid = document.querySelector('.modes-grid');
+
+  function selectMode(mode) {
+    // Mise à jour visuelle des cartes
+    grid.classList.add('has-selection');
+    document.querySelectorAll('.service-card[data-mode]').forEach(function(c) {
+      c.classList.toggle('selected', c.dataset.mode === mode);
+    });
+
+    var offresSection = document.getElementById('offresSection');
+    var formSection   = document.getElementById('formSection');
+
+    // Préparer les sections (reset état)
+    [offresSection, formSection].forEach(function(s) {
+      if (s) {
+        s.style.opacity   = '0';
+        s.style.transform = 'translateY(28px)';
+        s.style.transition = 'none';
+        s.style.display    = 'none';
+      }
+    });
+
+    var target = mode === 'offres' ? offresSection : formSection;
+    if (!target) return;
+
+    target.style.display = 'block';
+
+    // Animer les éléments enfants en stagger
+    var topbar  = target.querySelector('.form-topbar');
+    var content = target.querySelector('.offres-grid, .offres-vide, .candidature-wrapper');
+    var els = [topbar, content].filter(Boolean);
+    els.forEach(function(el) {
+      el.style.transition = 'none';
+      el.style.opacity    = '0';
+      el.style.transform  = 'translateY(28px)';
+    });
+
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        target.style.transition  = 'opacity 0.55s cubic-bezier(0.16,1,0.3,1), transform 0.55s cubic-bezier(0.16,1,0.3,1)';
+        target.style.opacity     = '1';
+        target.style.transform   = 'translateY(0)';
+
+        els.forEach(function(el, i) {
+          setTimeout(function() {
+            el.style.transition = 'opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1)';
+            el.style.opacity    = '1';
+            el.style.transform  = 'translateY(0)';
+          }, 80 + i * 90);
+        });
+
+        // Scroll fluide
+        setTimeout(function() {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 120);
+      });
+    });
+  }
+
+  // Clic sur les cartes
+  document.querySelectorAll('.service-card[data-mode]').forEach(function(card) {
+    card.addEventListener('click', function() { selectMode(this.dataset.mode); });
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectMode(this.dataset.mode); }
+    });
+  });
+
+  // Boutons retour
+  ['btnRetourOffres', 'btnRetourForm'].forEach(function(id) {
+    var btn = document.getElementById(id);
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+      // Réinitialiser
+      grid.classList.remove('has-selection');
+      document.querySelectorAll('.service-card[data-mode]').forEach(function(c) {
+        c.classList.remove('selected');
+      });
+      ['offresSection', 'formSection'].forEach(function(sid) {
+        var s = document.getElementById(sid);
+        if (s) {
+          s.style.transition = 'opacity 0.3s ease';
+          s.style.opacity    = '0';
+          setTimeout(function() { s.style.display = 'none'; }, 300);
+        }
+      });
+      setTimeout(function() {
+        document.getElementById('modesSelect').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+    });
+  });
+
+  // Bouton "Déposer ma candidature" depuis offres vide
+  var btnSwitch = document.getElementById('btnSwitchCand');
+  if (btnSwitch) btnSwitch.addEventListener('click', function() { selectMode('candidature'); });
+
+  // Boutons "Postuler" depuis offres
+  document.querySelectorAll('[data-poste]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var posteInput = document.getElementById('poste');
+      if (posteInput) posteInput.value = this.getAttribute('data-poste');
+      selectMode('candidature');
+    });
+  });
+
+  // ── Fichier upload ────────────────────────────────────────────
   function setupFileInput(inputId, textId) {
     var input = document.getElementById(inputId);
     var text  = document.getElementById(textId);
@@ -295,25 +428,15 @@ const offres: {
       }
     });
   }
-  setupFileInput('cv',     'cvText');
+  setupFileInput('cv', 'cvText');
   setupFileInput('lettre', 'lettreText');
 
-  // ── Boutons "Postuler" depuis les offres ──────────────────────
-  document.querySelectorAll('[data-poste]').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var posteInput = document.getElementById('poste');
-      if (posteInput) posteInput.value = this.getAttribute('data-poste');
-      document.getElementById('candidature').scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-
-  // ── Word reveal (section succès) ──────────────────────────────
+  // ── Word reveal succès ────────────────────────────────────────
   function showWordReveal(text) {
     var el = document.getElementById('successWords');
     if (!el) return;
-    var words = text.split(' ');
     el.innerHTML = '';
-    words.forEach(function(word, i) {
+    text.split(' ').forEach(function(word, i) {
       var span = document.createElement('span');
       span.className = 'sw';
       span.textContent = word;
@@ -329,14 +452,13 @@ const offres: {
   var form       = document.getElementById('formCandidature');
   var btn        = document.getElementById('candSubmit');
   var formWrap   = document.getElementById('formWrapper');
-  var formHeader = document.getElementById('formHeader');
   var errBox     = document.getElementById('candError');
-  var successSec = document.getElementById('successSection');
+  var successBox = document.getElementById('candSuccess');
   var successSub = document.getElementById('successSub');
 
   if (!form) return;
 
-  form.addEventListener('submit', async function (e) {
+  form.addEventListener('submit', async function(e) {
     e.preventDefault();
 
     var rgpd = document.getElementById('rgpd');
@@ -346,7 +468,6 @@ const offres: {
       return;
     }
 
-    // État chargement
     btn.querySelector('.cand-btn__text').hidden = true;
     btn.querySelector('.cand-btn__loading').hidden = false;
     btn.disabled = true;
@@ -355,65 +476,46 @@ const offres: {
     var t0 = Date.now();
 
     try {
-      var fd = new FormData(form);
+      var fd  = new FormData(form);
       var res = await fetch('/send-candidature.php', { method: 'POST', body: fd });
-
-      // Lire comme texte puis parser pour éviter l'échec sur sortie PHP parasite
       var raw = await res.text();
       var data;
       try { data = JSON.parse(raw.trim()); } catch(_) { data = {}; }
 
-      // Délai minimum 700ms pour que l'état "envoi" soit visible
       var elapsed = Date.now() - t0;
       if (elapsed < 700) await new Promise(function(r) { setTimeout(r, 700 - elapsed); });
 
       if (data.success) {
-        // Sortie du formulaire
-        formWrap.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
-        formWrap.style.opacity = '0';
-        formWrap.style.transform = 'translateY(-16px)';
-        formHeader.style.transition = 'opacity 0.25s ease';
-        formHeader.style.opacity = '0';
-
+        // Masquer le formulaire, montrer le succès
+        form.style.transition = 'opacity 0.3s ease';
+        form.style.opacity    = '0';
         setTimeout(function() {
-          formWrap.hidden = true;
-          formHeader.hidden = true;
+          form.hidden       = true;
+          errBox.hidden     = true;
+          successBox.hidden = false;
+          successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-          // Révéler la section succès
-          successSec.hidden = false;
-          successSec.style.opacity = '0';
-          requestAnimationFrame(function() {
-            successSec.style.transition = 'opacity 0.5s ease';
-            successSec.style.opacity = '1';
-          });
-          successSec.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-          // Texte word-reveal selon la langue
           var lang = window.__lang || 'fr';
-          var txt = lang === 'en'
+          showWordReveal(lang === 'en'
             ? 'Your application is in good hands.'
-            : 'Votre candidature est entre de bonnes mains.';
-          showWordReveal(txt);
+            : 'Votre candidature est entre de bonnes mains.');
 
-          // Faire apparaître le sous-titre avec délai
           if (successSub) {
-            successSub.style.opacity = '0';
-            successSub.style.transform = 'translateY(12px)';
+            successSub.style.opacity    = '0';
+            successSub.style.transform  = 'translateY(12px)';
             successSub.style.transition = 'opacity 0.5s ease 0.9s, transform 0.5s ease 0.9s';
             requestAnimationFrame(function() {
               requestAnimationFrame(function() {
-                successSub.style.opacity = '1';
+                successSub.style.opacity   = '1';
                 successSub.style.transform = 'translateY(0)';
               });
             });
           }
-        }, 350);
-
+        }, 320);
       } else {
         throw new Error(data.error || 'Erreur serveur');
       }
-
-    } catch (err) {
+    } catch (_) {
       errBox.hidden = false;
       btn.querySelector('.cand-btn__text').hidden = false;
       btn.querySelector('.cand-btn__loading').hidden = true;
@@ -421,7 +523,7 @@ const offres: {
     }
   });
 
-  // ── Retirer la classe d'erreur RGPD au premier check ─────────
+  // Retirer erreur RGPD au premier changement
   var rgpdInput = document.getElementById('rgpd');
   if (rgpdInput) {
     rgpdInput.addEventListener('change', function() {
@@ -434,105 +536,112 @@ const offres: {
 
 <style>
   /* ── HERO ───────────────────────────────────────────────────── */
-  .recrutement-hero {
-    background: linear-gradient(160deg, var(--gris-clair) 0%, #fff 60%);
-    padding: 5rem 0 4rem;
+  .rec-hero {
+    position: relative;
+    background: linear-gradient(135deg, #fff 0%, var(--gris-clair) 100%);
+    padding: 4.5rem 0 3.5rem;
     text-align: center;
+    overflow: hidden;
   }
 
-  .recrutement-hero__titre {
-    font-size: clamp(2.8rem, 6vw, 5rem);
+  .rec-blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(80px);
+  }
+  .rec-blob--1 { width: 380px; height: 380px; top: -140px; right: -70px; background: rgba(227,6,19,0.08); }
+  .rec-blob--2 { width: 280px; height: 280px; bottom: -100px; left: -50px; background: rgba(227,6,19,0.06); }
+
+  .rec-hero__inner { position: relative; }
+
+  .rec-hero__titre {
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
     font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 1.08;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
     margin: 0.5rem 0 0;
     color: var(--gris-fonce);
   }
 
-  .recrutement-hero__sub {
-    font-size: 1.05rem;
+  .rec-hero__titre span { color: var(--rouge); }
+
+  .rec-hero__sub {
+    font-size: 1rem;
     color: var(--gris-moyen);
-    margin: 1rem auto 0;
-    max-width: 440px;
+    margin: 0.9rem auto 0;
+    max-width: 420px;
     line-height: 1.55;
   }
 
-  /* Word reveal hero */
-  .wr-word {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: wr-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: calc(var(--wi, 0) * 0.14s + 0.2s);
-  }
+  /* ── SECTION CHOIX ──────────────────────────────────────────── */
+  .modes-select { background: var(--gris-clair); }
+  .modes-intro  { text-align: center; margin-bottom: 3rem; }
 
-  /* Shimmer sur le mot accent */
-  .wr-word--shim {
-    background: linear-gradient(90deg,
-      var(--rouge) 0%,
-      #ff5555 30%,
-      var(--rouge) 55%,
-      var(--rouge) 100%
-    );
-    background-size: 250% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation:
-      wr-up    0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards calc(0.14s + 0.2s),
-      txt-shim 4s  linear infinite 1s;
-  }
-
-  @keyframes wr-up {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes txt-shim {
-    0%   { background-position: 250% center; }
-    100% { background-position: -250% center; }
-  }
-
-  /* ── CHOIX CARDS ────────────────────────────────────────────── */
-  .choix-section {
-    background: var(--gris-clair);
-    padding: 3.5rem 0;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-  }
-
-  .choix-grid {
+  .modes-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    max-width: 760px;
+    gap: 1.4rem;
+    max-width: 680px;
     margin: 0 auto;
   }
 
-  .choix-carte {
-    text-decoration: none;
-    animation: card-arrive 0.5s ease both;
+  @media (max-width: 560px) { .modes-grid { grid-template-columns: 1fr; } }
+
+  /* ── CONTENT SECTIONS ───────────────────────────────────────── */
+  .content-section {
+    background: var(--gris-clair);
+    padding: 0 0 5rem;
   }
 
-  .choix-carte:nth-child(1) { animation-delay: 0s; }
-  .choix-carte:nth-child(2) { animation-delay: 0.08s; }
-
-  @keyframes card-arrive {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
+  .form-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 860px;
+    margin: 0 auto 2rem;
+    padding-top: 3rem;
+    gap: 1rem;
   }
 
-  .choix-svg { color: var(--rouge); }
-
-  @media (max-width: 600px) {
-    .choix-grid { grid-template-columns: 1fr; }
+  .btn-retour {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--gris-moyen);
+    background: white;
+    border: 1.5px solid #e8e8e8;
+    border-radius: 2rem;
+    padding: 0.45rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
   }
+  .btn-retour:hover { border-color: var(--rouge); color: var(--rouge); }
+
+  .form-mode-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    background: white;
+    border: 1.5px solid #e8e8e8;
+    border-radius: 2rem;
+    padding: 0.45rem 1rem;
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--gris-fonce);
+  }
+  .form-mode-badge svg { color: var(--rouge); flex-shrink: 0; }
 
   /* ── OFFRES ─────────────────────────────────────────────────── */
-  .offres-section { background: white; }
-
   .offres-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
+    gap: 1.4rem;
+    max-width: 860px;
+    margin: 0 auto;
   }
 
   .offre-carte {
@@ -544,66 +653,37 @@ const offres: {
     display: flex;
     flex-direction: column;
     gap: 0.9rem;
+    animation: card-arrive 0.5s ease both;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
+  .offre-carte:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(227,6,19,0.10); }
 
-  .offre-carte:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(227,6,19,0.10);
-  }
+  .offre-carte__poste { font-size: 1.1rem; font-weight: 800; color: var(--gris-fonce); letter-spacing: -0.02em; margin: 0; }
+  .offre-carte__tags  { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 
-  .offre-carte__poste {
-    font-size: 1.12rem;
-    font-weight: 800;
-    color: var(--gris-fonce);
-    letter-spacing: -0.02em;
-    margin: 0;
-  }
-
-  .offre-carte__tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-
-  .offre-tag {
-    font-size: 0.72rem;
-    font-weight: 700;
-    padding: 0.25rem 0.7rem;
-    border-radius: 2rem;
-    letter-spacing: 0.03em;
-  }
+  .offre-tag { font-size: 0.72rem; font-weight: 700; padding: 0.25rem 0.7rem; border-radius: 2rem; letter-spacing: 0.03em; }
   .offre-tag--type { background: rgba(227,6,19,0.08); color: var(--rouge); }
   .offre-tag--lieu { background: rgba(0,0,0,0.05); color: var(--gris-moyen); }
 
-  .offre-carte__desc {
-    font-size: 0.87rem;
-    color: var(--gris-moyen);
-    line-height: 1.6;
-    flex: 1;
-    margin: 0;
-  }
+  .offre-carte__desc { font-size: 0.87rem; color: var(--gris-moyen); line-height: 1.6; flex: 1; margin: 0; }
 
   .offre-carte__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.87rem;
-    font-weight: 700;
-    color: var(--rouge);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    transition: gap 0.2s ease;
-    font-family: inherit;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.87rem; font-weight: 700; color: var(--rouge);
+    background: none; border: none; cursor: pointer; padding: 0;
+    transition: gap 0.2s; font-family: inherit;
   }
   .offre-carte__cta:hover { gap: 0.7rem; }
 
   /* État vide */
   .offres-vide {
-    background: var(--gris-clair);
+    background: white;
     border-radius: 2rem;
     padding: 4rem 2rem;
     text-align: center;
     max-width: 520px;
     margin: 0 auto;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.05);
   }
 
   .offres-vide__icone {
@@ -611,230 +691,141 @@ const offres: {
     background: rgba(227,6,19,0.07);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 1.4rem;
-    color: var(--rouge);
+    margin: 0 auto 1.4rem; color: var(--rouge);
   }
 
-  .offres-vide__titre {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--gris-fonce);
-    margin: 0 0 0.7rem;
-  }
+  .offres-vide__titre { font-size: 1.12rem; font-weight: 700; color: var(--gris-fonce); margin: 0 0 0.7rem; }
+  .offres-vide__desc  { font-size: 0.9rem; color: var(--gris-moyen); line-height: 1.65; margin: 0 0 1.6rem; }
 
-  .offres-vide__desc {
-    font-size: 0.9rem;
-    color: var(--gris-moyen);
-    line-height: 1.65;
-    margin: 0;
+  .btn-switch-cand {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--rouge); color: white;
+    font-size: 0.9rem; font-weight: 700;
+    padding: 0.8rem 2rem; border-radius: 3rem;
+    border: none; cursor: pointer; font-family: inherit;
+    transition: opacity 0.2s, transform 0.2s;
   }
+  .btn-switch-cand:hover { opacity: 0.88; transform: translateY(-2px); }
 
   /* ── FORMULAIRE ─────────────────────────────────────────────── */
-  .candidature-section { padding-bottom: 6rem; }
-
   .candidature-wrapper {
     background: white;
     border-radius: 2rem;
     padding: 3rem 3.5rem;
     box-shadow: 0 4px 40px rgba(0,0,0,0.06);
-    max-width: 780px;
+    max-width: 860px;
     margin: 0 auto;
   }
 
   .candidature-form { display: flex; flex-direction: column; gap: 1.4rem; }
 
-  .cand-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.2rem;
-  }
-
+  .cand-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
   .cand-group { display: flex; flex-direction: column; gap: 0.42rem; }
   .cand-group--full { grid-column: 1 / -1; }
 
   .cand-label {
-    font-size: 0.83rem;
-    font-weight: 700;
-    color: var(--gris-fonce);
-    letter-spacing: -0.01em;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
+    font-size: 0.83rem; font-weight: 700;
+    color: var(--gris-fonce); letter-spacing: -0.01em;
+    display: flex; align-items: center; gap: 0.3rem;
   }
+  .cand-optional { font-weight: 400; color: var(--gris-moyen); font-size: 0.78rem; }
 
-  .req-star { color: var(--rouge); }
-
-  .cand-optional {
-    font-weight: 400;
-    color: var(--gris-moyen);
-    font-size: 0.78rem;
-  }
-
-  .cand-input,
-  .cand-textarea {
-    width: 100%;
-    border: 1.5px solid rgba(0,0,0,0.12);
-    border-radius: 0.85rem;
-    padding: 0.8rem 1rem;
-    font-size: 0.92rem;
-    color: var(--gris-fonce);
-    background: #fafafa;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    outline: none;
-    font-family: inherit;
+  .cand-input, .cand-textarea {
+    width: 100%; border: 1.5px solid rgba(0,0,0,0.12);
+    border-radius: 0.85rem; padding: 0.8rem 1rem;
+    font-size: 0.92rem; color: var(--gris-fonce);
+    background: #fafafa; outline: none; font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
     box-sizing: border-box;
   }
-
-  .cand-input:focus,
-  .cand-textarea:focus {
-    border-color: var(--rouge);
-    background: white;
+  .cand-input:focus, .cand-textarea:focus {
+    border-color: var(--rouge); background: white;
     box-shadow: 0 0 0 3px rgba(227,6,19,0.08);
   }
-
   .cand-textarea { resize: vertical; min-height: 108px; }
 
-  /* Upload zones */
   .cand-upload {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 1.6rem 1rem;
-    border: 2px dashed rgba(0,0,0,0.14);
-    border-radius: 1rem;
-    cursor: pointer;
-    background: #fafafa;
-    transition: border-color 0.2s ease, background 0.2s ease;
-    text-align: center;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.4rem; padding: 1.6rem 1rem;
+    border: 2px dashed rgba(0,0,0,0.14); border-radius: 1rem;
+    cursor: pointer; background: #fafafa; text-align: center;
+    transition: border-color 0.2s, background 0.2s;
   }
-
-  .cand-upload:hover { border-color: var(--rouge); background: rgba(227,6,19,0.025); }
-  .cand-upload--ok   { border-color: #16a34a; background: rgba(22,163,74,0.04); }
-
-  .cand-upload__ico { color: var(--gris-moyen); margin-bottom: 0.2rem; }
+  .cand-upload:hover  { border-color: var(--rouge); background: rgba(227,6,19,0.025); }
+  .cand-upload--ok    { border-color: #16a34a; background: rgba(22,163,74,0.04); }
+  .cand-upload__ico   { color: var(--gris-moyen); margin-bottom: 0.2rem; }
   .cand-upload--ok .cand-upload__ico { color: #16a34a; }
-
   .cand-upload__text  { font-size: 0.87rem; font-weight: 600; color: var(--gris-fonce); }
   .cand-upload__hint  { font-size: 0.74rem; color: #aaa; }
+  .cand-upload__input { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
 
-  .cand-upload__input {
-    position: absolute;
-    width: 1px; height: 1px;
-    overflow: hidden;
-    clip: rect(0,0,0,0);
-  }
-
-  /* RGPD */
   .cand-rgpd {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.7rem;
-    padding: 1rem 1.2rem;
-    background: var(--gris-clair);
-    border-radius: 0.85rem;
-    transition: background 0.2s;
+    display: flex; align-items: flex-start; gap: 0.7rem;
+    padding: 1rem 1.2rem; background: var(--gris-clair);
+    border-radius: 0.85rem; transition: background 0.2s;
   }
-
   .cand-rgpd--error { background: rgba(227,6,19,0.06); }
+  .cand-rgpd input[type="checkbox"] { width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0; accent-color: var(--rouge); }
+  .cand-rgpd__label { font-size: 0.79rem; color: var(--gris-moyen); line-height: 1.55; cursor: pointer; }
 
-  .cand-rgpd input[type="checkbox"] {
-    width: 16px; height: 16px;
-    margin-top: 2px;
-    flex-shrink: 0;
-    accent-color: var(--rouge);
-  }
-
-  .cand-rgpd__label {
-    font-size: 0.79rem;
-    color: var(--gris-moyen);
-    line-height: 1.55;
-    cursor: pointer;
-  }
-
-  /* Bouton */
   .cand-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-    background: var(--rouge);
-    color: white;
-    font-size: 0.95rem;
-    font-weight: 700;
-    padding: 0.95rem 2.5rem;
-    border-radius: 3rem;
-    border: none;
-    cursor: pointer;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    align-self: flex-start;
-    font-family: inherit;
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+    background: var(--rouge); color: white; font-size: 0.95rem; font-weight: 700;
+    padding: 0.95rem 2.5rem; border-radius: 3rem; border: none;
+    cursor: pointer; font-family: inherit; align-self: flex-start;
+    transition: opacity 0.2s, transform 0.2s;
   }
-
   .cand-btn:hover:not(:disabled) { opacity: 0.88; transform: translateY(-2px); }
   .cand-btn:disabled { opacity: 0.65; cursor: not-allowed; }
 
   @keyframes spin { to { transform: rotate(360deg); } }
   .cand-spinner { animation: spin 0.8s linear infinite; }
 
-  /* Erreur */
   .cand-error {
-    background: rgba(227,6,19,0.06);
-    border: 1px solid rgba(227,6,19,0.2);
-    border-radius: 0.85rem;
-    padding: 1rem 1.2rem;
-    font-size: 0.87rem;
-    color: var(--rouge);
-    line-height: 1.5;
-    margin-top: 1rem;
+    background: rgba(227,6,19,0.06); border: 1px solid rgba(227,6,19,0.2);
+    border-radius: 0.85rem; padding: 1rem 1.2rem;
+    font-size: 0.87rem; color: var(--rouge); line-height: 1.5; margin-top: 1rem;
   }
   .cand-error a { color: var(--rouge); font-weight: 600; }
 
-  /* ── SECTION SUCCÈS ─────────────────────────────────────────── */
-  .success-section {
-    background: white;
-    padding: 7rem 0 6rem;
+  /* Succès intégré dans le wrapper */
+  .cand-success {
+    padding: 3.5rem 1rem 2rem;
     text-align: center;
   }
 
-  .success-eyebrow { margin-bottom: 1rem; }
-
   .success-words {
-    font-size: clamp(2.2rem, 5.5vw, 4rem);
+    font-size: clamp(1.9rem, 4.5vw, 3rem);
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1.12;
     color: var(--gris-fonce);
-    margin: 0 0 1.8rem;
-    max-width: 760px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 0 1.5rem;
   }
 
-  /* Mots individuels (générés par JS) */
-  .sw {
-    display: inline-block;
-    margin-right: 0.22em;
-    opacity: 0;
-    transform: translateY(22px);
-  }
-
+  .sw { display: inline-block; margin-right: 0.22em; opacity: 0; transform: translateY(20px); }
   .sw-active .sw {
     animation: sw-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: calc(var(--wi, 0) * 0.07s + 0.15s);
+    animation-delay: calc(var(--wi, 0) * 0.07s + 0.1s);
   }
-
-  @keyframes sw-up {
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes sw-up { to { opacity: 1; transform: translateY(0); } }
 
   .success-sub {
-    font-size: 1rem;
-    color: var(--gris-moyen);
-    line-height: 1.7;
-    max-width: 400px;
-    margin: 0 auto;
-    opacity: 0;
+    font-size: 0.96rem; color: var(--gris-moyen);
+    line-height: 1.7; max-width: 380px; margin: 0 auto;
+  }
+
+  /* ── ANIMATIONS ─────────────────────────────────────────────── */
+  @keyframes card-arrive {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes card-select-bounce {
+    0%   { transform: translateY(0) scale(1); }
+    35%  { transform: translateY(-8px) scale(1.04); }
+    65%  { transform: translateY(-4px) scale(1.01); }
+    100% { transform: translateY(-4px) scale(1); }
   }
 
   /* ── RESPONSIVE ─────────────────────────────────────────────── */
@@ -842,12 +833,11 @@ const offres: {
     .candidature-wrapper { padding: 2rem 1.5rem; }
     .cand-row { grid-template-columns: 1fr; }
     .cand-btn { width: 100%; }
-    .recrutement-hero { padding: 3.5rem 0 3rem; }
   }
 
   @media (max-width: 480px) {
     .candidature-wrapper { padding: 1.5rem 1.2rem; border-radius: 1.4rem; }
     .offres-vide { padding: 3rem 1.5rem; }
-    .success-section { padding: 5rem 0 4rem; }
+    .form-topbar { flex-direction: column; align-items: flex-start; padding-top: 2rem; }
   }
 </style>
