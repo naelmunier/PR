@@ -29,11 +29,12 @@ const offres: {
     <div class="rec-blob rec-blob--1" aria-hidden="true"></div>
     <div class="rec-blob rec-blob--2" aria-hidden="true"></div>
     <div class="container rec-hero__inner animate-in">
-      <p class="eyebrow-rouge" data-i18n="recrutement.eyebrow">Carrières</p>
-      <h1 class="rec-hero__titre" data-i18n-html="recrutement.title">
-        Rejoignez <span>l'équipe</span>
+      <p class="eyebrow-rouge wr" style="--d:0" data-i18n="recrutement.eyebrow">Carrières</p>
+      <h1 class="rec-hero__titre">
+        <span class="wr" style="--d:1">Rejoignez</span>
+        <span class="wr rec-hero__accent" style="--d:2">l'équipe</span>
       </h1>
-      <p class="rec-hero__sub" data-i18n="recrutement.subtitle">
+      <p class="rec-hero__sub wr" style="--d:3" data-i18n="recrutement.subtitle">
         Une équipe à taille humaine, au cœur du port du Havre.
       </p>
     </div>
@@ -43,9 +44,9 @@ const offres: {
   <section class="section modes-select" id="modesSelect">
     <div class="container">
       <div class="modes-intro reveal">
-        <p class="eyebrow-rouge" data-i18n="recrutement.choix.eyebrow">Par où commencer ?</p>
-        <h2 class="titre-section" style="margin:0.4rem 0 0.8rem;" data-i18n-html="recrutement.choix.title">
-          Que souhaitez-vous <span>faire ?</span>
+        <p class="eyebrow-rouge wr" style="--d:0.5" data-i18n="recrutement.choix.eyebrow">Par où commencer ?</p>
+        <h2 class="titre-section" style="margin:0.4rem 0 0.8rem;">
+          <span class="wr" style="--d:0.7">Que souhaitez-vous <em class="rec-hero__accent">faire ?</em></span>
         </h2>
       </div>
 
@@ -187,26 +188,26 @@ const offres: {
 
           <div class="cand-row">
             <div class="cand-group">
-              <label class="cand-label" for="prenom" data-i18n="recrutement.field.prenom">Prénom *</label>
+              <label class="cand-label" for="prenom"><span data-i18n="recrutement.field.prenom">Prénom</span> <span class="req-star">*</span></label>
               <input type="text" id="prenom" name="prenom" class="cand-input" placeholder="Prénom" required autocomplete="given-name" />
             </div>
             <div class="cand-group">
-              <label class="cand-label" for="nom" data-i18n="recrutement.field.nom">Nom *</label>
+              <label class="cand-label" for="nom"><span data-i18n="recrutement.field.nom">Nom</span> <span class="req-star">*</span></label>
               <input type="text" id="nom" name="nom" class="cand-input" placeholder="Nom" required autocomplete="family-name" />
             </div>
           </div>
 
           <div class="cand-row">
             <div class="cand-group">
-              <label class="cand-label" for="cand-email" data-i18n="recrutement.field.email">Email *</label>
+              <label class="cand-label" for="cand-email"><span data-i18n="recrutement.field.email">Email</span> <span class="req-star">*</span></label>
               <input type="email" id="cand-email" name="email" class="cand-input" placeholder="prenom@exemple.fr" required autocomplete="email" />
             </div>
             <div class="cand-group">
               <label class="cand-label" for="telephone">
                 <span data-i18n="recrutement.field.tel">Téléphone</span>
-                <span class="cand-optional" data-i18n="recrutement.optional">(optionnel)</span>
+                <span class="req-star">*</span>
               </label>
-              <input type="tel" id="telephone" name="telephone" class="cand-input" placeholder="+33 6 00 00 00 00" autocomplete="tel" />
+              <input type="tel" id="telephone" name="telephone" class="cand-input" placeholder="+33 6 00 00 00 00" required autocomplete="tel" />
             </div>
           </div>
 
@@ -227,7 +228,7 @@ const offres: {
           </div>
 
           <div class="cand-group cand-group--full">
-            <label class="cand-label" for="cv" data-i18n="recrutement.field.cv">CV *</label>
+            <label class="cand-label" for="cv"><span data-i18n="recrutement.field.cv">CV</span> <span class="req-star">*</span></label>
             <label class="cand-upload" for="cv" id="cvLabel">
               <div class="cand-upload__ico">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -264,9 +265,10 @@ const offres: {
           </div>
 
           <div class="cand-rgpd" id="rgpdWrap">
-            <input type="checkbox" id="rgpd" name="rgpd" required checked />
-            <label for="rgpd" class="cand-rgpd__label" data-i18n="recrutement.rgpd">
-              J'accepte que mes données soient traitées par PR Logistics dans le cadre de ma candidature, conformément au RGPD.
+            <input type="checkbox" id="rgpd" name="rgpd" required />
+            <label for="rgpd" class="cand-rgpd__label">
+              <span data-i18n="recrutement.rgpd">J'accepte que mes données soient traitées par PR Logistics dans le cadre de ma candidature, conformément au RGPD.</span>
+              <span class="req-star">*</span>
             </label>
           </div>
 
@@ -564,7 +566,21 @@ const offres: {
     color: var(--gris-fonce);
   }
 
-  .rec-hero__titre span { color: var(--rouge); }
+  .rec-hero__accent { color: var(--rouge); font-style: normal; }
+
+  /* ── WORD REVEAL ────────────────────────────────────────────── */
+  .wr {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(18px);
+    animation: wr-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: calc(var(--d, 0) * 0.12s + 0.15s);
+  }
+  @keyframes wr-up {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .req-star { color: var(--rouge); font-weight: 700; }
 
   .rec-hero__sub {
     font-size: 1rem;
@@ -594,7 +610,7 @@ const offres: {
     background: white;
     border: 1.5px solid #e8e8e8;
     border-radius: var(--rayon-lg);
-    padding: 2.4rem 2rem 2rem;
+    padding: 3rem 2.4rem 2.4rem;
     display: flex;
     flex-direction: column;
     gap: 0;
@@ -653,13 +669,13 @@ const offres: {
   .service-card.selected .service-card__selected-badge { display: flex; }
 
   .service-card__icon-wrap {
-    width: 72px; height: 72px;
+    width: 88px; height: 88px;
     background: var(--gris-clair);
     border-radius: var(--rayon);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.6rem;
     transition: background 0.25s;
     color: var(--gris-moyen);
   }
@@ -668,10 +684,10 @@ const offres: {
   .service-card__body { flex: 1; }
 
   .service-card__title {
-    font-size: 1.12rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--gris-fonce);
-    margin: 0 0 0.6rem;
+    margin: 0 0 0.7rem;
     line-height: 1.3;
   }
   .service-card.selected .service-card__title { color: var(--rouge); }
@@ -724,9 +740,9 @@ const offres: {
     gap: 0.45rem;
     font-size: 0.84rem;
     font-weight: 600;
-    color: var(--gris-moyen);
+    color: var(--gris-fonce);
     background: white;
-    border: 1.5px solid #e8e8e8;
+    border: 1.5px solid #d0d0d0;
     border-radius: 2rem;
     padding: 0.45rem 1rem;
     cursor: pointer;
