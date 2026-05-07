@@ -4,6 +4,7 @@
  * Déployer sur Hostinger avec le reste du site Astro.
  */
 
+ob_start(); // Capturer toute sortie parasite avant le JSON
 header('Content-Type: application/json; charset=utf-8');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
