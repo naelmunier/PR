@@ -31,8 +31,8 @@ const offres: {
     <div class="container rec-hero__inner animate-in">
       <p class="eyebrow-rouge wr" style="--d:0" data-i18n="recrutement.eyebrow">Carrières</p>
       <h1 class="rec-hero__titre">
-        <span class="wr" style="--d:1">Rejoignez</span>
-        <span class="wr rec-hero__accent" style="--d:2">l'équipe</span>
+        <span class="wr" style="--d:1" data-i18n="recrutement.hero.w1">Rejoignez</span>
+        <span class="wr rec-hero__accent" style="--d:2" data-i18n="recrutement.hero.w2">l'équipe</span>
       </h1>
       <p class="rec-hero__sub wr" style="--d:3" data-i18n="recrutement.subtitle">
         Une équipe à taille humaine, au cœur du port du Havre.
@@ -46,7 +46,7 @@ const offres: {
       <div class="modes-intro reveal">
         <p class="eyebrow-rouge wr" style="--d:0.5" data-i18n="recrutement.choix.eyebrow">Par où commencer ?</p>
         <h2 class="titre-section" style="margin:0.4rem 0 0.8rem;">
-          <span class="wr" style="--d:0.7">Que souhaitez-vous <em class="rec-hero__accent">faire ?</em></span>
+          <span class="wr" style="--d:0.7" data-i18n-html="recrutement.choix.title">Que souhaitez-vous <em class="rec-hero__accent">faire ?</em></span>
         </h2>
       </div>
 
@@ -593,6 +593,8 @@ const offres: {
   /* ── SECTION CHOIX ──────────────────────────────────────────── */
   .modes-select { background: var(--gris-clair); }
   .modes-intro  { text-align: center; margin-bottom: 3rem; }
+  /* Override : empêche .titre-section span de colorer le .wr en rouge */
+  .modes-intro .wr { color: var(--gris-fonce); }
 
   .modes-grid {
     display: grid;
