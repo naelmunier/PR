@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="fr"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Option B — Carte 3D</title><style>*,*:before,*:after{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,Inter,sans-serif;background:#0d0f14;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:2.5rem 1.5rem}.carte-section{background:#161820;border:1px solid rgba(255,255,255,.07);border-radius:2rem;padding:2.5rem 3rem;max-width:960px;width:100%;box-shadow:0 30px 100px #00000080}.carte-header{text-align:center;margin-bottom:2rem}.eyebrow{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#e30613;background:#e306131a;border:1px solid rgba(227,6,19,.22);border-radius:2rem;padding:.25rem .9rem;display:inline-block;margin-bottom:.8rem}h2{font-size:2rem;font-weight:700;letter-spacing:-.03em;color:#f5f5f7;margin-bottom:.35rem}h2 span{color:#e30613}.carte-subtitle{font-size:.92rem;color:#8e8e93}.carte-body{display:grid;grid-template-columns:1fr 230px;gap:2.5rem;align-items:center;margin-top:1.5rem}.map-3d-scene{perspective:1000px;perspective-origin:50% 20%}.map-3d-stage{transform:rotateX(42deg) rotate(-3deg);transform-style:preserve-3d;transform-origin:center center;transition:transform .7s cubic-bezier(.34,1.2,.64,1);filter:drop-shadow(0 40px 80px rgba(0,0,0,.6))}.map-3d-scene:hover .map-3d-stage{transform:rotateX(30deg) rotate(-1deg) scale(1.04)}#map-b{width:100%;height:auto;display:block}.dept{stroke:#ffffff40;stroke-width:.4;cursor:pointer;transition:filter .15s}.dept:hover{filter:brightness(1.3) drop-shadow(0 3px 8px rgba(0,0,0,.4));stroke-width:1;stroke:#fff}.j1{fill:#16a34a}.j2{fill:#a16207}.j3{fill:#c2410c}.j4{fill:#991b1b}.map-glow{position:relative}.map-glow:after{content:"";position:absolute;bottom:-20px;left:10%;width:80%;height:40px;background:radial-gradient(ellipse,rgba(227,6,19,.15) 0%,transparent 70%);filter:blur(12px);pointer-events:none}.legende{display:flex;flex-direction:column;gap:.9rem}.legende-titre{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#555;margin-bottom:.2rem}.legende-item{display:flex;align-items:center;gap:.85rem;padding:.85rem 1rem;border-radius:.9rem;border:1px solid rgba(255,255,255,.07);background:#ffffff0a;transition:transform .2s,background .2s}.legende-item:hover{transform:translate(4px);background:#ffffff12}.legende-couleur{width:32px;height:32px;border-radius:.5rem;flex-shrink:0;box-shadow:0 4px 12px #0006}.legende-delai{font-size:.95rem;font-weight:800;color:#f5f5f7}.legende-zones{font-size:.74rem;color:#6e6e73;line-height:1.35;margin-top:.1rem}.tooltip{position:fixed;background:#050508f2;color:#fff;padding:.5rem .9rem;border-radius:.6rem;font-size:.8rem;font-weight:600;pointer-events:none;opacity:0;transition:opacity .12s;z-index:100;white-space:nowrap;border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(8px)}.tooltip span{color:#fca5a5;margin-left:.4rem}@keyframes pulse{0%,to{opacity:.8;r:5}50%{opacity:.1;r:12}}.havre-ring{animation:pulse 2s ease-in-out infinite}.option-label{text-align:center;margin-top:1.8rem;font-size:.82rem;color:#444;letter-spacing:.04em}
+</style></head> <body> <div class="tooltip" id="tooltip"><span id="tt-nom"></span><span id="tt-j"></span></div> <div class="carte-section"> <div class="carte-header"> <span class="eyebrow">Transport</span> <h2>Délais de livraison <span>depuis Le Havre</span></h2> <p class="carte-subtitle">Estimations indicatives · Hors week-ends et jours fériés</p> </div> <div class="carte-body"> <div class="map-3d-scene"> <div class="map-3d-stage map-glow"> <svg id="map-b" viewBox="0 0 500 520"></svg> </div> </div> <div class="legende"> <span class="legende-titre">Délais estimés</span> <div class="legende-item"> <div class="legende-couleur" style="background:linear-gradient(135deg,#4ade80,#15803d);"></div> <div><div class="legende-delai">J + 1</div><div class="legende-zones">Normandie · Île-de-France<br>Hauts-de-France</div></div> </div> <div class="legende-item"> <div class="legende-couleur" style="background:linear-gradient(135deg,#fde047,#a16207);"></div> <div><div class="legende-delai">J + 2</div><div class="legende-zones">Bretagne · Centre · Grand Est<br>Pays de la Loire · Bourgogne</div></div> </div> <div class="legende-item"> <div class="legende-couleur" style="background:linear-gradient(135deg,#fb923c,#c2410c);"></div> <div><div class="legende-delai">J + 3</div><div class="legende-zones">Nouvelle-Aquitaine<br>Auvergne-Rhône-Alpes</div></div> </div> <div class="legende-item"> <div class="legende-couleur" style="background:linear-gradient(135deg,#f87171,#991b1b);"></div> <div><div class="legende-delai">J + 4</div><div class="legende-zones">Occitanie · PACA<br>Corse</div></div> </div> </div> </div> <p class="option-label">Option B — Carte 3D (perspective CSS + D3.js) · Dark mode · Hover interactif</p> </div> <script src="/assets/d3.min.js"></script> <script>
+const delais = {
+  '76':1,'27':1,'14':1,'61':1,'50':1,'75':1,'77':1,'78':1,'91':1,'92':1,'93':1,'94':1,'95':1,'59':1,'62':1,'02':1,'60':1,'80':1,
+  '29':2,'35':2,'22':2,'56':2,'44':2,'49':2,'72':2,'53':2,'85':2,'28':2,'37':2,'41':2,'45':2,'18':2,'36':2,'23':2,
+  '57':2,'67':2,'68':2,'54':2,'55':2,'88':2,'08':2,'51':2,'10':2,'52':2,'70':2,'90':2,'25':2,'39':2,'21':2,'71':2,'58':2,'89':2,
+  '86':3,'87':3,'19':3,'79':3,'16':3,'17':3,'24':3,'33':3,'40':3,'47':3,'64':3,
+  '03':3,'63':3,'43':3,'42':3,'69':3,'01':3,'38':3,'26':3,'07':3,'74':3,'73':3,
+  '09':4,'11':4,'12':4,'30':4,'31':4,'32':4,'34':4,'46':4,'48':4,'65':4,'66':4,'81':4,'82':4,
+  '04':4,'05':4,'06':4,'13':4,'83':4,'84':4,'2A':4,'2B':4
+};
+const labels = ['','J+1','J+2','J+3','J+4'];
+const tooltip = document.getElementById('tooltip');
+const ttNom = document.getElementById('tt-nom');
+const ttJ   = document.getElementById('tt-j');
+const svg = d3.select('#map-b');
+const w = 500, h = 520;
+
+fetch('/assets/departements.geojson')
+  .then(r => r.json())
+  .then(geo => {
+    const projection = d3.geoConicConformal()
+      .center([2.454071, 46.279229])
+      .parallels([44, 49]);
+    const path = d3.geoPath().projection(projection);
+    projection.fitSize([w, h], { type: 'FeatureCollection', features: geo.features });
+    const colorMap = ['','#16a34a','#a16207','#c2410c','#991b1b'];
+
+    svg.selectAll('path')
+      .data(geo.features)
+      .enter().append('path')
+      .attr('d', path)
+      .attr('stroke', 'rgba(255,255,255,0.25)')
+      .attr('stroke-width', 0.4)
+      .style('fill', d => colorMap[delais[d.properties.code] || 2])
+      .style('cursor', 'pointer')
+      .on('mousemove', function(event, d) {
+        const j = delais[d.properties.code] || 2;
+        tooltip.style.opacity = '1';
+        tooltip.style.left = (event.clientX + 14) + 'px';
+        tooltip.style.top  = (event.clientY - 10) + 'px';
+        ttNom.textContent = d.properties.nom + ' (' + d.properties.code + ')';
+        ttJ.textContent   = ' · ' + labels[j];
+        this.style.filter = 'brightness(1.35)';
+      })
+      .on('mouseleave', function() {
+        tooltip.style.opacity = '0';
+        this.style.filter = '';
+      });
+
+    // Le Havre marker
+    const [lx, ly] = projection([0.1074, 49.4944]);
+    svg.append('circle').attr('cx', lx).attr('cy', ly).attr('r', 12).attr('fill', '#e30613').attr('opacity', 0.15).attr('class','havre-ring');
+    svg.append('circle').attr('cx', lx).attr('cy', ly).attr('r', 5).attr('fill', '#e30613').attr('stroke','white').attr('stroke-width',1.5);
+    svg.append('text').attr('x', lx+9).attr('y', ly+4).attr('font-size','10').attr('font-weight','700').attr('fill','#f5f5f7').attr('font-family','sans-serif').text('Le Havre');
+  });
+</script> </body> </html>
