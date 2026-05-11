@@ -166,6 +166,12 @@ const offres: {
               </div>
             </div>
           ))}
+          <!-- Message fin de liste -->
+          <div class="offre-fin">
+            <span class="offre-fin__dot" aria-hidden="true"></span>
+            <p>Pas d'autres offres pour le moment</p>
+            <span class="offre-fin__dot" aria-hidden="true"></span>
+          </div>
         </div>
       ) : (
         <div class="offres-vide" id="offresVide">
@@ -1092,6 +1098,26 @@ const offres: {
     transition: opacity 0.2s, transform 0.2s; font-family: inherit;
   }
   .offre-carte__cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  .offre-fin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    background: white;
+    border: 1.5px solid rgba(0,0,0,0.08);
+    border-radius: 1.8rem;
+    padding: 1.4rem 2rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--gris-moyen);
+  }
+  .offre-fin__dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.15);
+    flex-shrink: 0;
+  }
 
   @media (max-width: 600px) {
     .offre-carte { padding: 1.8rem 1.6rem; }
