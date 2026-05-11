@@ -141,14 +141,14 @@ const offres: {
                   <span class="offre-tag offre-tag--lieu">{offre.lieu}</span>
                   {offre.places && (
                     <span class="offre-tag offre-tag--places">
-                      {offre.places} postes disponibles
+                      {offre.places}<span data-i18n="recrutement.offre.places"> postes disponibles</span>
                     </span>
                   )}
                 </div>
               </div>
               <!-- Encadré description -->
               <div class="offre-desc-box">
-                <p class="offre-desc-box__label">Description</p>
+                <p class="offre-desc-box__label" data-i18n="recrutement.offre.desc-label">Description</p>
                 <p class="offre-desc-box__text">{offre.desc}</p>
               </div>
               <!-- Actions -->
@@ -156,11 +156,11 @@ const offres: {
                 {offre.pdf && (
                   <a href={offre.pdf} target="_blank" rel="noopener" class="offre-carte__pdf">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                    Consulter la fiche de poste
+                    <span data-i18n="recrutement.offre.fiche">Consulter la fiche de poste</span>
                   </a>
                 )}
                 <button type="button" class="offre-carte__cta" data-offre-poste={offre.poste}>
-                  Postuler
+                  <span data-i18n="recrutement.offre.postuler">Postuler</span>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </button>
               </div>
@@ -169,7 +169,7 @@ const offres: {
           <!-- Message fin de liste -->
           <div class="offre-fin">
             <span class="offre-fin__dot" aria-hidden="true"></span>
-            <p>Pas d'autres offres pour le moment</p>
+            <p data-i18n="recrutement.offre.fin">Pas d'autres offres pour le moment</p>
             <span class="offre-fin__dot" aria-hidden="true"></span>
           </div>
         </div>
@@ -202,7 +202,7 @@ const offres: {
       <div class="form-topbar">
         <button type="button" class="btn-retour" id="btnRetourOffreForm">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-          <span>Retour aux offres</span>
+          <span data-i18n="recrutement.offre.retour">Retour aux offres</span>
         </button>
         <div class="form-mode-badge">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
