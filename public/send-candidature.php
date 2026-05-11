@@ -233,9 +233,10 @@ if ($lettreBase64 && $lettreName) {
 }
 
 // ── Envoi ─────────────────────────────────────────────────────────
-$sujetInterne = $poste
-    ? "Candidature spontanée — $nomComplet — $poste"
-    : "Candidature spontanée — $nomComplet";
+$typeForm = htmlspecialchars(trim($_POST['type_form'] ?? 'spontanee'));
+$sujetInterne = ($typeForm === 'offre' && $poste)
+    ? "Candidature — $poste — $nomComplet"
+    : ($poste ? "Candidature spontanée — $nomComplet — $poste" : "Candidature spontanée — $nomComplet");
 
 $r1 = sendBrevoEmail2(
     BREVO_API_KEY,
