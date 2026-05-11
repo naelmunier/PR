@@ -133,24 +133,27 @@ const offres: {
         <div class="offres-grid" id="offresGrid">
           {offres.map((offre, i) => (
             <div class="offre-carte" style={`animation-delay:${i * 0.08}s`}>
-              <div class="offre-carte__top">
+              <!-- En-tête : titre à gauche, infos à droite -->
+              <div class="offre-carte__header">
                 <h3 class="offre-carte__poste">{offre.poste}</h3>
-                <div class="offre-carte__tags">
-                  <span class="offre-tag offre-tag--type">{offre.type}</span>
-                  <span class="offre-tag offre-tag--lieu">{offre.lieu}</span>
+                <div class="offre-carte__infos">
+                  <span class="offre-info">{offre.type}</span>
+                  <span class="offre-info">{offre.lieu}</span>
                   {offre.places && (
-                    <span class="offre-tag offre-tag--places">
-                      {offre.places} poste{offre.places > 1 ? 's' : ''} disponible{offre.places > 1 ? 's' : ''}
+                    <span class="offre-info offre-info--places">
+                      {offre.places} postes disponibles
                     </span>
                   )}
                 </div>
               </div>
+              <!-- Description -->
               <p class="offre-carte__desc">{offre.desc}</p>
+              <!-- Actions -->
               <div class="offre-carte__actions">
                 {offre.pdf && (
                   <a href={offre.pdf} target="_blank" rel="noopener" class="offre-carte__pdf">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                    Fiche de poste
+                    Consulter la fiche de poste
                   </a>
                 )}
                 <button type="button" class="offre-carte__cta" data-poste={offre.poste} data-i18n="recrutement.offre.postuler">
@@ -822,8 +825,8 @@ const offres: {
 
   /* ── OFFRES ─────────────────────────────────────────────────── */
   .offres-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 1.4rem;
     max-width: 860px;
     margin: 0 auto;
@@ -831,27 +834,63 @@ const offres: {
 
   .offre-carte {
     background: white;
-    border-radius: 1.6rem;
-    padding: 2rem 2rem 1.6rem;
+    border-radius: 1.8rem;
+    padding: 2.4rem 2.8rem;
     border: 1.5px solid rgba(0,0,0,0.08);
     box-shadow: 0 4px 24px rgba(0,0,0,0.05);
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
+    gap: 1.4rem;
     animation: card-arrive 0.5s ease both;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
-  .offre-carte:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(227,6,19,0.10); }
+  .offre-carte:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(227,6,19,0.10); }
 
-  .offre-carte__poste { font-size: 1.1rem; font-weight: 800; color: var(--gris-fonce); letter-spacing: -0.02em; margin: 0; }
-  .offre-carte__tags  { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  /* En-tête : titre gauche, infos droite */
+  .offre-carte__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+  }
 
-  .offre-tag { font-size: 0.72rem; font-weight: 700; padding: 0.25rem 0.7rem; border-radius: 2rem; letter-spacing: 0.03em; }
-  .offre-tag--type   { background: rgba(227,6,19,0.08); color: var(--rouge); }
-  .offre-tag--lieu   { background: rgba(0,0,0,0.05); color: var(--gris-moyen); }
-  .offre-tag--places { background: rgba(22,163,74,0.09); color: #15803d; }
+  .offre-carte__poste {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--gris-fonce);
+    letter-spacing: -0.02em;
+    margin: 0;
+    line-height: 1.2;
+  }
 
-  .offre-carte__desc { font-size: 0.87rem; color: var(--gris-moyen); line-height: 1.6; flex: 1; margin: 0; }
+  .offre-carte__infos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3rem;
+    flex-shrink: 0;
+  }
+
+  .offre-info {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--gris-moyen);
+  }
+
+  .offre-info--places {
+    color: #15803d;
+    font-weight: 700;
+  }
+
+  /* Séparateur entre header et desc */
+  .offre-carte__desc {
+    font-size: 0.9rem;
+    color: var(--gris-moyen);
+    line-height: 1.65;
+    margin: 0;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
 
   .offre-carte__actions {
     display: flex;
@@ -861,22 +900,28 @@ const offres: {
   }
 
   .offre-carte__pdf {
-    display: inline-flex; align-items: center; gap: 0.35rem;
-    font-size: 0.82rem; font-weight: 600; color: var(--gris-moyen);
-    border: 1.5px solid #e0e0e0; border-radius: 2rem;
-    padding: 0.35rem 0.85rem;
-    transition: border-color 0.2s, color 0.2s;
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    font-size: 0.87rem; font-weight: 700; color: var(--rouge);
+    border: 2px solid var(--rouge); border-radius: 2rem;
+    padding: 0.55rem 1.2rem;
+    transition: background 0.2s, color 0.2s;
     text-decoration: none;
   }
-  .offre-carte__pdf:hover { border-color: var(--rouge); color: var(--rouge); }
+  .offre-carte__pdf:hover { background: var(--rouge); color: white; }
 
   .offre-carte__cta {
     display: inline-flex; align-items: center; gap: 0.4rem;
-    font-size: 0.87rem; font-weight: 700; color: var(--rouge);
+    font-size: 0.87rem; font-weight: 700; color: var(--gris-moyen);
     background: none; border: none; cursor: pointer; padding: 0;
-    transition: gap 0.2s; font-family: inherit;
+    transition: gap 0.2s, color 0.2s; font-family: inherit;
   }
-  .offre-carte__cta:hover { gap: 0.7rem; }
+  .offre-carte__cta:hover { gap: 0.7rem; color: var(--gris-fonce); }
+
+  @media (max-width: 600px) {
+    .offre-carte { padding: 1.8rem 1.6rem; }
+    .offre-carte__header { flex-direction: column; gap: 0.8rem; }
+    .offre-carte__infos { align-items: flex-start; }
+  }
 
   /* État vide */
   .offres-vide {
