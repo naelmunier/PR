@@ -1,0 +1,27 @@
+{
+  "validite": "2026",
+  "note": "Grille tarifaire dépotage/empotage 2026 — PR Logistics",
+  "conteneurs": {
+    "20":    { "label": "20' Standard",       "prix_fixe": 280 },
+    "40":    { "label": "40' Standard",       "prix_fixe": 380 },
+    "40hc":  { "label": "40' High Cube",      "prix_fixe": 420 },
+    "45hc":  { "label": "45' High Cube",      "prix_fixe": 465 },
+    "reefer":{ "label": "Réfrigéré (Reefer)", "prix_fixe": 520 },
+    "autre": { "label": "Autre / Spécial",    "prix_fixe": 350 }
+  },
+  "palettes": {
+    "80x100":  { "label": "80 × 100 cm",        "prix_unite": 4.50 },
+    "80x120":  { "label": "80 × 120 cm (Euro)", "prix_unite": 5.00 },
+    "100x120": { "label": "100 × 120 cm",       "prix_unite": 5.80 }
+  },
+  "majorations": {
+    "standard":  { "label": "Marchandise standard",   "coefficient": 1.00 },
+    "froid":     { "label": "Température dirigée",    "coefficient": 1.30 },
+    "dangereux": { "label": "Matières dangereuses",   "coefficient": 1.45 },
+    "alcool":    { "label": "Alcool",                 "coefficient": 1.20 },
+    "bio":       { "label": "Produits biologiques",   "coefficient": 1.15 },
+    "autre":     { "label": "Autre (sur devis)",      "coefficient": null  }
+  },
+  "minimum_facturation": 150,
+  "tva": 0.20
+}
