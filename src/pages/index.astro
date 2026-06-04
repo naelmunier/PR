@@ -34,6 +34,15 @@ const equipements = [
   description="PR Logistics — entrepôt logistique Le Havre, Normandie. Dépotage, empotage, cross-docking, stockage sous douane, traction portuaire. Sites : Rogerville & Sandouville. Devis gratuit 24h."
 >
 
+  <!-- ANNONCE OUVERTURE SANDOUVILLE -->
+  <div class="annonce-wrap">
+    <a href="#entrepots" class="annonce-pill" id="annoncePill">
+      <span class="annonce-badge" data-i18n="annonce.badge">Nouveau</span>
+      <span class="annonce-text" data-i18n="annonce.text">Nouvel entrepôt à Sandouville — découvrez le</span>
+      <span class="annonce-arrow">→</span>
+    </a>
+  </div>
+
   <!-- CARROUSEL PARTENAIRES — juste sous la navbar -->
   <PartenairesCarousel />
 
@@ -84,7 +93,7 @@ const equipements = [
   </section>
 
   <!-- NOS MOYENS -->
-  <section class="section moyens">
+  <section class="section moyens" id="entrepots">
     <div class="container">
       <div class="reveal" style="text-align:center; margin-bottom:3.5rem;">
         <p class="eyebrow-rouge" data-i18n="moyens.eyebrow">Nos équipements</p>
@@ -447,6 +456,63 @@ const equipements = [
 </script>
 
 <style>
+  /* ── ANNONCE OUVERTURE ── */
+  .annonce-wrap {
+    background: white;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    display: flex;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    animation: annonce-slide-in 0.55s cubic-bezier(0.34,1.4,0.64,1) both;
+  }
+  @keyframes annonce-slide-in {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .annonce-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    background: linear-gradient(135deg, #fff8ec, #fff);
+    border: 1.5px solid rgba(245,158,11,0.3);
+    border-radius: 2rem;
+    padding: 0.42rem 1.1rem 0.42rem 0.65rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #92400e;
+    text-decoration: none;
+    box-shadow: 0 2px 12px rgba(245,158,11,0.12);
+    transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+  }
+  .annonce-pill:hover {
+    box-shadow: 0 5px 24px rgba(245,158,11,0.28);
+    transform: translateY(-1px);
+    border-color: rgba(245,158,11,0.55);
+  }
+  .annonce-badge {
+    background: linear-gradient(135deg, #f59e0b, #dc6b00);
+    color: white;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.6rem;
+    border-radius: 2rem;
+    flex-shrink: 0;
+  }
+  .annonce-text {
+    line-height: 1;
+  }
+  .annonce-arrow {
+    opacity: 0.55;
+    font-size: 0.85rem;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .annonce-pill:hover .annonce-arrow {
+    transform: translateX(3px);
+    opacity: 1;
+  }
+
   /* HERO */
   .hero {
     position: relative;
@@ -842,6 +908,7 @@ const equipements = [
     background: rgba(255,255,255,0.9);
     flex-shrink: 0;
     display: inline-block;
+    align-self: center;
     animation: dot-blink 1.2s ease-in-out infinite;
   }
   @keyframes dot-blink {
