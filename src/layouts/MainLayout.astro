@@ -22,7 +22,7 @@ const {
 const fullTitle    = rawTitle ? title : `${title} | PR Logistics – Le Havre`;
 const canonicalUrl = `${SITE_URL}${canonicalPath}`;
 
-// Données structurées JSON-LD (entreprise locale)
+// Données structurées JSON-LD (entreprise locale — enrichi)
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
@@ -33,29 +33,65 @@ const jsonLd = {
   "image": `${SITE_URL}/assets/home/port-havre-2.jpg`,
   "telephone": "+33232724803",
   "email": "lehavre@pr-logistics.fr",
+  "foundingDate": "2017",
+  "numberOfEmployees": { "@type": "QuantitativeValue", "value": 20 },
+  "keywords": "entrepôt Le Havre, logistique portuaire, dépotage empotage, stockage sous douane, traction conteneur, cross-docking, Normandie, Seine-Maritime",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "PLPN 1 – Port 4935",
     "addressLocality": "Rogerville",
     "postalCode": "76700",
+    "addressRegion": "Normandie",
     "addressCountry": "FR"
   },
+  "location": [
+    {
+      "@type": "Place",
+      "name": "Site de Rogerville (site actuel)",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "PLPN 1 – Port 4935",
+        "addressLocality": "Rogerville",
+        "postalCode": "76700",
+        "addressCountry": "FR"
+      }
+    },
+    {
+      "@type": "Place",
+      "name": "Site de Sandouville (nouveau)",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Port 5052, Voie des Tadornes",
+        "addressLocality": "Sandouville",
+        "postalCode": "76430",
+        "addressCountry": "FR"
+      }
+    }
+  ],
   "geo": {
     "@type": "GeoCoordinates",
     "latitude": 49.4936,
     "longitude": 0.1969
   },
-  "areaServed": "France",
-  "openingHours": "Mo-Fr 08:00-18:00",
+  "areaServed": [
+    { "@type": "Country", "name": "France" },
+    { "@type": "AdministrativeArea", "name": "Normandie" },
+    { "@type": "AdministrativeArea", "name": "Seine-Maritime" }
+  ],
+  "openingHours": "Mo-Fr 08:30-16:30",
   "sameAs": [],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Services logistiques",
     "itemListElement": [
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dépotage et empotage de conteneurs" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Stockage et entreposage" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Traction portuaire" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Transport et livraison de palettes" } }
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cross-docking et transfert direct" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Stockage sous douane" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Traction portuaire conteneur" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Transport et livraison de palettes" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Préparation de commandes et picking" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Reconditionnement et palettisation" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Contrôle qualité à réception" } }
     ]
   }
 };
@@ -88,6 +124,18 @@ const jsonLd = {
     <meta property="og:url"         content={canonicalUrl} />
     <meta property="og:image"       content={`${SITE_URL}/assets/home/port-havre-2.jpg`} />
     <meta property="og:locale"      content="fr_FR" />
+    <meta property="og:locale:alternate" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image"       content={`${SITE_URL}/assets/home/port-havre-2.jpg`} />
+
+    <!-- hreflang — FR / EN -->
+    <link rel="alternate" hreflang="fr" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={`${SITE_URL}/en${canonicalPath}`} />
+    <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
 
     <!-- Données structurées pour Google (entreprise locale) -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

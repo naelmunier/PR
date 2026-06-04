@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /preview-*
 
-Sitemap: https://prlogistics.fr/sitemap.xml
+Sitemap: https://prlogistics.fr/sitemap-index.xml
