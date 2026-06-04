@@ -14,7 +14,7 @@ const SITE_URL = 'https://prlogistics.fr';
 
 const {
   title,
-  description = 'PR Logistics – Prestataire logistique et transport au Havre. Dépotage, empotage, stockage, traction et transport de palettes. Entrepôt de 8 000 m² au Port du Havre.',
+  description = 'Entrepôt logistique au Port du Havre (Normandie) — PR Logistics. Dépotage, empotage, cross-docking, stockage sous douane, traction portuaire. Sites : Rogerville & Sandouville.',
   rawTitle = false,
   canonicalPath = '/',
 } = Astro.props;
@@ -27,7 +27,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "PR Logistics",
-  "description": "Prestataire logistique et transport au port du Havre. Dépotage, empotage, stockage, traction et livraison de palettes.",
+  "description": "Prestataire logistique et transport au port du Havre, Normandie (Seine-Maritime). Dépotage, empotage, cross-docking, stockage sous douane, traction portuaire et transport de palettes. Entrepôts à Rogerville et Sandouville.",
   "url": SITE_URL,
   "logo": `${SITE_URL}/assets/logo.jpeg`,
   "image": `${SITE_URL}/assets/home/port-havre-2.jpg`,
@@ -73,6 +73,13 @@ const jsonLd = {
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalUrl} />
 
+    <!-- SEO local — mots-clés & géolocalisation -->
+    <meta name="keywords" content="entrepôt Le Havre, logistique Normandie, logistique portuaire, entrepôt sous douane, dépotage empotage, cross-docking Le Havre, stockage portuaire, traction conteneur, entrepôt Sandouville, entrepôt Rogerville, prestataire logistique Havre, Seine-Maritime logistique, transport palettes Normandie" />
+    <meta name="geo.region" content="FR-76" />
+    <meta name="geo.placename" content="Le Havre, Normandie, France" />
+    <meta name="geo.position" content="49.4936;0.1969" />
+    <meta name="ICBM" content="49.4936, 0.1969" />
+
     <!-- Open Graph (partage réseaux sociaux + aperçu Google) -->
     <meta property="og:type"        content="website" />
     <meta property="og:site_name"   content="PR Logistics" />
@@ -111,10 +118,10 @@ const jsonLd = {
             'prestation.reconditionnement.titre':'Reconditionnement','prestation.reconditionnement.desc':'Remise en état et reconditionnement de vos produits selon vos exigences.',
             'prestation.transport.titre':'Transport','prestation.transport.desc':'Fret conventionnel et traction conteneur depuis et vers le port du Havre.',
             'moyens.eyebrow':'Nos équipements','moyens.title':'Des moyens à la <span>hauteur</span>','moyens.subtitle':"PR Logistics dispose d'un entrepôt de 8\u202f000\u00a0m² sur un terrain de 18\u202f500\u00a0m² entièrement clos, télésurveillé 24h/7j par la sécurité portuaire.",
-            'entrepot.soon':'À venir — Fin 2026','entrepot.actif':'Site actuel','entrepot.quais.label':'quais de chargement','entrepot.surface.label':'de surface',
+            'entrepot.soon':'Ouverture imminente','entrepot.actif':'Site actuel','entrepot.quais.label':'quais de chargement','entrepot.surface.label':'de surface',
             'entrepot.sandouville.nom':'Site de Sandouville','entrepot.sandouville.location':'Sandouville · Zone Industrielle Portuaire','entrepot.sandouville.desc':"Nouveau site logistique d'envergure nationale, à deux pas du port du Havre.",
             'entrepot.sandouville.titre':'Site de <span class="entrepot-rouge">Sandouville</span>',
-            'entrepot.sandouville.adresse':'Port 5053, Voie des Tadornes, 76430 Sandouville',
+            'entrepot.sandouville.adresse':'Port 5052, Voie des Tadornes, 76430 Sandouville',
             'entrepot.sandouville.surface':'24 000 m² de surface',
             'entrepot.sandouville.quais':'45 quais de chargement',
             'entrepot.rogerville.nom':'Site de Rogerville','entrepot.rogerville.location':"Rogerville · Route de l'Estuaire, Le Havre",'entrepot.rogerville.desc':"Notre entrepôt actuel, entièrement clos et télésurveillé 24h/7j par la sécurité portuaire.",
@@ -122,11 +129,11 @@ const jsonLd = {
             'entrepot.rogerville.adresse':'PLPN 1 – Port 4935, 76700 Rogerville',
             'entrepot.rogerville.surface':'8 000 m² de surface',
             'entrepot.rogerville.quais':'6 quais de chargement',
-            'entrepot.bridge.eyebrow':'D\'ici fin 2026',
+            'entrepot.bridge.eyebrow':'Dès maintenant',
             'entrepot.bridge.title':'Deux sites au service de votre <span class="bridge-grad">performance</span><br class="bridge-br"> et de la <span class="bridge-grad">fiabilité</span> de chaque flux.',
             'entrepot.photo.hint':'Photo à venir',
             'entrepot.kpi.surface':'de surface totale','entrepot.kpi.quais':'de chargement','entrepot.kpi.quais.unit':'quais','entrepot.kpi.sites':'logistiques stratégiques','entrepot.kpi.sites.unit':'sites',
-            'equip.entrepot':'Entrepôt sous douane','equip.palettes':'Palettes de stockage','equip.banderoleuses':'Banderoleuses','equip.chaine':'Chaîne de tri','equip.chariots':'Chariots élévateurs 1,6T – 5T','equip.cameras':'Caméras sécurité 24/7','equip.wms':'WMS gestion des stocks','equip.tracteur':'Tracteur de parc','equip.collaborateurs':'Collaborateurs','equip.quais':'Quais de chargement',
+            'equip.entrepot':'Entrepôt sous douane','equip.palettes':'Palettes de stockage','equip.banderoleuses':'Banderoleuses','equip.chaine':'Chaîne de tri','equip.chariots':'Chariots élévateurs 1,6T – 5T','equip.cameras':'Caméras sécurité 24/7','equip.wms':'WMS gestion des stocks','equip.tracteur':'Tracteurs de parc','equip.collaborateurs':'Collaborateurs','equip.quais':'Quais de chargement',
             'cta.title':'Prêt à optimiser votre <span>logistique</span>\u00a0?','cta.subtitle':"Contactez-nous dès aujourd'hui pour étudier ensemble vos besoins logistiques.",'cta.contact':'Nous contacter','cta.devis':'Demander un devis',
             'contact.eyebrow':'Coordination','contact.title':'Nous <span>contacter</span>','contact.subtitle':'Notre équipe est disponible du lundi au vendredi pour répondre à toutes vos demandes.',
             'contact.addr.eyebrow':'Nous trouver','contact.addr.title':'Notre <span>adresse</span>','contact.addr.sub':'Au cœur du port du Havre',
@@ -238,11 +245,12 @@ const jsonLd = {
             'securite.eyebrow':'Sécurité',
             'securite.title':'Votre marchandise, sous <span class="securite-accent">haute surveillance</span>',
             'securite.subtitle':'La sécurité n\'est pas une option — c\'est notre engagement premier. Chaque site est conçu pour protéger vos flux, nuit et jour, 365 jours par an.',
-            'securite.item1.val':'22 caméras HD','securite.item1.desc':'Couverture intégrale de l\'ensemble du site',
+            'securite.item1.val':'27 caméras HD','securite.item1.desc':'Couverture intégrale de l\'ensemble du site',
             'securite.item2.val':'Surveillance 24/7','securite.item2.sub':'Intérieur et Extérieur','securite.item2.copy':'Monitoring permanent avec reporting à domicile','securite.item2.desc':'Intérieur et Extérieur',
             'securite.item3.val':'Stockage vidéo 30 jours','securite.item3.desc':'Conservation conforme aux exigences de la CNIL',
             'securite.item4.val':'Police portuaire','securite.item4.desc':'Sécurité renforcée par les forces de l\'ordre du port',
             'securite.item5.val':'Site 100% clôturé','securite.item5.desc':'Enceinte sécurisée sur l\'intégralité du périmètre',
+            'securite.item6.val':'Contrôle d\'accès par badge','securite.item6.desc':'Accès réglementé à l\'ensemble des zones du site',
             // Caractéristiques
             'caract.label':'Caractéristiques',
             // Horaires
@@ -358,10 +366,10 @@ const jsonLd = {
             'prestation.reconditionnement.titre':'Repackaging','prestation.reconditionnement.desc':'Restoration and repackaging of your products according to your requirements.',
             'prestation.transport.titre':'Transport','prestation.transport.desc':'Conventional freight and container traction to and from Le Havre port.',
             'moyens.eyebrow':'Our equipment','moyens.title':'World-class <span>resources</span>','moyens.subtitle':'PR Logistics has an 8,000\u00a0m² warehouse on a fully enclosed 18,500\u00a0m² site, monitored 24/7 by port security.',
-            'entrepot.soon':'Coming soon — End of 2026','entrepot.actif':'Current site','entrepot.quais.label':'loading docks','entrepot.surface.label':'of floor space',
+            'entrepot.soon':'Opening imminently','entrepot.actif':'Current site','entrepot.quais.label':'loading docks','entrepot.surface.label':'of floor space',
             'entrepot.sandouville.nom':'Sandouville Site','entrepot.sandouville.location':'Sandouville · Industrial Port Zone','entrepot.sandouville.desc':'New large-scale logistics site, just steps from the Port of Le Havre.',
             'entrepot.sandouville.titre':'<span class="entrepot-rouge">Sandouville</span> Site',
-            'entrepot.sandouville.adresse':'Port 5053, Voie des Tadornes, 76430 Sandouville',
+            'entrepot.sandouville.adresse':'Port 5052, Voie des Tadornes, 76430 Sandouville',
             'entrepot.sandouville.surface':'24,000 m² floor area',
             'entrepot.sandouville.quais':'45 loading docks',
             'entrepot.rogerville.nom':'Rogerville Site','entrepot.rogerville.location':"Rogerville · Route de l'Estuaire, Le Havre",'entrepot.rogerville.desc':'Our current warehouse, fully enclosed and monitored 24/7 by port security.',
@@ -369,11 +377,11 @@ const jsonLd = {
             'entrepot.rogerville.adresse':'PLPN 1 – Port 4935, 76700 Rogerville',
             'entrepot.rogerville.surface':'8,000 m² floor area',
             'entrepot.rogerville.quais':'6 loading docks',
-            'entrepot.bridge.eyebrow':'By end of 2026',
+            'entrepot.bridge.eyebrow':'Starting now',
             'entrepot.bridge.title':'Two sites built for your <span class="bridge-grad">performance</span><br class="bridge-br"> and the <span class="bridge-grad">reliability</span> of every flow.',
             'entrepot.photo.hint':'Photo coming soon',
             'entrepot.kpi.surface':'total floor space','entrepot.kpi.quais':'loading docks','entrepot.kpi.quais.unit':'docks','entrepot.kpi.sites':'strategic logistics sites','entrepot.kpi.sites.unit':'sites',
-            'equip.entrepot':'Bonded warehouse','equip.palettes':'Storage pallets','equip.banderoleuses':'Stretch wrappers','equip.chaine':'Sorting line','equip.chariots':'Forklifts 1.6T – 5T','equip.cameras':'Security cameras 24/7','equip.wms':'WMS inventory management','equip.tracteur':'Yard tractor','equip.collaborateurs':'Team members','equip.quais':'Loading docks',
+            'equip.entrepot':'Bonded warehouse','equip.palettes':'Storage pallets','equip.banderoleuses':'Stretch wrappers','equip.chaine':'Sorting line','equip.chariots':'Forklifts 1.6T – 5T','equip.cameras':'Security cameras 24/7','equip.wms':'WMS inventory management','equip.tracteur':'Yard tractors','equip.collaborateurs':'Team members','equip.quais':'Loading docks',
             'cta.title':'Ready to optimize your <span>logistics</span>?','cta.subtitle':'Contact us today to explore your logistics needs together.','cta.contact':'Contact us','cta.devis':'Request a quote',
             'contact.eyebrow':'Get in touch','contact.title':'Contact <span>us</span>','contact.subtitle':'Our team is available Monday to Friday to answer all your inquiries.',
             'contact.addr.eyebrow':'Find us','contact.addr.title':'Our <span>address</span>','contact.addr.sub':'At the heart of Le Havre port',
@@ -485,11 +493,12 @@ const jsonLd = {
             'securite.eyebrow':'Security',
             'securite.title':'Your goods, under <span class="securite-accent">constant surveillance</span>',
             'securite.subtitle':'Security is not an option — it\'s our primary commitment. Every site is designed to protect your flows, day and night, 365 days a year.',
-            'securite.item1.val':'22 HD cameras','securite.item1.desc':'Full coverage of the entire site',
+            'securite.item1.val':'27 HD cameras','securite.item1.desc':'Full coverage of the entire site',
             'securite.item2.val':'24/7 Surveillance','securite.item2.sub':'Interior and Exterior','securite.item2.copy':'Continuous monitoring with remote reporting','securite.item2.desc':'Interior and Exterior',
             'securite.item3.val':'30-day video storage','securite.item3.desc':'Retention compliant with GDPR requirements',
             'securite.item4.val':'Port security','securite.item4.desc':'Enhanced security by port law enforcement',
             'securite.item5.val':'100% fenced site','securite.item5.desc':'Secured perimeter around the entire facility',
+            'securite.item6.val':'Badge-controlled access','securite.item6.desc':'Regulated access across all site areas',
             // Specifications
             'caract.label':'Specifications',
             // Opening hours

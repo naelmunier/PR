@@ -19,16 +19,20 @@ const equipements = [
   { ico: '/assets/carousel-equipement/pallet.png',            val: '8 000',    label: 'Palettes de stockage',         key: 'palettes' },
   { ico: '/assets/carousel-equipement/banderoleuse.png',      val: '5',        label: 'Banderoleuses',                key: 'banderoleuses' },
   { ico: '/assets/carousel-equipement/chaine-de-tri.png',     val: '1',        label: 'Chaîne de tri',                key: 'chaine' },
-  { ico: '/assets/carousel-equipement/chariot-elevateur.png', val: '10',       label: 'Chariots élévateurs 1,6T – 5T', key: 'chariots' },
-  { ico: '/assets/carousel-equipement/videosurveillance.png', val: '22',       label: 'Caméras sécurité 24/7',        key: 'cameras' },
+  { ico: '/assets/carousel-equipement/chariot-elevateur.png', val: '14',       label: 'Chariots élévateurs 1,6T – 5T', key: 'chariots' },
+  { ico: '/assets/carousel-equipement/videosurveillance.png', val: '27',       label: 'Caméras sécurité 24/7',        key: 'cameras' },
   { ico: '/assets/carousel-equipement/wms.png',               val: '1',        label: 'WMS gestion des stocks',       key: 'wms' },
-  { ico: '/assets/carousel-equipement/tracteur-de-parc.png',  val: '1',        label: 'Tracteur de parc',             key: 'tracteur' },
-  { ico: '/assets/carousel-equipement/equipe.png',           val: '15',       label: 'Collaborateurs',               key: 'collaborateurs' },
+  { ico: '/assets/carousel-equipement/tracteur-de-parc.png',  val: '2',        label: 'Tracteurs de parc',            key: 'tracteur' },
+  { ico: '/assets/carousel-equipement/equipe.png',           val: '20',       label: 'Collaborateurs',               key: 'collaborateurs' },
   { ico: '/assets/carousel-equipement/quais.png',            val: '51',       label: 'Quais de chargement',          key: 'quais' },
 ];
 ---
 
-<MainLayout title="PR Logistics – Le Havre" rawTitle={true}>
+<MainLayout
+  title="PR Logistics – Entrepôt Logistique & Transport, Le Havre"
+  rawTitle={true}
+  description="PR Logistics — entrepôt logistique Le Havre, Normandie. Dépotage, empotage, cross-docking, stockage sous douane, traction portuaire. Sites : Rogerville & Sandouville. Devis gratuit 24h."
+>
 
   <!-- CARROUSEL PARTENAIRES — juste sous la navbar -->
   <PartenairesCarousel />
@@ -100,16 +104,19 @@ const equipements = [
             <div class="entrepot-photo entrepot-photo--sandouville">
               <img class="entrepot-photo__img" src="/assets/entrepot/nouvel-entrepot2.jpg" alt="Futur entrepôt de Sandouville" />
               <div class="entrepot-photo__shimmer"></div>
-              <div class="entrepot-carte__badge entrepot-carte__badge--soon" data-i18n="entrepot.soon">À venir — Fin 2026</div>
+              <div class="entrepot-carte__badge entrepot-carte__badge--soon">
+                <span class="badge-dot" aria-hidden="true"></span>
+                <span data-i18n="entrepot.soon">Ouverture imminente</span>
+              </div>
             </div>
           </div>
           <div class="entrepot-carte__body">
             <div class="entrepot-caract">
               <span class="entrepot-caract__label" data-i18n="caract.label">Caractéristiques</span>
               <div class="entrepot-caract__liste">
-                <a href="https://maps.google.com/?q=Port+5053+Voie+des+Tadornes+76430+Sandouville" class="entrepot-caract__item entrepot-caract__item--lien" target="_blank" rel="noopener noreferrer">
+                <a href="https://maps.google.com/?q=Port+5052+Voie+des+Tadornes+76430+Sandouville" class="entrepot-caract__item entrepot-caract__item--lien" target="_blank" rel="noopener noreferrer">
                   <img src="/assets/entrepot/adresse.png" alt="" aria-hidden="true" width="18" height="18" class="entrepot-ico" />
-                  <span data-i18n="entrepot.sandouville.adresse">Port 5053, Voie des Tadornes, 76430 Sandouville</span>
+                  <span data-i18n="entrepot.sandouville.adresse">Port 5052, Voie des Tadornes, 76430 Sandouville</span>
                 </a>
                 <span class="entrepot-caract__item">
                   <img src="/assets/entrepot/surface.png" alt="" aria-hidden="true" width="18" height="18" class="entrepot-ico" />
@@ -172,7 +179,7 @@ const equipements = [
               <img src="/assets/security/camera.gif" alt="" aria-hidden="true" width="48" height="48" />
             </div>
             <div class="securite-item__text">
-              <span class="securite-item__val" data-i18n="securite.item1.val">22 caméras HD</span>
+              <span class="securite-item__val" data-i18n="securite.item1.val">27 caméras HD</span>
               <span class="securite-item__desc" data-i18n="securite.item1.desc">Couverture intégrale de l'ensemble du site</span>
             </div>
           </div>
@@ -213,12 +220,21 @@ const equipements = [
               <span class="securite-item__desc" data-i18n="securite.item5.desc">Enceinte sécurisée sur l'intégralité du périmètre</span>
             </div>
           </div>
+          <div class="securite-item reveal" style="transition-delay:0.3s;">
+            <div class="securite-item__ico-wrap">
+              <img src="/assets/security/badge.gif" alt="" aria-hidden="true" width="48" height="48" />
+            </div>
+            <div class="securite-item__text">
+              <span class="securite-item__val" data-i18n="securite.item6.val">Contrôle d'accès par badge</span>
+              <span class="securite-item__desc" data-i18n="securite.item6.desc">Accès réglementé à l'ensemble des zones du site</span>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- ── Bridge / Statement ── -->
       <div class="entrepots-bridge reveal">
-        <p class="bridge-eyebrow" data-i18n="entrepot.bridge.eyebrow">Dès septembre 2025</p>
+        <p class="bridge-eyebrow" data-i18n="entrepot.bridge.eyebrow">Dès maintenant</p>
         <h3 class="bridge-title" data-i18n-html="entrepot.bridge.title">
           Deux sites au service de votre <span class="bridge-grad">performance</span><br class="bridge-br">
           et de la <span class="bridge-grad">fiabilité</span> de chaque flux.
@@ -766,7 +782,14 @@ const equipements = [
     box-shadow: 0 36px 80px rgba(0,0,0,0.14);
   }
 
-  .entrepot-carte--sandouville { background: #ffffff; }
+  .entrepot-carte--sandouville {
+    background: #ffffff;
+    animation: sandouville-glow 2.5s ease-in-out infinite;
+  }
+  @keyframes sandouville-glow {
+    0%, 100% { box-shadow: 0 4px 32px rgba(0,0,0,0.07); }
+    50%       { box-shadow: 0 4px 32px rgba(0,0,0,0.07), 0 0 42px 4px rgba(245,158,11,0.22); }
+  }
   .entrepot-carte--rogerville  { background: #ffffff; }
 
   /* Zone texte (EN BAS de la carte) */
@@ -796,19 +819,34 @@ const equipements = [
     -webkit-backdrop-filter: blur(8px);
   }
   .entrepot-carte__badge--soon {
-    background: rgba(255,255,255,0.88);
-    color: #444;
-    border: 1px solid rgba(0,0,0,0.1);
-    animation: badge-blink 3s ease-in-out infinite;
+    background: linear-gradient(135deg, #f59e0b, #dc6b00);
+    color: white;
+    border: none;
+    gap: 0.4rem;
+    box-shadow: 0 2px 12px rgba(245,158,11,0.4);
+    animation: badge-pulse 1.8s ease-in-out infinite;
   }
   .entrepot-carte__badge--actif {
     background: rgba(255,255,255,0.88);
     color: #e30613;
     border: 1px solid rgba(227,6,19,0.2);
   }
-  @keyframes badge-blink {
-    0%,100% { opacity: 1; }
-    50%      { opacity: 0.65; }
+  @keyframes badge-pulse {
+    0%, 100% { box-shadow: 0 2px 12px rgba(245,158,11,0.4); }
+    50%       { box-shadow: 0 4px 22px rgba(245,158,11,0.75); }
+  }
+  .badge-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    flex-shrink: 0;
+    display: inline-block;
+    animation: dot-blink 1.2s ease-in-out infinite;
+  }
+  @keyframes dot-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.2; }
   }
 
   .entrepot-rouge { color: var(--rouge); }
@@ -1038,7 +1076,7 @@ const equipements = [
   }
   .securite-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
     position: relative;
   }
@@ -1104,14 +1142,11 @@ const equipements = [
     font-size: 0.72rem;
     color: #aaa;
   }
-  @media (max-width: 1100px) {
-    .securite-grid { grid-template-columns: repeat(3, 1fr); }
-  }
   @media (max-width: 900px) {
     .securite-grid { grid-template-columns: repeat(2, 1fr); }
     .securite-bloc { padding: 2.5rem 1.8rem; }
   }
-  @media (max-width: 600px) {
+  @media (max-width: 500px) {
     .securite-grid { grid-template-columns: 1fr; }
   }
 
