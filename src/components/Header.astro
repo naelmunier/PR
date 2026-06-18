@@ -1,4 +1,6 @@
 ---
+const APP_URL = import.meta.env.PUBLIC_APP_URL || 'http://localhost:3000';
+
 const navLinks = [
   { href: '/', label: 'Accueil', key: 'nav.home' },
   { href: '/transport', label: 'Transport', key: 'nav.transport' },
@@ -28,8 +30,16 @@ const currentPath = Astro.url.pathname;
         </a>
       ))}
 
-      <!-- CTA Espace client -->
-      <a href="/pr-plus" class={`header__cta ${currentPath === '/pr-plus' ? 'header__cta--actif' : ''}`} aria-label="Accéder à votre espace PR+">
+      <!-- Lien PR+ dans la nav -->
+      <a
+        href="/pr-plus"
+        class={`header__link header__link--prplus ${currentPath === '/pr-plus' ? 'header__link--actif' : ''}`}
+      >
+        PR+
+      </a>
+
+      <!-- CTA Espace client → connexion plateforme -->
+      <a href={`${APP_URL}/connexion`} class="header__cta" aria-label="Accéder à votre espace PR+">
         Espace client
       </a>
 
@@ -102,7 +112,7 @@ const currentPath = Astro.url.pathname;
   }
 
   .header__logo img {
-    height: 54px;
+    height: 44px;
     width: auto;
     border-radius: 0;
     display: block;
@@ -112,15 +122,20 @@ const currentPath = Astro.url.pathname;
   .header__nav {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.4rem;
   }
 
   .header__link {
-    font-size: 0.95rem;
+    font-size: 0.82rem;
     font-weight: 500;
     color: var(--gris-fonce);
     transition: color 0.2s;
     position: relative;
+  }
+
+  .header__link--prplus {
+    font-weight: 700;
+    color: var(--rouge);
   }
 
   .header__link::after {
