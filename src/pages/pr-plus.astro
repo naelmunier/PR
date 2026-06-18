@@ -1,0 +1,22 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import PRPlusPage from '../components/prplus/PRPlusPage';
+---
+
+<MainLayout
+  title="PR+ — Votre espace logistique digital"
+  description="PR+ est la plateforme digitale de PR Logistics. Demandez vos devis, suivez vos dossiers en temps réel et échangez avec nos équipes depuis votre espace dédié."
+  canonicalPath="/pr-plus"
+  rawTitle={true}
+>
+  <!-- La nav et footer du site PR Logistics sont conservés via MainLayout -->
+  <!-- Le composant React est chargé progressivement au scroll -->
+  <PRPlusPage client:load />
+</MainLayout>
+
+<style is:global>
+  /* Empêcher le padding-top du layout (déjà géré dans le composant React) */
+  main:has(> .prp-root-wrapper) {
+    padding-top: 0 !important;
+  }
+</style>
