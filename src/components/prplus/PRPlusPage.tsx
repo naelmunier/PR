@@ -177,15 +177,61 @@ export default function PRPlusPage() {
           </motion.h2>
         </motion.div>
 
-        {/* 2 colonnes : DisplayCards gauche — GradientCards droite */}
+        {/* 2 colonnes : GradientCards 2×2 gauche — DisplayCards droite */}
         <div className="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-12 items-center">
 
-          {/* Gauche — Display Cards à taille naturelle */}
+          {/* Gauche — 4 Gradient Cards en grille 2×2 */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.7 }}
+            className="grid grid-cols-2 gap-4"
+          >
+            <GradientCard
+              gradient="orange"
+              badgeText="Suivi temps réel"
+              badgeColor="#f97316"
+              title="Chaque étape, en direct"
+              description="De la réception à l'expédition, suivez l'avancement en temps réel."
+              ctaText="Voir mes dossiers"
+              ctaHref={`${APP_URL}/connexion`}
+            />
+            <GradientCard
+              gradient="green"
+              badgeText="Devis intelligents"
+              badgeColor="#10b981"
+              title="Un prix précis en minutes"
+              description="Votre grille tarifaire est intégrée. La plateforme calcule, la direction valide."
+              ctaText="Demander un devis"
+              ctaHref={`${APP_URL}/connexion`}
+            />
+            <GradientCard
+              gradient="purple"
+              badgeText="Documents & Factures"
+              badgeColor="#8b5cf6"
+              title="Tous vos documents"
+              description="BL, packing lists, factures et historique dans votre espace, à tout moment."
+              ctaText="Accéder à mon espace"
+              ctaHref={`${APP_URL}/connexion`}
+            />
+            <GradientCard
+              gradient="red"
+              badgeText="Messagerie intégrée"
+              badgeColor="#e30613"
+              title="Échangez directement"
+              description="Communiquez avec les équipes PR Logistics depuis votre dossier, sans email."
+              ctaText="Ouvrir la messagerie"
+              ctaHref={`${APP_URL}/connexion`}
+            />
+          </motion.div>
+
+          {/* Droite — Display Cards à taille naturelle */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, delay: 0.1 }}
             className="flex justify-center py-20 overflow-visible"
           >
             <DisplayCards
@@ -215,43 +261,6 @@ export default function PRPlusPage() {
                   titleClassName: "text-[#e30613]",
                 },
               ]}
-            />
-          </motion.div>
-
-          {/* Droite — Gradient Cards */}
-          <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="flex flex-col gap-4"
-          >
-            <GradientCard
-              gradient="orange"
-              badgeText="Suivi temps réel"
-              badgeColor="#f97316"
-              title="Chaque étape, en direct"
-              description="De la réception à l'expédition, suivez l'avancement de vos dossiers en temps réel. Rien ne vous échappe."
-              ctaText="Voir mes dossiers"
-              ctaHref={`${APP_URL}/connexion`}
-            />
-            <GradientCard
-              gradient="green"
-              badgeText="Devis intelligents"
-              badgeColor="#10b981"
-              title="Un prix précis en minutes"
-              description="Votre grille tarifaire négociée est intégrée. La plateforme calcule, la direction valide."
-              ctaText="Demander un devis"
-              ctaHref={`${APP_URL}/connexion`}
-            />
-            <GradientCard
-              gradient="purple"
-              badgeText="Documents & Factures"
-              badgeColor="#8b5cf6"
-              title="Tous vos documents au même endroit"
-              description="BL, packing lists, factures et historique disponibles directement dans votre espace, à tout moment."
-              ctaText="Accéder à mon espace"
-              ctaHref={`${APP_URL}/connexion`}
             />
           </motion.div>
         </div>
