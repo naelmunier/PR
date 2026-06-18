@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, CheckCircle2, FileText, MessageSquare, Package } from "lucide-react";
 import { ContainerScroll } from "./ContainerScroll";
 import DisplayCards from "./DisplayCards";
+import { GradientCard } from "./GradientCard";
 import { PlatformMockup } from "./PlatformMockup";
 
 // URL de la plateforme — prod vs dev
@@ -32,11 +33,11 @@ function AnimatedTitle() {
   return (
     <h1 className="font-display font-black text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-ink mb-0">
       <span className="block">Vos dossiers logistiques.</span>
-      <span className="relative flex overflow-hidden h-[1.15em] mt-1">
+      <span className="relative flex justify-center overflow-hidden h-[1.15em] mt-1">
         {words.map((word, i) => (
           <motion.span
             key={i}
-            className="absolute bg-gradient-to-r from-primary to-primary-clair bg-clip-text text-transparent font-black"
+            className="absolute inset-x-0 text-center bg-gradient-to-r from-primary to-primary-clair bg-clip-text text-transparent font-black"
             initial={{ opacity: 0, y: 60 }}
             transition={{ type: "spring", stiffness: 55, damping: 14 }}
             animate={index === i ? { y: 0, opacity: 1 } : { y: index > i ? -60 : 60, opacity: 0 }}
@@ -66,7 +67,7 @@ export default function PRPlusPage() {
           }}
         />
 
-        <div className="relative w-full max-w-5xl mx-auto px-6 lg:px-10 pt-16 pb-10 flex flex-col items-start">
+        <div className="relative w-full max-w-5xl mx-auto px-6 lg:px-10 pt-16 pb-10 flex flex-col items-center text-center">
 
           {/* Badge */}
           <motion.div
@@ -112,7 +113,7 @@ export default function PRPlusPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-col sm:flex-row gap-3 mb-10"
+            className="flex flex-col sm:flex-row gap-3 justify-center mb-10"
           >
             <a
               href={`${APP_URL}/connexion`}
@@ -132,7 +133,7 @@ export default function PRPlusPage() {
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
-            className="flex flex-wrap gap-4 text-xs text-ink-4"
+            className="flex flex-wrap gap-4 text-xs text-ink-4 justify-center"
           >
             {["Devis en minutes", "Suivi temps réel", "Messagerie intégrée"].map((t) => (
               <span key={t} className="flex items-center gap-1.5">
@@ -160,7 +161,7 @@ export default function PRPlusPage() {
         <PlatformMockup />
       </ContainerScroll>
 
-      {/* ── FONCTIONNALITÉS + PARCOURS (fusionnés) ── */}
+      {/* ── FONCTIONNALITÉS ── */}
       <section className="py-20">
         {/* En-tête */}
         <motion.div
@@ -176,15 +177,17 @@ export default function PRPlusPage() {
           </motion.h2>
         </motion.div>
 
-        {/* Display Cards centrées ×2 */}
-        <motion.div
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.7 }}
-          className="h-[480px] flex items-center justify-center overflow-visible mb-8"
-        >
-          <div style={{ transform: "scale(2)", transformOrigin: "center center" }}>
+        {/* 2 colonnes : DisplayCards gauche — GradientCards droite */}
+        <div className="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-12 items-center">
+
+          {/* Gauche — Display Cards à taille naturelle */}
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7 }}
+            className="flex justify-center py-20 overflow-visible"
+          >
             <DisplayCards
               cards={[
                 {
@@ -213,11 +216,48 @@ export default function PRPlusPage() {
                 },
               ]}
             />
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* Sous-titre Parcours */}
-        <div className="max-w-6xl mx-auto px-5">
+          {/* Droite — Gradient Cards */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="flex flex-col gap-4"
+          >
+            <GradientCard
+              gradient="orange"
+              badgeText="Suivi temps réel"
+              badgeColor="#f97316"
+              title="Chaque étape, en direct"
+              description="De la réception à l'expédition, suivez l'avancement de vos dossiers en temps réel. Rien ne vous échappe."
+              ctaText="Voir mes dossiers"
+              ctaHref={`${APP_URL}/connexion`}
+            />
+            <GradientCard
+              gradient="green"
+              badgeText="Devis intelligents"
+              badgeColor="#10b981"
+              title="Un prix précis en minutes"
+              description="Votre grille tarifaire négociée est intégrée. La plateforme calcule, la direction valide."
+              ctaText="Demander un devis"
+              ctaHref={`${APP_URL}/connexion`}
+            />
+            <GradientCard
+              gradient="purple"
+              badgeText="Documents & Factures"
+              badgeColor="#8b5cf6"
+              title="Tous vos documents au même endroit"
+              description="BL, packing lists, factures et historique disponibles directement dans votre espace, à tout moment."
+              ctaText="Accéder à mon espace"
+              ctaHref={`${APP_URL}/connexion`}
+            />
+          </motion.div>
+        </div>
+
+        {/* Parcours */}
+        <div className="max-w-6xl mx-auto px-5 mt-20">
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }}
             variants={stagger} className="text-center mb-10"
@@ -230,7 +270,6 @@ export default function PRPlusPage() {
             </motion.p>
           </motion.div>
 
-          {/* 3 cartes parcours — taille réduite 30% */}
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }}
             variants={stagger} className="grid md:grid-cols-3 gap-4"
