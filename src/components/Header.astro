@@ -28,6 +28,11 @@ const currentPath = Astro.url.pathname;
         </a>
       ))}
 
+      <!-- CTA Espace client -->
+      <a href="/pr-plus" class={`header__cta ${currentPath === '/pr-plus' ? 'header__cta--actif' : ''}`} aria-label="Accéder à votre espace PR+">
+        Espace client
+      </a>
+
       <!-- Sélecteur de langue dropdown -->
       <div class="lang-dropdown" id="langDropdown">
         <button class="lang-trigger" id="langTrigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Langue / Language">
@@ -263,6 +268,34 @@ const currentPath = Astro.url.pathname;
     color: var(--gris-fonce);
   }
 
+  /* ── CTA Espace client ──────────────────────────────── */
+  .header__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.45rem 1.1rem;
+    background: var(--rouge);
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 2rem;
+    border: 1.5px solid var(--rouge);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+  }
+
+  .header__cta:hover {
+    background: var(--rouge-hover);
+    border-color: var(--rouge-hover);
+    box-shadow: 0 4px 16px rgba(227,6,19,0.25);
+    transform: translateY(-1px);
+  }
+
+  .header__cta--actif {
+    background: var(--rouge-hover);
+  }
+
   /* ── Burger mobile ─────────────────────────────────── */
   .header__burger {
     display: none;
@@ -305,6 +338,10 @@ const currentPath = Astro.url.pathname;
 
     .header__burger {
       display: flex;
+    }
+
+    .header__cta {
+      width: fit-content;
     }
 
     .lang-dropdown {
