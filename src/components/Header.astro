@@ -1,5 +1,5 @@
 ---
-const APP_URL = import.meta.env.PUBLIC_APP_URL || 'http://localhost:3000';
+const SLOT_URL = import.meta.env.PUBLIC_SLOT_URL || 'http://localhost:3001';
 
 const navLinks = [
   { href: '/', label: 'Accueil', key: 'nav.home' },
@@ -30,17 +30,9 @@ const currentPath = Astro.url.pathname;
         </a>
       ))}
 
-      <!-- Lien PR+ dans la nav -->
-      <a
-        href="/pr-plus"
-        class={`header__link header__link--prplus ${currentPath === '/pr-plus' ? 'header__link--actif' : ''}`}
-      >
-        PR+
-      </a>
-
-      <!-- CTA Espace client → connexion plateforme -->
-      <a href={`${APP_URL}/connexion`} class="header__cta" aria-label="Accéder à votre espace PR+">
-        Espace client
+      <!-- CTA PR Slot → prise de rendez-vous -->
+      <a href={SLOT_URL} class="header__cta" aria-label="Accéder à PR Slot — prise de rendez-vous">
+        PR Slot
       </a>
 
       <!-- Sélecteur de langue dropdown -->
@@ -133,11 +125,6 @@ const currentPath = Astro.url.pathname;
     position: relative;
   }
 
-  .header__link--prplus {
-    font-weight: 700;
-    color: var(--rouge);
-  }
-
   .header__link::after {
     content: '';
     position: absolute;
@@ -158,6 +145,31 @@ const currentPath = Astro.url.pathname;
 
   .header__link--actif {
     color: var(--rouge);
+  }
+
+  /* ── CTA PR Slot ─────────────────────────────────── */
+  .header__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.45rem 1.1rem;
+    background: var(--rouge);
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 2rem;
+    border: 1.5px solid var(--rouge);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+  }
+
+  .header__cta:hover {
+    background: var(--rouge-hover);
+    border-color: var(--rouge-hover);
+    box-shadow: 0 4px 16px rgba(227,6,19,0.25);
+    transform: translateY(-1px);
   }
 
   /* ── Dropdown langue ─────────────────────────────── */
@@ -281,34 +293,6 @@ const currentPath = Astro.url.pathname;
     font-size: 0.85rem;
     font-weight: 500;
     color: var(--gris-fonce);
-  }
-
-  /* ── CTA Espace client ──────────────────────────────── */
-  .header__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 0.45rem 1.1rem;
-    background: var(--rouge);
-    color: #fff;
-    font-size: 0.875rem;
-    font-weight: 600;
-    border-radius: 2rem;
-    border: 1.5px solid var(--rouge);
-    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
-    white-space: nowrap;
-    letter-spacing: 0.01em;
-  }
-
-  .header__cta:hover {
-    background: var(--rouge-hover);
-    border-color: var(--rouge-hover);
-    box-shadow: 0 4px 16px rgba(227,6,19,0.25);
-    transform: translateY(-1px);
-  }
-
-  .header__cta--actif {
-    background: var(--rouge-hover);
   }
 
   /* ── Burger mobile ─────────────────────────────────── */
