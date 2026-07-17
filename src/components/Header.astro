@@ -8,7 +8,6 @@ const navLinks = [
   { href: '/qui-sommes-nous', label: 'Qui sommes-nous', key: 'nav.about' },
   { href: '/rejoignez-nous', label: 'Rejoignez-nous', key: 'nav.rejoindre' },
   { href: '/contact', label: 'Nous Contacter', key: 'nav.contact' },
-  { href: '/pr-slot', label: 'PR Slot', key: 'nav.prslot' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -146,12 +145,6 @@ const currentPath = Astro.url.pathname;
 
   .header__link--actif {
     color: var(--rouge);
-  }
-
-  /* Lien PR Slot mis en avant dans la nav */
-  .header__link[href="/pr-slot"] {
-    color: var(--rouge);
-    font-weight: 700;
   }
 
   /* ── CTA PR Slot ─────────────────────────────────── */
