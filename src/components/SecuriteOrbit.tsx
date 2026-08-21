@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 // ── Icônes SVG colorées ───────────────────────────────────
 
 const CameraIcon = ({ c }: { c: string }) => (
-  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="54" height="54" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="1" y="5" width="15" height="14" rx="2.5" fill={c} fillOpacity="0.13" stroke={c} strokeWidth="1.55"/>
     <circle cx="8.5" cy="12" r="3.2" fill={c} fillOpacity="0.18" stroke={c} strokeWidth="1.4"/>
     <circle cx="8.5" cy="12" r="1.5" fill={c} fillOpacity="0.5"/>
@@ -15,7 +15,7 @@ const CameraIcon = ({ c }: { c: string }) => (
 );
 
 const MonitorIcon = ({ c }: { c: string }) => (
-  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="54" height="54" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="1.5" y="2.5" width="21" height="15" rx="2.5" fill={c} fillOpacity="0.1" stroke={c} strokeWidth="1.55"/>
     <polyline points="3.5,10.5 5.5,10.5 7.5,7 9.5,14 11.5,9.5 13.5,12.5 15.5,10.5 18.5,10.5"
       stroke={c} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
@@ -26,7 +26,7 @@ const MonitorIcon = ({ c }: { c: string }) => (
 );
 
 const DatabaseIcon = ({ c }: { c: string }) => (
-  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="54" height="54" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="12" cy="5" rx="9" ry="3" fill={c} fillOpacity="0.18" stroke={c} strokeWidth="1.5"/>
     <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" fill={c} fillOpacity="0.07" stroke={c} strokeWidth="1.5"/>
     <path d="M21 9.5c0 1.66-4 3-9 3s-9-1.34-9-3" stroke={c} strokeWidth="1.3" fill="none" strokeDasharray="2 1.5"/>
@@ -37,7 +37,7 @@ const DatabaseIcon = ({ c }: { c: string }) => (
 );
 
 const ShieldIcon = ({ c }: { c: string }) => (
-  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="54" height="54" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
       fill={c} fillOpacity="0.12" stroke={c} strokeWidth="1.55" strokeLinejoin="round"/>
     <polygon points="12,7.5 13.2,10.8 16.5,10.8 13.9,12.8 14.9,16.1 12,14.2 9.1,16.1 10.1,12.8 7.5,10.8 10.8,10.8"
@@ -47,7 +47,7 @@ const ShieldIcon = ({ c }: { c: string }) => (
 );
 
 const LockIcon = ({ c }: { c: string }) => (
-  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="54" height="54" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="3" y="11" width="18" height="11" rx="3" fill={c} fillOpacity="0.12" stroke={c} strokeWidth="1.55"/>
     <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke={c} strokeWidth="1.6" strokeLinecap="round" fill="none"/>
     <circle cx="12" cy="16" r="2.2" fill={c} fillOpacity="0.2" stroke={c} strokeWidth="1.2"/>
@@ -58,7 +58,7 @@ const LockIcon = ({ c }: { c: string }) => (
 );
 
 const BadgeIcon = ({ c }: { c: string }) => (
-  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="54" height="54" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="2" y="6" width="20" height="14" rx="2.5" fill={c} fillOpacity="0.1" stroke={c} strokeWidth="1.55"/>
     <rect x="4.5" y="10" width="6" height="5.5" rx="1.2" fill={c} fillOpacity="0.22" stroke={c} strokeWidth="1.2"/>
     <line x1="14" y1="11.2" x2="19" y2="11.2" stroke={c} strokeWidth="1.35" strokeLinecap="round"/>
@@ -73,6 +73,7 @@ const BadgeIcon = ({ c }: { c: string }) => (
 // ── Data ─────────────────────────────────────────────────
 
 type Item = {
+  label: string;
   val: string;
   sub?: string;
   desc: string;
@@ -82,18 +83,18 @@ type Item = {
 };
 
 const ITEMS: Item[] = [
-  { val: '36 caméras HD',              desc: "Couverture intégrale de l'ensemble du site",                   color: '#e30613', colorBg: 'rgba(227,6,19,0.1)',   Icon: CameraIcon },
-  { val: 'Surveillance 24/7',          sub: 'Intérieur & Extérieur', desc: 'Monitoring permanent avec reporting à domicile', color: '#3b82f6', colorBg: 'rgba(59,130,246,0.1)', Icon: MonitorIcon },
-  { val: 'Stockage vidéo 30 jours',    desc: 'Conservation conforme aux exigences de la CNIL',              color: '#22c55e', colorBg: 'rgba(34,197,94,0.1)',  Icon: DatabaseIcon },
-  { val: 'Police portuaire',           desc: "Sécurité renforcée par les forces de l'ordre du port",        color: '#8b5cf6', colorBg: 'rgba(139,92,246,0.1)', Icon: ShieldIcon },
-  { val: 'Site 100% clôturé',          desc: "Enceinte sécurisée sur l'intégralité du périmètre",          color: '#f59e0b', colorBg: 'rgba(245,158,11,0.1)', Icon: LockIcon },
-  { val: "Contrôle d'accès par badge", desc: "Accès réglementé à l'ensemble des zones du site",            color: '#0ea5e9', colorBg: 'rgba(14,165,233,0.1)', Icon: BadgeIcon },
+  { label: 'Caméras',    val: '36 caméras HD',              desc: "Couverture intégrale de l'ensemble du site",                   color: '#e30613', colorBg: 'rgba(227,6,19,0.1)',   Icon: CameraIcon },
+  { label: 'Monitoring', val: 'Surveillance 24/7',           sub: 'Intérieur & Extérieur', desc: 'Monitoring permanent avec reporting à domicile', color: '#3b82f6', colorBg: 'rgba(59,130,246,0.1)', Icon: MonitorIcon },
+  { label: 'Stockage',   val: 'Vidéo 30 jours',             desc: 'Conservation conforme aux exigences de la CNIL',              color: '#22c55e', colorBg: 'rgba(34,197,94,0.1)',  Icon: DatabaseIcon },
+  { label: 'Police',     val: 'Police portuaire',            desc: "Sécurité renforcée par les forces de l'ordre du port",        color: '#8b5cf6', colorBg: 'rgba(139,92,246,0.1)', Icon: ShieldIcon },
+  { label: 'Clôture',    val: 'Site 100% clôturé',          desc: "Enceinte sécurisée sur l'intégralité du périmètre",           color: '#f59e0b', colorBg: 'rgba(245,158,11,0.1)', Icon: LockIcon },
+  { label: 'Badge',      val: "Contrôle par badge",         desc: "Accès réglementé à l'ensemble des zones du site",             color: '#0ea5e9', colorBg: 'rgba(14,165,233,0.1)', Icon: BadgeIcon },
 ];
 
-const SIZE = 660;
+const SIZE = 720;
 const CENTER = SIZE / 2;
-const ORBIT_R = 240;
-const ICON_R = 46;
+const ORBIT_R = 295;
+const ICON_R = 58;
 const CENTER_R = 128;
 const REVOLUTION_S = 28;
 
@@ -124,7 +125,7 @@ export default function SecuriteOrbit() {
 
       <div style={{ position: 'relative', width: SIZE, height: SIZE, maxWidth: '100%' }}>
 
-        {/* Anneau SVG */}
+        {/* Lueur centrale uniquement — plus de ligne de périmètre */}
         <svg style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }} width={SIZE} height={SIZE}>
           <defs>
             <radialGradient id="__orbGlow" cx="50%" cy="50%" r="50%">
@@ -132,18 +133,11 @@ export default function SecuriteOrbit() {
               <stop offset="65%"  stopColor="rgba(227,6,19,0.025)"/>
               <stop offset="100%" stopColor="transparent"/>
             </radialGradient>
-            <linearGradient id="__ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%"   stopColor="rgba(227,6,19,0.2)"/>
-              <stop offset="50%"  stopColor="rgba(227,6,19,0.06)"/>
-              <stop offset="100%" stopColor="rgba(227,6,19,0.2)"/>
-            </linearGradient>
           </defs>
-          <circle cx={CENTER} cy={CENTER} r={ORBIT_R + 35} fill="url(#__orbGlow)" />
-          <circle cx={CENTER} cy={CENTER} r={ORBIT_R} stroke="url(#__ringGrad)" strokeWidth="1.5" fill="none"/>
-          <circle cx={CENTER} cy={CENTER} r={CENTER_R + 18} stroke="rgba(0,0,0,0.045)" strokeWidth="1" fill="none"/>
+          <circle cx={CENTER} cy={CENTER} r={ORBIT_R + 40} fill="url(#__orbGlow)" />
         </svg>
 
-        {/* Wrapper orbit — tourne en continu, toujours */}
+        {/* Wrapper orbit — tourne en continu */}
         <div style={{
           position: 'absolute',
           inset: 0,
@@ -170,7 +164,7 @@ export default function SecuriteOrbit() {
                   animationPlayState: 'running',
                 }}
               >
-                {/* Anneau pulsant */}
+                {/* Anneaux pulsants */}
                 {isActive && (
                   <span style={{
                     position: 'absolute',
@@ -217,6 +211,26 @@ export default function SecuriteOrbit() {
                 >
                   <item.Icon c={item.color} />
                 </motion.button>
+
+                {/* Label mot-clé sous le bouton */}
+                <div style={{
+                  position: 'absolute',
+                  top: ICON_R * 2 + 7,
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  whiteSpace: 'nowrap',
+                  pointerEvents: 'none',
+                }}>
+                  <span style={{
+                    fontSize: '0.68rem',
+                    fontWeight: 700,
+                    color: isActive ? item.color : 'rgba(0,0,0,0.45)',
+                    letterSpacing: '0.03em',
+                    transition: 'color 0.25s',
+                  }}>
+                    {item.label}
+                  </span>
+                </div>
               </div>
             );
           })}
@@ -281,7 +295,7 @@ export default function SecuriteOrbit() {
                   <activeItem.Icon c={activeItem.color} />
                 </motion.div>
 
-                {/* Valeur principale — volumineuse */}
+                {/* Valeur principale */}
                 <span style={{
                   fontSize: '1rem',
                   fontWeight: 800,
