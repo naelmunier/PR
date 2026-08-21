@@ -82,12 +82,22 @@ const col3 = equipements.slice(7);
           Une gamme complète de services logistiques adaptée aux exigences du commerce international.
         </p>
       </div>
-      <CircularGallery
-        client:load
-        items={prestations.map(p => ({ image: p.icone, text: p.titre, desc: p.desc }))}
-        bend={2.8}
-        scrollEase={0.06}
-      />
+      <div style="display:flex; flex-direction:column; gap:2rem;">
+        <CircularGallery
+          client:load
+          items={prestations.slice(0, 5).map(p => ({ image: p.icone, text: p.titre, desc: p.desc }))}
+          bend={2.8}
+          scrollEase={0.06}
+          direction="right"
+        />
+        <CircularGallery
+          client:load
+          items={prestations.slice(5).map(p => ({ image: p.icone, text: p.titre, desc: p.desc }))}
+          bend={2.8}
+          scrollEase={0.06}
+          direction="left"
+        />
+      </div>
     </div>
   </section>
 

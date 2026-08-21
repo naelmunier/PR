@@ -10,6 +10,7 @@ interface Props {
   items: GalleryItem[];
   bend?: number;
   scrollEase?: number;
+  direction?: 'left' | 'right';
 }
 
 const CARD_W = 260;
@@ -17,7 +18,7 @@ const CARD_H = 330;
 const GAP = 28;
 const STRIDE = CARD_W + GAP;
 
-export default function CircularGallery({ items, bend = 2.8, scrollEase = 0.06 }: Props) {
+export default function CircularGallery({ items, bend = 2.8, scrollEase = 0.06, direction = 'right' }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const posRef       = useRef(0);
   const targetRef    = useRef(0);
@@ -79,7 +80,7 @@ export default function CircularGallery({ items, bend = 2.8, scrollEase = 0.06 }
 
     const tick = () => {
       /* Défilement automatique continu */
-      targetRef.current += AUTO_SPEED;
+      targetRef.current += AUTO_SPEED * (direction === 'left' ? -1 : 1);
 
       posRef.current += (targetRef.current - posRef.current) * scrollEase;
 
@@ -118,7 +119,7 @@ export default function CircularGallery({ items, bend = 2.8, scrollEase = 0.06 }
 
     frameRef.current = requestAnimationFrame(tick);
     return () => { if (frameRef.current) cancelAnimationFrame(frameRef.current); };
-  }, [scrollEase, bend, totalW]);
+  }, [scrollEase, bend, totalW, direction]);
 
   return (
     <div
