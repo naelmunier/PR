@@ -75,7 +75,12 @@ export default function CircularGallery({ items, bend = 2.8, scrollEase = 0.06 }
 
   /* ── Boucle d'animation ── */
   useEffect(() => {
+    const AUTO_SPEED = 0.6; // px/frame de défilement automatique
+
     const tick = () => {
+      /* Défilement automatique continu */
+      targetRef.current += AUTO_SPEED;
+
       posRef.current += (targetRef.current - posRef.current) * scrollEase;
 
       const W    = containerRef.current?.offsetWidth ?? 960;
