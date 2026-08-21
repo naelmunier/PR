@@ -12,9 +12,9 @@ interface Props {
   scrollEase?: number;
 }
 
-const CARD_W = 210;
-const CARD_H = 268;
-const GAP = 22;
+const CARD_W = 260;
+const CARD_H = 330;
+const GAP = 28;
 const STRIDE = CARD_W + GAP;
 
 export default function CircularGallery({ items, bend = 2.8, scrollEase = 0.06 }: Props) {
@@ -37,7 +37,7 @@ export default function CircularGallery({ items, bend = 2.8, scrollEase = 0.06 }
 
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
-      targetRef.current += (e.deltaX !== 0 ? e.deltaX : e.deltaY) * 0.75;
+      targetRef.current += (e.deltaX !== 0 ? e.deltaX : e.deltaY) * 1.8;
     };
 
     const onPointerDown = (e: PointerEvent) => {
@@ -50,7 +50,7 @@ export default function CircularGallery({ items, bend = 2.8, scrollEase = 0.06 }
 
     const onPointerMove = (e: PointerEvent) => {
       if (!dragging.current) return;
-      targetRef.current = startTarget.current - (e.clientX - startX.current) * 1.6;
+      targetRef.current = startTarget.current - (e.clientX - startX.current) * 2.4;
     };
 
     const onPointerUp = () => {
@@ -143,33 +143,25 @@ export default function CircularGallery({ items, bend = 2.8, scrollEase = 0.06 }
             marginTop: -(CARD_H / 2),
             willChange: 'transform, opacity',
             transformOrigin: 'center center',
-            borderRadius: 20,
+            borderRadius: 22,
             background: 'white',
-            boxShadow: '0 4px 30px rgba(0,0,0,0.08), 0 1px 6px rgba(0,0,0,0.04)',
-            border: '1.5px solid rgba(0,0,0,0.06)',
+            boxShadow: '0 12px 48px rgba(0,0,0,0.13), 0 3px 12px rgba(0,0,0,0.07)',
+            border: '1.5px solid rgba(0,0,0,0.055)',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: 12,
-            padding: '1.6rem 1.3rem 1.4rem',
+            gap: 14,
+            padding: '2rem 1.6rem 1.8rem',
             textAlign: 'center',
             pointerEvents: 'none',
             overflow: 'hidden',
           }}
         >
-          {/* Trait d'accent haut */}
-          <div style={{
-            position: 'absolute', top: 0,
-            left: '25%', right: '25%', height: 2,
-            background: 'linear-gradient(90deg, transparent, rgba(227,6,19,0.35), transparent)',
-            borderRadius: '0 0 4px 4px',
-          }} />
-
           {/* Cercle icône */}
           <div style={{
-            width: 70,
-            height: 70,
+            width: 88,
+            height: 88,
             borderRadius: '50%',
             background: 'rgba(227,6,19,0.07)',
             display: 'flex',
@@ -181,8 +173,8 @@ export default function CircularGallery({ items, bend = 2.8, scrollEase = 0.06 }
             <img
               src={item.image}
               alt=""
-              width={44}
-              height={44}
+              width={56}
+              height={56}
               style={{ objectFit: 'contain', borderRadius: 0 }}
               loading="lazy"
             />
@@ -190,7 +182,7 @@ export default function CircularGallery({ items, bend = 2.8, scrollEase = 0.06 }
 
           {/* Titre */}
           <span style={{
-            fontSize: '0.94rem',
+            fontSize: '1rem',
             fontWeight: 700,
             color: '#1d1d1f',
             lineHeight: 1.28,
@@ -201,9 +193,9 @@ export default function CircularGallery({ items, bend = 2.8, scrollEase = 0.06 }
           {/* Description */}
           {item.desc && (
             <span style={{
-              fontSize: '0.76rem',
+              fontSize: '0.8rem',
               color: '#8e8e93',
-              lineHeight: 1.55,
+              lineHeight: 1.58,
             }}>
               {item.desc}
             </span>
