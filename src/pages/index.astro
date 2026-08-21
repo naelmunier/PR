@@ -1,6 +1,7 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import PartenairesCarousel from '../components/PartenairesCarousel.astro';
+import SecuriteOrbit from '../components/SecuriteOrbit.tsx';
 
 const prestations = [
   { icone: '/assets/nos prestations/depotage-empotage.png', titre: 'Dépotage & Empotage',      desc: 'Déchargement et chargement de conteneurs et de camions avec rigueur et réactivité.',       key: 'depotage' },
@@ -26,6 +27,9 @@ const equipements = [
   { ico: '/assets/carousel-equipement/equipe.png',           val: '20',       label: 'Collaborateurs',               key: 'collaborateurs' },
   { ico: '/assets/carousel-equipement/quais.png',            val: '51',       label: 'Quais de chargement',          key: 'quais' },
 ];
+const col1 = equipements.slice(0, 4);
+const col2 = equipements.slice(4, 7);
+const col3 = equipements.slice(7);
 ---
 
 <MainLayout
@@ -162,84 +166,43 @@ const equipements = [
 
       </div>
 
-      <!-- Drawer détails site -->
-      <div class="site-drawer" id="siteDrawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Détails du site">
-        <div class="site-drawer__backdrop" id="siteDrawerBackdrop"></div>
-        <div class="site-drawer__panel">
-          <button class="site-drawer__close" id="siteDrawerClose" aria-label="Fermer">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-          </button>
-          <div class="site-drawer__img-wrap">
-            <img class="site-drawer__img" id="siteDrawerImg" src="" alt="" loading="lazy" />
-            <div class="site-drawer__img-overlay"></div>
+      <!-- Modale carte détails site -->
+      <div class="site-modal" id="siteModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Détails du site">
+        <div class="site-modal__backdrop" id="siteModalBackdrop"></div>
+        <div class="site-modal__wrap">
+          <div class="site-modal__card">
+
+            <!-- Header -->
+            <div class="site-modal__header">
+              <div class="site-modal__header-left">
+                <div class="site-modal__ico-wrap" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <h2 class="site-modal__title" id="siteModalTitle">Site</h2>
+              </div>
+              <button class="site-modal__close" id="siteModalClose" aria-label="Fermer">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+
+            <!-- Body -->
+            <div class="site-modal__body" id="siteModalBody"></div>
+
           </div>
-          <div class="site-drawer__body" id="siteDrawerBody"></div>
         </div>
       </div>
 
       <!-- ── Sécurité ── -->
       <div class="securite-bloc reveal">
-        <div class="securite-header">
-          <span class="securite-eyebrow" data-i18n="securite.eyebrow">Sécurité</span>
-          <h3 class="securite-titre" data-i18n-html="securite.title">Votre marchandise, sous <span class="securite-accent">haute surveillance</span></h3>
-          <p class="securite-sous-titre" data-i18n="securite.subtitle">La sécurité n'est pas une option — c'est notre engagement premier. Chaque site est conçu pour protéger vos flux, nuit et jour, 365 jours par an.</p>
-        </div>
-        <div class="securite-grid">
-          <div class="securite-item reveal" style="transition-delay:0.05s;">
-            <div class="securite-item__ico-wrap">
-              <img src="/assets/security/camera.gif" alt="" aria-hidden="true" width="48" height="48" />
-            </div>
-            <div class="securite-item__text">
-              <span class="securite-item__val" data-i18n="securite.item1.val">27 caméras HD</span>
-              <span class="securite-item__desc" data-i18n="securite.item1.desc">Couverture intégrale de l'ensemble du site</span>
-            </div>
+        <div class="securite-layout">
+          <!-- Colonne gauche : texte -->
+          <div class="securite-header">
+            <span class="securite-eyebrow" data-i18n="securite.eyebrow">Sécurité</span>
+            <h3 class="securite-titre" data-i18n-html="securite.title">Votre marchandise, sous <span class="securite-accent">haute surveillance</span></h3>
+            <p class="securite-sous-titre" data-i18n="securite.subtitle">La sécurité n'est pas une option — c'est notre engagement premier. Chaque site est conçu pour protéger vos flux, nuit et jour, 365 jours par an.</p>
           </div>
-          <div class="securite-item reveal" style="transition-delay:0.1s;">
-            <div class="securite-item__ico-wrap">
-              <img src="/assets/security/video.gif" alt="" aria-hidden="true" width="48" height="48" />
-            </div>
-            <div class="securite-item__text">
-              <span class="securite-item__val" data-i18n="securite.item2.val">Surveillance 24/7</span>
-              <span class="securite-item__val" data-i18n="securite.item2.sub">Intérieur et Extérieur</span>
-              <span class="securite-item__desc securite-item__desc--copy" data-i18n="securite.item2.copy">Monitoring permanent avec reporting à domicile</span>
-            </div>
-          </div>
-          <div class="securite-item reveal" style="transition-delay:0.15s;">
-            <div class="securite-item__ico-wrap">
-              <img src="/assets/security/stockage.gif" alt="" aria-hidden="true" width="48" height="48" />
-            </div>
-            <div class="securite-item__text">
-              <span class="securite-item__val" data-i18n="securite.item3.val">Stockage vidéo 30 jours</span>
-              <span class="securite-item__desc" data-i18n="securite.item3.desc">Conservation conforme aux exigences de la CNIL</span>
-            </div>
-          </div>
-          <div class="securite-item reveal" style="transition-delay:0.2s;">
-            <div class="securite-item__ico-wrap">
-              <img src="/assets/security/police.gif" alt="" aria-hidden="true" width="48" height="48" />
-            </div>
-            <div class="securite-item__text">
-              <span class="securite-item__val" data-i18n="securite.item4.val">Police portuaire</span>
-              <span class="securite-item__desc" data-i18n="securite.item4.desc">Sécurité renforcée par les forces de l'ordre du port</span>
-            </div>
-          </div>
-          <div class="securite-item reveal" style="transition-delay:0.25s;">
-            <div class="securite-item__ico-wrap">
-              <img src="/assets/security/cloture.png" alt="" aria-hidden="true" width="48" height="48" />
-            </div>
-            <div class="securite-item__text">
-              <span class="securite-item__val" data-i18n="securite.item5.val">Site 100% clôturé</span>
-              <span class="securite-item__desc" data-i18n="securite.item5.desc">Enceinte sécurisée sur l'intégralité du périmètre</span>
-            </div>
-          </div>
-          <div class="securite-item reveal" style="transition-delay:0.3s;">
-            <div class="securite-item__ico-wrap">
-              <img src="/assets/security/badge.gif" alt="" aria-hidden="true" width="48" height="48" />
-            </div>
-            <div class="securite-item__text">
-              <span class="securite-item__val" data-i18n="securite.item6.val">Contrôle d'accès par badge</span>
-              <span class="securite-item__desc" data-i18n="securite.item6.desc">Accès réglementé à l'ensemble des zones du site</span>
-            </div>
-          </div>
+          <!-- Colonne droite : orbit carousel -->
+          <SecuriteOrbit client:load />
         </div>
       </div>
 
@@ -269,25 +232,48 @@ const equipements = [
         </div>
       </div>
 
-      <div class="c3d-wrapper reveal">
-        <div class="c3d-scene">
-          <div class="c3d-ring" id="c3dRing">
-            {equipements.map((e, i) => (
-              <div class="c3d-card" data-index={i}>
-                <img class="c3d-card__ico" src={e.ico} alt={e.label} width="46" height="46" loading="lazy" />
-                <span class="c3d-card__val">{e.val}</span>
-                <span class="c3d-card__label" data-i18n={`equip.${e.key}`}>{e.label}</span>
+      <!-- Colonnes d'équipements — défilement vertical infini -->
+      <div class="equip-columns reveal">
+
+        <!-- Colonne 1 -->
+        <div class="equip-col">
+          <div class="equip-col__inner equip-col__inner--1">
+            {[...col1, ...col1].map((e) => (
+              <div class="equip-card">
+                <img class="equip-card__ico" src={e.ico} alt={e.label} width="48" height="48" loading="lazy" />
+                <span class="equip-card__val">{e.val}</span>
+                <span class="equip-card__label" data-i18n={`equip.${e.key}`}>{e.label}</span>
               </div>
             ))}
           </div>
-          <button class="c3d-arrow c3d-arrow--prev" id="c3dPrev" aria-label="Précédent">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <button class="c3d-arrow c3d-arrow--next" id="c3dNext" aria-label="Suivant">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
         </div>
-        <p class="c3d-counter" id="c3dCounter">1 / 8</p>
+
+        <!-- Colonne 2 — masquée mobile -->
+        <div class="equip-col equip-col--md">
+          <div class="equip-col__inner equip-col__inner--2">
+            {[...col2, ...col2].map((e) => (
+              <div class="equip-card">
+                <img class="equip-card__ico" src={e.ico} alt={e.label} width="48" height="48" loading="lazy" />
+                <span class="equip-card__val">{e.val}</span>
+                <span class="equip-card__label" data-i18n={`equip.${e.key}`}>{e.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Colonne 3 — masquée mobile/tablet -->
+        <div class="equip-col equip-col--lg">
+          <div class="equip-col__inner equip-col__inner--3">
+            {[...col3, ...col3].map((e) => (
+              <div class="equip-card">
+                <img class="equip-card__ico" src={e.ico} alt={e.label} width="48" height="48" loading="lazy" />
+                <span class="equip-card__val">{e.val}</span>
+                <span class="equip-card__label" data-i18n={`equip.${e.key}`}>{e.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -340,205 +326,81 @@ const equipements = [
 
   document.querySelectorAll('.bridge-stats-row').forEach(el => kpiObserver.observe(el));
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const ring      = document.getElementById('c3dRing')    as HTMLElement;
-    const counterEl = document.getElementById('c3dCounter') as HTMLElement;
-    const prevBtn   = document.getElementById('c3dPrev')    as HTMLButtonElement;
-    const nextBtn   = document.getElementById('c3dNext')    as HTMLButtonElement;
-    if (!ring) return;
 
-    const cards     = Array.from(ring.querySelectorAll<HTMLElement>('.c3d-card'));
-    const total     = cards.length;        // 8
-    const DEG       = 360 / total;         // 45° par carte
-    const TO_RAD    = Math.PI / 180;
-
-    /* — Ellipse — */
-    const RX = 350;   // demi-axe horizontal (px)
-    const RZ = 85;    // demi-axe profondeur (px) — petit = très plat/elliptique
-
-    /* Taille relative min (carte arrière) → max (carte avant) */
-    const SCALE_MIN = 0.50;
-    const SCALE_MAX = 1.00;
-
-    /* Opacité min (carte arrière) */
-    const OPACITY_MIN = 0.32;
-
-    let current   = 0;
-    let autoTimer: ReturnType<typeof setInterval>;
-
-    /* — Applique les positions 3D de toutes les cartes — */
-    function updateCards() {
-      cards.forEach((card, i) => {
-        /* angle relatif à la carte avant, normalisé dans [-180, 180] */
-        const a    = ((i - current) * DEG % 360 + 540) % 360 - 180;
-        const rad  = a * TO_RAD;
-        const cosA = Math.cos(rad);
-
-        const tx = RX * Math.sin(rad);
-        const tz = -RZ * (1 - cosA);                             // 0 devant, −2RZ derrière
-
-        /* Scale et opacité progressifs : max devant, min derrière */
-        const t       = (cosA + 1) / 2;                          // 1 devant, 0 derrière
-        const baseScale = SCALE_MIN + (SCALE_MAX - SCALE_MIN) * t;
-        const scale   = i === current ? baseScale * 1.10 : baseScale;  // +10% sur la carte active
-        const opacity = OPACITY_MIN + (1 - OPACITY_MIN) * t;
-
-        card.style.transform = `translateX(${tx.toFixed(1)}px) translateZ(${tz.toFixed(1)}px) scale(${scale.toFixed(3)})`;
-        card.style.opacity   = opacity.toFixed(3);
-        card.style.zIndex    = String(Math.round(t * 100));
-        card.classList.toggle('c3d-card--active', i === current);
-      });
-
-      if (counterEl) counterEl.textContent = `${current + 1} / ${total}`;
-    }
-
-    /* — Navigation avec animation pop sur la carte active — */
-    function goTo(index: number) {
-      current = ((index % total) + total) % total;
-      updateCards();
-      /* Pop lumineux sur la nouvelle carte active */
-      const active = cards[current];
-      active.classList.remove('c3d-card--pop');
-      requestAnimationFrame(() => requestAnimationFrame(() => active.classList.add('c3d-card--pop')));
-    }
-
-    function startAuto() { autoTimer = setInterval(() => goTo(current + 1), 2000); }
-    function clearAuto()  { clearInterval(autoTimer); }
-
-    prevBtn?.addEventListener('click', () => { clearAuto(); goTo(current - 1); startAuto(); });
-    nextBtn?.addEventListener('click', () => { clearAuto(); goTo(current + 1); startAuto(); });
-
-    /* Pause au survol */
-    ring.addEventListener('mouseenter', clearAuto);
-    ring.addEventListener('mouseleave', startAuto);
-
-    /* — Drag souris — */
-    let dragX: number | null = null;
-    let didDrag = false;
-
-    ring.addEventListener('mousedown', (e: MouseEvent) => {
-      dragX   = e.clientX;
-      didDrag = false;
-    });
-    window.addEventListener('mousemove', (e: MouseEvent) => {
-      if (dragX === null) return;
-      if (Math.abs(e.clientX - dragX) > 6) didDrag = true;
-    });
-    window.addEventListener('mouseup', (e: MouseEvent) => {
-      if (dragX === null) return;
-      const delta = e.clientX - dragX;
-      if (Math.abs(delta) > 48) {
-        clearAuto();
-        goTo(delta < 0 ? current + 1 : current - 1);
-        startAuto();
-      }
-      dragX = null; didDrag = false;
-    });
-    /* Empêche le clic si on a dragué */
-    ring.addEventListener('click', (e: MouseEvent) => { if (didDrag) e.stopPropagation(); });
-
-    /* — Swipe tactile — */
-    let touchX: number | null = null;
-    ring.addEventListener('touchstart', (e: TouchEvent) => { touchX = e.touches[0].clientX; }, { passive: true });
-    ring.addEventListener('touchend',   (e: TouchEvent) => {
-      if (touchX === null) return;
-      const delta = e.changedTouches[0].clientX - touchX;
-      if (Math.abs(delta) > 48) {
-        clearAuto();
-        goTo(delta < 0 ? current + 1 : current - 1);
-        startAuto();
-      }
-      touchX = null;
-    }, { passive: true });
-
-    /* Initialisation */
-    goTo(0);
-    startAuto();
-  });
-
-  /* ── Drawer — détails des sites ── */
+  /* ── Modale carte — détails des sites ── */
   (() => {
-    const drawer   = document.getElementById('siteDrawer');
-    const backdrop = document.getElementById('siteDrawerBackdrop');
-    const closeBtn = document.getElementById('siteDrawerClose');
-    const imgWrap  = document.querySelector<HTMLImageElement>('.site-drawer__img');
-    const bodyEl   = document.getElementById('siteDrawerBody');
-    if (!drawer || !bodyEl) return;
+    const modal    = document.getElementById('siteModal');
+    const backdrop = document.getElementById('siteModalBackdrop');
+    const closeBtn = document.getElementById('siteModalClose');
+    const titleEl  = document.getElementById('siteModalTitle');
+    const bodyEl   = document.getElementById('siteModalBody');
+    if (!modal || !bodyEl || !titleEl) return;
 
-    const SITE_IMGS: Record<string, { src: string; alt: string; badge: 'soon' | 'actif' }> = {
-      sandouville: { src: '/assets/entrepot/nouvel-entrepot2.jpg', alt: 'Futur entrepôt de Sandouville', badge: 'soon' },
-      rogerville:  { src: '/assets/entrepot/ancien-entrepot.jpg',  alt: 'Entrepôt de Rogerville',         badge: 'actif' },
-    };
-
-    function openDrawer(cardEl: HTMLElement) {
-      const site = cardEl.dataset.site ?? '';
-      const meta = SITE_IMGS[site];
-      if (!meta) return;
-
-      /* Lecture des données i18n depuis les spans cachés (déjà traduits par i18n.js) */
+    function openModal(cardEl: HTMLElement) {
+      /* Lecture i18n depuis les spans cachés */
       const d: Record<string, string> = {};
       cardEl.querySelectorAll<HTMLElement>('.hrc-data[data-key]').forEach(span => {
         d[span.dataset.key!] = span.innerHTML;
       });
 
-      /* Image */
-      if (imgWrap) { imgWrap.src = meta.src; imgWrap.alt = meta.alt; }
+      /* Titre dans le header */
+      titleEl.innerHTML = d.titre ?? '';
 
-      /* Badge */
-      const badgeClass = meta.badge === 'soon' ? 'site-drawer__badge--soon' : 'site-drawer__badge--actif';
-      const badgeDot   = meta.badge === 'soon' ? '<span class="badge-dot" aria-hidden="true"></span>' : '';
-      const badgeText  = cardEl.querySelector<HTMLElement>('.hrc-card__badge')?.textContent?.trim() ?? '';
+      /* Surface → extraire jusqu'à m² */
+      const surfRaw = d.surface ?? '';
+      const mIdx    = surfRaw.indexOf('m²');
+      const surfNum = mIdx >= 0 ? surfRaw.slice(0, mIdx + 2).trim() : surfRaw;
 
-      /* Lien maps */
+      /* Map URL */
       const mapUrl = cardEl.querySelector<HTMLElement>('.hrc-data[data-key="mapurl"]')?.textContent?.trim() ?? '#';
 
+      /* SVG icons */
+      const surfIco = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>`;
+      const quaiIco = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="8" y1="4" x2="8" y2="20"/><line x1="16" y1="4" x2="16" y2="20"/></svg>`;
+      const mapIco  = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
+
       bodyEl.innerHTML = `
-        <span class="site-drawer__badge ${badgeClass}">${badgeDot}${badgeText}</span>
-        <h2 class="site-drawer__title">${d.titre ?? ''}</h2>
-        <p class="site-drawer__desc">${d.desc ?? ''}</p>
-        <div class="site-drawer__section">
-          <span class="site-drawer__section-title" data-i18n="caract.label">Caractéristiques</span>
-          <div class="site-drawer__row">
-            <img class="site-drawer__row-ico" src="/assets/entrepot/adresse.png" alt="" aria-hidden="true" width="18" height="18" />
-            <div>
-              <span>${d.addr ?? ''}</span>
-              <br/>
-              <a href="${mapUrl}" target="_blank" rel="noopener noreferrer" class="site-drawer__map-link">
-                Voir sur la carte
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-              </a>
-            </div>
+        <div class="site-modal__rows">
+          <div class="site-modal__row">
+            <span class="site-modal__row-ico">${surfIco}</span>
+            <span class="site-modal__row-label">Surface</span>
+            <span class="site-modal__row-sep">:</span>
+            <span class="site-modal__row-val">${surfNum}</span>
           </div>
-          <div class="site-drawer__row">
-            <img class="site-drawer__row-ico" src="/assets/entrepot/surface.png" alt="" aria-hidden="true" width="18" height="18" />
-            <span>${d.surface ?? ''}</span>
+          <div class="site-modal__row">
+            <span class="site-modal__row-ico">${quaiIco}</span>
+            <span class="site-modal__row-label">Quais</span>
+            <span class="site-modal__row-sep">:</span>
+            <span class="site-modal__row-val">${d.quais ?? ''}</span>
           </div>
-          <div class="site-drawer__row">
-            <img class="site-drawer__row-ico" src="/assets/entrepot/quai.png" alt="" aria-hidden="true" width="18" height="18" />
-            <span>${d.quais ?? ''}</span>
-          </div>
+          <a class="site-modal__row site-modal__row--map" href="${mapUrl}" target="_blank" rel="noopener noreferrer">
+            <span class="site-modal__row-ico">${mapIco}</span>
+            <span class="site-modal__row-label">Voir sur la carte</span>
+            <span class="site-modal__row-sep">:</span>
+            <span class="site-modal__row-val">${d.addr ?? ''}&nbsp;↗</span>
+          </a>
         </div>
       `;
 
-      drawer.classList.add('open');
-      drawer.setAttribute('aria-hidden', 'false');
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
     }
 
-    function closeDrawer() {
-      drawer.classList.remove('open');
-      drawer.setAttribute('aria-hidden', 'true');
+    function closeModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     }
 
     document.querySelectorAll<HTMLElement>('.hrc-card').forEach(card => {
-      card.addEventListener('click',  () => openDrawer(card));
-      card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDrawer(card); } });
+      card.addEventListener('click',   ()  => openModal(card));
+      card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card); } });
     });
 
-    closeBtn?.addEventListener('click', closeDrawer);
-    backdrop?.addEventListener('click', closeDrawer);
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer(); });
+    closeBtn?.addEventListener('click', closeModal);
+    backdrop?.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
   })();
 </script>
 
@@ -1066,189 +928,167 @@ const equipements = [
   }
 
   /* ══════════════════════════════════════════════════════
-     DRAWER — détails du site
+     MODALE CARTE — détails du site
   ══════════════════════════════════════════════════════ */
-  .site-drawer {
+  .site-modal {
     position: fixed;
     inset: 0;
     z-index: 9000;
     pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
   }
-  .site-drawer.open {
-    pointer-events: all;
-  }
+  .site-modal.open { pointer-events: all; }
 
-  .site-drawer__backdrop {
+  .site-modal__backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.48);
+    background: rgba(0,0,0,0.46);
     opacity: 0;
-    transition: opacity 0.32s ease;
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
+    transition: opacity 0.28s ease;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
   }
-  .site-drawer.open .site-drawer__backdrop {
+  .site-modal.open .site-modal__backdrop { opacity: 1; }
+
+  .site-modal__wrap {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    transform: scale(0.94) translateY(14px);
+    opacity: 0;
+    transition:
+      transform 0.38s cubic-bezier(0.34, 1.4, 0.64, 1),
+      opacity   0.28s ease;
+  }
+  .site-modal.open .site-modal__wrap {
+    transform: none;
     opacity: 1;
   }
 
-  .site-drawer__panel {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: min(500px, 100%);
-    background: #ffffff;
-    transform: translateX(105%);
-    transition: transform 0.42s cubic-bezier(0.34, 1, 0.64, 1);
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    overflow-x: hidden;
-    box-shadow: -8px 0 48px rgba(0,0,0,0.18);
-  }
-  .site-drawer.open .site-drawer__panel {
-    transform: none;
+  .site-modal__card {
+    background: white;
+    border-radius: 1.8rem;
+    box-shadow:
+      0 28px 80px rgba(0,0,0,0.16),
+      0 4px 20px rgba(0,0,0,0.07);
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
   }
 
-  .site-drawer__close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    z-index: 10;
+  /* Header */
+  .site-modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.35rem 1.5rem;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+  }
+  .site-modal__header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .site-modal__ico-wrap {
     width: 38px;
     height: 38px;
+    border-radius: 0.85rem;
+    background: rgba(227,6,19,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--rouge);
+  }
+  .site-modal__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1d1d1f;
+    margin: 0;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .site-modal__title .entrepot-rouge { color: var(--rouge); }
+
+  .site-modal__close {
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    border: 1.5px solid rgba(255,255,255,0.4);
-    background: rgba(0,0,0,0.52);
-    color: white;
+    border: 1.5px solid rgba(0,0,0,0.1);
+    background: #f5f5f7;
+    color: #6e6e73;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-  .site-drawer__close:hover {
-    background: rgba(0,0,0,0.75);
-    border-color: rgba(255,255,255,0.65);
-  }
-
-  .site-drawer__img-wrap {
-    position: relative;
     flex-shrink: 0;
-    height: 260px;
-    background: #111;
-    overflow: hidden;
+    transition: background 0.2s, color 0.2s;
   }
-  .site-drawer__img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 0 !important;
-  }
-  .site-drawer__img-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, transparent 45%, rgba(0,0,0,0.42) 100%);
-  }
+  .site-modal__close:hover { background: #e8e8ed; color: #1d1d1f; }
 
-  .site-drawer__body {
-    padding: 2rem 2rem 3rem;
+  /* Body de la modale */
+  .site-modal__body {
+    padding: 1.25rem 1.4rem 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 1.4rem;
+    gap: 0;
   }
 
-  .site-drawer__badge {
-    align-self: flex-start;
-    display: inline-flex;
+  /* Lignes de données */
+  .site-modal__rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .site-modal__row {
+    display: flex;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.28rem 0.9rem;
-    border-radius: 2rem;
-  }
-  .site-drawer__badge--soon {
-    background: linear-gradient(135deg, #f59e0b, #dc6b00);
-    color: white;
-  }
-  .site-drawer__badge--actif {
-    background: rgba(227,6,19,0.08);
-    color: #e30613;
-    border: 1px solid rgba(227,6,19,0.2);
-  }
-
-  .site-drawer__title {
-    font-size: 1.9rem;
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    color: #1d1d1f;
-    line-height: 1.1;
-    margin: 0;
-  }
-  .site-drawer__title .entrepot-rouge { color: var(--rouge); }
-
-  .site-drawer__desc {
-    font-size: 0.95rem;
-    color: #6e6e73;
-    line-height: 1.7;
-    margin: 0;
-  }
-
-  .site-drawer__section {
+    gap: 0.65rem;
+    padding: 0.82rem 0.95rem;
     background: #f5f5f7;
-    border-radius: 1.3rem;
-    padding: 1.3rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-  }
-  .site-drawer__section-title {
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--rouge);
-    padding-bottom: 0.65rem;
-    border-bottom: 1px solid rgba(227,6,19,0.12);
-  }
-  .site-drawer__row {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    font-size: 0.92rem;
-    color: #1d1d1f;
-    font-weight: 500;
-    line-height: 1.5;
-  }
-  .site-drawer__row-ico {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-    opacity: 0.6;
-    flex-shrink: 0;
-    margin-top: 2px;
-    border-radius: 0 !important;
-  }
-  .site-drawer__map-link {
-    color: var(--rouge);
+    border-radius: 0.9rem;
     text-decoration: none;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: 0.82rem;
-    margin-top: 0.25rem;
-    transition: opacity 0.2s;
+    transition: background 0.18s;
   }
-  .site-drawer__map-link:hover {
-    opacity: 0.7;
+  .site-modal__row:hover { background: #ebebf0; }
+  .site-modal__row-ico {
+    width: 32px;
+    height: 32px;
+    border-radius: 0.6rem;
+    background: rgba(227,6,19,0.08);
+    color: var(--rouge);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .site-modal__row-label {
+    font-size: 0.82rem;
+    color: #8e8e93;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .site-modal__row-sep {
+    font-size: 0.82rem;
+    color: #c7c7cc;
+    flex-shrink: 0;
+  }
+  .site-modal__row-val {
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: #1d1d1f;
+    text-align: right;
+    flex: 1;
+    line-height: 1.4;
+  }
+  .site-modal__row--map .site-modal__row-val {
+    color: var(--rouge);
+  }
+  .site-modal__row--map:hover .site-modal__row-val {
+    text-decoration: underline;
   }
 
 
@@ -1276,10 +1116,29 @@ const equipements = [
     background: radial-gradient(circle, rgba(227,6,19,0.06) 0%, transparent 70%);
     pointer-events: none;
   }
+
+  /* Layout 2 colonnes : texte gauche, orbit droite */
+  .securite-layout {
+    display: grid;
+    grid-template-columns: 1fr 580px;
+    gap: 2rem;
+    align-items: center;
+  }
+  @media (max-width: 1100px) {
+    .securite-layout {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .securite-header {
+      text-align: center !important;
+      margin: 0 auto !important;
+    }
+  }
+
   .securite-header {
-    text-align: center;
-    max-width: 680px;
-    margin: 0 auto 3rem;
+    text-align: left;
+    max-width: 420px;
+    margin: 0;
     position: relative;
   }
   .securite-eyebrow {
@@ -1494,131 +1353,92 @@ const equipements = [
     .bridge-br { display: none; }
   }
 
-  /* MOYENS — CARROUSEL 3D ELLIPTIQUE */
-  .c3d-wrapper {
+  /* ══════════════════════════════════════════════════════
+     COLONNES ÉQUIPEMENTS — défilement vertical infini
+  ══════════════════════════════════════════════════════ */
+  .equip-columns {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.4rem;
-  }
-
-  .c3d-scene {
-    position: relative;
-    width: 100%;
-    height: 270px;
-    perspective: 900px;
-    perspective-origin: 50% 50%;
-    overflow: visible;
-  }
-
-  .c3d-ring {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transform-style: preserve-3d;
-  }
-
-  .c3d-card {
-    position: absolute;
-    width: 192px;
-    height: 172px;
-    left: 50%;
-    top: 50%;
-    margin-left: -96px;
-    margin-top: -86px;
-    background: white;
-    border-radius: 1.4rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    border: 1.5px solid transparent;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 0.45rem;
-    padding: 1.1rem 1rem;
+    gap: 1.5rem;
+    max-height: 680px;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+  }
+
+  .equip-col {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .equip-col--md { display: none; }
+  .equip-col--lg { display: none; }
+
+  @media (min-width: 640px) { .equip-col--md { display: block; } }
+  @media (min-width: 1024px) { .equip-col--lg { display: block; } }
+
+  .equip-col__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    animation: equip-scroll-up linear infinite;
+  }
+
+  .equip-col__inner--1,
+  .equip-col__inner--2,
+  .equip-col__inner--3 { animation-duration: 24s; }
+
+  .equip-col:hover .equip-col__inner {
+    animation-play-state: paused;
+  }
+
+  @keyframes equip-scroll-up {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+  }
+
+  .equip-card {
+    background: white;
+    border-radius: 1.5rem;
+    border: 1.5px solid rgba(0,0,0,0.07);
+    box-shadow: 0 2px 18px rgba(0,0,0,0.06);
+    padding: 1.8rem 1.4rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.65rem;
     text-align: center;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity   0.6s ease,
-                box-shadow 0.4s,
-                border-color 0.4s;
-    cursor: grab;
-    user-select: none;
-    will-change: transform, opacity;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
   }
 
-  .c3d-card:active { cursor: grabbing; }
-
-  .c3d-card--active {
-    box-shadow: 0 16px 50px rgba(227,6,19,0.18), 0 4px 14px rgba(0,0,0,0.08);
-    border-color: rgba(227,6,19,0.22);
+  .equip-card:hover {
+    box-shadow: 0 8px 36px rgba(227,6,19,0.12);
+    border-color: rgba(227,6,19,0.2);
   }
 
-  /* Animation "pop" quand la carte arrive devant */
-  @keyframes card-arrive {
-    0%   { filter: brightness(1.4) saturate(1.2); }
-    100% { filter: brightness(1)   saturate(1);   }
-  }
-
-  .c3d-card--pop {
-    animation: card-arrive 0.55s ease-out forwards;
-  }
-
-  .c3d-card__ico {
-    width: 46px;
-    height: 46px;
+  .equip-card__ico {
+    width: 48px;
+    height: 48px;
     object-fit: contain;
-    border-radius: 0 !important;  /* annule le border-radius global sur img */
+    border-radius: 0 !important;
+    opacity: 0.82;
   }
 
-  .c3d-card__val {
-    font-size: 1.25rem;
+  .equip-card__val {
+    font-size: 2rem;
     font-weight: 800;
     color: var(--rouge);
     line-height: 1;
+    letter-spacing: -0.04em;
   }
 
-  .c3d-card__label {
-    font-size: 0.82rem;
+  .equip-card__label {
+    font-size: 0.84rem;
     color: var(--gris-moyen);
-    line-height: 1.35;
-  }
-
-  /* Flèches centrées verticalement sur la scène */
-  .c3d-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1.5px solid #e0e0e0;
-    background: white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
-    color: var(--gris-fonce);
-    z-index: 20;
-  }
-
-  .c3d-arrow--prev { left: 4px; }
-  .c3d-arrow--next { right: 4px; }
-
-  .c3d-arrow:hover {
-    background: var(--rouge);
-    border-color: var(--rouge);
-    color: white;
-    box-shadow: 0 4px 18px rgba(227,6,19,0.25);
-  }
-
-  /* Compteur */
-  .c3d-counter {
-    font-size: 0.95rem;
-    color: #aaa;
-    letter-spacing: 0.08em;
-    margin: 0;
+    line-height: 1.45;
+    font-weight: 500;
+    max-width: 160px;
   }
 
   /* CTA FINAL */
@@ -1671,10 +1491,6 @@ const equipements = [
     .prestations-grid {
       grid-template-columns: repeat(2, 1fr);
     }
-
-    .c3d-scene {
-      height: 260px;
-    }
   }
 
   @media (max-width: 600px) {
@@ -1684,10 +1500,6 @@ const equipements = [
 
     .hero__titre {
       font-size: 2rem;
-    }
-
-    .c3d-scene {
-      height: 240px;
     }
   }
 </style>
