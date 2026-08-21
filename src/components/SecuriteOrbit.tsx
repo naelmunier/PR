@@ -94,9 +94,9 @@ const ITEMS: Item[] = [
 const SIZE = 720;
 const CENTER = SIZE / 2;
 const ORBIT_R = 295;
-const ICON_R = 58;
+const ICON_R = 50;
 const CENTER_R = 128;
-const REVOLUTION_S = 28;
+const REVOLUTION_S = 38;
 
 // ── Composant ────────────────────────────────────────────
 export default function SecuriteOrbit() {
@@ -125,7 +125,7 @@ export default function SecuriteOrbit() {
 
       <div style={{ position: 'relative', width: SIZE, height: SIZE, maxWidth: '100%' }}>
 
-        {/* Lueur centrale uniquement — plus de ligne de périmètre */}
+        {/* Lueur + anneau très fin */}
         <svg style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }} width={SIZE} height={SIZE}>
           <defs>
             <radialGradient id="__orbGlow" cx="50%" cy="50%" r="50%">
@@ -135,6 +135,7 @@ export default function SecuriteOrbit() {
             </radialGradient>
           </defs>
           <circle cx={CENTER} cy={CENTER} r={ORBIT_R + 40} fill="url(#__orbGlow)" />
+          <circle cx={CENTER} cy={CENTER} r={ORBIT_R} stroke="rgba(227,6,19,0.15)" strokeWidth="1" fill="none" strokeDasharray="4 6"/>
         </svg>
 
         {/* Wrapper orbit — tourne en continu */}
@@ -212,25 +213,6 @@ export default function SecuriteOrbit() {
                   <item.Icon c={item.color} />
                 </motion.button>
 
-                {/* Label mot-clé sous le bouton */}
-                <div style={{
-                  position: 'absolute',
-                  top: ICON_R * 2 + 7,
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  whiteSpace: 'nowrap',
-                  pointerEvents: 'none',
-                }}>
-                  <span style={{
-                    fontSize: '0.68rem',
-                    fontWeight: 700,
-                    color: isActive ? item.color : 'rgba(0,0,0,0.45)',
-                    letterSpacing: '0.03em',
-                    transition: 'color 0.25s',
-                  }}>
-                    {item.label}
-                  </span>
-                </div>
               </div>
             );
           })}
