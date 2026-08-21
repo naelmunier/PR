@@ -204,7 +204,9 @@ const col3 = equipements.slice(7);
         <p class="securite-sous-titre" data-i18n="securite.subtitle">La sécurité n'est pas une option — c'est notre engagement premier. Chaque site est conçu pour protéger vos flux, nuit et jour, 365 jours par an.</p>
       </div>
       <div class="securite-bloc reveal">
-        <SecuriteOrbit client:load />
+        <div class="securite-orbit-container">
+          <SecuriteOrbit client:load />
+        </div>
       </div>
 
       <!-- ── Bridge / Statement ── -->
@@ -1112,6 +1114,30 @@ const col3 = equipements.slice(7);
     box-shadow: 0 4px 40px rgba(227,6,19,0.06), 0 1px 8px rgba(0,0,0,0.04);
     overflow: hidden;
     position: relative;
+  }
+
+  /* Responsive SecuriteOrbit — scale l'orbite sur petits écrans */
+  .securite-orbit-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .securite-orbit-container > div {
+    transform-origin: top center;
+    flex-shrink: 0;
+  }
+  @media (max-width: 760px) {
+    .securite-orbit-container { height: 432px; }
+    .securite-orbit-container > div { transform: scale(0.6); }
+  }
+  @media (max-width: 520px) {
+    .securite-orbit-container { height: 338px; }
+    .securite-orbit-container > div { transform: scale(0.47); }
+  }
+  @media (max-width: 380px) {
+    .securite-orbit-container { height: 274px; }
+    .securite-orbit-container > div { transform: scale(0.38); }
   }
   .securite-bloc::before {
     content: '';
