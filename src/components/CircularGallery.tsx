@@ -8,17 +8,16 @@ export type GalleryItem = {
 
 interface Props {
   items: GalleryItem[];
-  bend?: number;
   scrollEase?: number;
   direction?: 'left' | 'right';
 }
 
-const CARD_W = 260;
-const CARD_H = 330;
-const GAP = 28;
+const CARD_W = 240;
+const CARD_H = 310;
+const GAP = 16;
 const STRIDE = CARD_W + GAP;
 
-export default function CircularGallery({ items, bend = 2.8, scrollEase = 0.06, direction = 'right' }: Props) {
+export default function CircularGallery({ items, scrollEase = 0.06, direction = 'right' }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const posRef       = useRef(0);
   const targetRef    = useRef(0);
@@ -99,19 +98,13 @@ export default function CircularGallery({ items, bend = 2.8, scrollEase = 0.06, 
         /* Position écran : centré */
         const screenX = rawX + half - CARD_W / 2;
 
-        /* Normalisation : 0 = centre, ±1 = bord viewport */
-        const t  = rawX / half;
-        const tc = Math.max(-1.5, Math.min(1.5, t));
+        /* Fondu sur les bords uniquement */
+        const t     = rawX / half;
+        const alpha = Math.max(0, 1 - Math.abs(t) * 0.55);
 
-        const s  = bend / 3;
-        const rotY  = -tc * 22 * s;
-        const tz    = -Math.abs(tc) * 90 * s;
-        const scale = Math.max(0.72, 1 - Math.abs(tc) * 0.16 * s);
-        const alpha = Math.max(0, 1 - Math.abs(tc) * 0.48);
-
-        el.style.transform = `translateX(${screenX}px) perspective(1000px) rotateY(${rotY}deg) translateZ(${tz}px) scale(${scale})`;
+        el.style.transform = `translateX(${screenX}px)`;
         el.style.opacity   = String(alpha);
-        el.style.zIndex    = String(Math.round((1.5 - Math.abs(tc)) * 100));
+        el.style.zIndex    = '1';
       });
 
       frameRef.current = requestAnimationFrame(tick);
@@ -127,7 +120,7 @@ export default function CircularGallery({ items, bend = 2.8, scrollEase = 0.06, 
       style={{
         position: 'relative',
         width: '100%',
-        height: CARD_H + 72,
+        height: CARD_H + 48,
         cursor: 'grab',
         userSelect: 'none',
         touchAction: 'pan-y',

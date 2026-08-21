@@ -86,14 +86,12 @@ const col3 = equipements.slice(7);
         <CircularGallery
           client:load
           items={prestations.slice(0, 5).map(p => ({ image: p.icone, text: p.titre, desc: p.desc }))}
-          bend={2.8}
           scrollEase={0.06}
           direction="right"
         />
         <CircularGallery
           client:load
           items={prestations.slice(5).map(p => ({ image: p.icone, text: p.titre, desc: p.desc }))}
-          bend={2.8}
           scrollEase={0.06}
           direction="left"
         />
