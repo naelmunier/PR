@@ -112,7 +112,7 @@ export default function CircularGallery({ items, scrollEase = 0.06, direction = 
 
     frameRef.current = requestAnimationFrame(tick);
     return () => { if (frameRef.current) cancelAnimationFrame(frameRef.current); };
-  }, [scrollEase, bend, totalW, direction]);
+  }, [scrollEase, totalW, direction]);
 
   return (
     <div
