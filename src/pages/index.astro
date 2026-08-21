@@ -2,6 +2,7 @@
 import MainLayout from '../layouts/MainLayout.astro';
 import PartenairesCarousel from '../components/PartenairesCarousel.astro';
 import SecuriteOrbit from '../components/SecuriteOrbit.tsx';
+import CircularGallery from '../components/CircularGallery.tsx';
 
 const prestations = [
   { icone: '/assets/nos prestations/depotage-empotage.png', titre: 'Dépotage & Empotage',      desc: 'Déchargement et chargement de conteneurs et de camions avec rigueur et réactivité.',       key: 'depotage' },
@@ -81,18 +82,12 @@ const col3 = equipements.slice(7);
           Une gamme complète de services logistiques adaptée aux exigences du commerce international.
         </p>
       </div>
-      <div class="prestations-grid">
-        {prestations.map((p, i) => (
-          <div class="prestation-carte reveal" style={`transition-delay: ${i * 0.08}s`}>
-            <div class="prestation-carte__icone">
-              <img src={p.icone} alt={p.titre} width="48" height="48" loading="lazy" />
-            </div>
-            <h3 class="prestation-carte__titre" data-i18n={`prestation.${p.key}.titre`}>{p.titre}</h3>
-            <p class="prestation-carte__desc" data-i18n={`prestation.${p.key}.desc`}>{p.desc}</p>
-            <div class="prestation-carte__accent"></div>
-          </div>
-        ))}
-      </div>
+      <CircularGallery
+        client:load
+        items={prestations.map(p => ({ image: p.icone, text: p.titre, desc: p.desc }))}
+        bend={2.8}
+        scrollEase={0.06}
+      />
     </div>
   </section>
 
@@ -194,16 +189,12 @@ const col3 = equipements.slice(7);
 
       <!-- ── Sécurité ── -->
       <div class="securite-bloc reveal">
-        <div class="securite-layout">
-          <!-- Colonne gauche : texte -->
-          <div class="securite-header">
-            <span class="securite-eyebrow" data-i18n="securite.eyebrow">Sécurité</span>
-            <h3 class="securite-titre" data-i18n-html="securite.title">Votre marchandise, sous <span class="securite-accent">haute surveillance</span></h3>
-            <p class="securite-sous-titre" data-i18n="securite.subtitle">La sécurité n'est pas une option — c'est notre engagement premier. Chaque site est conçu pour protéger vos flux, nuit et jour, 365 jours par an.</p>
-          </div>
-          <!-- Colonne droite : orbit carousel -->
-          <SecuriteOrbit client:load />
+        <div class="securite-header">
+          <span class="securite-eyebrow" data-i18n="securite.eyebrow">Sécurité</span>
+          <h3 class="securite-titre" data-i18n-html="securite.title">Votre marchandise, sous <span class="securite-accent">haute surveillance</span></h3>
+          <p class="securite-sous-titre" data-i18n="securite.subtitle">La sécurité n'est pas une option — c'est notre engagement premier. Chaque site est conçu pour protéger vos flux, nuit et jour, 365 jours par an.</p>
         </div>
+        <SecuriteOrbit client:load />
       </div>
 
       <!-- ── Bridge / Statement ── -->
@@ -1041,24 +1032,28 @@ const col3 = equipements.slice(7);
   .site-modal__rows {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 1rem;
+    overflow: hidden;
   }
   .site-modal__row {
     display: flex;
     align-items: center;
-    gap: 0.65rem;
-    padding: 0.82rem 0.95rem;
-    background: #f5f5f7;
-    border-radius: 0.9rem;
+    gap: 0.7rem;
+    padding: 0.88rem 1rem;
+    background: white;
     text-decoration: none;
-    transition: background 0.18s;
+    transition: background 0.16s;
+    /* Séparateur entre lignes */
+    border-bottom: 1px solid rgba(0,0,0,0.06);
   }
-  .site-modal__row:hover { background: #ebebf0; }
+  .site-modal__row:last-child { border-bottom: none; }
+  .site-modal__row:hover { background: #fafafa; }
   .site-modal__row-ico {
     width: 32px;
     height: 32px;
     border-radius: 0.6rem;
-    background: rgba(227,6,19,0.08);
+    background: rgba(227,6,19,0.07);
     color: var(--rouge);
     display: flex;
     align-items: center;
@@ -1067,29 +1062,29 @@ const col3 = equipements.slice(7);
   }
   .site-modal__row-label {
     font-size: 0.82rem;
-    color: #8e8e93;
-    font-weight: 500;
+    font-weight: 700;
+    color: #3a3a3c;
     flex-shrink: 0;
+    white-space: nowrap;
   }
   .site-modal__row-sep {
     font-size: 0.82rem;
     color: #c7c7cc;
     flex-shrink: 0;
+    white-space: nowrap;
   }
   .site-modal__row-val {
-    font-size: 0.86rem;
-    font-weight: 600;
+    font-size: 0.84rem;
+    font-weight: 500;
     color: #1d1d1f;
     text-align: right;
     flex: 1;
     line-height: 1.4;
+    min-width: 0;
   }
-  .site-modal__row--map .site-modal__row-val {
-    color: var(--rouge);
-  }
-  .site-modal__row--map:hover .site-modal__row-val {
-    text-decoration: underline;
-  }
+  .site-modal__row--map .site-modal__row-label { color: var(--rouge); }
+  .site-modal__row--map .site-modal__row-val   { color: var(--rouge); font-weight: 600; }
+  .site-modal__row--map:hover .site-modal__row-val { text-decoration: underline; }
 
 
   /* ══════════════════════════════════════════════════════
@@ -1117,28 +1112,10 @@ const col3 = equipements.slice(7);
     pointer-events: none;
   }
 
-  /* Layout 2 colonnes : texte gauche, orbit droite */
-  .securite-layout {
-    display: grid;
-    grid-template-columns: 1fr 580px;
-    gap: 2rem;
-    align-items: center;
-  }
-  @media (max-width: 1100px) {
-    .securite-layout {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-    .securite-header {
-      text-align: center !important;
-      margin: 0 auto !important;
-    }
-  }
-
   .securite-header {
-    text-align: left;
-    max-width: 420px;
-    margin: 0;
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 2.5rem;
     position: relative;
   }
   .securite-eyebrow {
