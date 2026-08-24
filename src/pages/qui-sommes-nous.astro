@@ -829,4 +829,8 @@ import MainLayout from '../layouts/MainLayout.astro';
       gap: 2rem;
     }
   }
+  @media (max-width: 600px) {
+    .histoire__grid { gap: 1.5rem; }
+    .certif-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  }
 </style>
