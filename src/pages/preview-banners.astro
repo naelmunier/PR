@@ -1,0 +1,331 @@
+---
+// Page de prévisualisation des 4 options de bannière d'annonce
+---
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aperçu — Options bannière annonce</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #f0f0f0; }
+
+    /* ── Séparateurs de section ── */
+    .section-label {
+      background: #1d1d1f;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .section-label span { opacity: 0.5; font-weight: 400; text-transform: none; letter-spacing: 0; }
+
+    /* ── Fausse navbar ── */
+    .fake-nav {
+      background: white;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 64px;
+    }
+    .fake-nav__logo { font-size: 1.1rem; font-weight: 800; color: #e30613; letter-spacing: -0.02em; }
+    .fake-nav__links { display: flex; gap: 1.8rem; }
+    .fake-nav__link { font-size: 0.88rem; font-weight: 500; color: #444; text-decoration: none; }
+
+    /* ── Faux carousel / contenu ── */
+    .fake-content {
+      background: white;
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      text-align: center;
+      color: #aaa;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .fake-hero {
+      background: linear-gradient(to bottom, #111 0%, #222 100%);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .fake-hero h1 { font-size: 2rem; font-weight: 800; color: white; line-height: 1.2; }
+    .fake-hero h1 span { color: #ff4d57; }
+    .fake-hero p { color: rgba(255,255,255,0.7); margin-top: 0.8rem; font-size: 0.95rem; }
+    .fake-hero__ctas { display: flex; gap: 0.8rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
+    .btn-rouge { background: #e30613; color: white; padding: 0.7rem 1.5rem; border-radius: 2rem; font-weight: 600; font-size: 0.9rem; text-decoration: none; }
+    .btn-outline { border: 1.5px solid rgba(255,255,255,0.5); color: white; padding: 0.7rem 1.5rem; border-radius: 2rem; font-weight: 600; font-size: 0.9rem; text-decoration: none; }
+
+    /* ════════════════════════════════════
+       OPTION A — Bandeau top-of-site
+    ════════════════════════════════════ */
+    .banner-a {
+      background: linear-gradient(90deg, #e30613 0%, #b50010 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      padding: 0.55rem 1.5rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      position: relative;
+    }
+    .banner-a__dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.85);
+      flex-shrink: 0;
+      animation: dot-blink 1.2s ease-in-out infinite;
+    }
+    .banner-a__link {
+      color: white;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      opacity: 0.9;
+      font-weight: 700;
+    }
+    .banner-a__close {
+      position: absolute; right: 1rem;
+      background: none; border: none; color: rgba(255,255,255,0.7);
+      cursor: pointer; font-size: 1rem; line-height: 1;
+      padding: 0.2rem 0.4rem;
+    }
+    .banner-a__close:hover { color: white; }
+
+    /* ════════════════════════════════════
+       OPTION B — Pill animé flottant
+    ════════════════════════════════════ */
+    .banner-b-wrap {
+      background: white;
+      padding: 0.9rem 2rem;
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .banner-b {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: linear-gradient(135deg, #fff5e0, #fff);
+      border: 1.5px solid rgba(245,158,11,0.35);
+      border-radius: 2rem;
+      padding: 0.45rem 1.1rem 0.45rem 0.7rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #92400e;
+      text-decoration: none;
+      box-shadow: 0 2px 14px rgba(245,158,11,0.15);
+      animation: pill-enter 0.5s cubic-bezier(0.34,1.4,0.64,1) both;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .banner-b:hover {
+      box-shadow: 0 4px 22px rgba(245,158,11,0.28);
+      transform: translateY(-1px);
+    }
+    .banner-b__badge {
+      background: linear-gradient(135deg, #f59e0b, #dc6b00);
+      color: white;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.18rem 0.55rem;
+      border-radius: 2rem;
+    }
+    .banner-b__arrow {
+      opacity: 0.6; font-size: 0.85rem;
+      transition: transform 0.2s;
+    }
+    .banner-b:hover .banner-b__arrow { transform: translateX(3px); opacity: 1; }
+    @keyframes pill-enter {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ════════════════════════════════════
+       OPTION C — Notification dismissable
+    ════════════════════════════════════ */
+    .banner-c {
+      background: linear-gradient(135deg, #fffbf0 0%, #fff9ed 100%);
+      border-bottom: 1.5px solid rgba(245,158,11,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0.85rem 3rem;
+      position: relative;
+    }
+    .banner-c__icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, #f59e0b, #dc6b00);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+    .banner-c__text { display: flex; flex-direction: column; gap: 0.1rem; }
+    .banner-c__title { font-size: 0.88rem; font-weight: 700; color: #1d1d1f; }
+    .banner-c__sub { font-size: 0.78rem; color: #6b6b6b; }
+    .banner-c__cta {
+      background: linear-gradient(135deg, #f59e0b, #dc6b00);
+      color: white;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .banner-c__close {
+      position: absolute; right: 1rem;
+      background: none; border: none; color: #aaa;
+      cursor: pointer; font-size: 1.1rem; line-height: 1;
+    }
+    .banner-c__close:hover { color: #555; }
+
+    /* ════════════════════════════════════
+       OPTION D — Pill dans le hero
+    ════════════════════════════════════ */
+    .banner-d {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 2rem;
+      padding: 0.45rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      backdrop-filter: blur(8px);
+      margin-top: 1rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .banner-d:hover {
+      background: rgba(255,255,255,0.2);
+      border-color: rgba(255,255,255,0.4);
+    }
+    .banner-d__dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #f59e0b;
+      animation: dot-blink 1.2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    .banner-d__arrow { opacity: 0.65; font-size: 0.85rem; }
+
+    @keyframes dot-blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.2; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ OPTION A ══ -->
+  <div class="section-label">Option A — Bandeau top-of-site <span>fin barre rouge en haut, avec ✕ pour fermer</span></div>
+  <div class="banner-a" id="bannerA">
+    <span class="banner-a__dot"></span>
+    Nouvel entrepôt à Sandouville — ouverture imminente !
+    <a href="#" class="banner-a__link">Découvrir →</a>
+    <button class="banner-a__close" onclick="document.getElementById('bannerA').remove()">✕</button>
+  </div>
+  <div class="fake-nav">
+    <div class="fake-nav__logo">PR LOGISTICS P</div>
+    <div class="fake-nav__links">
+      <a class="fake-nav__link" href="#">Accueil</a>
+      <a class="fake-nav__link" href="#">Transport</a>
+      <a class="fake-nav__link" href="#">Qui sommes-nous</a>
+      <a class="fake-nav__link" href="#">Contact</a>
+    </div>
+  </div>
+  <div class="fake-content">— Carousel partenaires —</div>
+
+  <br>
+
+  <!-- ══ OPTION B ══ -->
+  <div class="section-label">Option B — Pill animé flottant <span>discret, au-dessus du carousel, slide-in à l'arrivée</span></div>
+  <div class="fake-nav">
+    <div class="fake-nav__logo">PR LOGISTICS P</div>
+    <div class="fake-nav__links">
+      <a class="fake-nav__link" href="#">Accueil</a>
+      <a class="fake-nav__link" href="#">Transport</a>
+      <a class="fake-nav__link" href="#">Qui sommes-nous</a>
+      <a class="fake-nav__link" href="#">Contact</a>
+    </div>
+  </div>
+  <div class="banner-b-wrap">
+    <a href="#" class="banner-b">
+      <span class="banner-b__badge">Nouveau</span>
+      Nouvel entrepôt à Sandouville — découvrez l'ouverture
+      <span class="banner-b__arrow">→</span>
+    </a>
+  </div>
+  <div class="fake-content">— Carousel partenaires —</div>
+
+  <br>
+
+  <!-- ══ OPTION C ══ -->
+  <div class="section-label">Option C — Notification sous la navbar <span>plus visible, avec CTA et description courte</span></div>
+  <div class="fake-nav">
+    <div class="fake-nav__logo">PR LOGISTICS P</div>
+    <div class="fake-nav__links">
+      <a class="fake-nav__link" href="#">Accueil</a>
+      <a class="fake-nav__link" href="#">Transport</a>
+      <a class="fake-nav__link" href="#">Qui sommes-nous</a>
+      <a class="fake-nav__link" href="#">Contact</a>
+    </div>
+  </div>
+  <div class="banner-c" id="bannerC">
+    <div class="banner-c__icon">🏭</div>
+    <div class="banner-c__text">
+      <span class="banner-c__title">Nouvel entrepôt à Sandouville — ouverture imminente</span>
+      <span class="banner-c__sub">24 000 m² · 45 quais · Port 5052, Voie des Tadornes</span>
+    </div>
+    <a href="#" class="banner-c__cta">Découvrir →</a>
+    <button class="banner-c__close" onclick="document.getElementById('bannerC').remove()">✕</button>
+  </div>
+  <div class="fake-content">— Carousel partenaires —</div>
+
+  <br>
+
+  <!-- ══ OPTION D ══ -->
+  <div class="section-label">Option D — Pill dans le hero <span>intégré directement sous les boutons CTA, style glassmorphism</span></div>
+  <div class="fake-nav">
+    <div class="fake-nav__logo">PR LOGISTICS P</div>
+    <div class="fake-nav__links">
+      <a class="fake-nav__link" href="#">Accueil</a>
+      <a class="fake-nav__link" href="#">Transport</a>
+      <a class="fake-nav__link" href="#">Qui sommes-nous</a>
+      <a class="fake-nav__link" href="#">Contact</a>
+    </div>
+  </div>
+  <div class="fake-hero">
+    <h1>Votre partenaire <span>logistique</span><br>au cœur du port du Havre</h1>
+    <p>PR Logistics — entrepôt sous douane, dépotage, traction, transport.</p>
+    <div class="fake-hero__ctas">
+      <a href="#" class="btn-rouge">Nous contacter</a>
+      <a href="#" class="btn-outline">Demander un devis</a>
+    </div>
+    <div style="display:flex; justify-content:center;">
+      <a href="#" class="banner-d">
+        <span class="banner-d__dot"></span>
+        Nouvel entrepôt à Sandouville — ouverture imminente
+        <span class="banner-d__arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>

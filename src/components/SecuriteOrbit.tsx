@@ -1,3 +1,4 @@
+import { useI18n } from './useI18n';
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -73,6 +74,7 @@ const BadgeIcon = ({ c }: { c: string }) => (
 // ── Data ─────────────────────────────────────────────────
 
 type Item = {
+  key: string;
   label: string;
   val: string;
   sub?: string;
@@ -83,12 +85,12 @@ type Item = {
 };
 
 const ITEMS: Item[] = [
-  { label: 'Caméras',    val: '36 caméras HD',              desc: "Couverture intégrale de l'ensemble du site",                   color: '#e30613', colorBg: 'rgba(227,6,19,0.1)',   Icon: CameraIcon },
-  { label: 'Monitoring', val: 'Surveillance 24/7',           sub: 'Intérieur & Extérieur', desc: 'Monitoring permanent avec reporting à domicile', color: '#3b82f6', colorBg: 'rgba(59,130,246,0.1)', Icon: MonitorIcon },
-  { label: 'Stockage',   val: 'Vidéo 30 jours',             desc: 'Conservation conforme aux exigences de la CNIL',              color: '#22c55e', colorBg: 'rgba(34,197,94,0.1)',  Icon: DatabaseIcon },
-  { label: 'Police',     val: 'Police portuaire',            desc: "Sécurité renforcée par les forces de l'ordre du port",        color: '#8b5cf6', colorBg: 'rgba(139,92,246,0.1)', Icon: ShieldIcon },
-  { label: 'Clôture',    val: 'Site 100% clôturé',          desc: "Enceinte sécurisée sur l'intégralité du périmètre",           color: '#f59e0b', colorBg: 'rgba(245,158,11,0.1)', Icon: LockIcon },
-  { label: 'Badge',      val: "Contrôle par badge",         desc: "Accès réglementé à l'ensemble des zones du site",             color: '#0ea5e9', colorBg: 'rgba(14,165,233,0.1)', Icon: BadgeIcon },
+  { key: 'cameras', label: 'Caméras',    val: '36 caméras HD',              desc: "Couverture intégrale de l'ensemble du site",                   color: '#e30613', colorBg: 'rgba(227,6,19,0.1)',   Icon: CameraIcon },
+  { key: 'monitoring', label: 'Monitoring', val: 'Surveillance 24/7',           sub: 'Intérieur & Extérieur', desc: 'Monitoring permanent avec reporting à domicile', color: '#3b82f6', colorBg: 'rgba(59,130,246,0.1)', Icon: MonitorIcon },
+  { key: 'stockage', label: 'Stockage',   val: 'Vidéo 30 jours',             desc: 'Conservation conforme aux exigences de la CNIL',              color: '#22c55e', colorBg: 'rgba(34,197,94,0.1)',  Icon: DatabaseIcon },
+  { key: 'police', label: 'Police',     val: 'Police portuaire',            desc: "Sécurité renforcée par les forces de l'ordre du port",        color: '#8b5cf6', colorBg: 'rgba(139,92,246,0.1)', Icon: ShieldIcon },
+  { key: 'cloture', label: 'Clôture',    val: 'Site 100% clôturé',          desc: "Enceinte sécurisée sur l'intégralité du périmètre",           color: '#f59e0b', colorBg: 'rgba(245,158,11,0.1)', Icon: LockIcon },
+  { key: 'badge', label: 'Badge',      val: "Contrôle par badge",         desc: "Accès réglementé à l'ensemble des zones du site",             color: '#0ea5e9', colorBg: 'rgba(14,165,233,0.1)', Icon: BadgeIcon },
 ];
 
 const SIZE = 720;
@@ -100,6 +102,7 @@ const REVOLUTION_S = 38;
 
 // ── Composant ────────────────────────────────────────────
 export default function SecuriteOrbit() {
+  const t = useI18n();
   const [active, setActive] = useState<number | null>(null);
 
   const toggle = (i: number) => setActive(prev => (prev === i ? null : i));
@@ -207,8 +210,8 @@ export default function SecuriteOrbit() {
                   animate={{ scale: isActive ? 1.38 : 1 }}
                   whileHover={{ scale: isActive ? 1.38 : 1.12 }}
                   transition={{ type: 'spring', stiffness: 280, damping: 18 }}
-                  aria-label={item.val}
-                  title={item.val}
+                  aria-label={t(`orbit.${item.key}.val`, item.val)}
+                  title={t(`orbit.${item.key}.val`, item.val)}
                 >
                   <item.Icon c={item.color} />
                 </motion.button>
@@ -285,7 +288,7 @@ export default function SecuriteOrbit() {
                   lineHeight: 1.18,
                   letterSpacing: '-0.02em',
                 }}>
-                  {activeItem.val}
+                  {t(`orbit.${activeItem.key}.val`, activeItem.val)}
                 </span>
 
                 {activeItem.sub && (
@@ -296,7 +299,7 @@ export default function SecuriteOrbit() {
                     marginTop: '0.12rem',
                     lineHeight: 1.2,
                   }}>
-                    {activeItem.sub}
+                    {t(`orbit.${activeItem.key}.sub`, activeItem.sub)}
                   </span>
                 )}
 
@@ -306,7 +309,7 @@ export default function SecuriteOrbit() {
                   lineHeight: 1.45,
                   marginTop: '0.3rem',
                 }}>
-                  {activeItem.desc}
+                  {t(`orbit.${activeItem.key}.desc`, activeItem.desc)}
                 </span>
               </motion.div>
             ) : (
@@ -335,7 +338,7 @@ export default function SecuriteOrbit() {
                   lineHeight: 1.6,
                   textTransform: 'uppercase',
                 }}>
-                  Cliquez<br/>une icône
+                  {t('orbit.hint', 'Cliquez une icône')}
                 </span>
               </motion.div>
             )}

@@ -1,9 +1,13 @@
 import React, { useRef, useEffect } from 'react';
+import { useI18n } from './useI18n';
 
 export type GalleryItem = {
   image: string;
   text: string;
   desc?: string;
+  /* Clés i18n — permettent la traduction côté React */
+  textKey?: string;
+  descKey?: string;
 };
 
 interface Props {
@@ -18,6 +22,7 @@ const GAP = 16;
 const STRIDE = CARD_W + GAP;
 
 export default function CircularGallery({ items, scrollEase = 0.06, direction = 'right' }: Props) {
+  const t = useI18n();
   const containerRef = useRef<HTMLDivElement>(null);
   const posRef       = useRef(0);
   const targetRef    = useRef(0);
@@ -124,6 +129,9 @@ export default function CircularGallery({ items, scrollEase = 0.06, direction = 
         cursor: 'grab',
         userSelect: 'none',
         touchAction: 'pan-y',
+        /* Les cartes sont en position absolue : sans ceci elles débordent
+           horizontalement et créent un scroll parasite sur mobile/tablette. */
+        overflow: 'hidden',
         /* Masque fondu sur les bords */
         maskImage: 'linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%)',
         WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%)',
@@ -144,8 +152,8 @@ export default function CircularGallery({ items, scrollEase = 0.06, direction = 
             transformOrigin: 'center center',
             borderRadius: 22,
             background: 'white',
-            boxShadow: '0 12px 48px rgba(0,0,0,0.13), 0 3px 12px rgba(0,0,0,0.07)',
-            border: '1.5px solid rgba(0,0,0,0.055)',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04)',
+            border: '1px solid rgba(0,0,0,0.05)',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -186,7 +194,7 @@ export default function CircularGallery({ items, scrollEase = 0.06, direction = 
             color: '#1d1d1f',
             lineHeight: 1.28,
           }}>
-            {item.text}
+            {t(item.textKey, item.text)}
           </span>
 
           {/* Description */}
@@ -196,7 +204,7 @@ export default function CircularGallery({ items, scrollEase = 0.06, direction = 
               color: '#8e8e93',
               lineHeight: 1.58,
             }}>
-              {item.desc}
+              {t(item.descKey, item.desc)}
             </span>
           )}
         </div>

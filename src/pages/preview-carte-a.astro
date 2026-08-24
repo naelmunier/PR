@@ -1,6 +1,111 @@
-<!DOCTYPE html><html lang="fr"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Option A — Carte SVG plate</title><link rel="stylesheet" href="/_astro/contact.D_ne3CHx.css">
-<style>*,*:before,*:after{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,Inter,sans-serif;background:#f5f5f7;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:2.5rem 1.5rem}.carte-section{background:#fff;border-radius:2rem;padding:2.5rem 3rem;max-width:960px;width:100%;box-shadow:0 8px 60px #0000001a}.carte-header{text-align:center;margin-bottom:2rem}.eyebrow{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#e30613;background:#e3061312;border:1px solid rgba(227,6,19,.18);border-radius:2rem;padding:.25rem .9rem;display:inline-block;margin-bottom:.8rem}h2{font-size:2rem;font-weight:700;letter-spacing:-.03em;color:#1d1d1f;margin-bottom:.35rem}h2 span{color:#e30613}.carte-subtitle{font-size:.92rem;color:#6e6e73}.carte-body{display:grid;grid-template-columns:1fr 230px;gap:2.5rem;align-items:center;margin-top:1.5rem}#map-a{width:100%;height:auto;display:block;overflow:visible}.legende{display:flex;flex-direction:column;gap:.9rem}.legende-titre{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#bbb;margin-bottom:.2rem}.legende-item{display:flex;align-items:center;gap:.85rem;padding:.85rem 1rem;border-radius:.9rem;border:1px solid rgba(0,0,0,.07);background:#fafafa;transition:transform .2s,box-shadow .2s}.legende-item:hover{transform:translate(4px);box-shadow:0 4px 20px #00000014}.legende-couleur{width:32px;height:32px;border-radius:.5rem;flex-shrink:0}.legende-delai{font-size:.95rem;font-weight:800;color:#1d1d1f}.legende-zones{font-size:.74rem;color:#8e8e93;line-height:1.35;margin-top:.1rem}.tooltip{position:fixed;background:#0a0a0ae6;color:#fff;padding:.5rem .9rem;border-radius:.6rem;font-size:.82rem;font-weight:600;pointer-events:none;opacity:0;transition:opacity .1s;z-index:100;white-space:nowrap;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1)}.tooltip-nom{color:#f5f5f7}.tooltip-delai{color:#fca5a5;margin-left:.4rem}.option-label{text-align:center;margin-top:1.8rem;font-size:.82rem;color:#bbb;letter-spacing:.04em}
-</style></head> <body> <div class="tooltip" id="tooltip"> <span class="tooltip-nom" id="tt-nom"></span><span class="tooltip-delai" id="tt-j"></span> </div> <div class="carte-section"> <div class="carte-header"> <span class="eyebrow">Transport</span> <h2>Délais de livraison <span>depuis Le Havre</span></h2> <p class="carte-subtitle">Estimations indicatives · Hors week-ends et jours fériés</p> </div> <div class="carte-body"> <svg id="map-a" viewBox="0 0 500 520"></svg> <div class="legende"> <span class="legende-titre">Délais estimés</span> <div class="legende-item"> <div class="legende-couleur" style="background:#22c55e;"></div> <div><div class="legende-delai">J + 1</div><div class="legende-zones">Normandie · Île-de-France<br>Hauts-de-France</div></div> </div> <div class="legende-item"> <div class="legende-couleur" style="background:#eab308;"></div> <div><div class="legende-delai">J + 2</div><div class="legende-zones">Bretagne · Centre · Grand Est<br>Pays de la Loire · Bourgogne</div></div> </div> <div class="legende-item"> <div class="legende-couleur" style="background:#f97316;"></div> <div><div class="legende-delai">J + 3</div><div class="legende-zones">Nouvelle-Aquitaine<br>Auvergne-Rhône-Alpes</div></div> </div> <div class="legende-item"> <div class="legende-couleur" style="background:#e30613;"></div> <div><div class="legende-delai">J + 4</div><div class="legende-zones">Occitanie · PACA<br>Corse</div></div> </div> </div> </div> <p class="option-label">Option A — SVG plat interactif · Zoom au survol · Numéros de département</p> </div> <script src="/assets/d3.min.js"></script> <script>
+---
+// Prototype Option A — carte SVG plate, vraie France via D3 + GeoJSON
+---
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Option A — Carte SVG plate</title>
+<style is:global>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+    background: #f5f5f7;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2.5rem 1.5rem;
+  }
+  .carte-section {
+    background: white;
+    border-radius: 2rem;
+    padding: 2.5rem 3rem;
+    max-width: 960px;
+    width: 100%;
+    box-shadow: 0 8px 60px rgba(0,0,0,0.1);
+  }
+  .carte-header { text-align: center; margin-bottom: 2rem; }
+  .eyebrow {
+    font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.14em; color: #e30613;
+    background: rgba(227,6,19,0.07); border: 1px solid rgba(227,6,19,0.18);
+    border-radius: 2rem; padding: 0.25rem 0.9rem;
+    display: inline-block; margin-bottom: 0.8rem;
+  }
+  h2 { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; color: #1d1d1f; margin-bottom: 0.35rem; }
+  h2 span { color: #e30613; }
+  .carte-subtitle { font-size: 0.92rem; color: #6e6e73; }
+  .carte-body { display: grid; grid-template-columns: 1fr 230px; gap: 2.5rem; align-items: center; margin-top: 1.5rem; }
+
+  #map-a { width: 100%; height: auto; display: block; overflow: visible; }
+
+  /* Légende */
+  .legende { display: flex; flex-direction: column; gap: 0.9rem; }
+  .legende-titre { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #bbb; margin-bottom: 0.2rem; }
+  .legende-item {
+    display: flex; align-items: center; gap: 0.85rem;
+    padding: 0.85rem 1rem; border-radius: 0.9rem;
+    border: 1px solid rgba(0,0,0,0.07); background: #fafafa;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .legende-item:hover { transform: translateX(4px); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+  .legende-couleur { width: 32px; height: 32px; border-radius: 0.5rem; flex-shrink: 0; }
+  .legende-delai { font-size: 0.95rem; font-weight: 800; color: #1d1d1f; }
+  .legende-zones { font-size: 0.74rem; color: #8e8e93; line-height: 1.35; margin-top: 0.1rem; }
+
+  /* Tooltip flottant */
+  .tooltip {
+    position: fixed; background: rgba(10,10,10,0.9); color: white;
+    padding: 0.5rem 0.9rem; border-radius: 0.6rem;
+    font-size: 0.82rem; font-weight: 600; pointer-events: none;
+    opacity: 0; transition: opacity 0.1s; z-index: 100; white-space: nowrap;
+    backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1);
+  }
+  .tooltip-nom { color: #f5f5f7; }
+  .tooltip-delai { color: #fca5a5; margin-left: 0.4rem; }
+
+  .option-label { text-align: center; margin-top: 1.8rem; font-size: 0.82rem; color: #bbb; letter-spacing: 0.04em; }
+</style>
+</head>
+<body>
+<div class="tooltip" id="tooltip">
+  <span class="tooltip-nom" id="tt-nom"></span><span class="tooltip-delai" id="tt-j"></span>
+</div>
+<div class="carte-section">
+  <div class="carte-header">
+    <span class="eyebrow">Transport</span>
+    <h2>Délais de livraison <span>depuis Le Havre</span></h2>
+    <p class="carte-subtitle">Estimations indicatives · Hors week-ends et jours fériés</p>
+  </div>
+  <div class="carte-body">
+    <svg id="map-a" viewBox="0 0 500 520"></svg>
+    <div class="legende">
+      <span class="legende-titre">Délais estimés</span>
+      <div class="legende-item">
+        <div class="legende-couleur" style="background:#22c55e;"></div>
+        <div><div class="legende-delai">J + 1</div><div class="legende-zones">Normandie · Île-de-France<br>Hauts-de-France</div></div>
+      </div>
+      <div class="legende-item">
+        <div class="legende-couleur" style="background:#eab308;"></div>
+        <div><div class="legende-delai">J + 2</div><div class="legende-zones">Bretagne · Centre · Grand Est<br>Pays de la Loire · Bourgogne</div></div>
+      </div>
+      <div class="legende-item">
+        <div class="legende-couleur" style="background:#f97316;"></div>
+        <div><div class="legende-delai">J + 3</div><div class="legende-zones">Nouvelle-Aquitaine<br>Auvergne-Rhône-Alpes</div></div>
+      </div>
+      <div class="legende-item">
+        <div class="legende-couleur" style="background:#e30613;"></div>
+        <div><div class="legende-delai">J + 4</div><div class="legende-zones">Occitanie · PACA<br>Corse</div></div>
+      </div>
+    </div>
+  </div>
+  <p class="option-label">Option A — SVG plat interactif · Zoom au survol · Numéros de département</p>
+</div>
+
+<script src="/assets/d3.min.js" is:inline></script>
+<script is:inline>
 const delais = {
   '76':1,'27':1,'14':1,'61':1,'50':1,'75':1,'77':1,'78':1,'91':1,'92':1,'93':1,'94':1,'95':1,'59':1,'62':1,'02':1,'60':1,'80':1,
   '29':2,'35':2,'22':2,'56':2,'44':2,'49':2,'72':2,'53':2,'85':2,'28':2,'37':2,'41':2,'45':2,'18':2,'36':2,'23':2,
@@ -119,4 +224,6 @@ fetch('/assets/departements.geojson')
       .attr('fill','#1d1d1f').attr('font-family','sans-serif')
       .text('Le Havre');
   });
-</script> </body> </html>
+</script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+import{r as t}from"./index.BA6MrCfD.js";function u(){const[,r]=t.useState(0);return t.useEffect(()=>{const e=()=>r(n=>n+1);return document.addEventListener("i18n:changed",e),e(),()=>document.removeEventListener("i18n:changed",e)},[]),(e,n)=>!e||typeof window>"u"?n:window.I18N?.t?.(e)??n}export{u};

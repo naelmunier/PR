@@ -85,13 +85,13 @@ const col3 = equipements.slice(7);
       <div style="display:flex; flex-direction:column; gap:2rem;">
         <CircularGallery
           client:load
-          items={prestations.slice(0, 5).map(p => ({ image: p.icone, text: p.titre, desc: p.desc }))}
+          items={prestations.slice(0, 5).map(p => ({ image: p.icone, text: p.titre, desc: p.desc, textKey: `prestation.${p.key}.titre`, descKey: `prestation.${p.key}.desc` }))}
           scrollEase={0.06}
           direction="right"
         />
         <CircularGallery
           client:load
-          items={prestations.slice(5).map(p => ({ image: p.icone, text: p.titre, desc: p.desc }))}
+          items={prestations.slice(5).map(p => ({ image: p.icone, text: p.titre, desc: p.desc, textKey: `prestation.${p.key}.titre`, descKey: `prestation.${p.key}.desc` }))}
           scrollEase={0.06}
           direction="left"
         />
@@ -123,16 +123,16 @@ const col3 = equipements.slice(7);
           <img class="hrc-card__img" src="/assets/entrepot/nouvel-entrepot2.jpg" alt="Futur entrepôt de Sandouville" loading="lazy" />
 
           <div class="hrc-card__overlay">
-            <div class="hrc-card__badge hrc-card__badge--soon">
+            <div class="hrc-card__badge hrc-card__badge--principal">
               <span class="badge-dot" aria-hidden="true"></span>
-              <span data-i18n="entrepot.soon">Ouverture imminente</span>
+              <span data-i18n="entrepot.principal">Ouvert · Site principal</span>
             </div>
             <div class="hrc-card__reveal-panel">
-              <p class="hrc-card__sub">Sandouville · 24 000 m²</p>
+              <p class="hrc-card__sub" data-i18n="entrepot.sandouville.sub">Sandouville · 24 000 m²</p>
               <div class="hrc-card__bottom">
                 <h3 class="hrc-card__title">Sandouville</h3>
                 <span class="hrc-card__cta">
-                  Voir les détails
+                  <span data-i18n="entrepot.voirdetails">Voir les détails</span>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
                 </span>
               </div>
@@ -153,13 +153,13 @@ const col3 = equipements.slice(7);
           <img class="hrc-card__img" src="/assets/entrepot/ancien-entrepot.jpg" alt="Entrepôt de Rogerville" loading="lazy" />
 
           <div class="hrc-card__overlay">
-            <div class="hrc-card__badge hrc-card__badge--actif" data-i18n="entrepot.actif">Site actuel</div>
+            <div class="hrc-card__badge hrc-card__badge--actif" data-i18n="entrepot.historique">Site historique</div>
             <div class="hrc-card__reveal-panel">
-              <p class="hrc-card__sub">Rogerville · 8 000 m²</p>
+              <p class="hrc-card__sub" data-i18n="entrepot.rogerville.sub">Rogerville · 8 000 m²</p>
               <div class="hrc-card__bottom">
                 <h3 class="hrc-card__title">Rogerville</h3>
                 <span class="hrc-card__cta">
-                  Voir les détails
+                  <span data-i18n="entrepot.voirdetails">Voir les détails</span>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
                 </span>
               </div>
@@ -360,25 +360,28 @@ const col3 = equipements.slice(7);
       const quaiIco = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="8" y1="4" x2="8" y2="20"/><line x1="16" y1="4" x2="16" y2="20"/></svg>`;
       const mapIco  = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
 
+      /* Libellés traduits */
+      const tr = (k: string, fb: string) => (window as any).I18N?.t?.(k) ?? fb;
+
       bodyEl.innerHTML = `
         <div class="site-modal__rows">
           <div class="site-modal__row">
             <span class="site-modal__row-ico">${surfIco}</span>
-            <span class="site-modal__row-label">Surface</span>
-            <span class="site-modal__row-sep">:</span>
+            <span class="site-modal__row-label">${tr('modal.surface', 'Surface')}</span>
             <span class="site-modal__row-val">${surfNum}</span>
           </div>
           <div class="site-modal__row">
             <span class="site-modal__row-ico">${quaiIco}</span>
-            <span class="site-modal__row-label">Quais</span>
-            <span class="site-modal__row-sep">:</span>
+            <span class="site-modal__row-label">${tr('modal.quais', 'Quais')}</span>
             <span class="site-modal__row-val">${d.quais ?? ''}</span>
           </div>
           <a class="site-modal__row site-modal__row--map" href="${mapUrl}" target="_blank" rel="noopener noreferrer">
             <span class="site-modal__row-ico">${mapIco}</span>
-            <span class="site-modal__row-label">Voir sur la carte</span>
-            <span class="site-modal__row-sep">:</span>
-            <span class="site-modal__row-val">${d.addr ?? ''}&nbsp;↗</span>
+            <span class="site-modal__row-label">${tr('modal.carte', 'Voir sur la carte')}</span>
+            <span class="site-modal__row-val">
+              <span class="site-modal__addr">${d.addr ?? ''}</span>
+              <svg class="site-modal__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </span>
           </a>
         </div>
       `;
@@ -828,10 +831,10 @@ const col3 = equipements.slice(7);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
-  .hrc-card__badge--soon {
-    background: linear-gradient(135deg, #f59e0b, #dc6b00);
+  .hrc-card__badge--principal {
+    background: linear-gradient(135deg, #16a34a, #15803d);
     color: white;
-    box-shadow: 0 2px 12px rgba(245,158,11,0.4);
+    box-shadow: 0 2px 12px rgba(22,163,74,0.4);
     animation: badge-pulse 1.8s ease-in-out infinite;
   }
   .hrc-card__badge--actif {
@@ -840,8 +843,8 @@ const col3 = equipements.slice(7);
     border: 1px solid rgba(227,6,19,0.2);
   }
   @keyframes badge-pulse {
-    0%, 100% { box-shadow: 0 2px 12px rgba(245,158,11,0.4); }
-    50%       { box-shadow: 0 4px 22px rgba(245,158,11,0.75); }
+    0%, 100% { box-shadow: 0 2px 12px rgba(22,163,74,0.4); }
+    50%       { box-shadow: 0 4px 22px rgba(22,163,74,0.7); }
   }
 
   .badge-dot {
@@ -1038,63 +1041,8 @@ const col3 = equipements.slice(7);
     gap: 0;
   }
 
-  /* Lignes de données */
-  .site-modal__rows {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid rgba(0,0,0,0.07);
-    border-radius: 1rem;
-    overflow: hidden;
-  }
-  .site-modal__row {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    padding: 0.88rem 1rem;
-    background: white;
-    text-decoration: none;
-    transition: background 0.16s;
-    /* Séparateur entre lignes */
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-  }
-  .site-modal__row:last-child { border-bottom: none; }
-  .site-modal__row:hover { background: #fafafa; }
-  .site-modal__row-ico {
-    width: 32px;
-    height: 32px;
-    border-radius: 0.6rem;
-    background: rgba(227,6,19,0.07);
-    color: var(--rouge);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .site-modal__row-label {
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: #3a3a3c;
-    flex-shrink: 0;
-    white-space: nowrap;
-  }
-  .site-modal__row-sep {
-    font-size: 0.82rem;
-    color: #c7c7cc;
-    flex-shrink: 0;
-    white-space: nowrap;
-  }
-  .site-modal__row-val {
-    font-size: 0.84rem;
-    font-weight: 500;
-    color: #1d1d1f;
-    text-align: right;
-    flex: 1;
-    line-height: 1.4;
-    min-width: 0;
-  }
-  .site-modal__row--map .site-modal__row-label { color: var(--rouge); }
-  .site-modal__row--map .site-modal__row-val   { color: var(--rouge); font-weight: 600; }
-  .site-modal__row--map:hover .site-modal__row-val { text-decoration: underline; }
+  /* Les lignes de la modale sont injectées via innerHTML : elles n'ont pas
+     l'attribut data-astro-cid, donc leurs styles vivent dans global.css. */
 
 
   /* ══════════════════════════════════════════════════════
@@ -1121,21 +1069,26 @@ const col3 = equipements.slice(7);
     justify-content: center;
     overflow: hidden;
   }
-  .securite-orbit-container > div {
+  /* Astro enveloppe le composant React dans <astro-island>, déclaré
+     `display:contents` par Astro — un élément en display:contents ne génère
+     aucune boîte, donc transform ne s'y applique pas. On le repasse en block
+     avec un sélecteur de type pour gagner en spécificité. */
+  .securite-orbit-container > :global(astro-island) {
+    display: block;
     transform-origin: top center;
     flex-shrink: 0;
   }
   @media (max-width: 760px) {
     .securite-orbit-container { height: 432px; }
-    .securite-orbit-container > div { transform: scale(0.6); }
+    .securite-orbit-container > :global(astro-island) { transform: scale(0.6); }
   }
   @media (max-width: 520px) {
     .securite-orbit-container { height: 338px; }
-    .securite-orbit-container > div { transform: scale(0.47); }
+    .securite-orbit-container > :global(astro-island) { transform: scale(0.47); }
   }
   @media (max-width: 380px) {
     .securite-orbit-container { height: 274px; }
-    .securite-orbit-container > div { transform: scale(0.38); }
+    .securite-orbit-container > :global(astro-island) { transform: scale(0.38); }
   }
   .securite-bloc::before {
     content: '';
