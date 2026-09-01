@@ -97,9 +97,15 @@ export function guard(req, res) {
     res.status(405).json({ error: 'Méthode non autorisée' });
     return null;
   }
-  const apiKey = process.env.BREVO_API_KEY;
+  /* La clé est souvent collée avec un espace, un retour à la ligne ou des
+     guillemets : Brevo répond alors « Key not found ». On nettoie avant usage. */
+  const apiKey = String(process.env.BREVO_API_KEY ?? '').trim().replace(/^["']|["']$/g, '');
   if (!apiKey) {
     res.status(500).json({ error: "Service d'envoi non configuré (BREVO_API_KEY manquante)" });
+    return null;
+  }
+  if (!apiKey.startsWith('xkeysib-')) {
+    res.status(500).json({ error: "BREVO_API_KEY invalide : une clé API v3 commence par « xkeysib- »" });
     return null;
   }
   const body = typeof req.body === 'string' ? safeParse(req.body) : req.body;
