@@ -118,10 +118,11 @@ const col3 = equipements.slice(7);
           <span class="hrc-data" data-key="addr"    data-i18n="entrepot.sandouville.adresse"       hidden>Port 5052, Voie des Tadornes, 76430 Sandouville</span>
           <span class="hrc-data" data-key="surface" data-i18n="entrepot.sandouville.surface"       hidden>24 000 m² de surface</span>
           <span class="hrc-data" data-key="quais"   data-i18n="entrepot.sandouville.quais"         hidden>44 quais et 2 portes sectionnelles</span>
-          <!-- Fiche établissement Google « PR Logistics ». Le paramètre `cid` ouvre
-               directement la fiche (nom, photos, bouton Itinéraire) plutôt qu'un
-               simple point GPS. Sur mobile, le lien bascule dans l'application Maps. -->
-          <span class="hrc-data" data-key="mapurl"  hidden>https://maps.google.com/?cid=8166318042843644763</span>
+          <!-- Itinéraire direct vers la fiche établissement « PR Logistics ».
+               `destination_place_id` rattache la destination à la fiche Google :
+               Maps affiche le nom de l'entreprise et non des coordonnées GPS.
+               Sur mobile, le lien ouvre l'application Maps avec l'itinéraire prêt. -->
+          <span class="hrc-data" data-key="mapurl"  hidden>https://www.google.com/maps/dir/?api=1&destination=PR+Logistics&destination_place_id=ChIJ6Z1LUgAx4EcRWwOPMv6WVHE</span>
 
           <img class="hrc-card__img" src="/assets/entrepot/nouvel-entrepot2.jpg" alt="Futur entrepôt de Sandouville" loading="lazy" />
 
@@ -151,8 +152,9 @@ const col3 = equipements.slice(7);
           <span class="hrc-data" data-key="addr"    data-i18n="entrepot.rogerville.adresse"         hidden>PLPN 1 – Port 4935, 76700 Rogerville</span>
           <span class="hrc-data" data-key="surface" data-i18n="entrepot.rogerville.surface"         hidden>8 000 m² de surface</span>
           <span class="hrc-data" data-key="quais"   data-i18n="entrepot.rogerville.quais"           hidden>6 quais de chargement</span>
-          <!-- Coordonnées GPS exactes (voir Sandouville plus haut pour le format). -->
-          <span class="hrc-data" data-key="mapurl"  hidden>https://www.google.com/maps/search/?api=1&query=49.475080,0.261173</span>
+          <!-- Itinéraire direct. Pas de fiche Google pour ce site : la destination
+               est donnée en coordonnées GPS exactes (voir Sandouville plus haut). -->
+          <span class="hrc-data" data-key="mapurl"  hidden>https://www.google.com/maps/dir/?api=1&destination=49.475080,0.261173</span>
 
           <img class="hrc-card__img" src="/assets/entrepot/ancien-entrepot.jpg" alt="Entrepôt de Rogerville" loading="lazy" />
 
