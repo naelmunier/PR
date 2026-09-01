@@ -118,7 +118,10 @@ const col3 = equipements.slice(7);
           <span class="hrc-data" data-key="addr"    data-i18n="entrepot.sandouville.adresse"       hidden>Port 5052, Voie des Tadornes, 76430 Sandouville</span>
           <span class="hrc-data" data-key="surface" data-i18n="entrepot.sandouville.surface"       hidden>24 000 m² de surface</span>
           <span class="hrc-data" data-key="quais"   data-i18n="entrepot.sandouville.quais"         hidden>44 quais et 2 portes sectionnelles</span>
-          <span class="hrc-data" data-key="mapurl"  hidden>https://maps.google.com/?q=Port+5052+Voie+des+Tadornes+76430+Sandouville</span>
+          <!-- Coordonnées GPS exactes : la recherche textuelle ne pointait pas précisément le site.
+               Format `search/?api=1` : centre la carte sur le point et laisse le bouton Itinéraire
+               disponible (ouvre l'application Maps sur mobile). -->
+          <span class="hrc-data" data-key="mapurl"  hidden>https://www.google.com/maps/search/?api=1&query=49.473357,0.277485</span>
 
           <img class="hrc-card__img" src="/assets/entrepot/nouvel-entrepot2.jpg" alt="Futur entrepôt de Sandouville" loading="lazy" />
 
