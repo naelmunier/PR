@@ -256,7 +256,7 @@ const offres: {
                 </svg>
               </div>
               <span class="cand-upload__text" id="ofCvText" data-i18n="recrutement.upload.cv">Cliquez ou déposez votre CV ici</span>
-              <span class="cand-upload__hint" data-i18n="recrutement.upload.hint">PDF, DOC, DOCX · max 6 Mo</span>
+              <span class="cand-upload__hint" data-i18n="recrutement.upload.hint">PDF, DOC, DOCX · max 3 Mo</span>
               <input type="file" id="of-cv" name="cv" accept=".pdf,.doc,.docx" required class="cand-upload__input" />
             </label>
           </div>
@@ -276,7 +276,7 @@ const offres: {
                 </svg>
               </div>
               <span class="cand-upload__text" id="ofLettreText" data-i18n="recrutement.upload.lettre">Cliquez ou déposez votre lettre ici</span>
-              <span class="cand-upload__hint" data-i18n="recrutement.upload.hint">PDF, DOC, DOCX · max 6 Mo</span>
+              <span class="cand-upload__hint" data-i18n="recrutement.upload.hint">PDF, DOC, DOCX · max 3 Mo</span>
               <input type="file" id="of-lettre" name="lettre" accept=".pdf,.doc,.docx" class="cand-upload__input" />
             </label>
           </div>
@@ -396,7 +396,7 @@ const offres: {
                 </svg>
               </div>
               <span class="cand-upload__text" id="cvText" data-i18n="recrutement.upload.cv">Cliquez ou déposez votre CV ici</span>
-              <span class="cand-upload__hint" data-i18n="recrutement.upload.hint">PDF, DOC, DOCX · max 6 Mo</span>
+              <span class="cand-upload__hint" data-i18n="recrutement.upload.hint">PDF, DOC, DOCX · max 3 Mo</span>
               <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required class="cand-upload__input" />
             </label>
           </div>
@@ -417,7 +417,7 @@ const offres: {
                 </svg>
               </div>
               <span class="cand-upload__text" id="lettreText" data-i18n="recrutement.upload.lettre">Cliquez ou déposez votre lettre ici</span>
-              <span class="cand-upload__hint" data-i18n="recrutement.upload.hint">PDF, DOC, DOCX · max 6 Mo</span>
+              <span class="cand-upload__hint" data-i18n="recrutement.upload.hint">PDF, DOC, DOCX · max 3 Mo</span>
               <input type="file" id="lettre" name="lettre" accept=".pdf,.doc,.docx" class="cand-upload__input" />
             </label>
           </div>
@@ -720,6 +720,19 @@ const offres: {
     }, 400);
   }
 
+  // ── Lecture d'un fichier en base64 ────────────────────────────
+  function fileToBase64(file) {
+    return new Promise(function(resolve, reject) {
+      var reader = new FileReader();
+      reader.onerror = function() { reject(new Error('Lecture du fichier impossible')); };
+      reader.onload  = function() {
+        /* readAsDataURL renvoie « data:<mime>;base64,<données> » */
+        resolve({ name: file.name, data: String(reader.result).split(',')[1] });
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
   // ── Soumission générique ──────────────────────────────────────
   function setupForm(formId, btnId, rgpdId, rgpdWrapId, errId, wrapId, successId, wordsId, subId) {
     var form   = document.getElementById(formId);
@@ -741,8 +754,22 @@ const offres: {
 
       var t0 = Date.now();
       try {
-        var fd  = new FormData(form);
-        var res = await fetch('/send-candidature.php', { method: 'POST', body: fd });
+        var fd      = new FormData(form);
+        var payload = {};
+        /* Les champs texte tels quels ; les fichiers encodés en base64 car la
+           fonction serverless reçoit du JSON et non du multipart. */
+        for (var entry of fd.entries()) {
+          if (entry[1] instanceof File) {
+            if (entry[1].size > 0) payload[entry[0]] = await fileToBase64(entry[1]);
+          } else {
+            payload[entry[0]] = entry[1];
+          }
+        }
+        var res = await fetch('/api/send-candidature', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(payload),
+        });
         var raw = await res.text();
         var data; try { data = JSON.parse(raw.trim()); } catch(_) { data = {}; }
         var elapsed = Date.now() - t0;

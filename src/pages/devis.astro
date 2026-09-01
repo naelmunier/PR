@@ -1084,12 +1084,19 @@ const departementsJson = JSON.stringify(departements);
   // ── Envoi serveur ─────────────────────────────────────────────
   async function sendToServer(data, pdfBase64) {
     try {
-      const res = await fetch('/send-devis.php', {
+      const res = await fetch('/api/send-devis', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ ...data, pdf_base64: pdfBase64 }),
       });
-      return await res.json();
+      /* Si la fonction plante, la réponse n'est pas du JSON : on lit le texte
+         brut pour remonter un message utile plutôt qu'une erreur de parsing. */
+      const raw = await res.text();
+      try {
+        return JSON.parse(raw);
+      } catch {
+        return { success: false, error: `Réponse serveur inattendue (${res.status})` };
+      }
     } catch (err) {
       return { success: false, error: err.message };
     }
